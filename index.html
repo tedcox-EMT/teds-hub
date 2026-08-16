@@ -470,10 +470,10 @@ loadWeather();
 // ── TASA next-up ──
 (function renderTasaCard(){
   const fallback = [
-    { title:'TASA Retirement Conversation', start:'2026-08-18T13:00:00', loc:'Nashville · 1:00 PM CT' },
-    { title:'PCG prep for TennCare discussion', start:'2026-08-20T10:00:00', loc:'Zoom · 10:00 AM CT' },
-    { title:'Reimbursement & Compliance Conference', start:'2026-08-26T09:00:00', loc:'Park Vista, Gatlinburg' },
-    { title:'TASA Board Meeting', start:'2026-09-03T10:00:00', loc:'10:00 AM CT' }
+    { title:'TASA Retirement Conversation', start:'2026-08-18T13:00:00-05:00', location:'Nashville' },
+    { title:'PCG prep for TennCare discussion', start:'2026-08-20T10:00:00-05:00', location:'Zoom' },
+    { title:'Reimbursement & Compliance Conference', start:'2026-08-26T09:00:00-05:00', location:'Park Vista, Gatlinburg' },
+    { title:'TASA Board Meeting', start:'2026-09-03T10:00:00-05:00', location:'Board call' }
   ];
   let meetings = fallback;
   try {

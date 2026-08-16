@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TASA Desk · Ted's Hub</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { min-height:100vh; font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#020c1b; overflow-x:hidden; color:#fff; }
+
+    .ocean-bg { position:fixed; inset:0; z-index:0; background:linear-gradient(180deg,#0a1628 0%,#0d2744 25%,#0e3d6e 55%,#0b5a8a 75%,#0e7aaa 100%); }
+    .ocean-bg::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 40% at 30% 20%,rgba(100,200,255,.07) 0%,transparent 70%),radial-gradient(ellipse 50% 35% at 75% 35%,rgba(192,57,43,.08) 0%,transparent 70%); }
+    .bubbles { position:fixed; inset:0; z-index:1; pointer-events:none; overflow:hidden; }
+    .bubble { position:absolute; bottom:-60px; border-radius:50%; background:rgba(100,210,255,.12); border:1px solid rgba(150,230,255,.2); animation:rise linear infinite; }
+    .bubble:nth-child(1){width:8px;height:8px;left:8%;animation-duration:12s}
+    .bubble:nth-child(2){width:14px;height:14px;left:18%;animation-duration:18s;animation-delay:3s}
+    .bubble:nth-child(3){width:6px;height:6px;left:28%;animation-duration:10s;animation-delay:1s}
+    .bubble:nth-child(4){width:20px;height:20px;left:40%;animation-duration:22s;animation-delay:5s}
+    .bubble:nth-child(5){width:10px;height:10px;left:55%;animation-duration:14s;animation-delay:2s}
+    .bubble:nth-child(6){width:5px;height:5px;left:65%;animation-duration:9s;animation-delay:7s}
+    .bubble:nth-child(7){width:16px;height:16px;left:75%;animation-duration:20s;animation-delay:4s}
+    .bubble:nth-child(8){width:9px;height:9px;left:85%;animation-duration:13s;animation-delay:1.5s}
+    @keyframes rise{0%{transform:translateY(0);opacity:0}10%{opacity:.7}90%{opacity:.4}100%{transform:translateY(-110vh) translateX(30px);opacity:0}}
+    .waves{position:fixed;bottom:0;left:0;right:0;height:120px;z-index:1;overflow:hidden;pointer-events:none}
+    .wave{position:absolute;width:200%;height:100%;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120'%3E%3Cpath fill='rgba(14,122,170,0.35)' d='M0,60 C240,100 480,20 720,60 C960,100 1200,20 1440,60 L1440,120 L0,120 Z'/%3E%3C/svg%3E") repeat-x center bottom;background-size:50% 100%;animation:wave-move linear infinite}
+    .wave-1{animation-duration:12s;opacity:.5}
+    .wave-2{animation-duration:18s;animation-direction:reverse;opacity:.3;bottom:-10px}
+    @keyframes wave-move{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .sidebar {
+      position:fixed; left:0; top:0; bottom:0; width:80px; z-index:20;
+      display:flex; flex-direction:column; align-items:center;
+      padding:28px 0 140px; background:rgba(5,18,40,0.6);
+      backdrop-filter:blur(16px); border-right:1px solid rgba(255,255,255,.08); gap:6px;
+      overflow-y:auto; scrollbar-width:none;
+    }
+    .sidebar::-webkit-scrollbar { display:none; }
+    .sidebar-label { font-size:8px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:rgba(255,255,255,.25); margin:4px 0 6px; }
+    .sb-link {
+      display:flex; flex-direction:column; align-items:center; gap:5px;
+      width:62px; padding:10px 6px 8px; border-radius:12px; text-decoration:none;
+      background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);
+    }
+    .sb-link:hover { background:rgba(255,255,255,.16); }
+    .sb-link.active { background:rgba(192,57,43,.28); border-color:rgba(231,76,60,.45); }
+    .sb-icon { width:34px; height:34px; border-radius:9px; display:flex; align-items:center; justify-content:center; }
+    .sb-name { font-size:8.5px; color:rgba(255,255,255,.65); text-align:center; font-weight:500; }
+    .sb-divider { width:40px; border:none; border-top:1px solid rgba(255,255,255,.1); margin:4px 0; }
+    .ic-hub { background:linear-gradient(135deg,#0e7aaa,#0d2744); }
+    .ic-tasa { background:linear-gradient(135deg,#c0392b,#96281b); }
+    .ic-eso { background:linear-gradient(135deg,#1a6b8a,#0e4d6b); }
+    .ic-corsium { background:linear-gradient(135deg,#2c5f8a,#1a3d5c); }
+    .ic-vairkko { background:linear-gradient(135deg,#27ae60,#1e8449); }
+    .ic-tango { background:linear-gradient(135deg,#8e44ad,#6c3483); }
+
+    .page { position:relative; z-index:10; margin-left:80px; min-height:100vh; padding:24px 24px 140px; max-width:1180px; }
+
+    .glass { background:rgba(255,255,255,.08); backdrop-filter:blur(20px); border:1px solid rgba(255,255,255,.14); border-radius:18px; box-shadow:0 8px 32px rgba(0,0,0,.25); }
+
+    .topbar { display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between; gap:16px; margin-bottom:18px; }
+    .brand-kicker { font-size:10px; font-weight:700; letter-spacing:2.4px; text-transform:uppercase; color:rgba(255,255,255,.4); }
+    .brand-title { font-size:28px; font-weight:650; letter-spacing:-.4px; margin-top:4px; }
+    .brand-title span { color:#ff8a7a; }
+    .brand-sub { font-size:13px; color:rgba(255,255,255,.55); margin-top:4px; max-width:520px; line-height:1.45; }
+    .top-actions { display:flex; flex-wrap:wrap; gap:8px; }
+    .btn {
+      border:1px solid rgba(255,255,255,.16); background:rgba(255,255,255,.08); color:#fff;
+      border-radius:40px; padding:8px 14px; font-size:12px; font-weight:600; cursor:pointer;
+    }
+    .btn:hover { background:rgba(255,255,255,.16); }
+    .btn-primary { background:rgba(192,57,43,.85); border-color:rgba(255,255,255,.18); }
+    .btn-primary:hover { background:rgba(192,57,43,1); }
+    .btn-ghost { background:transparent; }
+    .btn-small { padding:6px 10px; font-size:11px; }
+
+    .search-box { display:flex; align-items:center; gap:8px; background:rgba(255,255,255,.11); border:1px solid rgba(255,255,255,.2); border-radius:50px; padding:0 14px; min-width:min(100%,280px); }
+    .search-box input { flex:1; background:none; border:none; outline:none; color:#fff; font-size:14px; padding:10px 0; }
+    .search-box input::placeholder { color:rgba(255,255,255,.4); }
+
+    .tabs { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:16px; }
+    .tab {
+      padding:8px 14px; border-radius:999px; border:1px solid transparent; background:transparent;
+      color:rgba(255,255,255,.5); font-size:12px; font-weight:700; letter-spacing:.4px; cursor:pointer;
+    }
+    .tab.active { color:#fff; background:rgba(255,255,255,.12); border-color:rgba(255,255,255,.16); }
+    .tab .count { margin-left:6px; color:rgba(255,255,255,.4); font-weight:600; }
+
+    .stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:16px; }
+    .stat { padding:14px 16px; }
+    .stat-val { font-size:26px; font-weight:650; }
+    .stat-lbl { font-size:10px; letter-spacing:1.2px; text-transform:uppercase; color:rgba(255,255,255,.4); margin-top:4px; }
+
+    .grid-2 { display:grid; grid-template-columns:1.4fr .9fr; gap:14px; }
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .stack { display:flex; flex-direction:column; gap:10px; }
+    .section-title { font-size:11px; font-weight:700; letter-spacing:1.6px; text-transform:uppercase; color:rgba(255,255,255,.4); margin-bottom:10px; }
+    .pad { padding:16px 18px; }
+
+    .hero { padding:20px 22px; background:linear-gradient(135deg,rgba(192,57,43,.22),rgba(14,61,110,.35)); }
+    .hero-when { font-size:12px; color:#ffb3a8; font-weight:700; letter-spacing:.4px; }
+    .hero h2 { font-size:22px; margin:6px 0 8px; }
+    .hero p { font-size:13px; color:rgba(255,255,255,.7); line-height:1.45; }
+    .hero-meta { display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+
+    .chip { display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:600; padding:5px 9px; border-radius:999px; background:rgba(255,255,255,.1); color:rgba(255,255,255,.8); }
+    .chip-board { background:rgba(52,152,219,.22); }
+    .chip-legislative { background:rgba(155,89,182,.22); }
+    .chip-conference { background:rgba(230,126,34,.28); }
+    .chip-call { background:rgba(26,188,156,.22); }
+    .chip-travel { background:rgba(241,196,15,.18); }
+    .chip-other { background:rgba(255,255,255,.1); }
+    .chip-open { background:rgba(231,76,60,.22); color:#ffb4ab; }
+    .chip-done { background:rgba(39,174,96,.22); color:#a8e6c1; }
+    .chip-overdue { background:rgba(192,57,43,.35); color:#ffd0c8; }
+
+    .item {
+      display:block; width:100%; text-align:left; padding:12px 14px; border-radius:14px;
+      background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); color:inherit; cursor:pointer;
+    }
+    .item:hover { background:rgba(255,255,255,.1); }
+    .item-title { font-size:14px; font-weight:650; }
+    .item-meta { font-size:12px; color:rgba(255,255,255,.5); margin-top:4px; line-height:1.4; }
+    .item-row { display:flex; justify-content:space-between; gap:10px; align-items:flex-start; }
+
+    .filters { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+    .filter {
+      border:1px solid rgba(255,255,255,.12); background:rgba(255,255,255,.05); color:rgba(255,255,255,.65);
+      border-radius:999px; padding:6px 10px; font-size:11px; font-weight:600; cursor:pointer;
+    }
+    .filter.on { background:rgba(255,255,255,.16); color:#fff; }
+
+    .list { display:flex; flex-direction:column; gap:8px; }
+    .empty { padding:28px 16px; text-align:center; color:rgba(255,255,255,.45); font-size:13px; }
+
+    .note-grid { display:grid; grid-template-columns:280px 1fr; gap:14px; min-height:520px; }
+    .note-list { max-height:70vh; overflow:auto; padding-right:4px; }
+    .note-editor textarea, .field, select, input[type="text"], input[type="datetime-local"], input[type="date"] {
+      width:100%; background:rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.14); color:#fff;
+      border-radius:12px; padding:10px 12px; font:inherit; font-size:14px;
+    }
+    .note-editor textarea { min-height:280px; resize:vertical; line-height:1.5; }
+    .note-editor h3 { font-size:16px; margin:10px 0; }
+    .muted { color:rgba(255,255,255,.45); font-size:12px; }
+
+    .check { display:flex; gap:10px; align-items:flex-start; }
+    .check input { margin-top:3px; accent-color:#c0392b; width:16px; height:16px; }
+    .done .item-title { text-decoration:line-through; color:rgba(255,255,255,.45); }
+
+    .resource { display:flex; justify-content:space-between; align-items:center; gap:12px; text-decoration:none; color:inherit; }
+    .resource:hover { background:rgba(255,255,255,.1); }
+
+    .modal-bg { position:fixed; inset:0; z-index:40; background:rgba(2,12,27,.62); display:none; align-items:center; justify-content:center; padding:20px; }
+    .modal-bg.open { display:flex; }
+    .modal { width:min(560px,100%); max-height:90vh; overflow:auto; padding:20px; }
+    .modal h2 { font-size:18px; margin-bottom:14px; }
+    .form-grid { display:grid; gap:10px; }
+    .form-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    label { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:rgba(255,255,255,.45); display:block; margin-bottom:5px; }
+    .modal-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:14px; }
+
+    .drawer-bg { position:fixed; inset:0; z-index:35; background:rgba(2,12,27,.45); display:none; }
+    .drawer-bg.open { display:block; }
+    .drawer {
+      position:fixed; top:0; right:0; bottom:0; width:min(440px,100%); z-index:36;
+      background:rgba(8,22,42,.92); backdrop-filter:blur(22px); border-left:1px solid rgba(255,255,255,.12);
+      padding:22px 20px 120px; overflow:auto; transform:translateX(100%); transition:transform .2s ease;
+    }
+    .drawer.open { transform:translateX(0); }
+
+    .toast { position:fixed; bottom:28px; right:24px; z-index:50; background:rgba(8,22,42,.95); border:1px solid rgba(255,255,255,.16); padding:10px 14px; border-radius:12px; font-size:13px; display:none; }
+    .toast.show { display:block; }
+
+    @media (max-width:900px) {
+      .stats, .grid-2, .grid-3, .note-grid, .form-row { grid-template-columns:1fr; }
+      .page { padding:18px 14px 140px; }
+      .sidebar { width:64px; }
+      .page { margin-left:64px; }
+    }
+  </style>
+</head>
+<body>
+<div class="ocean-bg"></div>
+<div class="bubbles">
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+  <div class="bubble"></div><div class="bubble"></div><div class="bubble"></div><div class="bubble"></div>
+</div>
+<div class="waves"><div class="wave wave-1"></div><div class="wave wave-2"></div></div>
+
+<nav class="sidebar">
+  <div class="sidebar-label">Hub</div>
+  <a class="sb-link" href="index.html">
+    <div class="sb-icon ic-hub"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+    <span class="sb-name">Home</span>
+  </a>
+  <hr class="sb-divider">
+  <div class="sidebar-label">Work</div>
+  <a class="sb-link" href="https://www.esosuite.net/EsoSuite" target="_blank" rel="noopener">
+    <div class="sb-icon ic-eso"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M19 3H5c-1.1 0-2 .9-2 2v14l4-4h12c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></div>
+    <span class="sb-name">ESO</span>
+  </a>
+  <a class="sb-link" href="https://www.corsium.com/bedfordems/Home/Index" target="_blank" rel="noopener">
+    <div class="sb-icon ic-corsium"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    <span class="sb-name">Corsium</span>
+  </a>
+  <a class="sb-link active" href="tasa.html">
+    <div class="sb-icon ic-tasa"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17 8C8 10 5.9 16.17 3.82 21L5.71 22l1-2.3A4.49 4.49 0 008 20c4 0 4-2 8-2s4 2 8 2v-2c-4 0-4-2-8-2-1.13 0-1.9.16-2.53.33C14.28 12.06 16 10 17 8z"/></svg></div>
+    <span class="sb-name">TASA</span>
+  </a>
+  <a class="sb-link" href="https://suite.vairkko.com/APP/index.cfm/main/index" target="_blank" rel="noopener">
+    <div class="sb-icon ic-vairkko"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4zM3 3v18h18V3H3z"/></svg></div>
+    <span class="sb-name">Toolkit</span>
+  </a>
+  <a class="sb-link" href="https://cc.tangotango.io/dashboard" target="_blank" rel="noopener">
+    <div class="sb-icon ic-tango"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+    <span class="sb-name">Tango</span>
+  </a>
+</nav>
+
+<div class="page">
+  <div class="topbar">
+    <div>
+      <div class="brand-kicker">Ted's Hub · Operations</div>
+      <h1 class="brand-title"><span>TASA</span> Desk</h1>
+      <p class="brand-sub">Board meetings, legislative work, conferences, notes, and follow-ups for the Tennessee Ambulance Service Association — kept on this computer.</p>
+    </div>
+    <div class="top-actions">
+      <div class="search-box">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.45)" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input id="q" type="search" placeholder="Search meetings, notes, follow-ups" autocomplete="off">
+      </div>
+      <button class="btn" onclick="openModal('meeting')">+ Meeting</button>
+      <button class="btn" onclick="openModal('note')">+ Note</button>
+      <button class="btn btn-primary" onclick="openModal('action')">+ Follow-up</button>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="app"></div>
+</div>
+
+<div class="drawer-bg" id="drawerBg" onclick="closeDrawer()"></div>
+<aside class="drawer" id="drawer"></aside>
+
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal glass" id="modal"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORE_KEY = 'teds-hub-tasa-v1';
+const TZ = 'America/Chicago';
+const TYPES = ['board','legislative','conference','call','travel','other'];
+const TYPE_LABEL = { board:'Board', legislative:'Legislative', conference:'Conference', call:'Call', travel:'Travel', other:'Other' };
+
+const SEED = {
+  meetings: [
+    { id:'m-ret-2026-08-18', title:'TASA Retirement Conversation', type:'call', start:'2026-08-18T13:00:00', end:'2026-08-18T14:00:00', location:'500 Deaderick Street, Nashville, TN (in person; Teams option)', status:'upcoming', summary:'In-person meeting in Nashville. Calendar also has the original Teams invite.' },
+    { id:'m-pcg-2026-08-20', title:'PCG prep for TennCare discussion', type:'call', start:'2026-08-20T10:00:00', end:'2026-08-20T10:30:00', location:'Zoom', status:'upcoming', summary:'Short prep call with PCG ahead of the TennCare discussion.' },
+    { id:'m-reimb-2026-08-26', title:'2026 TASA Reimbursement & Compliance Conference', type:'conference', start:'2026-08-26T09:00:00', end:'2026-08-27T17:00:00', location:'Park Vista, 705 Cherokee Orchard Road, Gatlinburg, TN', status:'upcoming', summary:'Pre-conference Wed 9–11 (billing documentation and legislative updates). Main conference Wed noon–5 and Thu 8–5. CEUs: 4 CAC Mandatory, 8 CAC Elective, 12 CACO, 12 CAPO.' },
+    { id:'m-board-2026-09-03', title:'TASA Board Meeting', type:'board', start:'2026-09-03T10:00:00', end:'2026-09-03T11:00:00', location:'Zoom / board call', status:'upcoming', summary:'Monthly board meeting, 10:00 a.m. Central.' },
+    { id:'m-board-2026-10-01', title:'TASA Board Meeting', type:'board', start:'2026-10-01T10:00:00', end:'2026-10-01T11:00:00', location:'Zoom / board call', status:'upcoming', summary:'First-Thursday board slot. Calendar still carries an old 2024 title — treat this as the October board meeting.' },
+    { id:'m-board-2026-11-05', title:'TASA Board Meeting', type:'board', start:'2026-11-05T10:00:00', end:'2026-11-05T11:00:00', location:'Zoom / board call', status:'upcoming', summary:'November board meeting, 10:00 a.m. Central.' },
+    { id:'m-midwinter-2027', title:'2027 TASA Mid-Winter Conference', type:'conference', start:'2027-02-17T12:00:00', end:'2027-02-19T12:00:00', location:'Park Vista, Gatlinburg, TN', status:'upcoming', summary:'Mid-winter conference. Hotel booking code AMB; 865-436-9211 or 1-800-421-PARK.' },
+    { id:'m-call-2026-08-11', title:'TASA Call', type:'call', start:'2026-08-11T09:00:00', end:'2026-08-11T10:00:00', location:'Microsoft Teams', status:'done', summary:'Working call with Tim Booher, Andrew Reed, and TASA.' },
+    { id:'m-board-2026-08-06', title:'TASA Board Meeting', type:'board', start:'2026-08-06T10:00:00', end:'2026-08-06T11:00:00', location:'Zoom', status:'done', summary:'August board meeting (recurring first-Thursday slot).' },
+    { id:'m-leg-2026-07-13', title:'TASA Legislative Meeting', type:'legislative', start:'2026-07-13T10:00:00', end:'2026-07-13T11:00:00', location:'Lebanon Airport', status:'done', summary:'In-person legislative meeting.' },
+    { id:'m-board-2026-07-09', title:'July TASA Board Meeting', type:'board', start:'2026-07-09T09:00:00', end:'2026-07-09T10:00:00', location:'Board call', status:'done', summary:'' },
+    { id:'m-dc-2026-06-29', title:'DC TASA', type:'travel', start:'2026-06-29T00:00:00', end:'2026-07-02T23:59:00', location:'Washington, DC', status:'done', summary:'TASA travel / advocacy week in DC.' },
+    { id:'m-web-2026-06-11', title:'TASA website membership options', type:'call', start:'2026-06-11T09:00:00', end:'2026-06-11T10:00:00', location:'Zoom', status:'done', summary:'Discuss website option for memberships.' },
+    { id:'m-board-2026-06-04', title:'TASA Board Meeting', type:'board', start:'2026-06-04T10:00:00', end:'2026-06-04T11:00:00', location:'Board call', status:'done', summary:'' },
+    { id:'m-zoom-2026-05-29', title:'TASA Zoom meeting', type:'call', start:'2026-05-29T10:00:00', end:'2026-05-29T11:00:00', location:'Zoom', status:'done', summary:'' },
+    { id:'m-leg-2026-04-24', title:'TASA Legislative Update', type:'legislative', start:'2026-04-24T10:00:00', end:'2026-04-24T11:00:00', location:'Zoom', status:'done', summary:'Legislative update via Zoom, 10:00 a.m. Central.' },
+    { id:'m-leg-2026-04-10', title:'TASA Legislative Update', type:'legislative', start:'2026-04-10T10:00:00', end:'2026-04-10T11:00:00', location:'Zoom', status:'done', summary:'' },
+    { id:'m-meet-2026-01-15', title:'TASA Meeting', type:'board', start:'2026-01-15T10:00:00', end:'2026-01-15T11:00:00', location:'Lebanon Airport', status:'done', summary:'In-person meeting at Lebanon Airport.' },
+    { id:'m-dc-2025-05-12', title:'Ted in DC — TASA', type:'travel', start:'2025-05-12T00:00:00', end:'2025-05-16T23:59:00', location:'Washington, DC', status:'done', summary:'' }
+  ],
+  notes: [
+    { id:'n-zip-2027', title:'CY 2027 Ambulance ZIP Classification', tags:['reimbursement','classification'], meetingId:'', body:'County-level Tennessee ambulance ZIP changes prepared for the CY 2027 classification review.\n\nRelated: TASA_TN_CY2027_Ambulance_ZIP_Classification_Report.pdf and the county ZIP changes CSV.\n\nNotion home: TASA page → CY 2027 Ambulance ZIP Classification.' },
+    { id:'n-reimb-conf', title:'Reimbursement & Compliance Conference — Gatlinburg', tags:['conference','reimbursement'], meetingId:'m-reimb-2026-08-26', body:'When: Wednesday–Thursday, August 26–27, 2026\nWhere: Park Vista, Gatlinburg\n\nPre-conference Wed 9:00–11:00 — billing documentation (Chris Kelly) and legislative updates (Tim Booher, Andrew Reed).\nMain conference Wed 12:00–5:00 and Thu 8:00–5:00.\n\nCEUs: 4.0 CAC Mandatory, 8.0 CAC Elective, 12.0 CACO, 12.0 CAPO.\nHotel: Park Vista / DoubleTree, $120 night (block timing may already have passed — confirm current rate).\n\nAgenda and exhibitor pages live on tennesseeambulance.com.' },
+    { id:'n-tenncare', title:'TennCare / PCG discussion', tags:['reimbursement','tenncare'], meetingId:'m-pcg-2026-08-20', body:'Prep call August 20, 10:00 a.m. Central with PCG.\n\nCapture:\n- What TASA needs from the TennCare discussion\n- Open questions for PCG\n- Follow-ups after the call\n\nKeep this note updated so board and legislative conversations stay aligned.' },
+    { id:'n-retire', title:'Retirement conversation — Aug 18', tags:['people','nashville'], meetingId:'m-ret-2026-08-18', body:'In person at 500 Deaderick Street, Nashville, 1:00–2:00 p.m. Central. Teams option exists on the original invite.\n\nUse this note for talking points, decisions, and who owns next steps.' },
+    { id:'n-programs', title:'RHT, TNT2, and TASA program watch list', tags:['reimbursement','grants'], meetingId:'', body:'From recent TASA member news (August 2026):\n- UPDATE: RHT County Ambulance Program (Aug 11)\n- RHTF Grant Funding for Ambulances webinar (Aug 7)\n- TNT2 Reimbursement Program Update (Aug 7)\n\nFull posts sit behind the member login on tennesseeambulance.com. Drop takeaways here after you read them.' },
+    { id:'n-cadence', title:'How TASA work usually shows up', tags:['ops'], meetingId:'', body:'Typical pattern from the calendar:\n- Board meetings: often first Thursday, 10:00 a.m. Central, Zoom. Some months land on a different day. In-person board / association meetings have been at Lebanon Airport.\n- Legislative updates: Zoom or Lebanon Airport.\n- Conferences: Mid-Winter and Reimbursement & Compliance, usually Park Vista in Gatlinburg.\n- DC travel: late spring / early summer advocacy weeks.\n\nThe official site and member news stay at tennesseeambulance.com. Secretary: secretary@tennesseeambulance.com.' }
+  ],
+  actions: [
+    { id:'a-retire-prep', title:'Prep talking points for the Nashville retirement conversation', owner:'Ted', due:'2026-08-18', status:'open', meetingId:'m-ret-2026-08-18' },
+    { id:'a-pcg-prep', title:'Write TennCare questions before the PCG prep call', owner:'Ted', due:'2026-08-20', status:'open', meetingId:'m-pcg-2026-08-20' },
+    { id:'a-conf-ready', title:'Confirm conference registration, lodging, and CEU plan for Gatlinburg', owner:'Ted', due:'2026-08-24', status:'open', meetingId:'m-reimb-2026-08-26' },
+    { id:'a-zip-review', title:'Review CY 2027 ZIP classification before the September board meeting', owner:'Ted', due:'2026-09-02', status:'open', meetingId:'m-board-2026-09-03' },
+    { id:'a-aug11-notes', title:'Capture notes from the August 11 TASA call', owner:'Ted', due:'2026-08-12', status:'open', meetingId:'m-call-2026-08-11' },
+    { id:'a-member-news', title:'Pull takeaways from RHT / TNT2 member news into the program note', owner:'Ted', due:'2026-08-22', status:'open', meetingId:'' }
+  ]
+};
+
+let state = { tab:'desk', meetingFilter:'upcoming', actionFilter:'open', selectedNoteId:null, selectedMeetingId:null, q:'' };
+let data = { meetings:[], notes:[], actions:[] };
+
+function uid(prefix){ return prefix + '-' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function esc(s){ return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+function now(){ return new Date(); }
+function parseDT(s){ return new Date(s); }
+function isPast(m){ return parseDT(m.end || m.start) < now() || m.status==='done'; }
+function isUpcoming(m){ return !isPast(m) && m.status!=='cancelled'; }
+function fmtDate(s, opts){
+  if(!s) return '—';
+  return parseDT(s).toLocaleString('en-US', Object.assign({ timeZone:TZ, month:'short', day:'numeric', year:'numeric' }, opts||{}));
+}
+function fmtWhen(m){
+  const start = parseDT(m.start);
+  const end = m.end ? parseDT(m.end) : null;
+  const sameDay = end && start.toDateString()===end.toDateString();
+  const day = start.toLocaleDateString('en-US',{ timeZone:TZ, weekday:'short', month:'short', day:'numeric', year:'numeric' });
+  const t1 = start.toLocaleTimeString('en-US',{ timeZone:TZ, hour:'numeric', minute:'2-digit' });
+  if(!end) return day + ' · ' + t1;
+  if(!sameDay) return day + ' – ' + end.toLocaleDateString('en-US',{ timeZone:TZ, weekday:'short', month:'short', day:'numeric' });
+  const t2 = end.toLocaleTimeString('en-US',{ timeZone:TZ, hour:'numeric', minute:'2-digit' });
+  return day + ' · ' + t1 + '–' + t2 + ' CT';
+}
+function daysUntil(s){
+  const a = new Date(); a.setHours(0,0,0,0);
+  const b = parseDT(s); b.setHours(0,0,0,0);
+  return Math.round((b-a)/86400000);
+}
+function dueState(a){
+  if(a.status==='done') return 'done';
+  if(a.due && parseDT(a.due+'T23:59:00') < now()) return 'overdue';
+  return 'open';
+}
+function meetingById(id){ return data.meetings.find(m=>m.id===id); }
+function chipType(type){ return `<span class="chip chip-${esc(type)}">${esc(TYPE_LABEL[type]||type)}</span>`; }
+
+function load(){
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    data = raw ? JSON.parse(raw) : { meetings:[], notes:[], actions:[] };
+  } catch(e){ data = { meetings:[], notes:[], actions:[] }; }
+  mergeSeed();
+  save();
+}
+function mergeSeed(){
+  for(const key of ['meetings','notes','actions']){
+    const have = new Set((data[key]||[]).map(x=>x.id));
+    for(const item of SEED[key]){
+      if(!have.has(item.id)) data[key].push({...item});
+    }
+  }
+}
+function save(){ localStorage.setItem(STORE_KEY, JSON.stringify(data)); }
+
+function toast(msg){
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 2200);
+}
+
+function matchesQ(text){
+  const q = state.q.trim().toLowerCase();
+  if(!q) return true;
+  return String(text||'').toLowerCase().includes(q);
+}
+
+function filteredMeetings(){
+  return data.meetings
+    .filter(m => {
+      if(state.meetingFilter==='upcoming' && !isUpcoming(m)) return false;
+      if(state.meetingFilter==='past' && !isPast(m)) return false;
+      if(TYPES.includes(state.meetingFilter) && m.type!==state.meetingFilter) return false;
+      return matchesQ([m.title,m.location,m.summary,m.type].join(' '));
+    })
+    .sort((a,b)=> parseDT(a.start)-parseDT(b.start) || a.title.localeCompare(b.title));
+}
+function filteredNotes(){
+  return data.notes
+    .filter(n => matchesQ([n.title,n.body,(n.tags||[]).join(' ')].join(' ')))
+    .sort((a,b)=> (b.updatedAt||b.id).localeCompare(a.updatedAt||a.id));
+}
+function filteredActions(){
+  return data.actions
+    .filter(a => {
+      if(state.actionFilter==='open' && a.status==='done') return false;
+      if(state.actionFilter==='done' && a.status!=='done') return false;
+      return matchesQ([a.title,a.owner,a.due].join(' '));
+    })
+    .sort((a,b)=>{
+      if(a.status!==b.status) return a.status==='open' ? -1 : 1;
+      return (a.due||'9999').localeCompare(b.due||'9999');
+    });
+}
+
+function renderTabs(){
+  const openActs = data.actions.filter(a=>a.status==='open').length;
+  const up = data.meetings.filter(isUpcoming).length;
+  const tabs = [
+    ['desk','Desk'],
+    ['meetings',`Meetings <span class="count">${up}</span>`],
+    ['notes',`Notes <span class="count">${data.notes.length}</span>`],
+    ['actions',`Follow-ups <span class="count">${openActs}</span>`],
+    ['resources','Resources']
+  ];
+  document.getElementById('tabs').innerHTML = tabs.map(([id,label])=>
+    `<button class="tab ${state.tab===id?'active':''}" onclick="setTab('${id}')">${label}</button>`
+  ).join('');
+}
+
+function setTab(tab){
+  state.tab = tab;
+  if(tab==='notes' && !state.selectedNoteId && data.notes[0]) state.selectedNoteId = filteredNotes()[0]?.id || data.notes[0].id;
+  render();
+}
+
+function render(){
+  renderTabs();
+  const root = document.getElementById('app');
+  if(state.tab==='desk') root.innerHTML = renderDesk();
+  if(state.tab==='meetings') root.innerHTML = renderMeetings();
+  if(state.tab==='notes') root.innerHTML = renderNotes();
+  if(state.tab==='actions') root.innerHTML = renderActions();
+  if(state.tab==='resources') root.innerHTML = renderResources();
+}
+
+function nextMeeting(){
+  return data.meetings.filter(isUpcoming).sort((a,b)=>parseDT(a.start)-parseDT(b.start))[0];
+}
+
+function renderDesk(){
+  const next = nextMeeting();
+  const upcoming = data.meetings.filter(isUpcoming).sort((a,b)=>parseDT(a.start)-parseDT(b.start)).slice(0,5);
+  const open = data.actions.filter(a=>a.status==='open').sort((a,b)=>(a.due||'').localeCompare(b.due||'')).slice(0,6);
+  const notes = [...data.notes].slice(0,5);
+  const overdue = data.actions.filter(a=>dueState(a)==='overdue').length;
+  const d = next ? daysUntil(next.start) : null;
+  const whenLabel = d===0 ? 'Today' : d===1 ? 'Tomorrow' : d!=null ? `In ${d} days` : '';
+
+  return `
+    <div class="stats">
+      <div class="glass stat"><div class="stat-val">${data.meetings.filter(isUpcoming).length}</div><div class="stat-lbl">Upcoming</div></div>
+      <div class="glass stat"><div class="stat-val">${data.notes.length}</div><div class="stat-lbl">Notes</div></div>
+      <div class="glass stat"><div class="stat-val">${open.length ? data.actions.filter(a=>a.status==='open').length : 0}</div><div class="stat-lbl">Open follow-ups</div></div>
+      <div class="glass stat"><div class="stat-val">${overdue}</div><div class="stat-lbl">Overdue</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="stack">
+        <div class="glass hero">
+          <div class="hero-when">${next ? esc(whenLabel) + ' · next up' : 'Nothing upcoming'}</div>
+          <h2>${next ? esc(next.title) : 'Add a TASA meeting'}</h2>
+          <p>${next ? esc(fmtWhen(next)) + (next.location ? ' · ' + esc(next.location) : '') : 'Board calls, legislative meetings, and conferences all live here.'}</p>
+          ${next ? `<p style="margin-top:8px">${esc(next.summary||'')}</p>` : ''}
+          <div class="hero-meta">
+            ${next ? chipType(next.type) : ''}
+            ${next ? `<button class="btn btn-small" onclick="openMeeting('${next.id}')">Open</button>` : `<button class="btn btn-small btn-primary" onclick="openModal('meeting')">Add meeting</button>`}
+          </div>
+        </div>
+        <div class="glass pad">
+          <div class="section-title">Coming up</div>
+          <div class="list">${upcoming.map(m=>meetingRow(m)).join('') || '<div class="empty">No upcoming meetings.</div>'}</div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="glass pad">
+          <div class="section-title">Open follow-ups</div>
+          <div class="list">${open.map(a=>actionRow(a)).join('') || '<div class="empty">All clear.</div>'}</div>
+        </div>
+        <div class="glass pad">
+          <div class="section-title">Notes</div>
+          <div class="list">${notes.map(n=>`
+            <button class="item" onclick="state.tab='notes';state.selectedNoteId='${n.id}';render()">
+              <div class="item-title">${esc(n.title)}</div>
+              <div class="item-meta">${esc((n.tags||[]).join(' · ') || 'Note')}</div>
+            </button>`).join('')}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function meetingRow(m){
+  return `<button class="item" onclick="openMeeting('${m.id}')">
+    <div class="item-row">
+      <div>
+        <div class="item-title">${esc(m.title)}</div>
+        <div class="item-meta">${esc(fmtWhen(m))}${m.location?' · '+esc(m.location):''}</div>
+      </div>
+      ${chipType(m.type)}
+    </div>
+  </button>`;
+}
+
+function actionRow(a){
+  const st = dueState(a);
+  const meet = meetingById(a.meetingId);
+  return `<label class="item check ${a.status==='done'?'done':''}">
+    <input type="checkbox" ${a.status==='done'?'checked':''} onchange="toggleAction('${a.id}')">
+    <div style="flex:1">
+      <div class="item-row">
+        <div class="item-title">${esc(a.title)}</div>
+        <span class="chip chip-${st}">${st==='overdue'?'Overdue':st==='done'?'Done':esc(a.due?fmtDate(a.due+'T12:00:00',{year:undefined}):'Open')}</span>
+      </div>
+      <div class="item-meta">${esc(a.owner||'Ted')}${meet?' · '+esc(meet.title):''}</div>
+    </div>
+  </label>`;
+}
+
+function renderMeetings(){
+  const filters = [['upcoming','Upcoming'],['past','Past'],['all','All'], ...TYPES.map(t=>[t,TYPE_LABEL[t]])];
+  const rows = filteredMeetings();
+  return `
+    <div class="filters">
+      ${filters.map(([id,label])=>`<button class="filter ${state.meetingFilter===id?'on':''}" onclick="state.meetingFilter='${id}';render()">${label}</button>`).join('')}
+    </div>
+    <div class="glass pad">
+      <div class="list">${rows.map(meetingRow).join('') || '<div class="empty">No meetings match.</div>'}</div>
+    </div>`;
+}
+
+function renderNotes(){
+  const notes = filteredNotes();
+  const n = data.notes.find(x=>x.id===state.selectedNoteId) || notes[0];
+  if(n && state.selectedNoteId!==n.id) state.selectedNoteId = n.id;
+  return `
+    <div class="note-grid">
+      <div class="glass pad">
+        <div class="section-title">All notes</div>
+        <div class="note-list list">${notes.map(note=>`
+          <button class="item" onclick="state.selectedNoteId='${note.id}';render()" style="${note.id===state.selectedNoteId?'border-color:rgba(255,138,122,.5)':''}">
+            <div class="item-title">${esc(note.title)}</div>
+            <div class="item-meta">${esc((note.tags||[]).join(' · ')||'Note')}</div>
+          </button>`).join('') || '<div class="empty">No notes yet.</div>'}</div>
+      </div>
+      <div class="glass pad note-editor">
+        ${n ? `
+          <input class="field" value="${esc(n.title)}" oninput="updateNote('${n.id}','title',this.value)">
+          <div class="muted" style="margin:8px 0">Tags, comma-separated</div>
+          <input class="field" value="${esc((n.tags||[]).join(', '))}" oninput="updateNote('${n.id}','tags',this.value)">
+          <div class="muted" style="margin:8px 0">Linked meeting</div>
+          <select onchange="updateNote('${n.id}','meetingId',this.value)">
+            <option value="">None</option>
+            ${data.meetings.slice().sort((a,b)=>b.start.localeCompare(a.start)).map(m=>`<option value="${m.id}" ${m.id===n.meetingId?'selected':''}>${esc(m.title)} · ${esc(fmtDate(m.start,{year:undefined,hour:'numeric',minute:'2-digit'}))}</option>`).join('')}
+          </select>
+          <div class="muted" style="margin:12px 0 8px">Body</div>
+          <textarea oninput="updateNote('${n.id}','body',this.value)">${esc(n.body)}</textarea>
+          <div class="modal-actions">
+            <button class="btn" onclick="if(confirm('Delete this note?')) deleteNote('${n.id}')">Delete</button>
+          </div>
+        ` : '<div class="empty">Create a note to get started.</div>'}
+      </div>
+    </div>`;
+}
+
+function renderActions(){
+  const filters = [['open','Open'],['done','Done'],['all','All']];
+  return `
+    <div class="filters">
+      ${filters.map(([id,label])=>`<button class="filter ${state.actionFilter===id?'on':''}" onclick="state.actionFilter='${id}';render()">${label}</button>`).join('')}
+    </div>
+    <div class="glass pad">
+      <div class="list">${filteredActions().map(actionRow).join('') || '<div class="empty">No follow-ups match.</div>'}</div>
+    </div>`;
+}
+
+function renderResources(){
+  const links = [
+    ['TASA website','Member news, events, and association home','http://tennesseeambulance.com/'],
+    ['2026 Reimbursement & Compliance Conference','Gatlinburg · Aug 26–27','https://tennesseeambulance.com/event-6743009'],
+    ['TASA Notion page','ZIP classification and TASA files','https://www.notion.so/3bd05936a14780a7a1fbcc7d5c641957'],
+    ['CY 2027 ZIP Classification','County-level review notes','https://www.notion.so/3bd05936a147811a8a01d977b5c722b7'],
+    ['TASA on Facebook','Public association updates','https://www.facebook.com']
+  ];
+  return `
+    <div class="grid-3">
+      <div class="glass pad" style="grid-column:span 2">
+        <div class="section-title">Keep close</div>
+        <div class="list">${links.map(([t,s,href])=>`
+          <a class="item resource" href="${esc(href)}" target="_blank" rel="noopener">
+            <div><div class="item-title">${esc(t)}</div><div class="item-meta">${esc(s)}</div></div>
+            <span class="chip">Open</span>
+          </a>`).join('')}
+        <div class="item">
+          <div class="item-title">Secretary</div>
+          <div class="item-meta">secretary@tennesseeambulance.com · 540 W. Main St. #131, Gallatin, TN 37066</div>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="glass pad">
+          <div class="section-title">This desk</div>
+          <p class="muted" style="line-height:1.5;margin-bottom:12px">Meetings, notes, and follow-ups stay in this browser. Export a backup if you switch computers.</p>
+          <div class="stack">
+            <button class="btn" onclick="exportData()">Export JSON backup</button>
+            <button class="btn" onclick="document.getElementById('importFile').click()">Import backup</button>
+            <input id="importFile" type="file" accept="application/json" hidden onchange="importData(event)">
+            <button class="btn" onclick="if(confirm('Restore starter meetings and notes that are missing? Your own items stay.')){mergeSeed();save();render();toast('Starter items restored');}">Restore missing starter items</button>
+          </div>
+        </div>
+      </div>
+    </div>`;
+}
+
+function openMeeting(id){
+  state.selectedMeetingId = id;
+  const m = meetingById(id);
+  if(!m) return;
+  const notes = data.notes.filter(n=>n.meetingId===id);
+  const acts = data.actions.filter(a=>a.meetingId===id);
+  document.getElementById('drawerBg').classList.add('open');
+  const d = document.getElementById('drawer');
+  d.classList.add('open');
+  d.innerHTML = `
+    <div class="brand-kicker">Meeting</div>
+    <h2 style="font-size:22px;margin:8px 0 10px">${esc(m.title)}</h2>
+    <div class="hero-meta" style="margin-bottom:14px">${chipType(m.type)} <span class="chip">${isUpcoming(m)?'Upcoming':'Past'}</span></div>
+    <p class="item-meta">${esc(fmtWhen(m))}</p>
+    <p class="item-meta" style="margin:6px 0 12px">${esc(m.location||'Location TBD')}</p>
+    <p style="font-size:14px;line-height:1.5;color:rgba(255,255,255,.8)">${esc(m.summary||'No summary yet.')}</p>
+    <div class="modal-actions" style="justify-content:flex-start">
+      <button class="btn btn-small" onclick="openModal('meeting','${m.id}')">Edit</button>
+      <button class="btn btn-small" onclick="openModal('note',null,'${m.id}')">Add note</button>
+      <button class="btn btn-small" onclick="openModal('action',null,'${m.id}')">Add follow-up</button>
+    </div>
+    <div class="section-title" style="margin-top:22px">Notes</div>
+    <div class="list">${notes.map(n=>`<button class="item" onclick="closeDrawer();state.tab='notes';state.selectedNoteId='${n.id}';render()"><div class="item-title">${esc(n.title)}</div></button>`).join('') || '<div class="empty">No notes on this meeting.</div>'}</div>
+    <div class="section-title" style="margin-top:22px">Follow-ups</div>
+    <div class="list">${acts.map(actionRow).join('') || '<div class="empty">No follow-ups yet.</div>'}</div>
+    <div class="modal-actions">
+      <button class="btn" onclick="if(confirm('Delete this meeting?')) deleteMeeting('${m.id}')">Delete meeting</button>
+    </div>`;
+}
+function closeDrawer(){
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerBg').classList.remove('open');
+}
+
+function openModal(kind, id, meetingId){
+  const editing = id ? (kind==='meeting'?meetingById(id): kind==='note'?data.notes.find(n=>n.id===id):data.actions.find(a=>a.id===id)) : null;
+  const meetOpts = `<option value="">None</option>` + data.meetings.slice().sort((a,b)=>b.start.localeCompare(a.start)).map(m=>`<option value="${m.id}" ${(editing?.meetingId||meetingId)===m.id?'selected':''}>${esc(m.title)}</option>`).join('');
+  let body = '';
+  if(kind==='meeting'){
+    body = `
+      <h2>${editing?'Edit meeting':'New meeting'}</h2>
+      <div class="form-grid">
+        <div><label>Title</label><input id="f-title" type="text" value="${esc(editing?.title||'')}"></div>
+        <div class="form-row">
+          <div><label>Type</label><select id="f-type">${TYPES.map(t=>`<option value="${t}" ${editing?.type===t?'selected':''}>${TYPE_LABEL[t]}</option>`).join('')}</select></div>
+          <div><label>Status</label><select id="f-status">${['upcoming','done','cancelled'].map(s=>`<option ${editing?.status===s?'selected':''}>${s}</option>`).join('')}</select></div>
+        </div>
+        <div class="form-row">
+          <div><label>Start</label><input id="f-start" type="datetime-local" value="${toLocalInput(editing?.start)}"></div>
+          <div><label>End</label><input id="f-end" type="datetime-local" value="${toLocalInput(editing?.end)}"></div>
+        </div>
+        <div><label>Location</label><input id="f-loc" type="text" value="${esc(editing?.location||'')}"></div>
+        <div><label>Summary</label><textarea id="f-sum" style="min-height:90px">${esc(editing?.summary||'')}</textarea></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveMeeting('${editing?.id||''}')">Save</button>
+      </div>`;
+  } else if(kind==='note'){
+    body = `
+      <h2>${editing?'Edit note':'New note'}</h2>
+      <div class="form-grid">
+        <div><label>Title</label><input id="f-title" type="text" value="${esc(editing?.title||'')}"></div>
+        <div><label>Tags</label><input id="f-tags" type="text" value="${esc((editing?.tags||[]).join(', '))}" placeholder="board, reimbursement"></div>
+        <div><label>Meeting</label><select id="f-meet">${meetOpts}</select></div>
+        <div><label>Body</label><textarea id="f-body" style="min-height:160px">${esc(editing?.body||'')}</textarea></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveNote('${editing?.id||''}')">Save</button>
+      </div>`;
+  } else {
+    body = `
+      <h2>${editing?'Edit follow-up':'New follow-up'}</h2>
+      <div class="form-grid">
+        <div><label>Title</label><input id="f-title" type="text" value="${esc(editing?.title||'')}"></div>
+        <div class="form-row">
+          <div><label>Owner</label><input id="f-owner" type="text" value="${esc(editing?.owner||'Ted')}"></div>
+          <div><label>Due</label><input id="f-due" type="date" value="${esc(editing?.due||'')}"></div>
+        </div>
+        <div><label>Meeting</label><select id="f-meet">${meetOpts}</select></div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveAction('${editing?.id||''}')">Save</button>
+      </div>`;
+  }
+  document.getElementById('modal').innerHTML = body;
+  document.getElementById('modalBg').classList.add('open');
+}
+function closeModal(){ document.getElementById('modalBg').classList.remove('open'); }
+function toLocalInput(s){
+  if(!s) return '';
+  const d = parseDT(s);
+  const pad = n=>String(n).padStart(2,'0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+function saveMeeting(id){
+  const item = {
+    id: id || uid('m'),
+    title: val('f-title') || 'Untitled meeting',
+    type: val('f-type'),
+    status: val('f-status'),
+    start: val('f-start') || new Date().toISOString().slice(0,16),
+    end: val('f-end') || val('f-start'),
+    location: val('f-loc'),
+    summary: document.getElementById('f-sum').value
+  };
+  upsert('meetings', item);
+  closeModal();
+  openMeeting(item.id);
+  render();
+  toast('Meeting saved');
+}
+function saveNote(id){
+  const item = {
+    id: id || uid('n'),
+    title: val('f-title') || 'Untitled note',
+    tags: val('f-tags').split(',').map(s=>s.trim()).filter(Boolean),
+    meetingId: val('f-meet'),
+    body: document.getElementById('f-body').value,
+    updatedAt: new Date().toISOString()
+  };
+  upsert('notes', item);
+  state.selectedNoteId = item.id;
+  state.tab = 'notes';
+  closeModal();
+  render();
+  toast('Note saved');
+}
+function saveAction(id){
+  const existing = data.actions.find(a=>a.id===id);
+  const item = {
+    id: id || uid('a'),
+    title: val('f-title') || 'Untitled follow-up',
+    owner: val('f-owner') || 'Ted',
+    due: val('f-due'),
+    status: existing?.status || 'open',
+    meetingId: val('f-meet')
+  };
+  upsert('actions', item);
+  closeModal();
+  render();
+  if(state.selectedMeetingId) openMeeting(state.selectedMeetingId);
+  toast('Follow-up saved');
+}
+function val(id){ return document.getElementById(id).value.trim(); }
+function upsert(key, item){
+  const i = data[key].findIndex(x=>x.id===item.id);
+  if(i>=0) data[key][i] = Object.assign({}, data[key][i], item);
+  else data[key].unshift(item);
+  save();
+}
+function updateNote(id, field, value){
+  const n = data.notes.find(x=>x.id===id);
+  if(!n) return;
+  if(field==='tags') n.tags = value.split(',').map(s=>s.trim()).filter(Boolean);
+  else n[field] = value;
+  n.updatedAt = new Date().toISOString();
+  save();
+}
+function toggleAction(id){
+  const a = data.actions.find(x=>x.id===id);
+  if(!a) return;
+  a.status = a.status==='done' ? 'open' : 'done';
+  save();
+  render();
+  if(state.selectedMeetingId) openMeeting(state.selectedMeetingId);
+}
+function deleteNote(id){
+  data.notes = data.notes.filter(n=>n.id!==id);
+  state.selectedNoteId = data.notes[0]?.id || null;
+  save(); render(); toast('Note deleted');
+}
+function deleteMeeting(id){
+  data.meetings = data.meetings.filter(m=>m.id!==id);
+  save(); closeDrawer(); render(); toast('Meeting deleted');
+}
+
+function exportData(){
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'tasa-desk-backup.json';
+  a.click();
+  toast('Backup downloaded');
+}
+function importData(ev){
+  const file = ev.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      const parsed = JSON.parse(reader.result);
+      if(!parsed.meetings || !parsed.notes || !parsed.actions) throw new Error('bad');
+      data = parsed;
+      save();
+      render();
+      toast('Backup imported');
+    } catch(e){ toast('That file is not a TASA Desk backup'); }
+  };
+  reader.readAsText(file);
+  ev.target.value = '';
+}
+
+document.getElementById('q').addEventListener('input', e=>{
+  state.q = e.target.value;
+  if(state.tab==='desk' && state.q) state.tab = 'meetings';
+  render();
+});
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){ closeModal(); closeDrawer(); }
+  if(e.key==='/' && document.activeElement.tagName!=='INPUT' && document.activeElement.tagName!=='TEXTAREA'){
+    e.preventDefault();
+    document.getElementById('q').focus();
+  }
+});
+
+load();
+render();
+</script>
+</body>
+</html>

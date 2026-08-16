@@ -174,6 +174,15 @@
 
     .w-loading { padding:20px; text-align:center; font-size:12px; color:rgba(255,255,255,.4); }
 
+    /* TASA desk card */
+    .tasa-wrap { width:100%; max-width:820px; padding:0; display:block; text-decoration:none; color:inherit; }
+    .tasa-inner { padding:16px 20px 18px; }
+    .tasa-kicker { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#ffb3a8; margin-bottom:8px; }
+    .tasa-title { font-size:18px; font-weight:650; color:#fff; }
+    .tasa-meta { font-size:13px; color:rgba(255,255,255,.65); margin-top:6px; line-height:1.45; }
+    .tasa-row { display:flex; justify-content:space-between; gap:16px; align-items:flex-end; }
+    .tasa-cta { font-size:12px; font-weight:700; color:rgba(255,255,255,.8); background:rgba(192,57,43,.7); border-radius:999px; padding:7px 12px; white-space:nowrap; }
+
     .divider { width:100%; max-width:820px; border:none; border-top:1px solid rgba(255,255,255,.07); }
     .svg-icon { width:18px; height:18px; display:block; }
   </style>
@@ -226,7 +235,7 @@
     <div class="sb-icon ic-corsium"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
     <span class="sb-name">Corsium</span>
   </a>
-  <a class="sb-link" href="http://tennesseeambulance.com/" target="_blank">
+  <a class="sb-link" href="tasa.html">
     <div class="sb-icon ic-tasa"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17 8C8 10 5.9 16.17 3.82 21L5.71 22l1-2.3A4.49 4.49 0 008 20c4 0 4-2 8-2s4 2 8 2v-2c-4 0-4-2-8-2-1.13 0-1.9.16-2.53.33C14.28 12.06 16 10 17 8z"/></svg></div>
     <span class="sb-name">TASA</span>
   </a>
@@ -312,6 +321,20 @@
       <div class="news-list" id="list-tech"></div>
     </div>
   </div>
+
+  <!-- TASA Desk -->
+  <a class="glass tasa-wrap" href="tasa.html">
+    <div class="tasa-inner">
+      <div class="tasa-row">
+        <div>
+          <div class="tasa-kicker">TASA Desk</div>
+          <div class="tasa-title" id="tasa-next-title">Meetings, notes, and follow-ups</div>
+          <div class="tasa-meta" id="tasa-next-meta">Board calls, legislative work, and conferences in one place.</div>
+        </div>
+        <div class="tasa-cta">Open desk →</div>
+      </div>
+    </div>
+  </a>
 
   <!-- Calendar -->
   <div class="glass cal-wrap">
@@ -443,6 +466,31 @@ async function loadWeather(){
 loadFeed('breaking');
 loadFeed('tech');
 loadWeather();
+
+// ── TASA next-up ──
+(function renderTasaCard(){
+  const fallback = [
+    { title:'TASA Retirement Conversation', start:'2026-08-18T13:00:00', loc:'Nashville · 1:00 PM CT' },
+    { title:'PCG prep for TennCare discussion', start:'2026-08-20T10:00:00', loc:'Zoom · 10:00 AM CT' },
+    { title:'Reimbursement & Compliance Conference', start:'2026-08-26T09:00:00', loc:'Park Vista, Gatlinburg' },
+    { title:'TASA Board Meeting', start:'2026-09-03T10:00:00', loc:'10:00 AM CT' }
+  ];
+  let meetings = fallback;
+  try {
+    const stored = JSON.parse(localStorage.getItem('teds-hub-tasa-v1')||'null');
+    if(stored?.meetings?.length) meetings = stored.meetings;
+  } catch(e){}
+  const now = new Date();
+  const next = meetings
+    .filter(m => m.status!=='cancelled' && m.status!=='done' && new Date(m.end||m.start) >= now)
+    .sort((a,b)=> new Date(a.start)-new Date(b.start))[0];
+  if(!next) return;
+  const start = new Date(next.start);
+  const when = start.toLocaleString('en-US',{ weekday:'short', month:'short', day:'numeric', hour:'numeric', minute:'2-digit', timeZone:'America/Chicago' });
+  const place = next.location || next.loc;
+  document.getElementById('tasa-next-title').textContent = next.title;
+  document.getElementById('tasa-next-meta').textContent = place ? place + ' · ' + when : when;
+})();
 </script>
 </body>
 </html>

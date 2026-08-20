@@ -255,6 +255,9 @@
       white-space: nowrap;
     }
     th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    th[data-sort]::after { content: ""; margin-left: 4px; color: var(--gold); }
+    th.sort-asc::after { content: "▲"; }
+    th.sort-desc::after { content: "▼"; }
     td { padding: 7px 8px; border-bottom: 1px solid #e6e6e6; }
     tbody tr:hover { background: #faf7f0; }
     .bar-cell { min-width: 120px; }
@@ -365,8 +368,8 @@
               <th class="num" data-sort="budgeted">Budgeted</th>
               <th class="num" data-sort="spent">Spent</th>
               <th class="num" data-sort="remaining">Remaining</th>
-              <th class="num" data-sort="pct">% Spent</th>
-              <th data-sort="pct">Pace</th>
+              <th class="num" data-sort="spentPct">% Spent</th>
+              <th data-sort="spentPct">Pace</th>
               <th data-sort="status">Status</th>
             </tr>
           </thead>
@@ -486,7 +489,7 @@
       ["flagged", "Flags"]
     ];
     let filter = "all";
-    let sortKey = "pct";
+    let sortKey = "spentPct";
     let sortDir = -1;
     let query = "";
 
@@ -534,6 +537,10 @@
 
     function render() {
       const list = visible();
+      document.querySelectorAll("th[data-sort]").forEach((th) => {
+        th.classList.toggle("sort-asc", th.dataset.sort === sortKey && sortDir === 1);
+        th.classList.toggle("sort-desc", th.dataset.sort === sortKey && sortDir === -1);
+      });
       document.getElementById("count").textContent = list.length + " accounts";
       if (!list.length) {
         document.getElementById("tbody").innerHTML = `<tr><td class="empty" colspan="9">No accounts match.</td></tr>`;

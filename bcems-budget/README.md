@@ -27,6 +27,8 @@ python3 -m http.server 8080
 
 Then open `http://localhost:8080/bcems-budget/`.
 
+The Postgres/Neon app lives in `../bcms-budget`. After `npm start` there, the same dashboard at http://127.0.0.1:8787/ loads the snapshot from the database.
+
 ## Update a month
 
 1. Edit `bcems-budget/data.js`.

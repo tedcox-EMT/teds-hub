@@ -394,6 +394,16 @@
 
   <script src="data.js"></script>
   <script>
+    async function loadBudget() {
+      try {
+        const r = await fetch("/api/snapshot", { headers: { Accept: "application/json" } });
+        if (r.ok) {
+          const payload = await r.json();
+          if (payload?.meta && Array.isArray(payload.accounts)) window.BUDGET = payload;
+        }
+      } catch (e) {}
+    }
+
     const money = (n, cents) => {
       const abs = Math.abs(n);
       const body = abs.toLocaleString("en-US", {
@@ -403,6 +413,8 @@
       return (n < 0 ? "-$" : "$") + body;
     };
     const pct = (n) => (n * 100).toFixed(1) + "%";
+
+    function boot() {
     const B = window.BUDGET;
     const paceRate = B.meta.fiscalMonth / B.meta.fiscalMonths;
     const flagAccts = new Set(B.flags.map(f => f.acct));
@@ -435,7 +447,8 @@
     document.getElementById("subtitle").textContent =
       `${B.meta.fiscalYear} · Month ${B.meta.fiscalMonth} of ${B.meta.fiscalMonths} · Report ${B.meta.reportDate}`;
     document.getElementById("context").textContent =
-      `${B.meta.primarySource}, pulled ${B.meta.pulledAt} by ${B.meta.pulledBy}.`;
+      `${B.meta.primarySource}, pulled ${B.meta.pulledAt} by ${B.meta.pulledBy}.` +
+      (B.meta.source === "postgres" ? " Live from Postgres." : "");
     document.getElementById("src").textContent = B.meta.primarySource;
 
     document.getElementById("kpis").innerHTML = [
@@ -576,6 +589,9 @@
       cats
     };
     render();
+    }
+
+    loadBudget().then(boot);
   </script>
 </body>
 </html>

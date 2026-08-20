@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BCEMS Budget | FY2026-27</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1F3864;
+      --gold: #C5A253;
+      --gold-tint: #FBF3E3;
+      --navy-tint: #E9EDF4;
+      --card: #F3F3F3;
+      --ink: #1a1a1a;
+      --muted: #5a6570;
+      --white: #ffffff;
+      --ahead: #8B3A2A;
+      --ok: #2E5A3C;
+      --header-font: Cambria, Caladea, Georgia, "Times New Roman", serif;
+      --body-font: Calibri, "Source Sans 3", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #e8e8e8; color: var(--ink); font-family: var(--body-font); }
+    body { min-height: 100vh; }
+    .sheet {
+      max-width: 1100px;
+      margin: 24px auto 48px;
+      background: var(--white);
+      box-shadow: 0 8px 28px rgba(31,56,100,.18);
+    }
+
+    .banner {
+      background: var(--navy);
+      color: var(--white);
+      padding: 22px 28px 18px;
+      position: relative;
+    }
+    .banner-kicker {
+      font-family: var(--header-font);
+      font-size: 12px;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .banner h1 {
+      font-family: var(--header-font);
+      font-size: 32px;
+      color: var(--gold);
+      line-height: 1.15;
+      margin-top: 4px;
+    }
+    .banner .sub {
+      color: var(--white);
+      font-size: 16px;
+      margin-top: 4px;
+    }
+    .banner-rule {
+      height: 2px;
+      background: var(--gold);
+      margin: 12px 0 8px;
+    }
+    .banner .context {
+      font-style: italic;
+      font-size: 13.5px;
+      color: rgba(255,255,255,.82);
+    }
+    .hub-link {
+      position: absolute;
+      right: 28px;
+      top: 22px;
+      color: var(--gold);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .hub-link:hover { text-decoration: underline; }
+
+    .section-bar {
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--header-font);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      padding: 8px 28px;
+    }
+
+    .pad { padding: 18px 28px 22px; }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .kpi {
+      background: var(--card);
+      border-left: 6px solid var(--navy);
+      padding: 12px 14px 11px;
+    }
+    .kpi-label {
+      font-size: 11px;
+      letter-spacing: 1.1px;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .kpi-val {
+      font-family: var(--header-font);
+      font-size: 26px;
+      color: var(--navy);
+      margin-top: 2px;
+      font-weight: 700;
+    }
+    .kpi-note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .kpi.warn { border-left-color: var(--gold); }
+    .kpi.good { border-left-color: var(--ok); }
+
+    .pace-wrap { margin-top: 16px; }
+    .pace-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: var(--muted);
+    }
+    .pace-track {
+      position: relative;
+      height: 18px;
+      background: var(--navy-tint);
+      border-radius: 2px;
+      overflow: visible;
+    }
+    .pace-fill {
+      height: 100%;
+      background: var(--navy);
+    }
+    .pace-marker {
+      position: absolute;
+      top: -4px;
+      bottom: -4px;
+      width: 2px;
+      background: var(--gold);
+    }
+    .pace-marker span {
+      position: absolute;
+      top: -16px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      white-space: nowrap;
+      letter-spacing: .4px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+    .cat-row {
+      display: grid;
+      grid-template-columns: 110px 1fr 90px 70px;
+      gap: 8px;
+      align-items: center;
+      font-size: 13px;
+      margin: 7px 0;
+    }
+    .cat-bar {
+      height: 12px;
+      background: var(--navy-tint);
+      position: relative;
+    }
+    .cat-bar > i {
+      display: block;
+      height: 100%;
+      background: var(--navy);
+    }
+    .cat-bar.capital > i { background: var(--gold); }
+    .cat-bar.personnel > i { background: var(--navy); }
+    .cat-bar.operating > i { background: #4a6fa5; }
+
+    .callout {
+      background: var(--gold-tint);
+      border: 1px solid #ead8b0;
+      padding: 12px 14px;
+    }
+    .callout h3 {
+      font-family: var(--header-font);
+      color: var(--navy);
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    .callout li { margin: 0 0 6px 18px; font-size: 13.5px; line-height: 1.35; }
+    .note {
+      background: var(--navy-tint);
+      padding: 12px 14px;
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+    .chip, .search {
+      border: 1px solid #cfd5de;
+      background: var(--white);
+      font: inherit;
+      font-size: 13px;
+    }
+    .chip {
+      padding: 5px 10px;
+      cursor: pointer;
+      color: var(--navy);
+      font-weight: 600;
+    }
+    .chip.active {
+      background: var(--navy);
+      color: var(--white);
+      border-color: var(--navy);
+    }
+    .search {
+      padding: 6px 10px;
+      min-width: 200px;
+      outline: none;
+    }
+    .search:focus { border-color: var(--gold); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13.5px;
+    }
+    th {
+      text-align: left;
+      background: var(--navy-tint);
+      color: var(--navy);
+      font-size: 11px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      padding: 8px 8px;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+    th.num, td.num { text-align: right; font-variant-numeric: tabular-nums; }
+    td { padding: 7px 8px; border-bottom: 1px solid #e6e6e6; }
+    tbody tr:hover { background: #faf7f0; }
+    .bar-cell { min-width: 120px; }
+    .mini {
+      height: 8px;
+      background: var(--navy-tint);
+      position: relative;
+    }
+    .mini > i { display: block; height: 100%; background: var(--navy); max-width: 100%; }
+    .mini.ahead > i { background: var(--ahead); }
+    .mini.pass > i { background: var(--gold); }
+    .status {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+    }
+    .status.ahead { color: var(--ahead); }
+    .status.ok { color: var(--ok); }
+    .status.pass { color: #7a5b1a; }
+    .empty { padding: 20px; text-align: center; color: var(--muted); }
+    .count { font-size: 12px; color: var(--muted); margin-left: auto; }
+
+    .quality li { margin: 0 0 6px 18px; font-size: 13.5px; line-height: 1.35; }
+    footer {
+      padding: 10px 28px 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer a { color: var(--navy); }
+
+    @media (max-width: 860px) {
+      .kpis, .split { grid-template-columns: 1fr 1fr; }
+      .hub-link { position: static; display: inline-block; margin-bottom: 8px; }
+      .sheet { margin: 0; }
+      .pad { padding: 14px 16px 18px; }
+      .banner, .section-bar, footer { padding-left: 16px; padding-right: 16px; }
+      .table-wrap { overflow-x: auto; }
+    }
+    @media (max-width: 560px) {
+      .kpis, .split, .cat-row { grid-template-columns: 1fr; }
+      .banner h1 { font-size: 26px; }
+    }
+    @media print {
+      body { background: white; }
+      .sheet { box-shadow: none; margin: 0; }
+      .toolbar, .hub-link { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="banner">
+      <a class="hub-link" href="../index.html">Ted's Hub</a>
+      <div class="banner-kicker" id="kicker">Bedford County EMS</div>
+      <h1>FY2026-27 Budget Tracker</h1>
+      <div class="sub" id="subtitle">Month 2 expenditure snapshot</div>
+      <div class="banner-rule"></div>
+      <div class="context" id="context">County finance is official. This page reads the July 2026 statement.</div>
+    </header>
+
+    <div class="section-bar">Department position</div>
+    <div class="pad">
+      <div class="kpis" id="kpis"></div>
+      <div class="pace-wrap">
+        <div class="pace-meta">
+          <span id="pace-left">Spent vs straight-line pace</span>
+          <span id="pace-right"></span>
+        </div>
+        <div class="pace-track">
+          <div class="pace-fill" id="pace-fill"></div>
+          <div class="pace-marker" id="pace-marker"><span>PACE</span></div>
+        </div>
+      </div>
+      <div class="split">
+        <div>
+          <div class="cat-row" style="font-size:11px;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);font-weight:700;margin-bottom:2px">
+            <span>Category</span><span>Share of budget</span><span class="num">Spent</span><span class="num">% used</span>
+          </div>
+          <div id="cats"></div>
+        </div>
+        <div class="note" id="bottom-line"></div>
+      </div>
+    </div>
+
+    <div class="section-bar">Flags</div>
+    <div class="pad">
+      <div class="callout">
+        <h3>Ahead of pace (more than 20 points above the 16.7% month-2 line)</h3>
+        <ul id="flags"></ul>
+      </div>
+    </div>
+
+    <div class="section-bar">Accounts</div>
+    <div class="pad">
+      <div class="toolbar">
+        <div class="chips" id="chips"></div>
+        <input class="search" id="search" type="search" placeholder="Search account or number" aria-label="Search accounts">
+        <span class="count" id="count"></span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-sort="acct">Acct</th>
+              <th data-sort="name">Account</th>
+              <th data-sort="category">Type</th>
+              <th class="num" data-sort="budgeted">Budgeted</th>
+              <th class="num" data-sort="spent">Spent</th>
+              <th class="num" data-sort="remaining">Remaining</th>
+              <th class="num" data-sort="pct">% Spent</th>
+              <th data-sort="pct">Pace</th>
+              <th data-sort="status">Status</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-bar">Catches</div>
+    <div class="pad">
+      <div class="note">
+        <ul class="quality" id="quality"></ul>
+      </div>
+    </div>
+
+    <footer>
+      Primary source: <span id="src"></span>.
+      Do not treat the assistant director tracker as official.
+      <a href="../index.html">Back to Ted's Hub</a>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    const money = (n, cents) => {
+      const abs = Math.abs(n);
+      const body = abs.toLocaleString("en-US", {
+        minimumFractionDigits: cents || abs % 1 ? 2 : 0,
+        maximumFractionDigits: 2
+      });
+      return (n < 0 ? "-$" : "$") + body;
+    };
+    const pct = (n) => (n * 100).toFixed(1) + "%";
+    const B = window.BUDGET;
+    const paceRate = B.meta.fiscalMonth / B.meta.fiscalMonths;
+    const flagAccts = new Set(B.flags.map(f => f.acct));
+
+    function enrich(a) {
+      const remaining = a.budgeted - a.spent;
+      const spentPct = a.budgeted === 0 ? null : a.spent / a.budgeted;
+      const pointsAbove = spentPct == null ? null : (spentPct - paceRate) * 100;
+      let status = "On / under pace";
+      let statusClass = "ok";
+      if (a.category === "passthrough") {
+        status = "Pass-through";
+        statusClass = "pass";
+      } else if (spentPct != null && pointsAbove > 20) {
+        status = "Ahead of pace";
+        statusClass = "ahead";
+      }
+      return { ...a, remaining, spentPct, pointsAbove, status, statusClass };
+    }
+
+    const rows = B.accounts.map(enrich);
+    const listedBudgeted = rows.reduce((s, a) => s + a.budgeted, 0);
+    const listedSpent = rows.reduce((s, a) => s + a.spent, 0);
+    const officialRemaining = B.meta.officialBudgeted - B.meta.officialSpent;
+    const officialPct = B.meta.officialSpent / B.meta.officialBudgeted;
+    const expected = B.meta.officialBudgeted * paceRate;
+    const variancePts = (officialPct - paceRate) * 100;
+
+    document.getElementById("kicker").textContent = B.meta.department;
+    document.getElementById("subtitle").textContent =
+      `${B.meta.fiscalYear} · Month ${B.meta.fiscalMonth} of ${B.meta.fiscalMonths} · Report ${B.meta.reportDate}`;
+    document.getElementById("context").textContent =
+      `${B.meta.primarySource}, pulled ${B.meta.pulledAt} by ${B.meta.pulledBy}.`;
+    document.getElementById("src").textContent = B.meta.primarySource;
+
+    document.getElementById("kpis").innerHTML = [
+      ["Total budgeted", money(B.meta.officialBudgeted), "County department total", ""],
+      ["Spent to date", money(B.meta.officialSpent), pct(officialPct) + " of budget", ""],
+      ["Remaining", money(officialRemaining), "Through month " + B.meta.fiscalMonth, "good"],
+      ["Vs pace", (variancePts >= 0 ? "+" : "") + variancePts.toFixed(1) + " pts",
+        "Pace is " + pct(paceRate) + " / " + money(Math.round(expected)), variancePts < 0 ? "good" : "warn"]
+    ].map(([l,v,n,cls]) => `
+      <div class="kpi ${cls}">
+        <div class="kpi-label">${l}</div>
+        <div class="kpi-val">${v}</div>
+        <div class="kpi-note">${n}</div>
+      </div>`).join("");
+
+    document.getElementById("pace-fill").style.width = Math.min(100, officialPct * 100) + "%";
+    document.getElementById("pace-marker").style.left = (paceRate * 100) + "%";
+    document.getElementById("pace-right").textContent =
+      `${pct(officialPct)} spent · ${pct(paceRate)} pace · ${money(B.meta.officialSpent)} of ${money(Math.round(expected))} expected`;
+
+    const cats = ["personnel", "operating", "capital"].map(key => {
+      const list = rows.filter(r => r.category === key);
+      const b = list.reduce((s, a) => s + a.budgeted, 0);
+      const s = list.reduce((x, a) => x + a.spent, 0);
+      return { key, b, s, share: b / B.meta.officialBudgeted, used: b ? s / b : 0 };
+    });
+    const labels = { personnel: "Personnel", operating: "Operating", capital: "Capital" };
+    document.getElementById("cats").innerHTML = cats.map(c => `
+      <div class="cat-row">
+        <div>${labels[c.key]}</div>
+        <div class="cat-bar ${c.key}"><i style="width:${(c.share*100).toFixed(1)}%"></i></div>
+        <div class="num">${money(Math.round(c.s))}</div>
+        <div class="num">${pct(c.used)}</div>
+      </div>`).join("");
+
+    document.getElementById("bottom-line").innerHTML =
+      `<strong>Bottom line.</strong> The department is ${Math.abs(variancePts).toFixed(1)} points under straight-line pace.
+      Personnel is ${pct(cats[0].b / B.meta.officialBudgeted)} of the budget and only ${pct(cats[0].used)} spent.
+      Capital is front-loaded because 718 Motor Vehicle already posted. No operating account is over budget.
+      509 Refunds is the only negative remaining balance, and it is a pass-through.`;
+
+    document.getElementById("flags").innerHTML = B.flags.map(f =>
+      `<li><strong>${f.title}.</strong> ${f.detail}</li>`).join("");
+    document.getElementById("quality").innerHTML = B.quality.map(q => `<li>${q}</li>`).join("");
+
+    const filters = [
+      ["all", "All"],
+      ["personnel", "Personnel"],
+      ["operating", "Operating"],
+      ["capital", "Capital"],
+      ["flagged", "Flags"]
+    ];
+    let filter = "all";
+    let sortKey = "pct";
+    let sortDir = -1;
+    let query = "";
+
+    const chips = document.getElementById("chips");
+    chips.innerHTML = filters.map(([id, label]) =>
+      `<button type="button" class="chip${id==="all"?" active":""}" data-filter="${id}">${label}</button>`
+    ).join("");
+    chips.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-filter]");
+      if (!btn) return;
+      filter = btn.dataset.filter;
+      chips.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === btn));
+      render();
+    });
+
+    document.getElementById("search").addEventListener("input", (e) => {
+      query = e.target.value.trim().toLowerCase();
+      render();
+    });
+
+    document.querySelector("thead").addEventListener("click", (e) => {
+      const th = e.target.closest("th[data-sort]");
+      if (!th) return;
+      const key = th.dataset.sort;
+      if (sortKey === key) sortDir *= -1;
+      else { sortKey = key; sortDir = key === "name" || key === "acct" || key === "category" || key === "status" ? 1 : -1; }
+      render();
+    });
+
+    function visible() {
+      return rows.filter(r => {
+        if (filter === "flagged" && !flagAccts.has(r.acct)) return false;
+        if (filter !== "all" && filter !== "flagged" && r.category !== filter) return false;
+        if (query && !(r.acct + " " + r.name + " " + r.category).toLowerCase().includes(query)) return false;
+        return true;
+      }).sort((a, b) => {
+        const av = a[sortKey], bv = b[sortKey];
+        if (av == null && bv == null) return 0;
+        if (av == null) return 1;
+        if (bv == null) return -1;
+        if (typeof av === "string") return av.localeCompare(bv) * sortDir;
+        return (av - bv) * sortDir;
+      });
+    }
+
+    function render() {
+      const list = visible();
+      document.getElementById("count").textContent = list.length + " accounts";
+      if (!list.length) {
+        document.getElementById("tbody").innerHTML = `<tr><td class="empty" colspan="9">No accounts match.</td></tr>`;
+        return;
+      }
+      document.getElementById("tbody").innerHTML = list.map(r => {
+        const width = r.spentPct == null ? 0 : Math.min(100, Math.max(0, r.spentPct * 100));
+        const miniClass = r.statusClass === "ahead" ? "ahead" : r.statusClass === "pass" ? "pass" : "";
+        return `<tr>
+          <td>${r.acct}</td>
+          <td>${r.name}${r.note ? `<div style="font-size:11px;color:var(--muted)">${r.note}</div>` : ""}</td>
+          <td>${labels[r.category] || "Pass-through"}</td>
+          <td class="num">${money(r.budgeted, r.cents)}</td>
+          <td class="num">${money(r.spent, r.cents)}</td>
+          <td class="num">${money(r.remaining, r.cents)}</td>
+          <td class="num">${r.spentPct == null ? "N/A" : pct(r.spentPct)}</td>
+          <td class="bar-cell"><div class="mini ${miniClass}"><i style="width:${width}%"></i></div></td>
+          <td><span class="status ${r.statusClass}">${r.status}</span></td>
+        </tr>`;
+      }).join("");
+    }
+
+    window.__budgetTest = {
+      officialBudgeted: B.meta.officialBudgeted,
+      officialSpent: B.meta.officialSpent,
+      listedBudgeted,
+      listedSpent,
+      accountCount: rows.length,
+      flagCount: B.flags.length,
+      paceRate,
+      officialPct,
+      variancePts,
+      cats
+    };
+    render();
+  </script>
+</body>
+</html>

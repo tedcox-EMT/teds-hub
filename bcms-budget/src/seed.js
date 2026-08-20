@@ -4,7 +4,7 @@ import vm from "node:vm";
 import { ROOT, query, closePool } from "./db.js";
 
 function loadSnapshot() {
-  const js = fs.readFileSync(path.join(ROOT, "../bcems-budget/data.js"), "utf8");
+  const js = fs.readFileSync(path.join(ROOT, "data.js"), "utf8");
   const context = { window: {} };
   vm.runInNewContext(js, context);
   return context.window.BUDGET;

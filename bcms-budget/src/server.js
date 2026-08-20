@@ -5,7 +5,7 @@ import { ROOT, closePool, isNeon, databaseUrl } from "./db.js";
 import { latestSnapshot } from "./snapshot.js";
 
 const PORT = Number(process.env.PORT || 8787);
-const staticRoot = path.join(ROOT, "../bcems-budget");
+const staticRoot = path.join(ROOT, "public");
 
 const TYPES = {
   ".html": "text/html; charset=utf-8",

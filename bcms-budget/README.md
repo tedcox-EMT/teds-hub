@@ -21,7 +21,9 @@ npm run setup
 npm start
 ```
 
-Open http://127.0.0.1:8787/
+The dashboard is in `public/`. After `npm start`, open http://127.0.0.1:8787/
+
+Seed data is `data.js` (FY2026-27 Month 2). County finance is official. The AD `.xlsm` tracker is read-only detail only.
 
 ### Neon cloud
 

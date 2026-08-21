@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enter a month | BCEMS Budget</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caladea:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1F3864;
+      --gold: #C5A253;
+      --gold-tint: #FBF3E3;
+      --navy-tint: #E9EDF4;
+      --card: #F3F3F3;
+      --ink: #1a1a1a;
+      --muted: #5a6570;
+      --white: #ffffff;
+      --ok: #2E5A3C;
+      --ahead: #8B3A2A;
+      --header-font: Cambria, Caladea, Georgia, "Times New Roman", serif;
+      --body-font: Calibri, "Source Sans 3", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { background: #e8e8e8; color: var(--ink); font-family: var(--body-font); }
+    .sheet {
+      max-width: 1100px;
+      margin: 24px auto 48px;
+      background: var(--white);
+      box-shadow: 0 8px 28px rgba(31,56,100,.18);
+    }
+    .banner {
+      background: var(--navy);
+      color: var(--white);
+      padding: 22px 28px 18px;
+      position: relative;
+    }
+    .banner-kicker {
+      font-family: var(--header-font);
+      font-size: 12px;
+      letter-spacing: 2.4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .banner h1 {
+      font-family: var(--header-font);
+      font-size: 32px;
+      color: var(--gold);
+      line-height: 1.15;
+      margin-top: 4px;
+    }
+    .banner .sub { color: var(--white); font-size: 16px; margin-top: 4px; }
+    .banner-rule { height: 2px; background: var(--gold); margin: 12px 0 8px; }
+    .hub-link {
+      position: absolute; right: 28px; top: 22px;
+      color: var(--gold); text-decoration: none; font-size: 13px; font-weight: 600;
+    }
+    .hub-link:hover { text-decoration: underline; }
+    .section-bar {
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--header-font);
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      padding: 8px 28px;
+    }
+    .pad { padding: 18px 28px 22px; }
+    .note {
+      background: var(--navy-tint);
+      padding: 12px 14px;
+      font-size: 13.5px;
+      line-height: 1.4;
+      margin-bottom: 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+    label { display: block; font-size: 11px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    input, select, textarea {
+      width: 100%;
+      font: inherit;
+      font-size: 14px;
+      padding: 7px 9px;
+      border: 1px solid #cfd5de;
+      background: var(--white);
+    }
+    input:focus, select:focus, textarea:focus { outline: none; border-color: var(--gold); }
+    textarea { min-height: 90px; resize: vertical; }
+    .wide { grid-column: span 2; }
+    .full { grid-column: 1 / -1; }
+    .actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 14px 0; }
+    button, .file-btn {
+      background: var(--navy);
+      color: var(--white);
+      border: 0;
+      padding: 8px 14px;
+      font: inherit;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    button.secondary { background: var(--white); color: var(--navy); border: 1px solid var(--navy); }
+    button.gold { background: var(--gold); color: var(--navy); }
+    .status { font-size: 13.5px; color: var(--ok); }
+    .status.err { color: var(--ahead); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      text-align: left;
+      background: var(--navy-tint);
+      color: var(--navy);
+      font-size: 11px;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      padding: 8px;
+    }
+    td { padding: 6px 8px; border-bottom: 1px solid #e6e6e6; }
+    td input, td select { padding: 5px 6px; }
+    .num input { text-align: right; }
+    .remove { background: transparent; color: var(--ahead); border: 0; padding: 4px 8px; cursor: pointer; font-weight: 700; }
+    footer { padding: 10px 28px 16px; font-size: 12px; color: var(--muted); }
+    footer a { color: var(--navy); }
+    @media (max-width: 860px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .hub-link { position: static; display: inline-block; margin-bottom: 8px; }
+      .pad, .banner, .section-bar, footer { padding-left: 16px; padding-right: 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <header class="banner">
+      <a class="hub-link" href="/">Back to tracker</a>
+      <div class="banner-kicker">Bedford County EMS</div>
+      <h1>Enter a month</h1>
+      <div class="sub">Add or update a fiscal-month snapshot from the county statement</div>
+      <div class="banner-rule"></div>
+    </header>
+
+    <div class="section-bar">How this works</div>
+    <div class="pad">
+      <div class="note">
+        Start from last month so the chart of accounts copies forward. Then replace year-to-date spent
+        (and official department totals) from the new Statement of Expenditures and Encumbrances.
+        Saving the same fiscal year, month, and report date updates that snapshot. A new report date inserts a new one.
+        County finance is official.
+      </div>
+      <div class="actions">
+        <label style="margin:0">Start from
+          <select id="from" style="width:auto;display:inline-block;margin-left:6px"></select>
+        </label>
+        <button type="button" class="secondary" id="copy">Copy accounts</button>
+        <label class="file-btn" style="display:inline-block">
+          Load JSON
+          <input id="file" type="file" accept=".json,application/json" hidden>
+        </label>
+        <button type="button" class="secondary" id="flags-btn">Build flags from pace</button>
+      </div>
+    </div>
+
+    <div class="section-bar">Snapshot</div>
+    <div class="pad">
+      <div class="grid" id="meta">
+        <div><label for="fiscalYear">Fiscal year</label><input id="fiscalYear" value="FY2026-2027"></div>
+        <div><label for="fiscalMonth">Fiscal month (1-12)</label><input id="fiscalMonth" type="number" min="1" max="12" value="3"></div>
+        <div><label for="reportDate">Report date</label><input id="reportDate" type="date" value="2026-09-15"></div>
+        <div><label for="fiscalMonths">Months in year</label><input id="fiscalMonths" type="number" value="12"></div>
+        <div class="wide"><label for="fiscalYearStart">FY start</label><input id="fiscalYearStart" type="date" value="2026-07-01"></div>
+        <div class="wide"><label for="fiscalYearEnd">FY end</label><input id="fiscalYearEnd" type="date" value="2027-06-30"></div>
+        <div><label for="officialBudgeted">Official budgeted</label><input id="officialBudgeted" value="5479719"></div>
+        <div><label for="officialSpent">Official spent</label><input id="officialSpent" value=""></div>
+        <div><label for="pulledAt">Pulled at</label><input id="pulledAt" placeholder="2026-09-12 9:00 AM"></div>
+        <div><label for="pulledBy">Pulled by</label><input id="pulledBy" placeholder="Lori"></div>
+        <div class="full"><label for="primarySource">Primary source</label><input id="primarySource" placeholder="Bedford County Finance Statement of Expenditures and Encumbrances"></div>
+        <div class="full"><label for="secondarySource">Secondary source</label><input id="secondarySource" value="2026-2027 Expense Tracking .xlsm (line-item detail only, read-only)"></div>
+      </div>
+    </div>
+
+    <div class="section-bar">Accounts</div>
+    <div class="pad">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Acct</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th class="num">Budgeted</th>
+              <th class="num">Spent</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="accounts"></tbody>
+        </table>
+      </div>
+      <div class="actions">
+        <button type="button" class="secondary" id="add-acct">Add account</button>
+      </div>
+    </div>
+
+    <div class="section-bar">Flags and catches</div>
+    <div class="pad">
+      <label for="flags">Flags (one per line: acct | title | detail)</label>
+      <textarea id="flags" placeholder="718 | 718 Motor Vehicle | 95% spent. Front-loaded vehicle PO."></textarea>
+      <label for="quality" style="margin-top:12px">Catches (one per line)</label>
+      <textarea id="quality" placeholder="County finance is official. The AD xlsm is read-only detail only."></textarea>
+      <div class="actions">
+        <button type="button" class="gold" id="save">Save snapshot</button>
+        <span class="status" id="msg"></span>
+      </div>
+    </div>
+    <footer>
+      Same unique key as the database: fiscal year + month + report date.
+      CLI: <code>npm run import -- snapshots/your-month.json</code>
+    </footer>
+  </div>
+  <script>
+    const cats = ["personnel", "operating", "capital", "passthrough"];
+    const accountsBody = document.getElementById("accounts");
+    const from = document.getElementById("from");
+    const msg = document.getElementById("msg");
+
+    function rowHtml(a = {}) {
+      return `<tr>
+        <td><input value="${a.acct || ""}" data-k="acct"></td>
+        <td><input value="${(a.name || "").replace(/"/g, "&quot;")}" data-k="name"></td>
+        <td><select data-k="category">${cats.map(c => `<option${a.category===c?" selected":""}>${c}</option>`).join("")}</select></td>
+        <td class="num"><input value="${a.budgeted ?? ""}" data-k="budgeted"></td>
+        <td class="num"><input value="${a.spent ?? ""}" data-k="spent"></td>
+        <td><button type="button" class="remove">Remove</button></td>
+      </tr>`;
+    }
+
+    function addRow(a) {
+      accountsBody.insertAdjacentHTML("beforeend", rowHtml(a));
+    }
+
+    function readAccounts() {
+      return [...accountsBody.querySelectorAll("tr")].map((tr) => {
+        const get = (k) => tr.querySelector(`[data-k="${k}"]`).value;
+        const cents = String(get("spent")).includes(".") || String(get("budgeted")).includes(".");
+        return {
+          acct: get("acct").trim(),
+          name: get("name").trim(),
+          category: get("category"),
+          budgeted: Number(get("budgeted") || 0),
+          spent: Number(get("spent") || 0),
+          cents
+        };
+      }).filter((a) => a.acct && a.name);
+    }
+
+    function fillMeta(m) {
+      const map = {
+        fiscalYear: m.fiscalYear,
+        fiscalMonth: m.fiscalMonth,
+        fiscalMonths: m.fiscalMonths || 12,
+        fiscalYearStart: m.fiscalYearStart,
+        fiscalYearEnd: m.fiscalYearEnd,
+        reportDate: m.reportDate,
+        officialBudgeted: m.officialBudgeted,
+        officialSpent: m.officialSpent,
+        pulledAt: m.pulledAt || "",
+        pulledBy: m.pulledBy || "",
+        primarySource: m.primarySource || "",
+        secondarySource: m.secondarySource || ""
+      };
+      for (const [id, val] of Object.entries(map)) {
+        const el = document.getElementById(id);
+        if (el && val != null) el.value = val;
+      }
+    }
+
+    function fill(data, bumpMonth) {
+      fillMeta(data.meta || {});
+      if (bumpMonth && data.meta) {
+        const next = Number(data.meta.fiscalMonth) + 1;
+        document.getElementById("fiscalMonth").value = next > 12 ? 1 : next;
+        document.getElementById("reportDate").value = "";
+        document.getElementById("pulledAt").value = "";
+      }
+      accountsBody.innerHTML = "";
+      (data.accounts || []).forEach(addRow);
+      document.getElementById("flags").value = (data.flags || [])
+        .map((f) => `${f.acct} | ${f.title} | ${f.detail}`).join("\n");
+      document.getElementById("quality").value = (data.quality || []).join("\n");
+    }
+
+    function payload() {
+      const flags = document.getElementById("flags").value.split("\n").map((line) => line.trim()).filter(Boolean).map((line) => {
+        const [acct, title, ...rest] = line.split("|").map((s) => s.trim());
+        return { acct: acct || "", title: title || acct, detail: rest.join(" | ") };
+      });
+      const quality = document.getElementById("quality").value.split("\n").map((s) => s.trim()).filter(Boolean);
+      return {
+        meta: {
+          department: "Bedford County EMS",
+          shortName: "BCEMS",
+          fiscalYear: document.getElementById("fiscalYear").value.trim(),
+          fiscalYearStart: document.getElementById("fiscalYearStart").value,
+          fiscalYearEnd: document.getElementById("fiscalYearEnd").value,
+          fiscalMonth: Number(document.getElementById("fiscalMonth").value),
+          fiscalMonths: Number(document.getElementById("fiscalMonths").value || 12),
+          reportDate: document.getElementById("reportDate").value,
+          pulledAt: document.getElementById("pulledAt").value.trim(),
+          pulledBy: document.getElementById("pulledBy").value.trim(),
+          primarySource: document.getElementById("primarySource").value.trim(),
+          secondarySource: document.getElementById("secondarySource").value.trim(),
+          officialBudgeted: Number(document.getElementById("officialBudgeted").value),
+          officialSpent: Number(document.getElementById("officialSpent").value)
+        },
+        accounts: readAccounts(),
+        flags,
+        quality
+      };
+    }
+
+    async function loadMonths() {
+      const r = await fetch("/api/snapshots");
+      const list = r.ok ? await r.json() : [];
+      from.innerHTML = list.map((s) =>
+        `<option value="${s.id}">${s.fiscalYear} month ${s.fiscalMonth} (${s.monthName}) · ${s.reportDate}</option>`
+      ).join("") || `<option value="">No months yet</option>`;
+      return list;
+    }
+
+    document.getElementById("add-acct").addEventListener("click", () => addRow({ category: "operating" }));
+    accountsBody.addEventListener("click", (e) => {
+      if (e.target.classList.contains("remove")) e.target.closest("tr").remove();
+    });
+    document.getElementById("copy").addEventListener("click", async () => {
+      if (!from.value) return;
+      const r = await fetch("/api/snapshot?id=" + encodeURIComponent(from.value));
+      if (!r.ok) { msg.textContent = "Could not load that month."; msg.className = "status err"; return; }
+      fill(await r.json(), true);
+      msg.textContent = "Copied. Set the new report date and official spent, then save.";
+      msg.className = "status";
+    });
+    document.getElementById("file").addEventListener("change", async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      try {
+        fill(JSON.parse(await file.text()), false);
+        msg.textContent = "Loaded " + file.name;
+        msg.className = "status";
+      } catch (err) {
+        msg.textContent = "Could not read that JSON: " + err.message;
+        msg.className = "status err";
+      }
+    });
+    document.getElementById("flags-btn").addEventListener("click", () => {
+      const data = payload();
+      const pace = data.meta.fiscalMonth / data.meta.fiscalMonths;
+      const built = data.accounts.filter((a) => a.category !== "passthrough" && a.budgeted > 0)
+        .map((a) => ({ a, pct: a.spent / a.budgeted }))
+        .filter((x) => (x.pct - pace) * 100 > 20)
+        .sort((x, y) => y.pct - x.pct)
+        .map((x) => `${x.a.acct} | ${x.a.acct} ${x.a.name} | ${(x.pct * 100).toFixed(1)}% spent ($${(x.a.spent).toLocaleString("en-US")} of $${x.a.budgeted.toLocaleString("en-US")}).`);
+      document.getElementById("flags").value = built.join("\n");
+      msg.textContent = built.length ? `Built ${built.length} flag(s) from the ${ (pace*100).toFixed(1) }% pace line.` : "No accounts are more than 20 points above pace.";
+      msg.className = "status";
+    });
+    document.getElementById("save").addEventListener("click", async () => {
+      msg.textContent = "Saving...";
+      msg.className = "status";
+      try {
+        const body = payload();
+        const r = await fetch("/api/snapshot", {
+          method: "PUT",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify(body)
+        });
+        const out = await r.json();
+        if (!r.ok) throw new Error(out.error || r.statusText);
+        msg.innerHTML = `${out.created ? "Inserted" : "Updated"} snapshot ${out.id}. <a href="/?id=${out.id}">Open tracker</a>`;
+        msg.className = "status";
+        await loadMonths();
+      } catch (err) {
+        msg.textContent = err.message;
+        msg.className = "status err";
+      }
+    });
+
+    (async () => {
+      const list = await loadMonths();
+      if (list[0]) {
+        const r = await fetch("/api/snapshot?id=" + list[0].id);
+        if (r.ok) fill(await r.json(), true);
+      } else {
+        addRow({ acct: "105", name: "Supervisor", category: "personnel" });
+      }
+    })();
+  </script>
+</body>
+</html>

@@ -31,10 +31,18 @@ The Postgres/Neon app lives in `../bcms-budget`. After `npm start` there, the sa
 
 ## Update a month
 
-1. Edit `bcems-budget/data.js`.
-2. Keep `meta.officialBudgeted` and `meta.officialSpent` as the county statement department totals.
-3. Keep personnel cents from the payroll detail table when you have them.
-4. Refresh the Flags and Catches lists to match the new month.
+The Hub tile stays on this static Month 2 copy. Live month-to-month tracking is the Postgres app:
+
+http://127.0.0.1:8787/enter.html
+
+That form copies last month's accounts, then saves a new fiscal-year + month + report-date snapshot. Or:
+
+```bash
+cd ../bcms-budget
+npm run import -- snapshots/fy2026-27-month-03.json
+```
+
+To keep this static tracker in sync, copy the new `data.js` here after the live month is official.
 
 ## Source
 

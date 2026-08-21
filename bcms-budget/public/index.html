@@ -68,16 +68,40 @@
       font-size: 13.5px;
       color: rgba(255,255,255,.82);
     }
-    .hub-link {
+    .banner-tools {
       position: absolute;
       right: 28px;
       top: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .month-select {
+      background: rgba(255,255,255,.08);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 6px 10px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .month-select option { color: var(--navy); }
+    .hub-link {
       color: var(--gold);
       text-decoration: none;
       font-size: 13px;
       font-weight: 600;
     }
     .hub-link:hover { text-decoration: underline; }
+    .mom {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: var(--gold-tint);
+      border-left: 6px solid var(--gold);
+      font-size: 13.5px;
+      line-height: 1.4;
+    }
+    .mom strong { color: var(--navy); }
 
     .section-bar {
       background: var(--navy);
@@ -291,7 +315,7 @@
 
     @media (max-width: 860px) {
       .kpis, .split { grid-template-columns: 1fr 1fr; }
-      .hub-link { position: static; display: inline-block; margin-bottom: 8px; }
+      .banner-tools { position: static; margin-bottom: 8px; }
       .sheet { margin: 0; }
       .pad { padding: 14px 16px 18px; }
       .banner, .section-bar, footer { padding-left: 16px; padding-right: 16px; }
@@ -311,7 +335,10 @@
 <body>
   <div class="sheet">
     <header class="banner">
-      <a class="hub-link" href="/">BCMS budget</a>
+      <div class="banner-tools">
+        <select id="month-select" class="month-select" aria-label="Fiscal month" hidden></select>
+        <a class="hub-link" href="/enter.html">Enter a month</a>
+      </div>
       <div class="banner-kicker" id="kicker">Bedford County EMS</div>
       <h1>FY2026-27 Budget Tracker</h1>
       <div class="sub" id="subtitle">Month 2 expenditure snapshot</div>
@@ -322,6 +349,7 @@
     <div class="section-bar">Department position</div>
     <div class="pad">
       <div class="kpis" id="kpis"></div>
+      <div class="mom" id="mom" hidden></div>
       <div class="pace-wrap">
         <div class="pace-meta">
           <span id="pace-left">Spent vs straight-line pace</span>
@@ -346,7 +374,7 @@
     <div class="section-bar">Flags</div>
     <div class="pad">
       <div class="callout">
-        <h3>Ahead of pace (more than 20 points above the 16.7% month-2 line)</h3>
+        <h3 id="flags-heading">Ahead of pace</h3>
         <ul id="flags"></ul>
       </div>
     </div>
@@ -367,6 +395,7 @@
               <th data-sort="category">Type</th>
               <th class="num" data-sort="budgeted">Budgeted</th>
               <th class="num" data-sort="spent">Spent</th>
+              <th class="num mom-col" data-sort="spentDelta" hidden>Since last</th>
               <th class="num" data-sort="remaining">Remaining</th>
               <th class="num" data-sort="spentPct">% Spent</th>
               <th data-sort="spentPct">Pace</th>
@@ -388,22 +417,13 @@
     <footer>
       Primary source: <span id="src"></span>.
       Do not treat the assistant director tracker as official.
-      <a href="/">BCMS budget API</a>
+      <a href="/enter.html">Enter a month</a>
+      · <a href="/api/snapshots">Months API</a>
     </footer>
   </div>
 
   <script src="data.js"></script>
   <script>
-    async function loadBudget() {
-      try {
-        const r = await fetch("/api/snapshot", { headers: { Accept: "application/json" } });
-        if (r.ok) {
-          const payload = await r.json();
-          if (payload?.meta && Array.isArray(payload.accounts)) window.BUDGET = payload;
-        }
-      } catch (e) {}
-    }
-
     const money = (n, cents) => {
       const abs = Math.abs(n);
       const body = abs.toLocaleString("en-US", {
@@ -413,13 +433,39 @@
       return (n < 0 ? "-$" : "$") + body;
     };
     const pct = (n) => (n * 100).toFixed(1) + "%";
+    const labels = { personnel: "Personnel", operating: "Operating", capital: "Capital" };
 
-    function boot() {
-    const B = window.BUDGET;
-    const paceRate = B.meta.fiscalMonth / B.meta.fiscalMonths;
-    const flagAccts = new Set(B.flags.map(f => f.acct));
+    let rows = [];
+    let flagAccts = new Set();
+    let filter = "all";
+    let sortKey = "spentPct";
+    let sortDir = -1;
+    let query = "";
+    let hasPrior = false;
+    let eventsBound = false;
 
-    function enrich(a) {
+    async function loadBudget(params) {
+      try {
+        const qs = params ? "?" + new URLSearchParams(params) : "";
+        const r = await fetch("/api/snapshot" + qs, { headers: { Accept: "application/json" } });
+        if (r.ok) {
+          const payload = await r.json();
+          if (payload?.meta && Array.isArray(payload.accounts)) window.BUDGET = payload;
+        }
+      } catch (e) {}
+    }
+
+    async function loadMonths() {
+      try {
+        const r = await fetch("/api/snapshots", { headers: { Accept: "application/json" } });
+        if (!r.ok) return [];
+        return await r.json();
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function enrich(a, paceRate) {
       const remaining = a.budgeted - a.spent;
       const spentPct = a.budgeted === 0 ? null : a.spent / a.budgeted;
       const pointsAbove = spentPct == null ? null : (spentPct - paceRate) * 100;
@@ -432,105 +478,8 @@
         status = "Ahead of pace";
         statusClass = "ahead";
       }
-      return { ...a, remaining, spentPct, pointsAbove, status, statusClass };
+      return { ...a, remaining, spentPct, pointsAbove, status, statusClass, spentDelta: a.spentDelta };
     }
-
-    const rows = B.accounts.map(enrich);
-    const listedBudgeted = rows.reduce((s, a) => s + a.budgeted, 0);
-    const listedSpent = rows.reduce((s, a) => s + a.spent, 0);
-    const officialRemaining = B.meta.officialBudgeted - B.meta.officialSpent;
-    const officialPct = B.meta.officialSpent / B.meta.officialBudgeted;
-    const expected = B.meta.officialBudgeted * paceRate;
-    const variancePts = (officialPct - paceRate) * 100;
-
-    document.getElementById("kicker").textContent = B.meta.department;
-    document.getElementById("subtitle").textContent =
-      `${B.meta.fiscalYear} · Month ${B.meta.fiscalMonth} of ${B.meta.fiscalMonths} · Report ${B.meta.reportDate}`;
-    document.getElementById("context").textContent =
-      `${B.meta.primarySource}, pulled ${B.meta.pulledAt} by ${B.meta.pulledBy}.` +
-      (B.meta.source === "postgres" ? " Live from Postgres." : "");
-    document.getElementById("src").textContent = B.meta.primarySource;
-
-    document.getElementById("kpis").innerHTML = [
-      ["Total budgeted", money(B.meta.officialBudgeted), "County department total", ""],
-      ["Spent to date", money(B.meta.officialSpent), pct(officialPct) + " of budget", ""],
-      ["Remaining", money(officialRemaining), "Through month " + B.meta.fiscalMonth, "good"],
-      ["Vs pace", (variancePts >= 0 ? "+" : "") + variancePts.toFixed(1) + " pts",
-        "Pace is " + pct(paceRate) + " / " + money(Math.round(expected)), variancePts < 0 ? "good" : "warn"]
-    ].map(([l,v,n,cls]) => `
-      <div class="kpi ${cls}">
-        <div class="kpi-label">${l}</div>
-        <div class="kpi-val">${v}</div>
-        <div class="kpi-note">${n}</div>
-      </div>`).join("");
-
-    document.getElementById("pace-fill").style.width = Math.min(100, officialPct * 100) + "%";
-    document.getElementById("pace-marker").style.left = (paceRate * 100) + "%";
-    document.getElementById("pace-right").textContent =
-      `${pct(officialPct)} spent · ${pct(paceRate)} pace · ${money(B.meta.officialSpent)} of ${money(Math.round(expected))} expected`;
-
-    const cats = ["personnel", "operating", "capital"].map(key => {
-      const list = rows.filter(r => r.category === key);
-      const b = list.reduce((s, a) => s + a.budgeted, 0);
-      const s = list.reduce((x, a) => x + a.spent, 0);
-      return { key, b, s, share: b / B.meta.officialBudgeted, used: b ? s / b : 0 };
-    });
-    const labels = { personnel: "Personnel", operating: "Operating", capital: "Capital" };
-    document.getElementById("cats").innerHTML = cats.map(c => `
-      <div class="cat-row">
-        <div>${labels[c.key]}</div>
-        <div class="cat-bar ${c.key}"><i style="width:${(c.share*100).toFixed(1)}%"></i></div>
-        <div class="num">${money(Math.round(c.s))}</div>
-        <div class="num">${pct(c.used)}</div>
-      </div>`).join("");
-
-    document.getElementById("bottom-line").innerHTML =
-      `<strong>Bottom line.</strong> The department is ${Math.abs(variancePts).toFixed(1)} points under straight-line pace.
-      Personnel is ${pct(cats[0].b / B.meta.officialBudgeted)} of the budget and only ${pct(cats[0].used)} spent.
-      Capital is front-loaded because 718 Motor Vehicle already posted. No operating account is over budget.
-      509 Refunds is the only negative remaining balance, and it is a pass-through.`;
-
-    document.getElementById("flags").innerHTML = B.flags.map(f =>
-      `<li><strong>${f.title}.</strong> ${f.detail}</li>`).join("");
-    document.getElementById("quality").innerHTML = B.quality.map(q => `<li>${q}</li>`).join("");
-
-    const filters = [
-      ["all", "All"],
-      ["personnel", "Personnel"],
-      ["operating", "Operating"],
-      ["capital", "Capital"],
-      ["flagged", "Flags"]
-    ];
-    let filter = "all";
-    let sortKey = "spentPct";
-    let sortDir = -1;
-    let query = "";
-
-    const chips = document.getElementById("chips");
-    chips.innerHTML = filters.map(([id, label]) =>
-      `<button type="button" class="chip${id==="all"?" active":""}" data-filter="${id}">${label}</button>`
-    ).join("");
-    chips.addEventListener("click", (e) => {
-      const btn = e.target.closest("[data-filter]");
-      if (!btn) return;
-      filter = btn.dataset.filter;
-      chips.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === btn));
-      render();
-    });
-
-    document.getElementById("search").addEventListener("input", (e) => {
-      query = e.target.value.trim().toLowerCase();
-      render();
-    });
-
-    document.querySelector("thead").addEventListener("click", (e) => {
-      const th = e.target.closest("th[data-sort]");
-      if (!th) return;
-      const key = th.dataset.sort;
-      if (sortKey === key) sortDir *= -1;
-      else { sortKey = key; sortDir = key === "name" || key === "acct" || key === "category" || key === "status" ? 1 : -1; }
-      render();
-    });
 
     function visible() {
       return rows.filter(r => {
@@ -550,24 +499,29 @@
 
     function render() {
       const list = visible();
+      const cols = hasPrior ? 10 : 9;
       document.querySelectorAll("th[data-sort]").forEach((th) => {
         th.classList.toggle("sort-asc", th.dataset.sort === sortKey && sortDir === 1);
         th.classList.toggle("sort-desc", th.dataset.sort === sortKey && sortDir === -1);
       });
       document.getElementById("count").textContent = list.length + " accounts";
       if (!list.length) {
-        document.getElementById("tbody").innerHTML = `<tr><td class="empty" colspan="9">No accounts match.</td></tr>`;
+        document.getElementById("tbody").innerHTML = `<tr><td class="empty" colspan="${cols}">No accounts match.</td></tr>`;
         return;
       }
       document.getElementById("tbody").innerHTML = list.map(r => {
         const width = r.spentPct == null ? 0 : Math.min(100, Math.max(0, r.spentPct * 100));
         const miniClass = r.statusClass === "ahead" ? "ahead" : r.statusClass === "pass" ? "pass" : "";
+        const momCell = hasPrior
+          ? `<td class="num">${r.spentDelta == null ? "n/a" : money(r.spentDelta, r.cents)}</td>`
+          : "";
         return `<tr>
           <td>${r.acct}</td>
           <td>${r.name}${r.note ? `<div style="font-size:11px;color:var(--muted)">${r.note}</div>` : ""}</td>
           <td>${labels[r.category] || "Pass-through"}</td>
           <td class="num">${money(r.budgeted, r.cents)}</td>
           <td class="num">${money(r.spent, r.cents)}</td>
+          ${momCell}
           <td class="num">${money(r.remaining, r.cents)}</td>
           <td class="num">${r.spentPct == null ? "N/A" : pct(r.spentPct)}</td>
           <td class="bar-cell"><div class="mini ${miniClass}"><i style="width:${width}%"></i></div></td>
@@ -576,22 +530,176 @@
       }).join("");
     }
 
-    window.__budgetTest = {
-      officialBudgeted: B.meta.officialBudgeted,
-      officialSpent: B.meta.officialSpent,
-      listedBudgeted,
-      listedSpent,
-      accountCount: rows.length,
-      flagCount: B.flags.length,
-      paceRate,
-      officialPct,
-      variancePts,
-      cats
-    };
-    render();
+    function paint() {
+      const B = window.BUDGET;
+      const paceRate = B.meta.fiscalMonth / B.meta.fiscalMonths;
+      flagAccts = new Set(B.flags.map(f => f.acct));
+      hasPrior = Boolean(B.prior);
+      rows = B.accounts.map(a => enrich(a, paceRate));
+      const listedBudgeted = rows.reduce((s, a) => s + a.budgeted, 0);
+      const listedSpent = rows.reduce((s, a) => s + a.spent, 0);
+      const officialRemaining = B.meta.officialBudgeted - B.meta.officialSpent;
+      const officialPct = B.meta.officialSpent / B.meta.officialBudgeted;
+      const expected = B.meta.officialBudgeted * paceRate;
+      const variancePts = (officialPct - paceRate) * 100;
+      const monthLabel = B.meta.monthName
+        ? `Month ${B.meta.fiscalMonth} (${B.meta.monthName})`
+        : `Month ${B.meta.fiscalMonth}`;
+
+      document.getElementById("kicker").textContent = B.meta.department;
+      document.getElementById("subtitle").textContent =
+        `${B.meta.fiscalYear} · ${monthLabel} of ${B.meta.fiscalMonths} · Report ${B.meta.reportDate}`;
+      document.getElementById("context").textContent =
+        `${B.meta.primarySource}, pulled ${B.meta.pulledAt} by ${B.meta.pulledBy}.` +
+        (B.meta.source === "postgres" ? " Live from Postgres." : "");
+      document.getElementById("src").textContent = B.meta.primarySource;
+      document.getElementById("flags-heading").textContent =
+        `Ahead of pace (more than 20 points above the ${pct(paceRate)} ${monthLabel.toLowerCase()} line)`;
+
+      document.querySelectorAll(".mom-col").forEach((el) => {
+        el.hidden = !hasPrior;
+      });
+
+      document.getElementById("kpis").innerHTML = [
+        ["Total budgeted", money(B.meta.officialBudgeted), "County department total", ""],
+        ["Spent to date", money(B.meta.officialSpent), pct(officialPct) + " of budget", ""],
+        ["Remaining", money(officialRemaining), "Through " + monthLabel.toLowerCase(), "good"],
+        ["Vs pace", (variancePts >= 0 ? "+" : "") + variancePts.toFixed(1) + " pts",
+          "Pace is " + pct(paceRate) + " / " + money(Math.round(expected)), variancePts < 0 ? "good" : "warn"]
+      ].map(([l,v,n,cls]) => `
+        <div class="kpi ${cls}">
+          <div class="kpi-label">${l}</div>
+          <div class="kpi-val">${v}</div>
+          <div class="kpi-note">${n}</div>
+        </div>`).join("");
+
+      const mom = document.getElementById("mom");
+      if (B.prior) {
+        const dir = B.prior.spentDelta >= 0 ? "up" : "down";
+        mom.hidden = false;
+        mom.innerHTML = `<strong>Since month ${B.prior.fiscalMonth} (${B.prior.monthName}).</strong>
+          Spent is ${dir} ${money(Math.abs(B.prior.spentDelta))} to ${money(B.meta.officialSpent)}.
+          Budgeted ${B.prior.budgetedDelta === 0 ? "is unchanged" : "moved " + money(B.prior.budgetedDelta)}.
+          Report ${B.prior.reportDate} to ${B.meta.reportDate}.`;
+      } else {
+        mom.hidden = false;
+        mom.innerHTML = `<strong>No earlier month loaded.</strong> Use Enter a month, or
+          <code>npm run import -- snapshots/your-month.json</code>, when the next county statement arrives.`;
+      }
+
+      document.getElementById("pace-fill").style.width = Math.min(100, officialPct * 100) + "%";
+      document.getElementById("pace-marker").style.left = (paceRate * 100) + "%";
+      document.getElementById("pace-right").textContent =
+        `${pct(officialPct)} spent · ${pct(paceRate)} pace · ${money(B.meta.officialSpent)} of ${money(Math.round(expected))} expected`;
+
+      const cats = ["personnel", "operating", "capital"].map(key => {
+        const list = rows.filter(r => r.category === key);
+        const b = list.reduce((s, a) => s + a.budgeted, 0);
+        const s = list.reduce((x, a) => x + a.spent, 0);
+        return { key, b, s, share: b / B.meta.officialBudgeted, used: b ? s / b : 0 };
+      });
+      document.getElementById("cats").innerHTML = cats.map(c => `
+        <div class="cat-row">
+          <div>${labels[c.key]}</div>
+          <div class="cat-bar ${c.key}"><i style="width:${(c.share*100).toFixed(1)}%"></i></div>
+          <div class="num">${money(Math.round(c.s))}</div>
+          <div class="num">${pct(c.used)}</div>
+        </div>`).join("");
+
+      const capitalTop = rows.filter(r => r.category === "capital").sort((a,b) => b.spent - a.spent)[0];
+      const overBudget = rows.filter(r => r.category === "operating" && r.budgeted > 0 && r.spent > r.budgeted);
+      const negative = rows.filter(r => r.remaining < 0);
+      const vsWord = variancePts < 0 ? "under" : "over";
+      let bottom = `<strong>Bottom line.</strong> The department is ${Math.abs(variancePts).toFixed(1)} points ${vsWord} straight-line pace.
+        Personnel is ${pct(cats[0].b / B.meta.officialBudgeted)} of the budget and ${pct(cats[0].used)} spent.`;
+      if (capitalTop) {
+        bottom += ` Largest capital spend is ${capitalTop.acct} ${capitalTop.name} at ${money(capitalTop.spent)}.`;
+      }
+      bottom += overBudget.length
+        ? ` Operating over budget: ${overBudget.map(a => a.acct).join(", ")}.`
+        : " No operating account is over budget.";
+      if (negative.length) {
+        bottom += " " + negative.map(a => `${a.acct} ${a.name} has a negative remaining balance${a.category === "passthrough" ? " and is a pass-through" : ""}.`).join(" ");
+      }
+      document.getElementById("bottom-line").innerHTML = bottom;
+
+      document.getElementById("flags").innerHTML = B.flags.length
+        ? B.flags.map(f => `<li><strong>${f.title}.</strong> ${f.detail}</li>`).join("")
+        : "<li>No accounts are more than 20 points above pace in this month.</li>";
+      document.getElementById("quality").innerHTML = B.quality.map(q => `<li>${q}</li>`).join("");
+
+      window.__budgetTest = {
+        officialBudgeted: B.meta.officialBudgeted,
+        officialSpent: B.meta.officialSpent,
+        listedBudgeted,
+        listedSpent,
+        accountCount: rows.length,
+        flagCount: B.flags.length,
+        paceRate,
+        officialPct,
+        variancePts,
+        cats,
+        monthName: B.meta.monthName || null,
+        hasPrior,
+        snapshotId: B.meta.id || null
+      };
+      render();
     }
 
-    loadBudget().then(boot);
+    function bind() {
+      if (eventsBound) return;
+      eventsBound = true;
+      const filters = [
+        ["all", "All"],
+        ["personnel", "Personnel"],
+        ["operating", "Operating"],
+        ["capital", "Capital"],
+        ["flagged", "Flags"]
+      ];
+      const chips = document.getElementById("chips");
+      chips.innerHTML = filters.map(([id, label]) =>
+        `<button type="button" class="chip${id==="all"?" active":""}" data-filter="${id}">${label}</button>`
+      ).join("");
+      chips.addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-filter]");
+        if (!btn) return;
+        filter = btn.dataset.filter;
+        chips.querySelectorAll(".chip").forEach(c => c.classList.toggle("active", c === btn));
+        render();
+      });
+      document.getElementById("search").addEventListener("input", (e) => {
+        query = e.target.value.trim().toLowerCase();
+        render();
+      });
+      document.querySelector("thead").addEventListener("click", (e) => {
+        const th = e.target.closest("th[data-sort]");
+        if (!th) return;
+        const key = th.dataset.sort;
+        if (sortKey === key) sortDir *= -1;
+        else { sortKey = key; sortDir = key === "name" || key === "acct" || key === "category" || key === "status" ? 1 : -1; }
+        render();
+      });
+      document.getElementById("month-select").addEventListener("change", async (e) => {
+        await loadBudget({ id: e.target.value });
+        paint();
+      });
+    }
+
+    (async function start() {
+      bind();
+      const months = await loadMonths();
+      const select = document.getElementById("month-select");
+      if (months.length) {
+        select.hidden = false;
+        select.innerHTML = months.map(s =>
+          `<option value="${s.id}">${s.fiscalYear} month ${s.fiscalMonth} (${s.monthName}) · ${s.reportDate}</option>`
+        ).join("");
+      }
+      const chosen = new URLSearchParams(location.search).get("id");
+      await loadBudget(chosen ? { id: chosen } : undefined);
+      if (window.BUDGET?.meta?.id && months.length) select.value = String(window.BUDGET.meta.id);
+      paint();
+    })();
   </script>
 </body>
 </html>

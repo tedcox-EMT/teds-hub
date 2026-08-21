@@ -8,8 +8,11 @@
     "migrate": "node src/migrate.js",
     "seed": "node src/seed.js",
     "start": "node src/server.js",
+    "import": "node src/import.js",
     "verify": "node src/verify.js",
     "neon:setup": "node src/provision-neon.js",
+    "mac": "bash scripts/mac-setup.sh",
+    "publish": "bash scripts/publish-github.sh",
     "setup": "node src/migrate.js && node src/seed.js && node src/verify.js"
   },
   "dependencies": {

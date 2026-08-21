@@ -4,6 +4,7 @@ import path from "node:path";
 import { ROOT, closePool, isNeon, databaseUrl } from "./db.js";
 import { latestSnapshot, listSnapshots, loadSnapshot } from "./snapshot.js";
 import { upsertSnapshot, deleteSnapshot } from "./upsert.js";
+import { updateTurnStatus } from "./account.js";
 
 const PORT = Number(process.env.PORT || 8787);
 const staticRoot = path.join(ROOT, "public");
@@ -88,6 +89,11 @@ const server = http.createServer(async (req, res) => {
       const payload = await loadSnapshot({ id: result.id });
       return json(res, result.created ? 201 : 200, { ok: true, ...result, snapshot: payload });
     }
+    if (url.pathname === "/api/account" && req.method === "PATCH") {
+      const body = JSON.parse(await readBody(req) || "{}");
+      const result = await updateTurnStatus(body);
+      return json(res, 200, { ok: true, ...result });
+    }
     if (url.pathname === "/api/snapshot" && req.method === "DELETE") {
       const deleted = await deleteSnapshot({
         id: url.searchParams.get("id"),
@@ -115,7 +121,11 @@ const server = http.createServer(async (req, res) => {
     const ext = path.extname(filePath);
     send(res, 200, fs.readFileSync(filePath), { "content-type": TYPES[ext] || "application/octet-stream" });
   } catch (err) {
-    const status = /required|bad category|fiscalMonth|JSON/i.test(err.message) ? 400 : 500;
+    const status = /required|bad category|fiscalMonth|JSON|turnStatus/i.test(err.message)
+      ? 400
+      : /not found/i.test(err.message)
+        ? 404
+        : 500;
     json(res, status, { error: err.message });
   }
 });

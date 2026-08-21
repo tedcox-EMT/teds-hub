@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS accounts (
   category TEXT NOT NULL CHECK (category IN ('personnel', 'operating', 'capital', 'passthrough')),
   cents BOOLEAN NOT NULL DEFAULT false,
   note TEXT,
+  turn_status TEXT CHECK (turn_status IS NULL OR turn_status IN ('T', 'clear')),
   UNIQUE (snapshot_id, acct)
 );
 

@@ -77,7 +77,8 @@ export function validatePayload(data) {
       spent: num(a.spent),
       category: a.category,
       cents: Boolean(a.cents),
-      note: a.note || null
+      note: a.note || null,
+      turnStatus: a.turnStatus === "T" || a.turnStatus === "clear" ? a.turnStatus : null
     })),
     flags: Array.isArray(data.flags)
       ? data.flags.map((f) => ({

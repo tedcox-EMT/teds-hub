@@ -79,7 +79,10 @@ npm run import -- snapshots/fy2026-27-month-03.json
 - `GET /api/snapshot?fy=FY2026-2027&month=2` one month (latest report date if several)
 - `GET /api/snapshot?id=1` one snapshot
 - `PUT /api/snapshot` insert or update (JSON body, local bind only)
+- `PATCH /api/account` mark an account `{ snapshotId, acct, turnStatus: "T" | "clear" | null }`
 - `DELETE /api/snapshot?id=1` remove a snapshot
+
+T means turned in. The account shows in red. Clear turns the account name green. Re-importing a month keeps those marks.
 
 The dashboard month picker and the month-over-month strip read this API. Hub static `bcems-budget/` does not; it stays on the Month 2 `data.js` copy.
 
@@ -89,4 +92,4 @@ The dashboard month picker and the month-over-month strip read this API. Hub sta
 npm run verify
 ```
 
-Checks Month 2 official totals, then inserts and deletes a throwaway FY-VERIFY pair to prove upsert and prior-month linking.
+Checks Month 2 official totals, then inserts and deletes a throwaway FY-VERIFY pair to prove upsert, prior-month linking, and T/clear marks.

@@ -12,7 +12,8 @@ function mapAccounts(rows, priorByAcct) {
       budgeted,
       spent,
       category: a.category,
-      cents: a.cents
+      cents: a.cents,
+      turnStatus: a.turn_status || null
     };
     if (a.note) out.note = a.note;
     if (prior) {
@@ -26,7 +27,7 @@ function mapAccounts(rows, priorByAcct) {
 
 async function formatSnapshot(s) {
   const accounts = await query(
-    `SELECT acct, name, budgeted, spent, category, cents, note
+    `SELECT acct, name, budgeted, spent, category, cents, note, turn_status
      FROM accounts WHERE snapshot_id = $1 ORDER BY acct`,
     [s.id]
   );

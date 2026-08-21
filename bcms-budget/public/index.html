@@ -19,6 +19,10 @@
       --white: #ffffff;
       --ahead: #8B3A2A;
       --ok: #2E5A3C;
+      --turned: #B42318;
+      --cleared: #1F7A3A;
+      --turned-tint: #FCE8E6;
+      --cleared-tint: #E8F5EC;
       --header-font: Cambria, Caladea, Georgia, "Times New Roman", serif;
       --body-font: Calibri, "Source Sans 3", "Segoe UI", sans-serif;
     }
@@ -284,6 +288,48 @@
     th.sort-desc::after { content: "▼"; }
     td { padding: 7px 8px; border-bottom: 1px solid #e6e6e6; }
     tbody tr:hover { background: #faf7f0; }
+    tr.turned-row { background: var(--turned-tint); }
+    tr.turned-row:hover { background: #f8d7d3; }
+    tr.cleared-row { background: var(--cleared-tint); }
+    tr.cleared-row:hover { background: #d9eedf; }
+    .acct-num { font-variant-numeric: tabular-nums; }
+    .acct-name { font-weight: 600; }
+    tr.turned-row .acct-num,
+    .acct-name.turned { color: var(--turned); }
+    .acct-name.cleared { color: var(--cleared); }
+    .mark {
+      display: inline-flex;
+      gap: 4px;
+      white-space: nowrap;
+    }
+    .mark-btn {
+      border: 1px solid #cfd5de;
+      background: var(--white);
+      color: var(--navy);
+      font: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+      padding: 3px 7px;
+      cursor: pointer;
+    }
+    .mark-btn:hover { border-color: var(--navy); }
+    .mark-btn.t.active {
+      background: var(--turned);
+      color: var(--white);
+      border-color: var(--turned);
+    }
+    .mark-btn.clear.active {
+      background: var(--cleared);
+      color: var(--white);
+      border-color: var(--cleared);
+    }
+    .turn-legend {
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: -4px 0 10px;
+    }
     .bar-cell { min-width: 120px; }
     .mini {
       height: 8px;
@@ -328,7 +374,7 @@
     @media print {
       body { background: white; }
       .sheet { box-shadow: none; margin: 0; }
-      .toolbar, .hub-link { display: none; }
+      .toolbar, .hub-link, .mark { display: none; }
     }
   </style>
 </head>
@@ -386,12 +432,14 @@
         <input class="search" id="search" type="search" placeholder="Search account or number" aria-label="Search accounts">
         <span class="count" id="count"></span>
       </div>
+      <p class="turn-legend">T marks the item turned in (red). Clear turns the account name green.</p>
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
               <th data-sort="acct">Acct</th>
               <th data-sort="name">Account</th>
+              <th data-sort="turnStatus">Mark</th>
               <th data-sort="category">Type</th>
               <th class="num" data-sort="budgeted">Budgeted</th>
               <th class="num" data-sort="spent">Spent</th>
@@ -444,6 +492,56 @@
     let hasPrior = false;
     let eventsBound = false;
 
+    function turnKey() {
+      const m = window.BUDGET?.meta || {};
+      return "bcms-turn:" + (m.id || `${m.fiscalYear}-${m.fiscalMonth}`);
+    }
+
+    function loadLocalTurns() {
+      try {
+        return JSON.parse(localStorage.getItem(turnKey()) || "{}");
+      } catch (e) {
+        return {};
+      }
+    }
+
+    function persistLocal(acct, status) {
+      const map = loadLocalTurns();
+      if (status) map[acct] = status;
+      else delete map[acct];
+      localStorage.setItem(turnKey(), JSON.stringify(map));
+    }
+
+    function applyTurns(accounts) {
+      const local = loadLocalTurns();
+      for (const a of accounts) {
+        if (a.turnStatus === "T" || a.turnStatus === "clear") continue;
+        if (local[a.acct] === "T" || local[a.acct] === "clear") a.turnStatus = local[a.acct];
+      }
+      return accounts;
+    }
+
+    async function setTurnStatus(acct, next) {
+      const row = rows.find((r) => r.acct === acct);
+      if (!row) return;
+      const turnStatus = row.turnStatus === next ? null : next;
+      row.turnStatus = turnStatus;
+      const account = window.BUDGET.accounts.find((a) => a.acct === acct);
+      if (account) account.turnStatus = turnStatus;
+      persistLocal(acct, turnStatus);
+      render();
+      const snapshotId = window.BUDGET.meta.id;
+      if (!snapshotId) return;
+      try {
+        const r = await fetch("/api/account", {
+          method: "PATCH",
+          headers: { "content-type": "application/json", Accept: "application/json" },
+          body: JSON.stringify({ snapshotId, acct, turnStatus })
+        });
+        if (!r.ok) throw new Error("mark failed");
+      } catch (e) {}
+    }
+
     async function loadBudget(params) {
       try {
         const qs = params ? "?" + new URLSearchParams(params) : "";
@@ -484,7 +582,9 @@
     function visible() {
       return rows.filter(r => {
         if (filter === "flagged" && !flagAccts.has(r.acct)) return false;
-        if (filter !== "all" && filter !== "flagged" && r.category !== filter) return false;
+        if (filter === "turned" && r.turnStatus !== "T") return false;
+        if (filter === "cleared" && r.turnStatus !== "clear") return false;
+        if (!["all", "flagged", "turned", "cleared"].includes(filter) && r.category !== filter) return false;
         if (query && !(r.acct + " " + r.name + " " + r.category).toLowerCase().includes(query)) return false;
         return true;
       }).sort((a, b) => {
@@ -499,7 +599,7 @@
 
     function render() {
       const list = visible();
-      const cols = hasPrior ? 10 : 9;
+      const cols = hasPrior ? 11 : 10;
       document.querySelectorAll("th[data-sort]").forEach((th) => {
         th.classList.toggle("sort-asc", th.dataset.sort === sortKey && sortDir === 1);
         th.classList.toggle("sort-desc", th.dataset.sort === sortKey && sortDir === -1);
@@ -515,9 +615,19 @@
         const momCell = hasPrior
           ? `<td class="num">${r.spentDelta == null ? "n/a" : money(r.spentDelta, r.cents)}</td>`
           : "";
-        return `<tr>
-          <td>${r.acct}</td>
-          <td>${r.name}${r.note ? `<div style="font-size:11px;color:var(--muted)">${r.note}</div>` : ""}</td>
+        const turned = r.turnStatus === "T";
+        const cleared = r.turnStatus === "clear";
+        const rowClass = turned ? "turned-row" : cleared ? "cleared-row" : "";
+        const nameClass = turned ? "turned" : cleared ? "cleared" : "";
+        return `<tr class="${rowClass}" data-acct="${r.acct}">
+          <td class="acct-num">${r.acct}</td>
+          <td><span class="acct-name ${nameClass}">${r.name}</span>${r.note ? `<div style="font-size:11px;color:var(--muted)">${r.note}</div>` : ""}</td>
+          <td>
+            <div class="mark">
+              <button type="button" class="mark-btn t${turned ? " active" : ""}" data-mark="T" data-acct="${r.acct}" aria-pressed="${turned}">T</button>
+              <button type="button" class="mark-btn clear${cleared ? " active" : ""}" data-mark="clear" data-acct="${r.acct}" aria-pressed="${cleared}">Clear</button>
+            </div>
+          </td>
           <td>${labels[r.category] || "Pass-through"}</td>
           <td class="num">${money(r.budgeted, r.cents)}</td>
           <td class="num">${money(r.spent, r.cents)}</td>
@@ -535,7 +645,7 @@
       const paceRate = B.meta.fiscalMonth / B.meta.fiscalMonths;
       flagAccts = new Set(B.flags.map(f => f.acct));
       hasPrior = Boolean(B.prior);
-      rows = B.accounts.map(a => enrich(a, paceRate));
+      rows = applyTurns(B.accounts).map(a => enrich(a, paceRate));
       const listedBudgeted = rows.reduce((s, a) => s + a.budgeted, 0);
       const listedSpent = rows.reduce((s, a) => s + a.spent, 0);
       const officialRemaining = B.meta.officialBudgeted - B.meta.officialSpent;
@@ -654,7 +764,9 @@
         ["personnel", "Personnel"],
         ["operating", "Operating"],
         ["capital", "Capital"],
-        ["flagged", "Flags"]
+        ["flagged", "Flags"],
+        ["turned", "Turned in"],
+        ["cleared", "Cleared"]
       ];
       const chips = document.getElementById("chips");
       chips.innerHTML = filters.map(([id, label]) =>
@@ -676,8 +788,13 @@
         if (!th) return;
         const key = th.dataset.sort;
         if (sortKey === key) sortDir *= -1;
-        else { sortKey = key; sortDir = key === "name" || key === "acct" || key === "category" || key === "status" ? 1 : -1; }
+        else { sortKey = key; sortDir = key === "name" || key === "acct" || key === "category" || key === "status" || key === "turnStatus" ? 1 : -1; }
         render();
+      });
+      document.getElementById("tbody").addEventListener("click", (e) => {
+        const btn = e.target.closest("[data-mark]");
+        if (!btn) return;
+        setTurnStatus(btn.dataset.acct, btn.dataset.mark);
       });
       document.getElementById("month-select").addEventListener("change", async (e) => {
         await loadBudget({ id: e.target.value });

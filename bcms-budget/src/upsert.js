@@ -12,8 +12,14 @@ export async function upsertSnapshot(raw) {
       [m.fiscalYear, m.fiscalMonth, m.reportDate]
     );
     let snapshotId;
+    const priorTurns = new Map();
     if (existing.rowCount) {
       snapshotId = existing.rows[0].id;
+      const turns = await client.query(
+        `SELECT acct, turn_status FROM accounts WHERE snapshot_id = $1 AND turn_status IS NOT NULL`,
+        [snapshotId]
+      );
+      for (const row of turns.rows) priorTurns.set(row.acct, row.turn_status);
       await client.query(`DELETE FROM accounts WHERE snapshot_id = $1`, [snapshotId]);
       await client.query(`DELETE FROM flags WHERE snapshot_id = $1`, [snapshotId]);
       await client.query(`DELETE FROM quality_notes WHERE snapshot_id = $1`, [snapshotId]);
@@ -72,10 +78,11 @@ export async function upsertSnapshot(raw) {
     }
 
     for (const a of data.accounts) {
+      const turnStatus = a.turnStatus || priorTurns.get(a.acct) || null;
       await client.query(
-        `INSERT INTO accounts (snapshot_id, acct, name, budgeted, spent, category, cents, note)
-         VALUES ($1,$2,$3,$4,$5,$6,$7,$8)`,
-        [snapshotId, a.acct, a.name, a.budgeted, a.spent, a.category, a.cents, a.note]
+        `INSERT INTO accounts (snapshot_id, acct, name, budgeted, spent, category, cents, note, turn_status)
+         VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)`,
+        [snapshotId, a.acct, a.name, a.budgeted, a.spent, a.category, a.cents, a.note, turnStatus]
       );
     }
     for (const f of data.flags) {

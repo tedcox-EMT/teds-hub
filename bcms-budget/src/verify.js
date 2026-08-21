@@ -1,6 +1,7 @@
 import { query, closePool, isNeon, databaseUrl } from "./db.js";
 import { loadSnapshot, listSnapshots } from "./snapshot.js";
 import { upsertSnapshot, deleteSnapshot } from "./upsert.js";
+import { updateTurnStatus } from "./account.js";
 import { fiscalMonthName } from "./validate.js";
 
 const errors = [];
@@ -77,6 +78,25 @@ try {
   check(loaded?.prior?.spentDelta === 150, `spentDelta ${loaded?.prior?.spentDelta}`);
   check(loaded?.accounts.find((a) => a.acct === "100")?.spentDelta === 70, "account spentDelta");
   check(loaded?.quality[0] === "verify month 2 updated", "quality note not updated");
+
+  const marked = await updateTurnStatus({ snapshotId: second.id, acct: "100", turnStatus: "T" });
+  check(marked.turnStatus === "T", "turnStatus T not saved");
+  const cleared = await updateTurnStatus({ snapshotId: second.id, acct: "100", turnStatus: "clear" });
+  check(cleared.turnStatus === "clear", "turnStatus clear not saved");
+  const afterMark = await loadSnapshot({ id: second.id });
+  check(afterMark?.accounts.find((a) => a.acct === "100")?.turnStatus === "clear", "snapshot missing clear mark");
+
+  await upsertSnapshot({
+    meta: { ...verifyMeta, fiscalMonth: 2, reportDate: "2026-09-01", officialBudgeted: 1000, officialSpent: 250 },
+    accounts: [
+      { acct: "100", name: "Test A", budgeted: 600, spent: 120, category: "personnel" },
+      { acct: "200", name: "Test B", budgeted: 400, spent: 130, category: "operating" }
+    ],
+    flags: [{ acct: "200", title: "Test B", detail: "ahead" }],
+    quality: ["verify month 2 updated"]
+  });
+  const preserved = await loadSnapshot({ id: second.id });
+  check(preserved?.accounts.find((a) => a.acct === "100")?.turnStatus === "clear", "upsert dropped turn_status");
 
   const listed = await listSnapshots();
   check(listed.some((s) => s.fiscalYear === "FY-VERIFY" && s.fiscalMonth === 2), "list missing verify month");

@@ -664,7 +664,7 @@
         (B.meta.source === "postgres" ? " Live from Postgres." : "");
       document.getElementById("src").textContent = B.meta.primarySource;
       document.getElementById("flags-heading").textContent =
-        `Ahead of pace (more than 20 points above the ${pct(paceRate)} ${monthLabel.toLowerCase()} line)`;
+        `Ahead of pace (more than 20 points above the ${pct(paceRate)} ${monthLabel} line)`;
 
       document.querySelectorAll(".mom-col").forEach((el) => {
         el.hidden = !hasPrior;
@@ -673,7 +673,7 @@
       document.getElementById("kpis").innerHTML = [
         ["Total budgeted", money(B.meta.officialBudgeted), "County department total", ""],
         ["Spent to date", money(B.meta.officialSpent), pct(officialPct) + " of budget", ""],
-        ["Remaining", money(officialRemaining), "Through " + monthLabel.toLowerCase(), "good"],
+        ["Remaining", money(officialRemaining), "Through " + monthLabel, "good"],
         ["Vs pace", (variancePts >= 0 ? "+" : "") + variancePts.toFixed(1) + " pts",
           "Pace is " + pct(paceRate) + " / " + money(Math.round(expected)), variancePts < 0 ? "good" : "warn"]
       ].map(([l,v,n,cls]) => `

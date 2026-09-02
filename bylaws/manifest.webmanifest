@@ -1,0 +1,24 @@
+{
+  "name": "Bedford County Bylaws",
+  "short_name": "County Bylaws",
+  "description": "Search the Bedford County Board of Commissioners bylaws. December 2024 revision.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1F2E45",
+  "theme_color": "#1F2E45",
+  "icons": [
+    {
+      "src": "county-seal.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "county-seal.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

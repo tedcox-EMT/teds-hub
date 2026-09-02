@@ -38,6 +38,14 @@
         </form>
         <p class="hint">You do not need the legal wording. Try “public comment,” “snow day,” or “which committee does EMS report to.”</p>
         <div id="chips" class="chips"></div>
+        <div id="install" class="install-wrap">
+          <div class="install-row">
+            <button type="button" class="install-btn" id="install-btn">Install on phone</button>
+            <span class="install-note">Add to your Home Screen so it opens like an app.</span>
+          </div>
+          <p class="install-status" id="install-status" hidden></p>
+          <div class="install-help" id="install-help" hidden></div>
+        </div>
       </section>
 
       <div class="grid">
@@ -67,6 +75,7 @@
   <script src="data.js"></script>
   <script src="search.js"></script>
   <script src="app.js"></script>
+  <script src="install.js"></script>
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js");

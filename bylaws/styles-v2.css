@@ -194,6 +194,59 @@ button:not(:disabled),
 .chip:hover,
 .recent-chip:hover { background: #d7e4f4; }
 
+.install-wrap {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #edf0f5;
+}
+
+.install-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+.install-btn {
+  background: var(--color-navy);
+  color: white;
+  border: 0;
+  min-height: 44px;
+  padding: 8px 14px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.install-btn:hover { background: var(--color-navy-deep); }
+
+.install-note,
+.install-status {
+  font-size: 14px;
+  color: var(--color-muted);
+}
+
+.install-pill {
+  margin-top: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+.install-help {
+  margin-top: 8px;
+  background: var(--color-navy-tint);
+  padding: 10px 14px;
+  font-size: 15px;
+  color: var(--color-navy);
+}
+
+.install-help ol {
+  margin: 0;
+  padding-left: 18px;
+}
+
 .grid {
   display: grid;
   grid-template-columns: 280px 1fr;

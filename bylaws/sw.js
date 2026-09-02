@@ -1,4 +1,4 @@
-const CACHE = "bedford-bylaws-offline-v1";
+const CACHE = "bedford-bylaws-offline-v2";
 const PRECACHE = [
   "./",
   "./index.html",
@@ -6,6 +6,7 @@ const PRECACHE = [
   "./app.js",
   "./search.js",
   "./data.js",
+  "./install.js",
   "./county-seal.png",
   "./manifest.webmanifest",
 ];

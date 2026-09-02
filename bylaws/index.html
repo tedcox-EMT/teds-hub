@@ -3,57 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="theme-color" content="#1F3864">
+  <meta name="theme-color" content="#1F2E45">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="County Bylaws">
   <title>Bedford County Bylaws</title>
   <meta name="description" content="Search the Bedford County Board of Commissioners bylaws in everyday language. December 2024 revision.">
+  <link rel="icon" href="county-seal.png">
+  <link rel="apple-touch-icon" href="county-seal.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="banner">
-    <div class="banner-inner">
-      <h1>Bedford County Bylaws</h1>
-      <p class="subtitle">Board of Commissioners of Bedford County, Tennessee</p>
-      <div class="gold-rule"></div>
-      <p class="context">December 2024 revision · Search in everyday language</p>
-    </div>
-  </header>
+  <div class="app-shell">
+    <header class="banner">
+      <div class="banner-inner">
+        <img class="seal" src="county-seal.png" width="88" height="88" alt="Bedford County, Tennessee official seal">
+        <div class="banner-copy">
+          <p class="eyebrow">Bedford County · Tennessee</p>
+          <h1>County Bylaws</h1>
+          <p class="subtitle">Board of Commissioners</p>
+          <p class="context">December 2024 revision</p>
+        </div>
+      </div>
+    </header>
 
-  <main class="layout">
-    <section class="search-panel">
-      <div class="search-label">Find a bylaw</div>
-      <form id="search-form" class="search-row" role="search">
-        <input id="q" type="search" placeholder="Ask in plain language…" enterkeyhint="search" autocomplete="off">
-        <button type="submit">Search</button>
-      </form>
-      <p class="hint">You do not need the legal wording. Try “public comment,” “snow day,” or “which committee does EMS report to.”</p>
-      <div id="chips" class="chips"></div>
-    </section>
-
-    <div class="callout">
-      <strong>How this works.</strong> Each result leads with a plain-language answer, then the official bylaw text. This is a finding aid for the December 2024 rules. If anything conflicts with state or federal law, the law controls.
-    </div>
-
-    <div class="grid">
-      <aside class="nav-card">
-        <details class="browse-fold" id="browse-fold" open>
-          <summary class="section-bar">Browse by rule</summary>
-          <nav id="nav" class="nav-list" aria-label="Bylaw rules"></nav>
-        </details>
-      </aside>
-
-      <section class="results-card">
-        <div class="section-bar">Results</div>
-        <div id="status" class="status"></div>
-        <div id="results" class="cards"></div>
+    <main class="layout">
+      <section class="search-panel">
+        <div class="search-label">Find a bylaw</div>
+        <form id="search-form" class="search-row" role="search">
+          <input id="q" type="search" placeholder="Ask in plain language…" enterkeyhint="search" autocomplete="off" aria-label="Search bylaws">
+          <button type="submit">Search</button>
+        </form>
+        <p class="hint">You do not need the legal wording. Try “public comment,” “snow day,” or “which committee does EMS report to.”</p>
+        <div id="chips" class="chips"></div>
       </section>
-    </div>
 
-    <p class="note">Source: Bylaw Rules of the Board of Commissioners of Bedford County, Tennessee, originally adopted December 20, 2016, revised December 10, 2024. <a href="bylaws-december-2024.pdf">Download the original PDF</a>.</p>
-  </main>
+      <div class="grid">
+        <aside class="nav-card">
+          <details class="browse-fold" id="browse-fold" open>
+            <summary class="section-bar">Browse by rule</summary>
+            <nav id="nav" class="nav-list" aria-label="Bylaw rules"></nav>
+          </details>
+        </aside>
 
-  <footer>
-    Bedford County Bylaws · Finding aid for Commission use. Official text remains in the adopted bylaws.
-  </footer>
+        <section class="results-card">
+          <div class="section-bar">Results</div>
+          <div id="status" class="status"></div>
+          <div id="results" class="cards"></div>
+        </section>
+      </div>
+
+      <p class="note">Source: Bylaw Rules of the Board of Commissioners of Bedford County, Tennessee, originally adopted December 20, 2016, revised December 10, 2024. <a href="bylaws-december-2024.pdf">Download the original PDF</a>.</p>
+    </main>
+
+    <footer>
+      <p>Bedford County Bylaws · Finding aid for Commission use. Official text remains in the adopted bylaws. County site: <a href="https://www.bedfordcountytn.gov/" rel="noreferrer">bedfordcountytn.gov</a>.</p>
+      <p class="credit">© 2026 Ted Cox. Created by Ted Cox.</p>
+    </footer>
+  </div>
 
   <script src="data.js"></script>
   <script src="search.js"></script>

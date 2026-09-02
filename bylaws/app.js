@@ -65,6 +65,9 @@
       );
     }).join("");
 
+    var first = navEl.querySelector(".nav-group");
+    if (first) first.classList.add("open");
+
     navEl.querySelectorAll(".nav-group > button").forEach(function (btn) {
       btn.addEventListener("click", function () {
         btn.parentElement.classList.toggle("open");

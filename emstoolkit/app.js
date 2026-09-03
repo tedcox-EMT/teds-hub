@@ -33,10 +33,38 @@
   if (qInput && q) qInput.value = q;
 
   function pdfUrl(r) {
-    if (r.sourceUrl) return r.sourceUrl;
-    var ch = null;
-    for (var i = 0; i < CHAPTERS.length; i++) if (CHAPTERS[i].id === r.chapter) ch = CHAPTERS[i];
-    return ch ? ch.officialPdf : "https://publications.tnsosfiles.com/rules/1200/1200-12/1200-12.htm";
+    if (r && r.sourceUrl) return r.sourceUrl;
+    var ch = r && r.chapter;
+    for (var i = 0; i < CHAPTERS.length; i++) if (CHAPTERS[i].id === ch) return CHAPTERS[i].officialPdf;
+    return "https://publications.tnsosfiles.com/rules/1200/1200-12/1200-12.htm";
+  }
+
+  function ruleForCite(cite) {
+    var base = String(cite || "").replace(/\(.*$/, "");
+    for (var i = 0; i < RULES.length; i++) if (RULES[i].citation === base) return RULES[i];
+    return null;
+  }
+
+  function pdfForCite(cite) {
+    var r = ruleForCite(cite);
+    if (r) return pdfUrl(r);
+    var m = String(cite || "").match(/1200-12-(\d+)/);
+    if (m) {
+      var id = "1200-12-" + (m[1].length === 1 ? "0" + m[1] : m[1]);
+      for (var i = 0; i < CHAPTERS.length; i++) if (CHAPTERS[i].id === id) return CHAPTERS[i].officialPdf;
+    }
+    return "https://publications.tnsosfiles.com/rules/1200/1200-12/1200-12.htm";
+  }
+
+  function citeAnchor(cite) {
+    return '<a class="cite" href="' + esc(pdfForCite(cite)) + '" target="_blank" rel="noreferrer">' + esc(cite) + "</a>";
+  }
+
+  function linkCites(text) {
+    var safe = esc(text);
+    return safe.replace(/1200-12-\d+-\.\d+(?:\([^)]+\))*/g, function (m) {
+      return '<a class="cite" href="' + esc(pdfForCite(m)) + '" target="_blank" rel="noreferrer">' + m + "</a>";
+    });
   }
 
   function ruleCard(r) {
@@ -146,9 +174,19 @@
         return '<a class="tile" href="/emstoolkit/lookups.html?id=' + esc(x.id) + '"><strong>' + esc(x.title) + '</strong><div class="muted">' + esc(x.short) + "</div></a>";
       }).join("") + "</div>";
     } else {
-      var html = "<h1>" + esc(s.title) + "</h1><p>" + esc(s.short) + '</p><ol class="steps">';
-      s.steps.forEach(function (d) { html += "<li>" + esc(d) + "</li>"; });
-      html += '</ol><p class="cite">' + s.citations.map(esc).join(" · ") + "</p>";
+      var html = "<h1>" + esc(s.title) + "</h1><p>" + linkCites(s.short) + '</p><ol class="steps">';
+      s.steps.forEach(function (d) { html += "<li>" + linkCites(d) + "</li>"; });
+      html += '</ol><p class="cite-row">';
+      html += s.citations.map(function (c) { return citeAnchor(c); }).join(" · ");
+      html += "</p><p>";
+      var seen = {};
+      s.citations.forEach(function (c) {
+        var url = pdfForCite(c);
+        if (seen[url]) return;
+        seen[url] = true;
+        html += '<a class="btn" href="' + esc(url) + '" target="_blank" rel="noreferrer">Official PDF · ' + esc(c) + "</a> ";
+      });
+      html += "</p>";
       box.innerHTML = html;
     }
   }

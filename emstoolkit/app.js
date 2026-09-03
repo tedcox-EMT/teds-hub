@@ -2,11 +2,12 @@
   const app = document.getElementById("app");
 
   function esc(s) {
+    const q = String.fromCharCode(34);
     return String(s ?? "")
       .replace(/&/g, "&")
       .replace(/</g, "<")
       .replace(/>/g, ">")
-      .replace(/"/g, """);
+      .replace(new RegExp(q, "g"), "&" + "quot;");
   }
 
   function route() {

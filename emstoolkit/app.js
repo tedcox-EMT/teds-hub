@@ -56,10 +56,18 @@
     return "https://publications.tnsosfiles.com/rules/1200/1200-12/1200-12.htm";
   }
 
+  function idFromCite(cite) {
+    var m = String(cite || "").match(/1200-12-(\d+)-\.(\d+)/);
+    if (!m) return "";
+    var ch = m[1].length === 1 ? "0" + m[1] : m[1];
+    var sec = m[2].length === 1 ? "0" + m[2] : m[2];
+    return ch + "-" + sec;
+  }
+
   function rulePageHref(cite) {
     var r = ruleForCite(cite);
-    if (r) return "/emstoolkit/rule.html?id=" + encodeURIComponent(r.id);
-    return "/emstoolkit/rules.html";
+    var id = (r && r.id) || idFromCite(cite);
+    return id ? "/emstoolkit/" + id + ".html" : "/emstoolkit/rules.html";
   }
 
   function citeAnchor(cite) {
@@ -82,7 +90,7 @@
   }
 
   function ruleCard(r) {
-    return '<a class="tile" href="/emstoolkit/rule.html?id=' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + "</div></a>";
+    return '<a class="tile" href="/emstoolkit/' + esc(r.id) + '.html"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + "</div></a>";
   }
 
   if (file === "search.html" && box) {
@@ -198,7 +206,7 @@
         var r = ruleForCite(c);
         if (!r || seen[r.id]) return;
         seen[r.id] = true;
-        html += '<a class="btn" href="/emstoolkit/rule.html?id=' + esc(r.id) + '">Open ' + esc(c) + "</a> ";
+        html += '<a class="btn" href="/emstoolkit/' + esc(r.id) + '.html">Open ' + esc(c) + "</a> ";
       });
       html += "</p>";
       box.innerHTML = html;

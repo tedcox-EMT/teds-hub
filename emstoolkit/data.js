@@ -1118,3 +1118,19 @@ const SCENARIOS = [
     phrases: "what am i required to report accident crash wreck incident annual run report ePCR hospital copy five days",
   },
 ];
+
+window.CHAPTERS = CHAPTERS;
+window.RULES = RULES;
+window.SCENARIOS = SCENARIOS;
+window.FORMS = FORMS;
+window.REGIONS = REGIONS;
+window.OFFICE = OFFICE;
+window.DIRECTOR = DIRECTOR;
+window.BOARD_MEMBERS = BOARD_MEMBERS;
+window.BOARD_CALENDAR = BOARD_CALENDAR;
+window.BOARD_NOTE = BOARD_NOTE;
+window.PROTOCOLS = PROTOCOLS;
+window.LINKS = LINKS;
+window.getRule = getRule;
+window.searchRules = searchRules;
+window.matchesHay = matchesHay;

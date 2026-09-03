@@ -93,6 +93,11 @@
     return '<a class="tile" href="/emstoolkit/' + esc(r.id) + '.html"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + "</div></a>";
   }
 
+  function ruleBlock(r) {
+    var lis = (r.digest || []).map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("");
+    return '<article class="tile" id="' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + " · this section only</div><h2>" + esc(r.title) + "</h2><p>" + esc(r.summary) + '</p><ul class="steps">' + lis + '</ul><p><a class="btn" href="/emstoolkit/' + esc(r.id) + '.html">Open ' + esc(r.citation) + "</a></p></article>";
+  }
+
   if (file === "search.html" && box) {
     if (!q) {
       box.innerHTML = '<h2>Lookups</h2><div class="list">' + SCENARIOS.map(function (s) {
@@ -114,7 +119,7 @@
         }).join("") + "</div>";
       }
       html += "<h2>Rules · " + rules.length + "</h2><div class=\"list\">";
-      html += rules.length ? rules.map(ruleCard).join("") : '<p class="muted">No matching sections.</p>';
+      html += rules.length ? rules.map(ruleBlock).join("") : '<p class="muted">No matching sections.</p>';
       html += "</div>";
       box.innerHTML = html;
     }

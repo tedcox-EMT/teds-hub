@@ -25,6 +25,7 @@
   var matchesHay = window.matchesHay || function () { return false; };
 
   var file = (location.pathname.split("/").pop() || "index.html").toLowerCase();
+  if (file === "emstoolkit" || file === "") file = "index.html";
   var params = new URLSearchParams(location.search);
   var q = (params.get("q") || "").trim();
   var box = document.getElementById("results");

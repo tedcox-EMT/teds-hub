@@ -10,13 +10,13 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.5; }
 a { color: var(--navy); cursor: pointer; }
-.top { background: var(--paper); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+.top { background: var(--paper); border-bottom: 1px solid var(--line); position: -webkit-sticky; position: sticky; top: 0; z-index: 10; }
 .top .bar { height: 6px; background: var(--red); }
-.top .inner { max-width: 880px; margin: 0 auto; padding: 12px 20px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
-.brand { display: flex; gap: 10px; align-items: center; text-decoration: none; color: var(--navy); font-weight: 700; }
-.brand img { width: 36px; height: 36px; }
-nav { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
-nav a { text-decoration: none; color: var(--muted); font-size: 14px; padding: 8px 10px; border-radius: 6px; }
+.top .inner { max-width: 880px; margin: 0 auto; padding: 10px 16px 8px; display: flex; flex-direction: column; gap: 6px; }
+.brand { display: flex; gap: 10px; align-items: center; text-decoration: none; color: var(--navy); font-weight: 700; min-height: 44px; }
+.brand img { width: 36px; height: 36px; flex-shrink: 0; }
+nav { display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; padding-bottom: 4px; }
+nav a { text-decoration: none; color: var(--muted); font-size: 14px; padding: 10px 12px; border-radius: 6px; white-space: nowrap; flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; }
 nav a.on, nav a:hover { color: var(--navy); background: var(--bg); }
 main { max-width: 880px; margin: 0 auto; padding: 24px 20px 72px; }
 h1 { color: var(--navy); font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 10px; }

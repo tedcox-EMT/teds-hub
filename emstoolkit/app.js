@@ -2,12 +2,11 @@
   const app = document.getElementById("app");
 
   function esc(s) {
-    const q = String.fromCharCode(34);
-    return String(s ?? "")
-      .replace(/&/g, "&")
-      .replace(/</g, "<")
-      .replace(/>/g, ">")
-      .replace(new RegExp(q, "g"), "&" + "quot;");
+    return String(s == null ? "" : s)
+      .replace(/&/g, "\u0026amp;")
+      .replace(/</g, "\u0026lt;")
+      .replace(/>/g, "\u0026gt;")
+      .replace(/"/g, "\u0026quot;");
   }
 
   function route() {
@@ -154,7 +153,7 @@
     return `<main>
       <h1>${esc(s.title)}</h1>
       <p>${esc(s.short)}</p>
-      <ol class="steps">${s.steps.map((d) => `<li>${d.replace(/</g, "<")}</li>`).join("")}</ol>
+      <ol class="steps">${s.steps.map((d) => `<li>${esc(d)}</li>`).join("")}</ol>
       <p class="cite">${s.citations.map(esc).join(" · ")}</p>
     </main>`;
   }

@@ -12,15 +12,15 @@
   <header class="top">
     <div class="bar"></div>
     <div class="inner">
-      <a class="brand" href="#/">
+      <a class="brand" href="index.html">
         <img src="tristar.svg" alt="">
         Tennessee EMS
       </a>
       <nav>
-        <a href="#/search" data-nav="search">Search</a>
-        <a href="#/rules" data-nav="rules">Rules</a>
-        <a href="#/forms" data-nav="forms">Forms</a>
-        <a href="#/office" data-nav="office">Office</a>
+        <a href="search.html">Search</a>
+        <a href="rules.html">Rules</a>
+        <a href="forms.html">Forms</a>
+        <a href="office.html">Office</a>
       </nav>
     </div>
   </header>
@@ -31,31 +31,32 @@
         <div class="pad">
           <h1>Tennessee EMS rules and forms</h1>
           <p class="muted">A working copy of 1200-12, state forms, and regional contacts for service directors.</p>
-          <form class="searchbox" action="#/search" id="go">
-            <input type="search" id="q" name="q" placeholder="Board meetings, required reports…" autocomplete="off">
+          <form class="searchbox" action="search.html" method="get">
+            <input type="search" name="q" placeholder="Board meetings, required reports…" autocomplete="off">
             <button type="submit">Search</button>
           </form>
         </div>
       </section>
       <div class="grid">
-        <a class="tile" href="#/search"><strong>Search</strong><div class="muted">Type a topic. Matching sections and lookups show up immediately.</div></a>
-        <a class="tile" href="#/rules"><strong>Rules</strong><div class="muted">All 45 sections of 1200-12, with the official chapter PDFs.</div></a>
-        <a class="tile" href="#/forms"><strong>Forms</strong><div class="muted">PH-3939, inspections, renewals, and the other state applications.</div></a>
-        <a class="tile" href="#/office"><strong>Office</strong><div class="muted">Consultants, Board roster, protocols, and the Nashville numbers.</div></a>
+        <a class="tile" href="search.html"><strong>Search</strong><div class="muted">Type a topic. Matching sections and lookups show up immediately.</div></a>
+        <a class="tile" href="rules.html"><strong>Rules</strong><div class="muted">All 45 sections of 1200-12, with the official chapter PDFs.</div></a>
+        <a class="tile" href="forms.html"><strong>Forms</strong><div class="muted">Fleet notices, inspections, renewals, and the other state applications.</div></a>
+        <a class="tile" href="office.html"><strong>Office</strong><div class="muted">Consultants, Board roster, protocols, and the Nashville numbers.</div></a>
       </div>
       <h2>Lookups</h2>
       <div class="list">
-        <a class="tile" href="#/lookups/reserve-temp"><strong>Reserve / replacement ambulance</strong><div class="muted">A standing spare that answers calls needs its own permit. A shop fill-in and a newly titled replacement have written temporary paths in 1200-12-01-.02(5).</div></a>
-        <a class="tile" href="#/lookups/one-medic"><strong>Single clinician plus driver</strong><div class="muted">Category B Levels 1–4 write a single-clinician-plus-operator option after medical-director notice.</div></a>
-        <a class="tile" href="#/lookups/inventory"><strong>Equipment inventory frequency</strong><div class="muted">The state minimum is a recorded inventory at least every three days on each vehicle, kept available for three months.</div></a>
-        <a class="tile" href="#/lookups/destination"><strong>Taking a patient to the local hospital</strong><div class="muted">Bypass is written for trauma and pediatric-emergency criteria in 1200-12-01-.21.</div></a>
-        <a class="tile" href="#/lookups/board-meetings"><strong>When are the Board meetings</strong><div class="muted">Dates, agendas, minutes, and the livestream are on the state EMS site. Chapter 06 is what the Board does when it sits.</div></a>
-        <a class="tile" href="#/lookups/required-reports"><strong>What am I required to report</strong><div class="muted">Annual operations report, run data within 60 days, hospital copy, and the five-day incident file when the rule is triggered.</div></a>
+        <a class="tile" href="lookups.html?id=reserve-temp"><strong>Reserve / replacement ambulance</strong><div class="muted">A standing spare that answers calls needs its own permit. Shop fill-ins have a written temporary path.</div></a>
+        <a class="tile" href="lookups.html?id=one-medic"><strong>Single clinician plus driver</strong><div class="muted">Category B Levels 1–4 write a single-clinician-plus-operator option after medical-director notice.</div></a>
+        <a class="tile" href="lookups.html?id=inventory"><strong>Equipment inventory frequency</strong><div class="muted">The state minimum is a recorded inventory at least every three days on each vehicle.</div></a>
+        <a class="tile" href="lookups.html?id=destination"><strong>Taking a patient to the local hospital</strong><div class="muted">Bypass is written for trauma and pediatric-emergency criteria in 1200-12-01-.21.</div></a>
+        <a class="tile" href="lookups.html?id=board-meetings"><strong>When are the Board meetings</strong><div class="muted">Dates, agendas, and minutes are on the state EMS site. Chapter 06 is what the Board does when it sits.</div></a>
+        <a class="tile" href="lookups.html?id=required-reports"><strong>What am I required to report</strong><div class="muted">Annual operations report, run data within 60 days, hospital copy, and the five-day incident file when the rule is triggered.</div></a>
       </div>
     </main>
   </div>
   <footer>Working copy of published 1200-12 and the official state forms.</footer>
   <script src="data.js"></script>
   <script src="app.js"></script>
+  
 </body>
 </html>

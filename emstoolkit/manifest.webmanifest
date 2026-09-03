@@ -1,0 +1,14 @@
+{
+  "name": "Tennessee EMS Toolkit",
+  "short_name": "EMS Toolkit",
+  "description": "Tennessee EMS rules, forms, and Office contacts.",
+  "start_url": "/emstoolkit/index.html",
+  "scope": "/emstoolkit/",
+  "display": "standalone",
+  "background_color": "#002d65",
+  "theme_color": "#002d65",
+  "icons": [
+    { "src": "/emstoolkit/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/emstoolkit/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

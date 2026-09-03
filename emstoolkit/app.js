@@ -96,7 +96,7 @@
   if (file === "search.html" && box) {
     if (!q) {
       box.innerHTML = '<h2>Lookups</h2><div class="list">' + SCENARIOS.map(function (s) {
-        return '<a class="tile" href="/emstoolkit/lookups.html?id=' + esc(s.id) + '"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
+        return '<a class="tile" href="/emstoolkit/' + esc(s.id) + '.html"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
       }).join("") + "</div><h2>Rules</h2><div class=\"list\">" + RULES.slice(0, 8).map(ruleCard).join("") + "</div>";
     } else {
       var rules = searchRules(q);
@@ -105,7 +105,7 @@
       var html = "";
       if (lookups.length) {
         html += "<h2>Lookups</h2><div class=\"list\">" + lookups.map(function (s) {
-          return '<a class="tile" href="/emstoolkit/lookups.html?id=' + esc(s.id) + '"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
+          return '<a class="tile" href="/emstoolkit/' + esc(s.id) + '.html"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
         }).join("") + "</div>";
       }
       if (forms.length) {
@@ -193,7 +193,7 @@
     for (var i = 0; i < SCENARIOS.length; i++) if (SCENARIOS[i].id === id) s = SCENARIOS[i];
     if (!s) {
       box.innerHTML = "<h2>Lookups</h2><div class=\"list\">" + SCENARIOS.map(function (x) {
-        return '<a class="tile" href="/emstoolkit/lookups.html?id=' + esc(x.id) + '"><strong>' + esc(x.title) + '</strong><div class="muted">' + esc(x.short) + "</div></a>";
+        return '<a class="tile" href="/emstoolkit/' + esc(x.id) + '.html"><strong>' + esc(x.title) + '</strong><div class="muted">' + esc(x.short) + "</div></a>";
       }).join("") + "</div>";
     } else {
       var html = "<h1>" + esc(s.title) + "</h1><p>" + linkCites(s.short) + '</p><ol class="steps">';

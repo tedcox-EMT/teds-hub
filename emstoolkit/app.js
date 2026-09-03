@@ -67,7 +67,7 @@
   function rulePageHref(cite) {
     var r = ruleForCite(cite);
     var id = (r && r.id) || idFromCite(cite);
-    return id ? "/emstoolkit/" + id + ".html" : "/emstoolkit/rules.html";
+    return id ? id + ".html" : "rules.html";
   }
 
   function citeAnchor(cite) {
@@ -90,18 +90,18 @@
   }
 
   function ruleCard(r) {
-    return '<a class="tile" href="/emstoolkit/' + esc(r.id) + '.html"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + "</div></a>";
+    return '<a class="tile" href="' + esc(r.id) + '.html"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + "</div></a>";
   }
 
   function ruleBlock(r) {
     var lis = (r.digest || []).map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("");
-    return '<article class="tile" id="' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + " · this section only</div><h2>" + esc(r.title) + "</h2><p>" + esc(r.summary) + '</p><ul class="steps">' + lis + '</ul><p><a class="btn" href="/emstoolkit/' + esc(r.id) + '.html">Open ' + esc(r.citation) + "</a></p></article>";
+    return '<article class="tile" id="' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + " · this section only</div><h2>" + esc(r.title) + "</h2><p>" + esc(r.summary) + '</p><ul class="steps">' + lis + '</ul></article>';
   }
 
   if (file === "search.html" && box) {
     if (!q) {
       box.innerHTML = '<h2>Lookups</h2><div class="list">' + SCENARIOS.map(function (s) {
-        return '<a class="tile" href="/emstoolkit/' + esc(s.id) + '.html"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
+        return '<a class="tile" href="' + esc(s.id) + '.html"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
       }).join("") + "</div><h2>Rules</h2><div class=\"list\">" + RULES.slice(0, 8).map(ruleCard).join("") + "</div>";
     } else {
       var rules = searchRules(q);
@@ -110,7 +110,7 @@
       var html = "";
       if (lookups.length) {
         html += "<h2>Lookups</h2><div class=\"list\">" + lookups.map(function (s) {
-          return '<a class="tile" href="/emstoolkit/' + esc(s.id) + '.html"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
+          return '<a class="tile" href="' + esc(s.id) + '.html"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
         }).join("") + "</div>";
       }
       if (forms.length) {
@@ -118,7 +118,7 @@
           return '<a class="row" href="' + esc(openHref(f.href)) + '" target="_blank" rel="noreferrer"><span>' + esc(f.name) + "</span><small>" + esc(f.number) + "</small></a>";
         }).join("") + "</div>";
       }
-      html += "<h2>Rules · " + rules.length + "</h2><div class=\"list\">";
+      html += "<h2>Matching sections · " + rules.length + "</h2><div class=\"list\">";
       html += rules.length ? rules.map(ruleBlock).join("") : '<p class="muted">No matching sections.</p>';
       html += "</div>";
       box.innerHTML = html;
@@ -198,7 +198,7 @@
     for (var i = 0; i < SCENARIOS.length; i++) if (SCENARIOS[i].id === id) s = SCENARIOS[i];
     if (!s) {
       box.innerHTML = "<h2>Lookups</h2><div class=\"list\">" + SCENARIOS.map(function (x) {
-        return '<a class="tile" href="/emstoolkit/' + esc(x.id) + '.html"><strong>' + esc(x.title) + '</strong><div class="muted">' + esc(x.short) + "</div></a>";
+        return '<a class="tile" href="' + esc(x.id) + '.html"><strong>' + esc(x.title) + '</strong><div class="muted">' + esc(x.short) + "</div></a>";
       }).join("") + "</div>";
     } else {
       var html = "<h1>" + esc(s.title) + "</h1><p>" + linkCites(s.short) + '</p><ol class="steps">';
@@ -211,7 +211,7 @@
         var r = ruleForCite(c);
         if (!r || seen[r.id]) return;
         seen[r.id] = true;
-        html += '<a class="btn" href="/emstoolkit/' + esc(r.id) + '.html">Open ' + esc(c) + "</a> ";
+        html += '<a class="btn" href="' + esc(r.id) + '.html">Open ' + esc(c) + "</a> ";
       });
       html += "</p>";
       box.innerHTML = html;

@@ -95,7 +95,7 @@
 
   function ruleBlock(r) {
     var lis = (r.digest || []).map(function (d) { return "<li>" + esc(d) + "</li>"; }).join("");
-    return '<article class="tile" id="' + esc(r.id) + '"><div><a class="cite" href="' + esc(r.id) + '.html">' + esc(r.citation) + '</a> · this section only</div><h2>' + esc(r.title) + "</h2><p>" + esc(r.summary) + '</p><ul class="steps">' + lis + '</ul><p><a class="btn" href="' + esc(r.id) + '.html">Open ' + esc(r.citation) + "</a></p></article>";
+    return '<article class="tile" id="' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + " · this section only</div><h2>" + esc(r.title) + "</h2><p>" + esc(r.summary) + '</p><ul class="steps">' + lis + '</ul></article>';
   }
 
   if (file === "search.html" && box) {

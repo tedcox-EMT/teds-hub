@@ -32,8 +32,15 @@
   var qInput = document.getElementById("q");
   if (qInput && q) qInput.value = q;
 
+  function pdfUrl(r) {
+    if (r.sourceUrl) return r.sourceUrl;
+    var ch = null;
+    for (var i = 0; i < CHAPTERS.length; i++) if (CHAPTERS[i].id === r.chapter) ch = CHAPTERS[i];
+    return ch ? ch.officialPdf : "https://publications.tnsosfiles.com/rules/1200/1200-12/1200-12.htm";
+  }
+
   function ruleCard(r) {
-    return '<a class="tile" href="/emstoolkit/rule.html?id=' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + "</div></a>";
+    return '<div class="tile"><a href="/emstoolkit/rule.html?id=' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + '</div></a><p><a class="btn" href="' + esc(pdfUrl(r)) + '" target="_blank" rel="noreferrer">Official PDF</a></p></div>';
   }
 
   if (file === "search.html" && box) {

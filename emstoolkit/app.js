@@ -82,11 +82,6 @@
       var html = '<p class="cite">' + esc(r.citation) + "</p><h1>" + esc(r.title) + '</h1><p class="muted">' + esc(r.chapter) + " · " + esc(r.chapterTitle) + "</p><p>" + esc(r.summary) + '</p><ul class="steps">';
       (r.digest || []).forEach(function (d) { html += "<li>" + esc(d) + "</li>"; });
       html += "</ul>";
-      if (r.watchFor && r.watchFor.length) {
-        html += "<h2>Watch for</h2><ul class=\"steps\">";
-        r.watchFor.forEach(function (d) { html += "<li>" + esc(d) + "</li>"; });
-        html += "</ul>";
-      }
       html += '<p><a class="btn" href="' + esc(r.sourceUrl) + '" target="_blank" rel="noreferrer">Official PDF</a></p>';
       box.innerHTML = html;
     }

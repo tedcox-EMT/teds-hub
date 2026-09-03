@@ -51,4 +51,5 @@ button, .btn {
 .row small { color: var(--muted); }
 .steps { padding-left: 18px; }
 .steps li { margin: 8px 0; }
-footer { max-width: 880px; margin: 0 auto; padding: 0 20px calc(48px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; }
+footer { max-width: 880px; margin: 0 auto; padding: 8px 20px calc(88px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; }
+footer p { margin: 0 0 8px; }

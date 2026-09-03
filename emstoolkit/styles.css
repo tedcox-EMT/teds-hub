@@ -8,7 +8,8 @@
   --paper: #ffffff;
 }
 * { box-sizing: border-box; }
-html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.5; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.5; min-height: 100%; }
+html { padding-bottom: env(safe-area-inset-bottom, 0px); }
 a { color: var(--navy); cursor: pointer; }
 .top { background: var(--paper); border-bottom: 1px solid var(--line); position: -webkit-sticky; position: sticky; top: 0; z-index: 10; }
 .top .bar { height: 6px; background: var(--red); }
@@ -18,7 +19,7 @@ a { color: var(--navy); cursor: pointer; }
 nav { display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; width: 100%; padding-bottom: 4px; }
 nav a { text-decoration: none; color: var(--muted); font-size: 14px; padding: 10px 12px; border-radius: 6px; white-space: nowrap; flex: 0 0 auto; min-height: 44px; display: inline-flex; align-items: center; }
 nav a.on, nav a:hover { color: var(--navy); background: var(--bg); }
-main { max-width: 880px; margin: 0 auto; padding: 24px 20px 72px; }
+main { max-width: 880px; margin: 0 auto; padding: 24px 20px calc(96px + env(safe-area-inset-bottom, 0px)); }
 h1 { color: var(--navy); font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 10px; }
 h2 { color: var(--navy); font-size: 1.15rem; margin: 28px 0 10px; }
 .muted { color: var(--muted); }
@@ -46,4 +47,4 @@ button, .btn {
 .row small { color: var(--muted); }
 .steps { padding-left: 18px; }
 .steps li { margin: 8px 0; }
-footer { max-width: 880px; margin: 0 auto; padding: 0 20px 40px; color: var(--muted); font-size: 13px; }
+footer { max-width: 880px; margin: 0 auto; padding: 0 20px calc(48px + env(safe-area-inset-bottom, 0px)); color: var(--muted); font-size: 13px; }

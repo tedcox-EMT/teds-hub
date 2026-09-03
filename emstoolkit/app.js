@@ -56,14 +56,20 @@
     return "https://publications.tnsosfiles.com/rules/1200/1200-12/1200-12.htm";
   }
 
+  function rulePageHref(cite) {
+    var r = ruleForCite(cite);
+    if (r) return "/emstoolkit/rule.html?id=" + encodeURIComponent(r.id);
+    return "/emstoolkit/rules.html";
+  }
+
   function citeAnchor(cite) {
-    return '<a class="cite" href="' + esc(pdfForCite(cite)) + '" target="_blank" rel="noreferrer">' + esc(cite) + "</a>";
+    return '<a class="cite" href="' + esc(rulePageHref(cite)) + '">' + esc(cite) + "</a>";
   }
 
   function linkCites(text) {
     var safe = esc(text);
     return safe.replace(/1200-12-\d+-\.\d+(?:\([^)]+\))*/g, function (m) {
-      return '<a class="cite" href="' + esc(pdfForCite(m)) + '" target="_blank" rel="noreferrer">' + m + "</a>";
+      return '<a class="cite" href="' + esc(rulePageHref(m)) + '">' + m + "</a>";
     });
   }
 
@@ -76,7 +82,7 @@
   }
 
   function ruleCard(r) {
-    return '<div class="tile"><a href="/emstoolkit/rule.html?id=' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + '</div></a><p><a class="btn" href="' + esc(pdfUrl(r)) + '" target="_blank" rel="noreferrer">Official PDF</a></p></div>';
+    return '<a class="tile" href="/emstoolkit/rule.html?id=' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + "</div></a>";
   }
 
   if (file === "search.html" && box) {
@@ -125,7 +131,7 @@
       var html = '<p class="cite">' + esc(r.citation) + "</p><h1>" + esc(r.title) + '</h1><p class="muted">' + esc(r.chapter) + " · " + esc(r.chapterTitle) + "</p><p>" + esc(r.summary) + '</p><ul class="steps">';
       (r.digest || []).forEach(function (d) { html += "<li>" + esc(d) + "</li>"; });
       html += "</ul>";
-      html += '<p><a class="btn" href="' + esc(r.sourceUrl) + '" target="_blank" rel="noreferrer">Official PDF</a></p>';
+      html += '<p><a class="btn" href="' + esc(r.sourceUrl) + '" target="_blank" rel="noreferrer">Official chapter PDF</a></p>';
       box.innerHTML = html;
     }
   }
@@ -189,10 +195,10 @@
       html += "</p><p>";
       var seen = {};
       s.citations.forEach(function (c) {
-        var url = pdfForCite(c);
-        if (seen[url]) return;
-        seen[url] = true;
-        html += '<a class="btn" href="' + esc(url) + '" target="_blank" rel="noreferrer">Official PDF · ' + esc(c) + "</a> ";
+        var r = ruleForCite(c);
+        if (!r || seen[r.id]) return;
+        seen[r.id] = true;
+        html += '<a class="btn" href="/emstoolkit/rule.html?id=' + esc(r.id) + '">Open ' + esc(c) + "</a> ";
       });
       html += "</p>";
       box.innerHTML = html;

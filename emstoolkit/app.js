@@ -67,6 +67,14 @@
     });
   }
 
+  function openHref(href) {
+    var h = String(href || "");
+    if (/\.(docx?|DOCX?)$/.test(h.split("?")[0])) {
+      return "https://view.officeapps.live.com/op/view.aspx?src=" + encodeURIComponent(h);
+    }
+    return h;
+  }
+
   function ruleCard(r) {
     return '<div class="tile"><a href="/emstoolkit/rule.html?id=' + esc(r.id) + '"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + '</div></a><p><a class="btn" href="' + esc(pdfUrl(r)) + '" target="_blank" rel="noreferrer">Official PDF</a></p></div>';
   }
@@ -88,7 +96,7 @@
       }
       if (forms.length) {
         html += "<h2>Forms</h2><div class=\"list\">" + forms.map(function (f) {
-          return '<a class="row" href="' + esc(f.href) + '" target="_blank" rel="noreferrer"><span>' + esc(f.name) + "</span><small>" + esc(f.number) + "</small></a>";
+          return '<a class="row" href="' + esc(openHref(f.href)) + '" target="_blank" rel="noreferrer"><span>' + esc(f.name) + "</span><small>" + esc(f.number) + "</small></a>";
         }).join("") + "</div>";
       }
       html += "<h2>Rules · " + rules.length + "</h2><div class=\"list\">";
@@ -131,7 +139,7 @@
       html += "<h2>" + esc(g) + '</h2><div class="list">';
       list.forEach(function (f) {
         if (f.group !== g) return;
-        html += '<a class="row" href="' + esc(f.href) + '" target="_blank" rel="noreferrer"><span>' + esc(f.name) + "</span><small>" + esc(f.number) + "</small></a>";
+        html += '<a class="row" href="' + esc(openHref(f.href)) + '" target="_blank" rel="noreferrer"><span>' + esc(f.name) + "</span><small>" + esc(f.number) + "</small></a>";
       });
       html += "</div>";
     });

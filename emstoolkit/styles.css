@@ -1,0 +1,49 @@
+:root {
+  --navy: #002d65;
+  --red: #c8102e;
+  --ink: #1b2430;
+  --muted: #4d5b6d;
+  --line: #d5deea;
+  --bg: #f4f6f8;
+  --paper: #ffffff;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Segoe UI", system-ui, sans-serif; line-height: 1.5; }
+a { color: var(--navy); }
+.top { background: var(--paper); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+.top .bar { height: 6px; background: var(--red); }
+.top .inner { max-width: 880px; margin: 0 auto; padding: 12px 20px; display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+.brand { display: flex; gap: 10px; align-items: center; text-decoration: none; color: var(--navy); font-weight: 700; }
+.brand img { width: 36px; height: 36px; }
+nav { display: flex; gap: 4px; flex-wrap: wrap; margin-left: auto; }
+nav a { text-decoration: none; color: var(--muted); font-size: 14px; padding: 8px 10px; border-radius: 6px; }
+nav a.on, nav a:hover { color: var(--navy); background: var(--bg); }
+main { max-width: 880px; margin: 0 auto; padding: 24px 20px 72px; }
+h1 { color: var(--navy); font-size: clamp(1.8rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 10px; }
+h2 { color: var(--navy); font-size: 1.15rem; margin: 28px 0 10px; }
+.muted { color: var(--muted); }
+.hero { background: var(--paper); border: 1px solid var(--navy); border-radius: 6px; overflow: hidden; }
+.hero .bar { height: 6px; background: var(--red); }
+.hero .pad { padding: 28px 24px; }
+.searchbox { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+input[type="search"], input[type="text"] {
+  min-height: 48px; flex: 1; min-width: 200px; border: 1px solid var(--line);
+  border-radius: 6px; padding: 0 14px; font-size: 16px; color: var(--ink); background: #fff;
+}
+button, .btn {
+  min-height: 48px; border: 0; border-radius: 6px; background: var(--navy); color: #fff;
+  font-weight: 600; padding: 0 18px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center;
+}
+.grid { display: grid; gap: 10px; grid-template-columns: 1fr; margin-top: 18px; }
+@media (min-width: 640px) { .grid { grid-template-columns: 1fr 1fr; } }
+.card, .tile {
+  background: var(--paper); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; text-decoration: none; color: inherit; display: block;
+}
+.tile:hover { border-color: var(--navy); }
+.cite { font-family: ui-monospace, monospace; font-size: 12px; color: var(--red); }
+.list { display: flex; flex-direction: column; gap: 8px; }
+.row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; text-decoration: none; color: inherit; background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 12px 14px; }
+.row small { color: var(--muted); }
+.steps { padding-left: 18px; }
+.steps li { margin: 8px 0; }
+footer { max-width: 880px; margin: 0 auto; padding: 0 20px 40px; color: var(--muted); font-size: 13px; }

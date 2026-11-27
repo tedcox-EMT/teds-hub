@@ -3,22 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bedford County, Tennessee</title>
+  <title>Bedford County EMS</title>
   <meta name="robots" content="noindex">
+  <link rel="icon" href="seal.png">
   <style>
-    :root { --navy:#002d65; --red:#c8102e; --paper:#f4f6f8; --ink:#1b2430; --muted:#5a6a7c; }
+    :root {
+      --navy: #1F3864;
+      --gold: #C5A253;
+      --gold-tint: #FBF3E3;
+      --paper: #f7f4ee;
+      --ink: #1b2430;
+    }
     * { box-sizing: border-box; }
-    html, body { margin: 0; min-height: 100%; background: var(--paper); color: var(--ink); font-family: "Segoe UI", system-ui, sans-serif; }
-    .stripe { height: 6px; background: var(--red); }
-    main { max-width: 560px; margin: 0 auto; padding: 56px 24px; }
-    h1 { margin: 0; color: var(--navy); font-size: 1.8rem; }
-    p { color: var(--muted); }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      font-family: Calibri, "Segoe UI", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(900px 420px at 50% -80px, #31568f 0%, transparent 70%),
+        linear-gradient(180deg, #14284a 0%, var(--navy) 42%, #152743 100%);
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px 16px 40px;
+    }
+    .card {
+      width: min(680px, 100%);
+      background: #fff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32);
+    }
+    .banner {
+      background:
+        linear-gradient(180deg, rgba(197, 162, 83, 0.16), transparent 42%),
+        #12233f;
+      text-align: center;
+      padding: 28px 20px 0;
+    }
+    .seal {
+      width: min(300px, 78vw);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+    .rule {
+      height: 5px;
+      margin-top: 22px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .body { padding: 34px 32px 32px; }
+    .kicker {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-family: Cambria, Georgia, serif;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+    h1 {
+      margin: 0 0 12px;
+      color: var(--navy);
+      font-family: Cambria, Georgia, serif;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      line-height: 1.12;
+    }
+    .lead {
+      margin: 0 0 26px;
+      font-size: 1.15rem;
+      line-height: 1.45;
+      color: #3c4b60;
+      max-width: 36rem;
+    }
+    .who {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin: 0 0 22px;
+      padding: 14px 16px;
+      background: var(--gold-tint);
+      border-left: 6px solid var(--gold);
+    }
+    .mark {
+      width: 54px;
+      height: 54px;
+      flex: none;
+      border-radius: 50%;
+      background: var(--navy);
+      display: grid;
+      place-items: center;
+    }
+    .who strong {
+      display: block;
+      color: var(--navy);
+      font-family: Cambria, Georgia, serif;
+      font-size: 1.25rem;
+    }
+    .who span { color: #5c6b7e; }
+    a.mail {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--navy);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 2px solid var(--gold);
+    }
+    a.mail:hover { background: #152846; }
+    a.mail:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+    address {
+      margin: 26px 0 0;
+      font-style: normal;
+      color: #3c4b60;
+      line-height: 1.5;
+    }
+    address b {
+      display: block;
+      color: var(--navy);
+      font-family: Cambria, Georgia, serif;
+      margin-bottom: 2px;
+    }
+    @media (max-width: 560px) {
+      .body { padding: 26px 18px 24px; }
+      a.mail { width: 100%; justify-content: center; }
+    }
   </style>
 </head>
 <body>
-  <div class="stripe"></div>
-  <main>
-    <h1>Bedford County, Tennessee</h1>
+  <main class="card">
+    <div class="banner">
+      <img class="seal" src="seal.png" alt="Bedford County EMS seal">
+      <div class="rule"></div>
+    </div>
+    <div class="body">
+      <p class="kicker">Bedford County EMS</p>
+      <h1>Contact the director</h1>
+      <p class="lead">For information about Bedford County Emergency Medical Services, write Ted Cox.</p>
+      <div class="who">
+        <div class="mark" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <path d="M6 8.5h16v11H6z" stroke="#C5A253" stroke-width="1.7"/>
+            <path d="M6 9l8 6 8-6" stroke="#C5A253" stroke-width="1.7"/>
+          </svg>
+        </div>
+        <div>
+          <strong>Ted Cox</strong>
+          <span>Director</span>
+        </div>
+      </div>
+      <a class="mail" href="mailto:ted.cox@bedfordems.com">ted.cox@bedfordems.com</a>
+      <address>
+        <b>EMS Operations Center</b>
+        119 Frank Martin Road<br>
+        Shelbyville, Tennessee 37160
+      </address>
+    </div>
   </main>
 </body>
 </html>

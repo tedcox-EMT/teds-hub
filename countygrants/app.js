@@ -760,7 +760,7 @@ function render() {
     return;
   }
   const hash = location.hash || "#/";
-  const parts = hash.split("/").filter(Boolean);
+  const parts = hash.replace(/^#\/?/, "").split("/").filter(Boolean);
   let main = "";
   if (parts[0] === "grant" && parts[1]) main = renderGrant(parts[1]);
   else if (parts[0] === "apply" && parts[1] && parts[2]) main = renderWizard(parts[1], parts[2]);

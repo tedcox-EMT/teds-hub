@@ -1,5 +1,7 @@
 const PROFILE_KEY = "bcems-grants-profile";
 const APPS_KEY = "bcems-grants-apps";
+const HIDE_KEY = "bcems-grant-notices-hidden";
+const LIVE_URL = "https://bedford-grants.tedcox-travel.workers.dev/grant";
 
 const STATUS_LABEL = { open: "Open now", prepare: "Get ready", watch: "Watch", awarded: "Awarded" };
 const LEVEL_LABEL = { federal: "Federal", state: "State", local: "Local", private: "Private" };
@@ -252,13 +254,14 @@ function appById(id) {
 function checkedLabel() {
   if (!state.catalog?.checkedAt) return "The official pages have not been checked yet.";
   const date = new Date(state.catalog.checkedAt);
-  const spoken = date.toLocaleDateString("en-US", {
+  return `Official pages last read ${date.toLocaleString("en-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
     timeZone: "America/Chicago"
-  });
-  return `Official pages last read ${spoken}.`;
+  })} Central time.`;
 }
 
 function clockMarkup(grant) {
@@ -663,6 +666,70 @@ function shell(main) {
   `;
 }
 
+function hiddenNoticeIds() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(HIDE_KEY) || "[]");
+    return new Set(Array.isArray(saved) ? saved : []);
+  } catch (error) {
+    return new Set();
+  }
+}
+
+function hideNotice(id) {
+  const hidden = hiddenNoticeIds();
+  hidden.add(id);
+  localStorage.setItem(HIDE_KEY, JSON.stringify([...hidden]));
+  render();
+}
+
+function applyLive(overlay) {
+  if (!overlay || !overlay.checkedAt || !state.catalog) return;
+  state.catalog.checkedAt = overlay.checkedAt;
+  if (Array.isArray(overlay.notices)) state.catalog.notices = overlay.notices;
+  const patches = overlay.patches || {};
+  for (const grant of state.catalog.grants) {
+    const patch = patches[grant.id];
+    if (!patch) continue;
+    grant.status = patch.status;
+    grant.deadlineLabel = patch.deadlineLabel;
+    if ("actionDate" in patch) grant.actionDate = patch.actionDate;
+    if ("clock" in patch) grant.clock = patch.clock;
+    if ("watcherNote" in patch) grant.watcherNote = patch.watcherNote;
+  }
+  render();
+}
+
+function renderNotices(emptyLine) {
+  if (!Array.isArray(state.catalog.notices)) return "";
+  const hidden = hiddenNoticeIds();
+  const notices = state.catalog.notices.filter((notice) => notice && notice.id && !hidden.has(notice.id));
+  if (!notices.length) {
+    return `<section class="panel"><p class="kicker">New on official pages</p><h2>No new notice</h2><p>${esc(emptyLine)}</p></section>`;
+  }
+  const cards = notices.map((notice) => `
+    <article class="card notice">
+      <p class="kicker">New notice · ${esc(notice.funder || "Grants.gov")}</p>
+      <h2>${esc(notice.name)}</h2>
+      <div class="meta"><span class="badge ${esc(notice.status || "watch")}">${esc(STATUS_LABEL[notice.status] || "New")}</span></div>
+      <p class="small"><strong>Timing.</strong> ${esc(notice.deadlineLabel || "No close date posted.")}</p>
+      ${clockMarkup(notice)}
+      ${notice.amountLabel ? `<p class="small"><strong>Amount.</strong> ${esc(notice.amountLabel)}</p>` : ""}
+      <p class="small">${esc(notice.note || "")}</p>
+      <div class="actions">
+        <a class="btn-gold" href="${esc(notice.url)}" target="_blank" rel="noopener">Read the notice</a>
+        <button class="btn-ghost" type="button" data-hide-notice="${esc(notice.id)}">Hide</button>
+      </div>
+    </article>
+  `).join("");
+  return `
+    <section class="panel">
+      <p class="kicker">New on official pages</p>
+      <h2>Look at these before they are added</h2>
+      <p>These are postings from Grants.gov. The check does not turn them into an application. Read the notice. Hide it if it is not for Bedford County.</p>
+    </section>
+    ${cards}`;
+}
+
 function renderHome() {
   const grants = state.catalog.grants.filter((grant) => state.filter === "all" || grant.level === state.filter);
   const counts = { open: 0, prepare: 0, watch: 0 };
@@ -700,11 +767,12 @@ function renderHome() {
             <div class="stat"><b>${counts.prepare || 0}</b><span>Get ready</span></div>
             <div class="stat"><b>${counts.watch || 0}</b><span>Watch</span></div>
           </div>
-          <p class="small muted">${esc(checkedLabel())} The countdown uses a date only when the funder page posted one.</p>
+          <p class="small muted">${esc(checkedLabel())} The check runs every morning. This computer does not have to be on. The countdown uses a date only when the funder page posted one.</p>
           <div class="filters">
             ${["all", "federal", "state", "local", "private"].map((level) => `<button class="chip ${state.filter === level ? "active" : ""}" data-filter="${level}">${level === "all" ? "All" : LEVEL_LABEL[level]}</button>`).join("")}
           </div>
         </section>
+        ${renderNotices("The last check did not find a new EMS posting on Grants.gov. Programs already on this list stay in the cards below.")}
         ${cards || `<section class="panel"><p>No grants in this group.</p></section>`}
       </div>
       <aside class="list">
@@ -1073,6 +1141,11 @@ function copyText(text) {
 }
 
 function onClick(event) {
+  const hide = event.target.closest("[data-hide-notice]");
+  if (hide) {
+    hideNotice(hide.getAttribute("data-hide-notice"));
+    return;
+  }
   const go = event.target.closest("[data-go]");
   if (go) {
     location.hash = go.getAttribute("data-go");
@@ -1210,6 +1283,12 @@ fetch("grants.json", { cache: "no-store" })
   .then((catalog) => {
     state.catalog = catalog;
     render();
+    fetch(LIVE_URL, { cache: "no-store" })
+      .then((response) => (response.ok ? response.json() : null))
+      .then((overlay) => {
+        if (overlay) applyLive(overlay);
+      })
+      .catch(() => {});
   })
   .catch((error) => {
     state.error = error.message;

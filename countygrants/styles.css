@@ -145,6 +145,8 @@ img { max-width: 100%; }
 .badge.prepare { background: var(--gold-tint); color: var(--gold-deep); }
 .badge.watch { background: var(--navy-tint); color: var(--navy); }
 .badge.awarded { background: #e5f4ea; color: var(--open); }
+.card.notice { border-left-color: var(--gold-deep); }
+a.btn-gold, a.btn-ghost { text-decoration: none; display: inline-flex; align-items: center; justify-content: center; }
 
 .callout {
   background: var(--gold-tint);

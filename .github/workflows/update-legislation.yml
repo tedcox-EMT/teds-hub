@@ -1,0 +1,38 @@
+name: Daily Bedford County Legislation Update
+
+on:
+  schedule:
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout live GitHub Pages branch
+        uses: actions/checkout@v4
+        with:
+          ref: cursor/bedford-county-bylaws-a865
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Run legislation auto-updater
+        run: node scripts/update-legislation.mjs legislation
+
+      - name: Commit updated live-updates.json if changed
+        run: |
+          if [ -n "$(git status --porcelain legislation/live-updates.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add legislation/live-updates.json
+            git commit -m "Daily automatic Bedford County legislation update"
+            git push origin HEAD:cursor/bedford-county-bylaws-a865
+          else
+            echo "No legislative changes detected today."
+          fi

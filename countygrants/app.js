@@ -213,6 +213,7 @@ const QUESTIONS = {
 const state = {
   catalog: null,
   filter: "all",
+  statusFilter: "all",
   profile: loadProfile(),
   apps: loadApps(),
   error: ""
@@ -299,6 +300,9 @@ function checkedLabel() {
 function clockMarkup(grant) {
   const clock = grant.clock;
   if (!clock || !clock.kind) {
+    if (grant.status === "open") {
+      return `<div class="timer timer-open"><p class="timer-kicker">Open now</p><p class="timer-count">Rolling</p><p class="timer-note">Open now. No fixed close date is posted.</p></div>`;
+    }
     return `<div class="timer timer-none"><p class="timer-note">No due date posted.</p></div>`;
   }
   const on = clock.on ? ` data-on="${esc(clock.on)}"` : "";
@@ -518,11 +522,15 @@ function renderNotices(emptyLine) {
 }
 
 function renderHome() {
-  const grants = state.catalog.grants.filter((grant) => state.filter === "all" || grant.level === state.filter);
+  const grants = state.catalog.grants.filter((grant) => {
+    const levelMatch = state.filter === "all" || grant.level === state.filter;
+    const statusMatch = state.statusFilter === "all" || grant.status === state.statusFilter;
+    return levelMatch && statusMatch;
+  });
   const counts = { open: 0, prepare: 0, watch: 0 };
   state.catalog.grants.forEach((grant) => { counts[grant.status] = (counts[grant.status] || 0) + 1; });
   const cards = grants.map((grant) => `
-    <article class="card">
+    <article class="card card-${esc(grant.status)}">
       <p class="kicker">${esc(LEVEL_LABEL[grant.level])} · ${esc(grant.funder)}</p>
       <h2>${esc(grant.name)}</h2>
       <div class="meta"><span class="badge ${esc(grant.status)}">${esc(STATUS_LABEL[grant.status] || grant.status)}</span></div>
@@ -539,28 +547,38 @@ function renderHome() {
     </article>
   `).join("");
   const skipped = state.catalog.notAFit.map((item) => `<li><strong>${esc(item.name)}.</strong> ${esc(item.reason)}</li>`).join("");
+  const statTile = (key, label) => `
+    <button type="button" class="stat ${state.statusFilter === key ? "active" : ""}" data-status-filter="${key}" aria-pressed="${state.statusFilter === key}">
+      <b>${counts[key] || 0}</b>
+      <span>${label}</span>
+    </button>
+  `;
+  const activeStatusNote = state.statusFilter !== "all"
+    ? `<div class="actions"><button class="btn-ghost" type="button" data-status-filter="all">Showing ${esc(STATUS_LABEL[state.statusFilter])} · Show all (${state.catalog.grants.length})</button></div>`
+    : "";
   return `
     <section class="home-grid">
       <div class="list">
-        <section class="panel">
-          <p class="kicker">Bedford County Government</p>
-          <h2>Grant list</h2>
+        <section class="panel panel-hero">
+          <div class="section-bar">Bedford County Government</div>
+          <h2>Grant list (${state.catalog.grants.length} programs)</h2>
           <p>The assistant writes a draft from the funder's rules and the facts you confirm. You review it. You send it on the official site. The county's authorized official still has to certify a federal or state application.</p>
           <div class="actions"><button class="btn" data-share="list">Email or share</button></div>
           <div class="stats">
-            <div class="stat"><b>${counts.open || 0}</b><span>Open now</span></div>
-            <div class="stat"><b>${counts.prepare || 0}</b><span>Get ready</span></div>
-            <div class="stat"><b>${counts.watch || 0}</b><span>Watch</span></div>
+            ${statTile("open", "Open now")}
+            ${statTile("prepare", "Get ready")}
+            ${statTile("watch", "Watch")}
           </div>
-          <p class="small muted">${esc(checkedLabel())} The check runs every morning. This computer does not have to be on. The countdown uses a date only when the funder page posted one.</p>
+          ${activeStatusNote}
+          <p class="small muted">${esc(checkedLabel())} The check runs every morning. This computer does not have to be on. Tap a status box above to filter.</p>
           <div class="filters">
             ${["all", "federal", "state", "local", "private"].map((level) => `<button class="chip ${state.filter === level ? "active" : ""}" data-filter="${level}">${level === "all" ? "All" : LEVEL_LABEL[level]}</button>`).join("")}
           </div>
         </section>
         ${renderNotices("The last check did not find a new county posting on Grants.gov. Programs already on this list stay in the cards below.")}
-        ${cards || `<section class="panel"><p>No grants in this group.</p></section>`}
+        ${cards || `<section class="panel"><p>No grants match this filter.</p><button class="btn-ghost" type="button" data-reset-filters>Show all grants</button></section>`}
         <section class="panel">
-          <p class="kicker">Checked and set aside</p>
+          <div class="section-bar">Checked and set aside</div>
           <h2>Not a fit</h2>
           <ul class="clean">${skipped}</ul>
         </section>
@@ -580,7 +598,7 @@ function renderGrant(id) {
   const grant = grantById(id);
   if (!grant) return `<section class="panel"><p>That grant is not on the list.</p></section>`;
   return `
-    <section class="card">
+    <section class="card card-${esc(grant.status)}">
       <p class="kicker">${esc(LEVEL_LABEL[grant.level])} · ${esc(grant.funder)}</p>
       <h2>${esc(grant.name)}</h2>
       <div class="meta"><span class="badge ${esc(grant.status)}">${esc(STATUS_LABEL[grant.status])}</span></div>
@@ -635,9 +653,12 @@ function startApplication(grantId) {
 
 function renderApplyPicker() {
   const buttons = state.catalog.grants.map((grant) => `
-    <button class="btn full" data-start="${esc(grant.id)}">${esc(grant.name)}</button>
+    <button class="btn full picker-btn" data-start="${esc(grant.id)}">
+      <span>${esc(grant.name)}</span>
+      <span class="badge ${esc(grant.status)}">${esc(STATUS_LABEL[grant.status])}</span>
+    </button>
   `).join("");
-  return `<section class="panel"><p class="kicker">Assistant</p><h2>Which application should I write?</h2><div class="choice">${buttons}</div></section>`;
+  return `<section class="panel"><div class="section-bar">Assistant</div><h2>Which application should I write?</h2><div class="choice">${buttons}</div></section>`;
 }
 
 function renderWizard(grantId, appId) {
@@ -782,14 +803,17 @@ function renderPacket(id) {
     <div class="section-block">
       <h3>${esc(section.title)}</h3>
       <p>${esc(section.text)}</p>
-      <button class="btn noprint" data-copy="${index}" data-app="${esc(item.id)}">Copy this part</button>
+      <button class="btn-ghost noprint" data-copy="${index}" data-app="${esc(item.id)}">Copy this part</button>
     </div>
   `).join("");
-  const warning = item.blockers?.length ? `<div class="stop"><strong>Do not send this yet.</strong> ${item.blockers.map(esc).join(" ")}</div>` : `<div class="note">The draft has the facts you entered. A person still has to check it and file it.</div>`;
+  const ready = !(item.blockers && item.blockers.length);
+  const warning = ready
+    ? `<div class="note">The draft has the facts you entered. A person still has to check it and file it.</div>`
+    : `<div class="stop"><strong>Do not send this yet.</strong> ${item.blockers.map(esc).join(" ")}</div>`;
   return `
     <article class="packet">
-      <p class="kicker">${esc(grant?.name || "Draft")}</p>
-      <h2>Application draft</h2>
+      <div class="section-bar">${esc(grant?.funder || "Draft")}</div>
+      <h2>${esc(grant?.name || "Application draft")}</h2>
       ${warning}
       ${blocks}
       <div class="actions noprint">
@@ -798,20 +822,26 @@ function renderPacket(id) {
         <button class="btn" data-print>Print</button>
         <a class="btn" href="${esc(grant?.portalUrl || "#")}" target="_blank" rel="noreferrer noopener">Official page</a>
         <button class="btn" data-sent="${esc(item.id)}">Mark as sent</button>
+        <button class="btn-ghost" data-edit="${esc(item.id)}">${ready ? "Edit answers" : "Fix the answers"}</button>
       </div>
     </article>
   `;
 }
 
 function renderPackets() {
-  if (!state.apps.length) return `<section class="panel"><h2>No drafts yet</h2><p>Use Apply on a grant to start one.</p></section>`;
+  if (!state.apps.length) return `<section class="panel"><div class="section-bar">Drafts</div><h2>No drafts yet</h2><p>Use Apply on a grant to start one.</p><div class="actions"><button class="btn-gold" data-go="#/apply">Start</button></div></section>`;
   const cards = state.apps.map((item) => {
     const grant = grantById(item.grantId);
+    const target = item.sections?.length ? `#/packet/${esc(item.id)}` : `#/apply/${esc(item.grantId)}/${esc(item.id)}`;
     return `
       <article class="card">
+        <p class="kicker">${esc(item.status)}</p>
         <h2>${esc(grant?.name || "Draft")}</h2>
-        <p class="small">${esc(item.status)} · ${esc(new Date(item.updatedAt).toLocaleDateString())}</p>
-        <div class="actions"><button class="btn" data-go="#/packet/${esc(item.id)}">Open draft</button></div>
+        <p class="small muted">${esc(new Date(item.updatedAt).toLocaleDateString())} · Saved on this browser only.</p>
+        <div class="actions">
+          <button class="btn-gold" data-go="${target}">Open draft</button>
+          <button class="btn-ghost" data-delete-app="${esc(item.id)}">Delete</button>
+        </div>
       </article>
     `;
   }).join("");
@@ -827,13 +857,13 @@ function renderAgency() {
   const facts = COUNTY_FACTS.map(([label, value]) => `<li><strong>${esc(label)}.</strong> ${esc(value)}</li>`).join("");
   return `
     <section class="panel">
-      <p class="kicker">Checked November 26, 2026</p>
+      <div class="section-bar">Checked November 26, 2026</div>
       <h2>County facts</h2>
-      <p>These are the same for everyone who opens this page.</p>
-      <ul class="clean">${facts}</ul>
+      <p>These verified facts stay the same for everyone who opens this page.</p>
+      <ul class="clean facts-list">${facts}</ul>
     </section>
     <section class="panel">
-      <p class="kicker">County file</p>
+      <div class="section-bar">Local county file</div>
       <h2>Facts you add</h2>
       <p>Office, contact, UEI, EIN, and SAM.gov stay blank until you enter them. They stay in this browser until you copy or share a draft.</p>
       <form id="profile-form">
@@ -849,7 +879,8 @@ function renderAgency() {
       </form>
     </section>
     <section class="panel">
-      <h2>Move the drafts</h2>
+      <p class="kicker">Move the drafts</p>
+      <h2>Backup file</h2>
       <p>Export keeps a copy of this browser's drafts. Import brings that file back.</p>
       <div class="actions">
         <button class="btn" data-export>Export JSON</button>
@@ -955,6 +986,19 @@ function onClick(event) {
     showHiddenNotices();
     return;
   }
+  if (event.target.closest("[data-reset-filters]")) {
+    state.filter = "all";
+    state.statusFilter = "all";
+    render();
+    return;
+  }
+  const statusFilter = event.target.closest("[data-status-filter]");
+  if (statusFilter) {
+    const next = statusFilter.getAttribute("data-status-filter");
+    state.statusFilter = state.statusFilter === next ? "all" : next;
+    render();
+    return;
+  }
   const go = event.target.closest("[data-go]");
   if (go) {
     location.hash = go.getAttribute("data-go");
@@ -974,6 +1018,28 @@ function onClick(event) {
   const answer = event.target.closest("[data-answer]");
   if (answer) {
     saveAnswer(appById(answer.getAttribute("data-app")), answer.getAttribute("data-qid"), answer.getAttribute("data-answer"));
+    return;
+  }
+  const edit = event.target.closest("[data-edit]");
+  if (edit) {
+    const item = appById(edit.getAttribute("data-edit"));
+    if (item) {
+      item.step = 0;
+      item.sections = [];
+      item.updatedAt = new Date().toISOString();
+      saveApps();
+      location.hash = `#/apply/${item.grantId}/${item.id}`;
+    }
+    return;
+  }
+  const del = event.target.closest("[data-delete-app]");
+  if (del) {
+    const id = del.getAttribute("data-delete-app");
+    if (!window.confirm("Delete this draft from this browser?")) return;
+    state.apps = state.apps.filter((item) => item.id !== id);
+    saveApps();
+    if (location.hash.includes(id)) location.hash = "#/packets";
+    else render();
     return;
   }
   const back = event.target.closest("[data-back]");
@@ -1065,6 +1131,11 @@ document.getElementById("app").addEventListener("submit", (event) => {
 });
 
 document.getElementById("app").addEventListener("change", (event) => {
+  if (event.target.closest("#profile-form")) {
+    const submitBtn = event.target.closest("#profile-form").querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.textContent = "Save";
+    return;
+  }
   if (event.target.id !== "import-file") return;
   const file = event.target.files[0];
   if (!file) return;

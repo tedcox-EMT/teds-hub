@@ -1,98 +1,84 @@
 {
-  "checkedAt": "2026-11-26T19:00:00Z",
+  "checkedAt": "2026-11-26T23:00:00Z",
   "rulesNote": "Facts below were checked against the funder pages on November 26, 2026. The daily morning check reads official pages and Grants.gov and changes a status line only when the page itself changes.",
   "grants": [
     {
-      "id": "afg-vehicle",
-      "name": "Assistance to Firefighters Grant, ambulance",
-      "funder": "FEMA",
-      "level": "federal",
-      "status": "prepare",
-      "deadlineLabel": "FY 2025 window closed June 22, 2026. The next window is not posted yet.",
-      "actionDate": null,
-      "amountLabel": "Ambulance. FEMA sets aside part of the vehicle money for ambulances.",
-      "matchLabel": "10 percent cash match. In-kind match is not allowed.",
-      "summary": "This is the main federal grant for a county ambulance service that is not part of a fire department or a hospital. It can buy a new ambulance to replace an old front-line unit.",
-      "why": "Bedford County EMS is a county ambulance service. It provides medical transport. It is not a hospital. Shelbyville fire does not run the county ambulance service. That is the FEMA test for a nonaffiliated EMS organization.",
+      "id": "walmart",
+      "name": "Walmart Spark Good Local Grants",
+      "funder": "Walmart (Shelbyville facilities)",
+      "level": "private",
+      "status": "open",
+      "deadlineLabel": "Cycle 3 deadline is November 30, 2026. Next fiscal year cycles open February 1, May 1, and August 1.",
+      "actionDate": "2026-11-30",
+      "amountLabel": "$250 to $5,000 per facility per fiscal year.",
+      "matchLabel": "No match.",
+      "summary": "Local Walmart stores and distribution centers award cash grants of $250 to $5,000 to county and city agencies in their service area. Shelbyville has both Walmart Supercenter #656 and Walmart Distribution Center #6062.",
+      "why": "Walmart Spark Good guidelines list counties and municipal agencies as eligible government entities. Applicants must serve the same area as the facility. Shelbyville has Supercenter #656 at 1880 N. Main St. and Distribution Center #6062 at 285 Frank Martin Rd., on the same road as the EMS station.",
       "rules": [
-        "You may submit one Vehicle Acquisition application, one Operations and Safety application, and one regional application. Do not request the same vehicle twice.",
-        "Ambulances are a high priority vehicle for nonaffiliated EMS. The unit must meet NFPA 1900 or GSA KKK-A-1822F.",
-        "The service area population is 55,273. For a population from 20,001 through 1,000,000, FEMA divides the total cost by 1.10 to get the federal share. The county pays the rest in cash.",
-        "Replace the oldest front-line ambulance. Do not use this grant to duplicate the Rural Health Transformation ambulance awarded in 2026.",
-        "Give the year, mileage, and VIN of the unit you will replace. Unsafe units that you certify as removed cannot go back into emergency service.",
-        "Drivers must be trained to the DOT emergency vehicle operator course, or an equal course, before the new ambulance arrives.",
-        "Apply in FEMA GO. The authorized official has to certify the application."
+        "Set up a Spark Good account on Walmart.com and complete verification through Deed before you apply. Use the same work email for both.",
+        "Ask for $250 to $5,000. You may receive one grant per Walmart facility in the same fiscal year (February 1 through January 31).",
+        "Shelbyville has two separate facilities. You can file one request with Supercenter #656 and one request with Distribution Center #6062.",
+        "Facility managers recommend local grants. A short call or visit to the local manager helps before you submit.",
+        "If approved, you must provide county banking details within 21 days for electronic payment through JP Morgan."
       ],
-      "portalUrl": "https://go.fema.gov",
-      "infoUrl": "https://www.fema.gov/grants/preparedness/firefighters",
+      "portalUrl": "https://www.walmart.org/sparkgood/Join-Spark-Good/program/local-grants",
+      "infoUrl": "https://www.walmart.org/content/dam/walmart-org/documents/what-we-do/strengthening-community/spark-good/spark-good-getting-started/government-entity-one-pager.pdf",
       "sources": [
-        "FEMA FY 2025 AFG Notice of Funding Opportunity, funding opportunity DHS-25-GPD-044-00-98",
-        "FEMA Assistance to Firefighters Grants page, checked November 26, 2026. The FY 2025 application period is closed.",
-        "U.S. Census Bureau QuickFacts, Bedford County, Tennessee, July 1, 2025 population estimate 55,273"
+        "Walmart Spark Good Local Grants guidelines, checked November 26, 2026. Cycle 3 last day to submit is November 30.",
+        "Walmart Spark Good Government Entity one-pager, non-501(c)(3) county and municipal eligibility",
+        "Walmart Supercenter #656 (1880 N. Main St.) and Walmart Distribution Center #6062 (285 Frank Martin Rd.), Shelbyville, TN"
       ],
       "watch": {
-        "kind": "fema-afg",
-        "url": "https://www.fema.gov/grants/preparedness/firefighters"
+        "kind": "walmart",
+        "url": "https://www.walmart.org/sparkgood/Join-Spark-Good/program/local-grants"
       },
       "rulesVersion": "2026-11-26",
       "questions": [
-        "eligibility-ems",
-        "sam",
-        "uei",
-        "unit-year",
-        "unit-label",
-        "mileage",
-        "unit-condition",
-        "outages",
-        "project-cost",
-        "match-cash",
-        "calls",
-        "full-time"
-      ]
+        "wm-facility",
+        "wm-project",
+        "wm-amount",
+        "wm-deed",
+        "wm-impact"
+      ],
+      "clock": {
+        "kind": "due",
+        "on": "2026-11-30"
+      }
     },
     {
-      "id": "afg-ops",
-      "name": "Assistance to Firefighters Grant, equipment and training",
-      "funder": "FEMA",
-      "level": "federal",
-      "status": "prepare",
-      "deadlineLabel": "FY 2025 window closed June 22, 2026. The next window is not posted yet.",
+      "id": "gary-sinise",
+      "name": "Gary Sinise Foundation, First Responders Outreach",
+      "funder": "Gary Sinise Foundation",
+      "level": "private",
+      "status": "open",
+      "deadlineLabel": "Open year-round with rolling review. Applications stay under review for up to 6 months.",
       "actionDate": null,
-      "amountLabel": "Monitors, radios, PPE, or training. A micro grant is a federal request of $75,000 or less.",
-      "matchLabel": "10 percent cash match. In-kind match is not allowed.",
-      "summary": "The same FEMA program can fund cardiac monitors, portable radios, EMS protective gear, or EMT and paramedic training. File this only if you are not asking for the same items on a vehicle application.",
-      "why": "A county transport service that is not hospital-based and not fire-based can apply for Operations and Safety. Training priorities for this type of service include EMT, AEMT, and paramedic courses.",
+      "amountLabel": "Set by the equipment or training request. No dollar cap is posted on the guidelines.",
+      "matchLabel": "No match posted.",
+      "summary": "This private foundation accepts rolling requests from EMS agencies for equipment and training. It prioritizes volunteer and underfunded departments, so a paid county service faces stiff competition.",
+      "why": "The foundation's First Responders Outreach guidelines explicitly name Emergency Medical Service organizations as eligible first responder departments.",
       "rules": [
-        "One Operations and Safety application per cycle. A micro grant of $75,000 or less in federal funds does not stop you from also requesting a vehicle.",
-        "Monitors should match the number of ALS transport units. Portable radios must meet P25 rules and the Tennessee interoperability plan.",
-        "EMS turnout gear has to meet the current NFPA edition. Structural firefighting gear is not eligible for a nonaffiliated EMS service.",
-        "Power-load systems are a poor fit here if you can fund a monitor or training instead. Ask for the item your oldest inventory actually needs.",
-        "The 10 percent cash match uses the same FEMA formula as the vehicle grant.",
-        "Apply in FEMA GO. The authorized official has to certify the application."
+        "Requests are limited to equipment and training. Building, construction, utility, land, and operating costs are not eligible.",
+        "Limit is one application per calendar year, whether the prior request was approved or denied.",
+        "Applications stay open for approval for 6 months. The foundation contacts you only if approved, if it has questions, or after the 6-month period ends.",
+        "Priority goes to volunteer, low, and underfunded departments. Keep the request focused on an essential equipment or training gap.",
+        "Send questions to firstresponder@garysinisefoundation.org."
       ],
-      "portalUrl": "https://go.fema.gov",
-      "infoUrl": "https://www.fema.gov/grants/preparedness/firefighters",
+      "portalUrl": "https://www.garysinisefoundation.org/first-responders-outreach",
+      "infoUrl": "https://www.garysinisefoundation.org/first-responders-outreach",
       "sources": [
-        "FEMA FY 2025 AFG Notice of Funding Opportunity",
-        "FEMA Assistance to Firefighters Grants page, checked November 26, 2026"
+        "Gary Sinise Foundation First Responders Outreach Grant Guidelines, checked November 26, 2026"
       ],
-      "watch": {
-        "kind": "fema-afg",
-        "url": "https://www.fema.gov/grants/preparedness/firefighters"
-      },
+      "watch": null,
       "rulesVersion": "2026-11-26",
       "questions": [
-        "eligibility-ems",
-        "sam",
-        "uei",
-        "ops-item",
-        "item-age",
-        "quantity",
-        "project-cost",
-        "match-cash",
-        "calls",
-        "full-time"
-      ]
+        "gs-type",
+        "gs-item",
+        "gs-amount",
+        "gs-year",
+        "gs-need"
+      ],
+      "clock": null
     },
     {
       "id": "firehouse",
@@ -111,7 +97,7 @@
         "They do not reimburse equipment you already bought.",
         "They do not fund power-load stretchers, naloxone, drones, body cameras, or exercise equipment.",
         "You need one official vendor quote with the foundation's required quote details, plus a current budget, balance sheet, or audit that shows the county or department name.",
-        "The portal opens at 2:00 p.m. ET on January 14, 2027, April 15, 2027, and July 15, 2027. Dates can change. The weekly check reads the foundation page."
+        "The portal opens at 2:00 p.m. ET on January 14, 2027, April 15, 2027, and July 15, 2027. Dates can change. The morning check reads the foundation page."
       ],
       "portalUrl": "https://firehousesubs-foundation.wizehive.app/program/firehouse-subs-foundation-grant-us/applicant/application/info",
       "infoUrl": "https://grants.firehousesubs.com/FAQ",
@@ -180,6 +166,143 @@
       }
     },
     {
+      "id": "afg-vehicle",
+      "name": "Assistance to Firefighters Grant, ambulance",
+      "funder": "FEMA",
+      "level": "federal",
+      "status": "prepare",
+      "deadlineLabel": "FY 2025 window closed June 22, 2026. The next window is not posted yet.",
+      "actionDate": null,
+      "amountLabel": "Ambulance. FEMA sets aside part of the vehicle money for ambulances.",
+      "matchLabel": "10 percent cash match. In-kind match is not allowed.",
+      "summary": "This is the main federal grant for a county ambulance service that is not part of a fire department or a hospital. It can buy a new ambulance to replace an old front-line unit.",
+      "why": "Bedford County EMS is a county ambulance service. It provides medical transport. It is not a hospital. Shelbyville fire does not run the county ambulance service. That is the FEMA test for a nonaffiliated EMS organization.",
+      "rules": [
+        "You may submit one Vehicle Acquisition application, one Operations and Safety application, and one regional application. Do not request the same vehicle twice.",
+        "Ambulances are a high priority vehicle for nonaffiliated EMS. The unit must meet NFPA 1900 or GSA KKK-A-1822F.",
+        "The service area population is 55,273. For a population from 20,001 through 1,000,000, FEMA divides the total cost by 1.10 to get the federal share. The county pays the rest in cash.",
+        "Replace the oldest front-line ambulance. Do not use this grant to duplicate the Rural Health Transformation ambulance awarded in 2026.",
+        "Give the year, mileage, and VIN of the unit you will replace. Unsafe units that you certify as removed cannot go back into emergency service.",
+        "Drivers must be trained to the DOT emergency vehicle operator course, or an equal course, before the new ambulance arrives.",
+        "Apply in FEMA GO. The authorized official has to certify the application."
+      ],
+      "portalUrl": "https://go.fema.gov",
+      "infoUrl": "https://www.fema.gov/grants/preparedness/firefighters",
+      "sources": [
+        "FEMA FY 2025 AFG Notice of Funding Opportunity, funding opportunity DHS-25-GPD-044-00-98",
+        "FEMA Assistance to Firefighters Grants page, checked November 26, 2026. The FY 2025 application period is closed.",
+        "U.S. Census Bureau QuickFacts, Bedford County, Tennessee, July 1, 2025 population estimate 55,273"
+      ],
+      "watch": {
+        "kind": "fema-afg",
+        "url": "https://www.fema.gov/grants/preparedness/firefighters"
+      },
+      "rulesVersion": "2026-11-26",
+      "questions": [
+        "eligibility-ems",
+        "sam",
+        "uei",
+        "unit-year",
+        "unit-label",
+        "mileage",
+        "unit-condition",
+        "outages",
+        "project-cost",
+        "match-cash",
+        "calls",
+        "full-time"
+      ],
+      "clock": null
+    },
+    {
+      "id": "afg-ops",
+      "name": "Assistance to Firefighters Grant, equipment and training",
+      "funder": "FEMA",
+      "level": "federal",
+      "status": "prepare",
+      "deadlineLabel": "FY 2025 window closed June 22, 2026. The next window is not posted yet.",
+      "actionDate": null,
+      "amountLabel": "Monitors, radios, PPE, or training. A micro grant is a federal request of $75,000 or less.",
+      "matchLabel": "10 percent cash match. In-kind match is not allowed.",
+      "summary": "The same FEMA program can fund cardiac monitors, portable radios, EMS protective gear, or EMT and paramedic training. File this only if you are not asking for the same items on a vehicle application.",
+      "why": "A county transport service that is not hospital-based and not fire-based can apply for Operations and Safety. Training priorities for this type of service include EMT, AEMT, and paramedic courses.",
+      "rules": [
+        "One Operations and Safety application per cycle. A micro grant of $75,000 or less in federal funds does not stop you from also requesting a vehicle.",
+        "Monitors should match the number of ALS transport units. Portable radios must meet P25 rules and the Tennessee interoperability plan.",
+        "EMS turnout gear has to meet the current NFPA edition. Structural firefighting gear is not eligible for a nonaffiliated EMS service.",
+        "Power-load systems are a poor fit here if you can fund a monitor or training instead. Ask for the item your oldest inventory actually needs.",
+        "The 10 percent cash match uses the same FEMA formula as the vehicle grant.",
+        "Apply in FEMA GO. The authorized official has to certify the application."
+      ],
+      "portalUrl": "https://go.fema.gov",
+      "infoUrl": "https://www.fema.gov/grants/preparedness/firefighters",
+      "sources": [
+        "FEMA FY 2025 AFG Notice of Funding Opportunity",
+        "FEMA Assistance to Firefighters Grants page, checked November 26, 2026"
+      ],
+      "watch": {
+        "kind": "fema-afg",
+        "url": "https://www.fema.gov/grants/preparedness/firefighters"
+      },
+      "rulesVersion": "2026-11-26",
+      "questions": [
+        "eligibility-ems",
+        "sam",
+        "uei",
+        "ops-item",
+        "item-age",
+        "quantity",
+        "project-cost",
+        "match-cash",
+        "calls",
+        "full-time"
+      ],
+      "clock": null
+    },
+    {
+      "id": "samhsa-rems",
+      "name": "SAMHSA Rural Emergency Medical Services Training (R-EMS)",
+      "funder": "SAMHSA (HHS)",
+      "level": "federal",
+      "status": "prepare",
+      "deadlineLabel": "FY 2026 window (TI-26-004) closed July 16, 2026. The FY 2027 notice is not posted yet.",
+      "actionDate": null,
+      "amountLabel": "Up to $300,000 per year for up to 2 years (FY 2026 NOFO TI-26-004).",
+      "matchLabel": "No match required.",
+      "summary": "This federal grant funds rural EMS recruitment, EMT and paramedic licensing courses, EMS equipment, OSHA PPE, mental health and substance use training, and overdose reversal medications.",
+      "why": "Under 42 U.S.C. § 290ee-10 and FY 2026 NOFO TI-26-004, local government EMS agencies (both fire-based and non-fire-based) serving a nonmetropolitan statistical area are eligible. Bedford County is the Shelbyville, TN Micropolitan Statistical Area, classified as nonmetropolitan by OMB, BLS, and TNECD.",
+      "rules": [
+        "Annual budgets cannot exceed $300,000 in direct and indirect costs per year, for up to 2 years. No local match is required.",
+        "Required uses include training EMS staff for state or federal certification, acquiring EMS equipment, and training staff on mental health and substance use emergencies.",
+        "Allowed uses also include recruitment and retention, OSHA-required PPE, technology-based training, and FDA-approved overdose reversal drugs or devices.",
+        "Send a Public Health System Impact Statement (PHSIS) to state and local health agencies by the application deadline.",
+        "Requires an active SAM.gov registration and UEI. Apply on Grants.gov when the next notice posts."
+      ],
+      "portalUrl": "https://www.samhsa.gov/grants/grant-announcements/ti-26-004",
+      "infoUrl": "https://www.samhsa.gov/grants/grant-announcements/ti-26-004",
+      "sources": [
+        "SAMHSA FY 2026 R-EMS Notice of Funding Opportunity TI-26-004 (CFDA 93.490), closed July 16, 2026",
+        "42 U.S.C. § 290ee-10, Rural emergency medical service training and equipment assistance program",
+        "OMB, BLS (May 2025 OEWS), and TNECD classification of Bedford County as nonmetropolitan (Shelbyville, TN Micropolitan Statistical Area)"
+      ],
+      "watch": {
+        "kind": "samhsa-rems",
+        "url": "https://www.samhsa.gov/grants/grant-announcements/ti-26-004"
+      },
+      "rulesVersion": "2026-11-26",
+      "questions": [
+        "sam",
+        "uei",
+        "rems-focus",
+        "rems-years",
+        "rems-annual",
+        "rems-phsis",
+        "calls",
+        "full-time"
+      ],
+      "clock": null
+    },
+    {
       "id": "cdbg",
       "name": "Tennessee CDBG, public health and safety",
       "funder": "Tennessee Department of Economic and Community Development",
@@ -220,7 +343,118 @@
         "resolution",
         "unit-year",
         "mileage"
-      ]
+      ],
+      "clock": null
+    },
+    {
+      "id": "oac",
+      "name": "Tennessee Opioid Abatement Council, EMS and county funds",
+      "funder": "Tennessee Opioid Abatement Council",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "Community Grants Cycle 3 closed April 6, 2026 (awards expected January 15, 2027). Cycle 4 is planned for October 2027. Counties also receive annual Quarter 1 opioid abatement payments.",
+      "actionDate": null,
+      "amountLabel": "Community Grants cap at $1,000,000 per year for a single applicant (12, 24, or 36 months) and cannot exceed the agency's annual operating budget.",
+      "matchLabel": "No match required. Reimbursement-based. Indirect costs capped at 15 percent.",
+      "summary": "Tennessee's Opioid Abatement Council funds EMS post-overdose care connections, peer support partnerships, responder training, and overdose data work. You can also ask the Bedford County Commission about the county's annual Quarter 1 opioid abatement share.",
+      "why": "Cycle 3 rules explicitly allow established Tennessee governmental agencies to apply. Remediation Strategy CC9 names Emergency Medical Systems connecting overdose patients to treatment. Separately, T.C.A. § 33-11-103 sends 35 percent of trust fund proceeds directly to Tennessee's 95 counties each year.",
+      "rules": [
+        "Eligible EMS strategies include Strategy CC9 (post-overdose care and peer support connections), BB11 and KK1 (responder training), and FF6 (overdose and naloxone data systems).",
+        "Agencies must have operated at least 24 months. A Community Grant winner cannot apply in two consecutive cycles.",
+        "Community Grants are reimbursement-based, payor of last resort, and cannot pay for past projects.",
+        "File Community Grants in the State of Tennessee Sub-Recipient Grant Management Enterprise Solution portal when Cycle 4 opens.",
+        "For immediate local needs such as naloxone or overdose response training, coordinate with the Bedford County Commission on the county's annual Quarter 1 opioid abatement disbursement."
+      ],
+      "portalUrl": "https://www.tn.gov/oac/community.html",
+      "infoUrl": "https://www.tn.gov/oac/county.html",
+      "sources": [
+        "Tennessee OAC Community Grants Cycle 3 Announcement of Funding, revised February 13, 2026 (Cycle 4 planned for October 2027)",
+        "Tennessee OAC Current Community Grants page, checked November 26, 2026",
+        "Tennessee OAC County Funding page, T.C.A. § 33-11-103 annual Quarter 1 county disbursements"
+      ],
+      "watch": {
+        "kind": "oac",
+        "url": "https://www.tn.gov/content/tn/oac/community/current-grants.html"
+      },
+      "rulesVersion": "2026-11-26",
+      "questions": [
+        "oac-path",
+        "oac-strategy",
+        "oac-amount",
+        "oac-prev",
+        "oac-need"
+      ],
+      "clock": null
+    },
+    {
+      "id": "rhtp",
+      "name": "Rural Health Transformation, Round 2 ambulance and next EMS project",
+      "funder": "Tennessee Department of Health",
+      "level": "state",
+      "status": "watch",
+      "deadlineLabel": "Round 1 ambulance ($305,461) is awarded. Round 2 rural ambulance grants are in legislative review as of November 18, 2026. No new application packet is posted yet.",
+      "actionDate": null,
+      "amountLabel": "Round 1 provided up to $305,461 for one ambulance and one power-lift system. Round 2 and later competitive amounts depend on the official packet.",
+      "matchLabel": "Reimbursement-based. Each notice sets its own match rules. Do not assume there is no match on competitive rounds.",
+      "summary": "Track two items here. First, watch for the Round 2 rural county ambulance grant packet after legislative review finishes. Second, prepare a competitive Last Mile Teams or workforce concept without duplicating the Round 1 unit.",
+      "why": "Bedford County EMS received the Round 1 rural county ambulance allocation ($305,461). On November 18, 2026, TASA reported that TDOH is completing legislative-committee review for Round 2 ambulance grants, with packets estimated in 30 to 45 days. TDH's rural health page also lists Last Mile Teams covering ambulances, community paramedicine, and mobile health.",
+      "rules": [
+        "Do not duplicate the Round 1 ambulance already funded in 2026.",
+        "Watch TDH and TASA notices for the official Round 2 rural county ambulance packet and eligibility rules.",
+        "Competitive RHTP rounds are reimbursement-based, cap administrative costs at 10 percent, and require registration with the State of Tennessee.",
+        "Send questions to RuralHealth@tn.gov and watch tn.gov/health/rural.",
+        "The morning check watches the rural health page for a new notice that names EMS, ambulances, or the workforce."
+      ],
+      "portalUrl": "https://www.tn.gov/health/rural.html",
+      "infoUrl": "https://www.tn.gov/health/news/2026/5/15/tennessee-to-release-1st-grant-funding-opportunity-of-rural-health-transformation-program.html",
+      "sources": [
+        "Tennessee Department of Health rural health page, Last Mile Teams and Budget Period 1-5 schedule",
+        "TASA Update: Round #2 RHT County Ambulance Program, November 18, 2026 (legislative committee review underway)",
+        "Bedford County Financial Management Committee reports, June 23, 2026 and September 23, 2026"
+      ],
+      "watch": {
+        "kind": "rhtp",
+        "url": "https://www.tn.gov/health/rural.html"
+      },
+      "rulesVersion": "2026-11-26",
+      "questions": [
+        "rhtp-idea",
+        "rhtp-cost",
+        "email"
+      ],
+      "clock": null
+    },
+    {
+      "id": "tdh-equip",
+      "name": "Tennessee State Ambulance Equipment Grant",
+      "funder": "Tennessee Department of Health, Office of EMS",
+      "level": "state",
+      "status": "watch",
+      "deadlineLabel": "Non-recurring legislative appropriation. No 2027 round is posted yet. Watch the 2027 General Assembly session and TDH Office of EMS notices.",
+      "actionDate": null,
+      "amountLabel": "In 2025, the General Assembly appropriated $5 million, or about $23,000 per licensed ambulance service.",
+      "matchLabel": "Set by the state request for application if funded.",
+      "summary": "Tennessee has periodically funded equipment grants for every licensed ambulance service in the state to buy stretchers, cardiac monitors, or essential gear. TACIR recommended in September 2026 that the legislature make this grant recurring.",
+      "why": "Bedford County EMS is a state-licensed primary Category A ambulance service. When the General Assembly funds this program, licensed Tennessee ambulance services can apply directly.",
+      "rules": [
+        "Funding was non-recurring in 2023 and 2025 and skipped in 2024. It opens only if the General Assembly appropriates money.",
+        "Keep a current vendor quote ready for essential ambulance equipment such as a monitor, stretcher, or pediatric transport device.",
+        "Watch TDH Office of EMS emails and the 2027 Tennessee General Assembly budget."
+      ],
+      "portalUrl": "https://www.tn.gov/health/health-program-areas/health-professional-boards/ems-board.html",
+      "infoUrl": "https://www.tn.gov/content/dam/tn/tacir/2026publications/2026_AmbulanceServices.pdf",
+      "sources": [
+        "TACIR Final Report, Improving Tennessee's Ambulance Services through Increased Funding, Collaboration, and Training, September 2026 ($5 million appropriated in 2025, about $23,000 per licensed service)"
+      ],
+      "watch": null,
+      "rulesVersion": "2026-11-26",
+      "questions": [
+        "tdh-item",
+        "tdh-cost",
+        "tdh-quote",
+        "tdh-need"
+      ],
+      "clock": null
     },
     {
       "id": "tema",
@@ -239,7 +473,7 @@
         "The project has to support prevention, protection, response, or recovery. A replacement ambulance for daily 911 work does not fit.",
         "Radios bought with this money have to meet interoperability rules.",
         "Equipment has to be inventoried and tagged.",
-        "The weekly check reads the TEMA page for a posted deadline."
+        "The morning check reads the TEMA page for a posted deadline."
       ],
       "portalUrl": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html",
       "infoUrl": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html",
@@ -257,44 +491,8 @@
         "tema-hazard",
         "ema-name",
         "ema-email"
-      ]
-    },
-    {
-      "id": "rhtp",
-      "name": "Rural Health Transformation, next EMS project",
-      "funder": "Tennessee Department of Health",
-      "level": "state",
-      "status": "watch",
-      "deadlineLabel": "No new EMS funding notice is open. Subscribe at the state page. The ambulance allocation is already awarded.",
-      "actionDate": null,
-      "amountLabel": "The county already received about $305,000 for one ambulance. Later rounds are competitive and the amount depends on the notice.",
-      "matchLabel": "Each notice sets its own match. Do not assume there is no match.",
-      "summary": "Use this file to prepare the next project. Do not apply again for the ambulance the state already funded.",
-      "why": "Bedford County EMS told the finance committee in June and September 2026 that the state awarded about $305,000 from the Rural Health Transformation ambulance allocation. The director said the grant-funded unit was due at the end of October 2026. The state still posts later competitive notices on its rural health page.",
-      "rules": [
-        "Do not request a second ambulance under the same one-per-county allocation.",
-        "A later project can cover workforce, training, or technology if a notice says EMS or county government may apply.",
-        "Organizations have to be registered with the State of Tennessee.",
-        "Send questions to RuralHealth@tn.gov and watch tn.gov/health/rural.",
-        "The weekly check looks for a new notice that names EMS, ambulances, or the workforce."
       ],
-      "portalUrl": "https://www.tn.gov/health/rural.html",
-      "infoUrl": "https://www.tn.gov/health/news/2026/5/15/tennessee-to-release-1st-grant-funding-opportunity-of-rural-health-transformation-program.html",
-      "sources": [
-        "Tennessee Department of Health rural health page, last updated September 14, 2026",
-        "CTAS notice, May 15, 2026, one ambulance for every eligible rural county",
-        "Bedford County Financial Management Committee reports, June 23, 2026 and September 23, 2026"
-      ],
-      "watch": {
-        "kind": "rhtp",
-        "url": "https://www.tn.gov/health/rural.html"
-      },
-      "rulesVersion": "2026-11-26",
-      "questions": [
-        "rhtp-idea",
-        "rhtp-cost",
-        "email"
-      ]
+      "clock": null
     }
   ],
   "notAFit": [
@@ -307,8 +505,20 @@
       "reason": "SAFER hires firefighters for fire departments. A county ambulance service that is not a fire department cannot file as a fire department."
     },
     {
+      "name": "FEMA Fire Prevention and Safety (FP&S) grant",
+      "reason": "Under FEMA's FY 2025 Federal Register notice, nonaffiliated EMS organizations are excluded from FP&S, even though they can apply for AFG."
+    },
+    {
       "name": "Appalachian Regional Commission",
       "reason": "Bedford County is not an Appalachian Regional Commission county. Shelbyville sits outside that service area."
+    },
+    {
+      "name": "Motorola Solutions Foundation Annual Grants",
+      "reason": "Counties and municipal EMS departments cannot apply directly. Only a 501(c)(3) nonprofit or NCES school district can be the lead applicant, and equipment cannot be most of the budget."
+    },
+    {
+      "name": "Tennessee Rescue Squad Grant Program (TDCI / SFMO)",
+      "reason": "Starting in 2026 under the Rescue Squad Recognition Act, applicants must hold a Secretary of State rescue squad charter and a State Fire Marshal's Office recognition certificate. A county ambulance service without a separate chartered rescue squad cannot file directly."
     }
   ]
 }

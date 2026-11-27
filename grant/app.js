@@ -6,6 +6,20 @@ const LIVE_URL = "https://bedford-grants.tedcox-travel.workers.dev/grant";
 const STATUS_LABEL = { open: "Open now", prepare: "Get ready", watch: "Watch", awarded: "Awarded" };
 const LEVEL_LABEL = { federal: "Federal", state: "State", local: "Local", private: "Private" };
 
+const SERVICE_FACTS = [
+  ["Legal applicant", "Bedford County Government"],
+  ["Department", "Bedford County Emergency Medical Services"],
+  ["Station", "119 Frank Martin Road, Shelbyville, TN 37160"],
+  ["Non-emergency phone", "(931) 684-4403"],
+  ["County population", "55,273. U.S. Census Bureau estimate for July 1, 2025."],
+  ["Shelbyville population", "26,146. The station sits inside city limits, so USDA Community Facilities is not a fit."],
+  ["Rural status", "Shelbyville, TN Micropolitan Statistical Area. Classified as nonmetropolitan by OMB, BLS, and TNECD. Meets SAMHSA R-EMS rural eligibility."],
+  ["FEMA applicant type", "Nonaffiliated EMS organization. County ambulance transport service, not fire-based and not hospital-based."],
+  ["Licensed fleet", "10 ambulances. Stated to the Financial Management Committee on October 27, 2026."],
+  ["Crash rank", "Rank 23 of 95 counties for 2021 through 2025. TDOSHS rankings revised February 12, 2026."],
+  ["Region and CDBG", "South Central Tennessee Development District. Not a HUD entitlement county. Not an ARC county."]
+];
+
 const DEFAULT_PROFILE = {
   legalName: "Bedford County Government",
   department: "Bedford County Emergency Medical Services",
@@ -112,6 +126,68 @@ const QUESTIONS = {
     options: [["no", "No."], ["yes", "Yes. We have to wait."]]
   },
   "fh-need": { label: "Need", prompt: "In a sentence, what call or failure makes this equipment necessary?", type: "text", placeholder: "Two monitors fail their daily check" },
+  "wm-facility": {
+    label: "Walmart facility",
+    prompt: "Which Shelbyville Walmart facility should receive this request?",
+    type: "choice",
+    options: [
+      ["store", "Walmart Supercenter #656 (1880 N. Main St.)"],
+      ["dc", "Walmart Distribution Center #6062 (285 Frank Martin Rd.)"],
+      ["both", "Both facilities (two separate applications)"]
+    ]
+  },
+  "wm-project": { label: "Project or item", prompt: "What community safety equipment, supplies, or training will this grant pay for?", type: "text", placeholder: "Pediatric airway kits and community CPR supplies" },
+  "wm-amount": { label: "Request amount", prompt: "How much will you request per facility in dollars? Local grants range from $250 to $5,000.", type: "number", placeholder: "3500" },
+  "wm-deed": {
+    label: "Spark Good and Deed",
+    prompt: "Is Bedford County's Walmart Spark Good account set up and verified through Deed?",
+    type: "choice",
+    options: [["yes", "Yes. Verified and ready."], ["no", "Not yet."]]
+  },
+  "wm-impact": { label: "Local impact", prompt: "In one sentence, how will this protect residents in Bedford County?", type: "text", placeholder: "Equips ambulances with pediatric emergency supplies for 911 calls across Bedford County" },
+  "gs-type": {
+    label: "Request type",
+    prompt: "What type of cost does this Gary Sinise Foundation request cover?",
+    type: "choice",
+    options: [
+      ["equipment", "EMS equipment"],
+      ["training", "EMS training"],
+      ["ineligible", "Building, construction, utilities, land, or operating costs"]
+    ]
+  },
+  "gs-item": { label: "Equipment or training", prompt: "What specific equipment or training are you requesting?", type: "text", placeholder: "Two portable suction units and trauma bags" },
+  "gs-amount": { label: "Estimated cost", prompt: "What is the vendor quote or estimated cost in dollars?", type: "number", placeholder: "8500" },
+  "gs-year": {
+    label: "Calendar year limit",
+    prompt: "Has Bedford County EMS already submitted a Gary Sinise Foundation request this calendar year?",
+    type: "choice",
+    options: [["no", "No."], ["yes", "Yes. We must wait until next calendar year."]]
+  },
+  "gs-need": { label: "Operational need", prompt: "In a sentence, what gap does this fill for Bedford County EMS?", type: "text", placeholder: "Replaces worn field trauma gear used on countywide 911 calls" },
+  "rems-focus": {
+    label: "R-EMS focus",
+    prompt: "What will this SAMHSA Rural EMS Training request fund?",
+    type: "choice",
+    options: [
+      ["training", "EMT, AEMT, and paramedic training and certification"],
+      ["equipment", "EMS equipment, OSHA PPE, and overdose reversal supplies"],
+      ["behavioral", "Mental health, substance use, and overdose response training"],
+      ["combined", "Combined rural EMS training, recruitment, and equipment"]
+    ]
+  },
+  "rems-years": {
+    label: "Project length",
+    prompt: "How many years will the project run? SAMHSA allows up to 2 years.",
+    type: "choice",
+    options: [["1", "1 year"], ["2", "2 years"]]
+  },
+  "rems-annual": { label: "Annual budget", prompt: "What is the annual budget request in dollars? SAMHSA caps annual budgets at $300,000 per year.", type: "number", placeholder: "200000" },
+  "rems-phsis": {
+    label: "PHSIS notice",
+    prompt: "Will you send the Public Health System Impact Statement (PHSIS) to state and local health agencies by the deadline?",
+    type: "choice",
+    options: [["yes", "Yes."], ["no", "Not yet."]]
+  },
   "thso-project": {
     label: "THSO project",
     prompt: "What should the highway safety grant fund?",
@@ -151,7 +227,13 @@ const QUESTIONS = {
     type: "choice",
     options: [["yes", "Yes. TNECD confirmed it."], ["no", "No."], ["na", "The percentage is 51 or higher."]]
   },
-  atp: { label: "Ability to pay", prompt: "What is Bedford County's ability-to-pay match rate from the TNECD table? Enter the percent, from 5 to 25. Leave blank only if you do not have the table yet.", type: "number", placeholder: "15" },
+  atp: {
+    label: "Ability to pay",
+    prompt: "What is Bedford County's ability-to-pay match rate from the TNECD table? Enter the percent, from 5 to 25. Leave blank if you do not have the table yet.",
+    type: "number",
+    placeholder: "15",
+    optional: true
+  },
   "cdbg-open": {
     label: "Open CDBG grant",
     prompt: "Does Bedford County already have an open regular-round CDBG grant?",
@@ -164,6 +246,52 @@ const QUESTIONS = {
     type: "choice",
     options: [["yes", "Yes."], ["no", "Not yet."]]
   },
+  "oac-path": {
+    label: "Opioid funding path",
+    prompt: "Which opioid abatement funding track are you preparing?",
+    type: "choice",
+    options: [
+      ["community", "State OAC Community Grant (Cycle 4, planned October 2027)"],
+      ["county", "Bedford County annual Quarter 1 Opioid Abatement funds (County Commission)"]
+    ]
+  },
+  "oac-strategy": {
+    label: "EMS opioid strategy",
+    prompt: "Which approved EMS abatement strategy fits this request?",
+    type: "choice",
+    options: [
+      ["cc9", "Strategy CC9: Post-overdose care connections and peer support"],
+      ["training", "Strategies BB11 and KK1: Responder opioid response training"],
+      ["data", "Strategy FF6: Overdose and naloxone deployment data systems"]
+    ]
+  },
+  "oac-amount": { label: "Annual request", prompt: "What annual dollar amount are you planning? Single-applicant Community Grants cap at $1,000,000 per year.", type: "number", placeholder: "75000" },
+  "oac-prev": {
+    label: "Prior OAC award",
+    prompt: "Did Bedford County EMS win an OAC Community Grant in Cycle 3? Winners cannot apply in two consecutive cycles.",
+    type: "choice",
+    options: [["no", "No."], ["yes", "Yes. We must skip Cycle 4."]]
+  },
+  "oac-need": { label: "Local opioid need", prompt: "In a sentence, what overdose response gap will this program address?", type: "text", placeholder: "Connects overdose patients to treatment follow-up after 911 response" },
+  "tdh-item": {
+    label: "Equipment item",
+    prompt: "What essential ambulance equipment should be queued if the state funds another EMS equipment round?",
+    type: "choice",
+    options: [
+      ["monitors", "Cardiac monitor and defibrillator"],
+      ["stretcher", "Power stretcher or patient movement equipment"],
+      ["pediatric", "Pediatric transport restraint and airway gear"],
+      ["other", "Other essential ambulance equipment"]
+    ]
+  },
+  "tdh-cost": { label: "Estimated cost", prompt: "What is the estimated equipment cost in dollars? The 2025 state round averaged about $23,000 per licensed service.", type: "number", placeholder: "23000" },
+  "tdh-quote": {
+    label: "Vendor quote",
+    prompt: "Do you have a current vendor quote ready so you can file quickly when a window opens?",
+    type: "choice",
+    options: [["yes", "Yes."], ["no", "Not yet."]]
+  },
+  "tdh-need": { label: "Equipment need", prompt: "In a sentence, why does the licensed fleet need this equipment?", type: "text", placeholder: "Replaces aging front-line unit equipment on 10 licensed ambulances" },
   "tema-project": {
     label: "Preparedness project",
     prompt: "What should the EMA carry for EMS?",
@@ -179,8 +307,14 @@ const QUESTIONS = {
   "tema-hazard": { label: "Hazard", prompt: "Which hazard does this prepare the county to handle? Daily ambulance replacement is not eligible.", type: "text", placeholder: "A mass-casualty crash on the interstate" },
   "ema-name": { label: "EMA contact", prompt: "Who at Bedford County EMA should receive this request?", type: "text", placeholder: "Name and title" },
   "ema-email": { label: "EMA email", prompt: "What email should receive the request?", type: "text", placeholder: "name@bedfordcountytn.gov" },
-  "rhtp-idea": { label: "Next project", prompt: "What later Rural Health Transformation project should we prepare? Do not ask for a second ambulance under the award the county already received.", type: "text", placeholder: "Paramedic training seats for current EMTs" },
-  "rhtp-cost": { label: "Planning amount", prompt: "What planning amount should the concept use? Enter 0 if the next notice will set the amount.", type: "number", placeholder: "0" },
+  "rhtp-idea": { label: "Next project", prompt: "What Rural Health Transformation project are you preparing? Note whether this is for Round 2 ambulance tracking or a competitive Last Mile Teams or workforce project.", type: "text", placeholder: "Round 2 county ambulance packet or paramedic workforce training" },
+  "rhtp-cost": {
+    label: "Planning amount",
+    prompt: "What planning amount should the concept use? Leave blank or enter 0 if the next notice will set the amount.",
+    type: "number",
+    placeholder: "0",
+    optional: true
+  },
   email: { label: "Director email", prompt: "What email should appear on the application?", type: "text", placeholder: "director@bedfordcountytn.gov" }
 };
 
@@ -188,6 +322,7 @@ const state = {
   catalog: null,
   error: "",
   filter: "all",
+  statusFilter: "all",
   profile: loadProfile(),
   apps: loadApps()
 };
@@ -267,6 +402,9 @@ function checkedLabel() {
 function clockMarkup(grant) {
   const clock = grant.clock;
   if (!clock || !clock.kind) {
+    if (grant.status === "open") {
+      return `<div class="timer timer-open"><p class="timer-kicker">Open now</p><p class="timer-count">Rolling</p><p class="timer-note">Open year-round. No fixed close date is posted.</p></div>`;
+    }
     return `<div class="timer timer-none"><p class="timer-note">No due date posted.</p></div>`;
   }
   const on = clock.on ? ` data-on="${esc(clock.on)}"` : "";
@@ -375,6 +513,9 @@ function questionIds(grant, answers) {
     if (grant.id === "cdbg" && (id === "unit-year" || id === "mileage")) {
       return answers["cdbg-project"] === "ambulance";
     }
+    if (grant.id === "oac" && id === "oac-prev") {
+      return answers["oac-path"] !== "county";
+    }
     return true;
   });
 }
@@ -389,15 +530,29 @@ function hardStop(id, value) {
   if (id === "fh-prior" && value === "yes") {
     return "Do not file. The foundation asks an organization to wait 4 years after an award.";
   }
+  if (id === "gs-type" && value === "ineligible") {
+    return "Do not file this cost with the Gary Sinise Foundation. Grants are limited to equipment and training, not building, construction, utility, land, or operating costs.";
+  }
+  if (id === "gs-year" && value === "yes") {
+    return "Do not file again this year. The Gary Sinise Foundation limits departments to one application per calendar year.";
+  }
+  if (id === "oac-prev" && value === "yes") {
+    return "Do not file a Cycle 4 OAC Community Grant. Approved grantees cannot apply in two consecutive cycles. Switch to the Bedford County annual Quarter 1 opioid abatement track instead.";
+  }
   if (id === "cdbg-open" && value === "yes") {
     return "Do not file a new regular-round CDBG application while another regular-round grant is still open.";
   }
   return "";
 }
 
+function hasNumber(value) {
+  return String(value ?? "").trim() !== "" && Number.isFinite(Number(value));
+}
+
 function packetBlockers(grant, answers) {
   const blockers = [];
   questionIds(grant, answers).forEach((id) => {
+    if (QUESTIONS[id]?.optional) return;
     if (!String(answers[id] ?? "").trim()) blockers.push(`Finish this answer: ${QUESTIONS[id].label}.`);
   });
   const stop = questionIds(grant, answers).map((id) => hardStop(id, answers[id])).find(Boolean);
@@ -409,11 +564,29 @@ function packetBlockers(grant, answers) {
     blockers.push("Add the Unique Entity ID before you send this.");
   }
   if (answers["match-cash"] === "no") blockers.push("The county has to commit the cash match before you send this.");
+  if (grant.id === "walmart") {
+    const amount = Number(answers["wm-amount"]);
+    if (hasNumber(answers["wm-amount"]) && (amount < 250 || amount > 5000)) {
+      blockers.push("Keep each Walmart request between $250 and $5,000 per facility.");
+    }
+    if (answers["wm-deed"] === "no") {
+      blockers.push("Complete Walmart Spark Good setup and Deed verification before submitting.");
+    }
+  }
   if (grant.id === "firehouse") {
     const amount = Number(answers["fh-amount"]);
-    if (amount > 40000) blockers.push("Lower the request to $40,000 or less. The foundation rejects anything higher.");
+    if (hasNumber(answers["fh-amount"]) && amount > 40000) blockers.push("Lower the request to $40,000 or less. The foundation rejects anything higher.");
     if (answers["fh-quote"] === "no") blockers.push("Get the official vendor quote before opening day.");
     if (answers["fh-financials"] === "no") blockers.push("Attach a current budget, balance sheet, or audit before you send this.");
+  }
+  if (grant.id === "samhsa-rems") {
+    const annual = Number(answers["rems-annual"]);
+    if (hasNumber(answers["rems-annual"]) && annual > 300000) {
+      blockers.push("Lower the annual budget to $300,000 or less per year. SAMHSA caps total annual costs at $300,000.");
+    }
+    if (answers["rems-phsis"] === "no") {
+      blockers.push("Send the Public Health System Impact Statement (PHSIS) to state and local health agencies by the deadline.");
+    }
   }
   if (grant.id === "thso" && answers["thso-stats"] === "no") {
     blockers.push("Pull three years of Bedford County crash counts from the THSO dashboard before you send this.");
@@ -422,16 +595,24 @@ function packetBlockers(grant, answers) {
     blockers.push("Confirm the rural box with THSO before you send this.");
   }
   if (grant.id === "cdbg") {
-    const lmi = Number(answers.lmi);
-    if (Number.isFinite(lmi) && lmi < 51 && answers["lmi-alt"] !== "yes") {
+    if (hasNumber(answers.lmi) && Number(answers.lmi) < 51 && answers["lmi-alt"] !== "yes") {
       blockers.push("Do not file a countywide project under 51 percent low and moderate income unless TNECD has confirmed another method.");
     }
-    if (!answers.atp) blockers.push("Get Bedford County's ability-to-pay match rate from TNECD before you send this.");
+    if (!hasNumber(answers.atp)) blockers.push("Get Bedford County's ability-to-pay match rate from TNECD before you send this.");
     const cost = Number(answers["cdbg-cost"]);
-    if (answers["cdbg-project"] === "ambulance" && cost > 420000) {
+    if (answers["cdbg-project"] === "ambulance" && hasNumber(answers["cdbg-cost"]) && cost > 420000) {
       blockers.push("An equipment ambulance project caps at $420,000. Lower the request or talk to TNECD before you file.");
     }
     if (answers.resolution === "no") blockers.push("The commission has to adopt the resolution before you submit.");
+  }
+  if (grant.id === "oac" && answers["oac-path"] !== "county") {
+    const annual = Number(answers["oac-amount"]);
+    if (hasNumber(answers["oac-amount"]) && annual > 1000000) {
+      blockers.push("Single-applicant OAC Community Grants cap at $1,000,000 per year and cannot exceed the agency's annual operating budget.");
+    }
+  }
+  if (grant.id === "tdh-equip" && answers["tdh-quote"] === "no") {
+    blockers.push("Get a current vendor quote so you can file as soon as TDH opens an ambulance equipment round.");
   }
   return blockers;
 }
@@ -483,6 +664,40 @@ function buildPacket(grant, answers) {
   const sections = [];
   const push = (title, text) => sections.push({ title, text });
 
+  if (grant.id === "walmart") {
+    const facility = {
+      store: "Walmart Supercenter #656 (1880 N. Main St., Shelbyville, TN 37160)",
+      dc: "Walmart Distribution Center #6062 (285 Frank Martin Rd., Shelbyville, TN 37160)",
+      both: "Walmart Supercenter #656 (1880 N. Main St.) and Walmart Distribution Center #6062 (285 Frank Martin Rd.) as two separate applications"
+    }[answers["wm-facility"]] || "a Shelbyville Walmart facility";
+    push("Request", `${state.profile.department} requests ${money(answers["wm-amount"])} from ${facility} through Walmart Spark Good Local Grants for ${answers["wm-project"] || "[project or equipment]"}.`);
+    push("Community impact", `${agencyLines()} ${answers["wm-impact"] || ""} Bedford County EMS serves the same Shelbyville and Bedford County service area where Walmart operates and employs local residents.`);
+    push("Portal details", [
+      `Entity type: Government entity (non-501(c)(3)), County political subdivision`,
+      `Applicant: ${state.profile.legalName} / ${state.profile.department}`,
+      `Target facility: ${facility}`,
+      `Amount per facility: ${money(answers["wm-amount"])}`,
+      `Spark Good and Deed verified: ${answers["wm-deed"] === "yes" ? "Yes" : "No, complete first"}`,
+      `Contact: ${state.profile.director}, ${state.profile.title}, ${state.profile.phone}`
+    ].join("\n"));
+    push("Next steps", "Confirm Deed verification using your county email, submit in the Spark Good portal before the cycle deadline, and speak with the local facility manager. If approved, provide county banking details within 21 days for JP Morgan electronic payment.");
+  }
+
+  if (grant.id === "gary-sinise") {
+    const kind = answers["gs-type"] === "training" ? "training" : "equipment";
+    push("Request", `${state.profile.department} asks the Gary Sinise Foundation First Responders Outreach program for ${money(answers["gs-amount"])} to fund ${kind}: ${answers["gs-item"] || "[item or training]"}. This request covers ${kind} only and includes no building, utility, land, or operating costs.`);
+    push("Need", `${agencyLines()} ${answers["gs-need"] || ""} This is Bedford County EMS's only Gary Sinise Foundation request for this calendar year.`);
+    push("Submission notes", [
+      `Department: ${state.profile.department}`,
+      `Address: ${state.profile.address}, ${state.profile.city}, ${state.profile.state} ${state.profile.zip}`,
+      `Contact: ${state.profile.director}, ${state.profile.title}, ${state.profile.phone}`,
+      `Category: ${kind}`,
+      `Estimated cost: ${money(answers["gs-amount"])}`,
+      `Foundation email: firstresponder@garysinisefoundation.org`
+    ].join("\n"));
+    push("Review window", "Applications stay open for review for 6 months. The foundation reaches out if approved, if it needs more details, or when the 6-month window closes.");
+  }
+
   if (grant.id === "afg-vehicle") {
     const total = Number(answers["project-cost"] || 0);
     const split = afgMoney(total);
@@ -532,6 +747,26 @@ function buildPacket(grant, answers) {
     push("Attachments to gather", "SAM.gov proof. Inventory showing the age of the items you will replace. Vendor quote. Training plan if the request is tuition. County budget pages for the cash match.");
   }
 
+  if (grant.id === "samhsa-rems") {
+    const focus = {
+      training: "EMT, AEMT, and paramedic licensing and certification training",
+      equipment: "EMS equipment, OSHA-required PPE, and FDA-approved overdose reversal supplies",
+      behavioral: "mental health, substance use, and overdose emergency response training",
+      combined: "rural EMS recruitment, licensing training, behavioral health training, and EMS equipment"
+    }[answers["rems-focus"]] || "rural EMS training and equipment";
+    const years = Number(answers["rems-years"] || 1);
+    const annual = Number(answers["rems-annual"] || 0);
+    push("Applicant and rural eligibility", `${agencyLines()} ${callLine(answers)} ${staffLine(answers)} Under 42 U.S.C. § 290ee-10, Bedford County EMS qualifies as a local government EMS agency serving a nonmetropolitan statistical area (Shelbyville, TN Micropolitan Statistical Area). The Unique Entity ID is ${answers.uei || "[add UEI]"}.`);
+    push("Project", `Bedford County EMS requests SAMHSA Rural Emergency Medical Services Training (R-EMS) funding for ${focus}. Project length: ${years} ${years === 1 ? "year" : "years"}.`);
+    push("Budget", `Annual request: ${money(annual)} per year (${money(annual * years)} total across ${years} ${years === 1 ? "year" : "years"}). No local match is required. Total direct and indirect costs stay at or below the $300,000 annual cap.`);
+    push("Required filings", [
+      `SAM.gov active: ${answers.sam === "yes" ? "Yes" : "Confirm before submitting"}`,
+      `UEI: ${answers.uei || "[add UEI]"}`,
+      `Public Health System Impact Statement (PHSIS): ${answers["rems-phsis"] === "yes" ? "Planned for state and local health agencies by deadline" : "Required by deadline"}`,
+      "Statutory assurance: Include the Assurance of Improved Emergency Medical Services in Rural Areas"
+    ].join("\n"));
+  }
+
   if (grant.id === "firehouse") {
     const item = {
       monitor: "a cardiac monitor and defibrillator",
@@ -565,18 +800,52 @@ function buildPacket(grant, answers) {
 
   if (grant.id === "cdbg") {
     const cost = Number(answers["cdbg-cost"] || 0);
-    const rate = Number(answers.atp);
-    const match = Number.isFinite(rate) ? cost * (rate / 100) : 0;
+    const hasRate = hasNumber(answers.atp);
+    const rate = hasRate ? Number(answers.atp) : null;
+    const match = hasRate ? cost * (rate / 100) : 0;
     const grantFunds = cost - match;
     const project = answers["cdbg-project"] === "communications" ? "emergency communications equipment" : "one ambulance";
     push("Project", `${state.profile.legalName} requests Community Development Block Grant funds for ${project}. ${answers["cdbg-project"] === "ambulance" ? conditionLine(answers) : "The equipment improves emergency communications for the county ambulance service."} The project serves people who live in Bedford County.`);
     push("Benefit", `The low and moderate income figure entered for this draft is ${answers.lmi || "[percent]"} percent. A regular-round project has to benefit low and moderate income people at 51 percent or more, unless TNECD accepts a survey or another method. ${answers["lmi-alt"] === "yes" ? "TNECD has confirmed another method." : "Do not submit if this test is not met."}`);
-    push("Budget", `The total project cost is ${money(cost)}. ${Number.isFinite(rate) ? `Using an ability-to-pay rate of ${rate} percent, the county match is ${money(match)} and the CDBG request is ${money(grantFunds)}.` : "Add the ability-to-pay rate from the TNECD table before you rely on this budget."} Keep administration at or below 6.5 percent of the grant. Do not count on TNECD to cover a cost overrun.`);
+    push("Budget", `The total project cost is ${money(cost)}. ${hasRate ? `Using an ability-to-pay rate of ${rate} percent, the county match is ${money(match)} and the CDBG request is ${money(grantFunds)}.` : "Add Bedford County's ability-to-pay rate from the TNECD table before you rely on this budget."} Keep administration at or below 6.5 percent of the grant. Do not count on TNECD to cover a cost overrun.`);
     push("Resolution", `A resolution of the Bedford County Board of Commissioners should state that the county applies for Tennessee CDBG public health and safety funds for ${project}, that the county will provide the required match, and that the county mayor or the county executive is authorized to sign the application and the grant contract.`);
     push("Public meeting", "Advertise one public meeting in the local newspaper at least 14 full days before the meeting. Place the notice in the public notice or legal section. Include a nondiscrimination statement and the name of a contact for a disability accommodation. Also post the notice at the library, the courthouse, and the EMS station. Keep the sign-in sheet, including self-reported race, and a summary of how you invited minority participation. At the meeting, explain the CDBG national objectives, the eligible categories, the funding caps, the match, and this project. Leave time for other project ideas.");
     push("Environmental step", answers["cdbg-project"] === "ambulance"
       ? "An ambulance purchase with no installation work can use the signed Certification of Exemption for HUD funded projects."
       : "Ask TNECD whether this communications project is exempt before you file the environmental certification.");
+  }
+
+  if (grant.id === "oac") {
+    const strategy = {
+      cc9: "Remediation Strategy CC9 (supporting Emergency Medical Systems and peer support specialists to connect overdose patients to treatment)",
+      training: "Remediation Strategies BB11 and KK1 (training government EMS responders on opioid response and reducing stigma)",
+      data: "Remediation Strategy FF6 (overdose and naloxone deployment data reporting)"
+    }[answers["oac-strategy"]] || "an approved EMS opioid abatement strategy";
+    const isCountyTrack = answers["oac-path"] === "county";
+    push("Track and eligibility", isCountyTrack
+      ? `${state.profile.department} requests local allocation from Bedford County's annual Quarter 1 Tennessee Opioid Abatement Trust Fund payment under T.C.A. § 33-11-103. The Bedford County Board of Commissioners controls those local abatement funds.`
+      : `${state.profile.department} prepares a Tennessee Opioid Abatement Council Community Grant proposal for Cycle 4 (planned October 2027). Bedford County Government is an established Tennessee governmental agency operating for more than 24 months.`);
+    push("Program", `Strategy: ${strategy}. Planned annual amount: ${money(answers["oac-amount"])}. ${answers["oac-need"] || ""} Funds will serve Bedford County residents as payor of last resort and will not cover past expenses.`);
+    push("Rules check", isCountyTrack
+      ? "Present the budget and approved remediation strategy code to the Bedford County Commission or finance committee for local opioid abatement allocation."
+      : "Reimbursement-based grant. Invoice quarterly to monthly on actual expenses. Indirect costs cap at 15 percent. Budget cannot exceed the department's annual operating budget. Submit in the State of Tennessee Sub-Recipient Grant Management Enterprise Solution portal when Cycle 4 opens.");
+    push("Applicant", agencyLines());
+  }
+
+  if (grant.id === "tdh-equip") {
+    const item = {
+      monitors: "cardiac monitors and defibrillators",
+      stretcher: "power stretchers or patient movement equipment",
+      pediatric: "pediatric transport restraints and airway gear",
+      other: "essential ambulance equipment"
+    }[answers["tdh-item"]] || "essential ambulance equipment";
+    push("Queued request", `${state.profile.department} is preparing an equipment request for ${item} with an estimated cost of ${money(answers["tdh-cost"])}. ${answers["tdh-need"] || ""}`);
+    push("Readiness checklist", [
+      `Licensed service: ${state.profile.department} (${numberText(state.profile.ambulances)} licensed ambulances)`,
+      `Vendor quote ready: ${answers["tdh-quote"] === "yes" ? "Yes" : "Get quote now"}`,
+      "State funding note: The General Assembly appropriated $5 million in 2025 (about $23,000 per licensed service). Watch the 2027 legislative session and TDH Office of EMS notices."
+    ].join("\n"));
+    push("Applicant", agencyLines());
   }
 
   if (grant.id === "tema") {
@@ -602,19 +871,19 @@ function buildPacket(grant, answers) {
   }
 
   if (grant.id === "rhtp") {
-    const amount = Number(answers["rhtp-cost"] || 0);
-    push("Concept", `${state.profile.department} already received about $305,000 through the Rural Health Transformation ambulance allocation reported to the Bedford County Financial Management Committee in 2026. This concept does not ask for that ambulance again. The next project is ${answers["rhtp-idea"] || "[project]"}. ${amount > 0 ? `The planning amount is ${money(amount)}.` : "The next official notice should set the amount."}`);
+    const amount = hasNumber(answers["rhtp-cost"]) ? Number(answers["rhtp-cost"]) : 0;
+    push("Concept", `${state.profile.department} received the Round 1 Rural Health Transformation county ambulance allocation ($305,461). This concept does not duplicate the Round 1 unit. Next focus: ${answers["rhtp-idea"] || "[project]"}. ${amount > 0 ? `The planning amount is ${money(amount)}.` : "The official notice or Round 2 packet will set the amount."}`);
     push("Email to the state", [
       "To: RuralHealth@tn.gov",
-      "Subject: Bedford County EMS, next Rural Health Transformation project",
+      "Subject: Bedford County EMS, Rural Health Transformation update and next project",
       "",
       "Bedford County Emergency Medical Services is the county ambulance service in Shelbyville.",
-      "The county already received the rural ambulance allocation.",
-      `We want to be ready for the next competitive notice. The project we can carry is ${answers["rhtp-idea"] || "[project]"}.`,
+      "The county received the Round 1 rural ambulance allocation.",
+      `We are tracking Round 2 county ambulance guidance and preparing for the next competitive EMS or Last Mile Teams notice. Focus: ${answers["rhtp-idea"] || "[project]"}.`,
       `Contact: ${state.profile.director}, ${state.profile.phone}, ${answers.email || state.profile.email || "[email]"}.`,
-      "Please tell us when an EMS or workforce notice opens."
+      "Please notify us when Round 2 ambulance packets or competitive EMS notices post."
     ].join("\n"));
-    push("Do not send this as a grant yet", "Send the email only as a watch notice. File an application when the state posts a notice that names a project EMS can join.");
+    push("Do not send this as a grant yet", "Send the email only as a watch notice. File an application when TDH releases the official Round 2 packet or opens a competitive EMS notice.");
   }
 
   push("What you still do", "Read every number. Fix anything that is wrong. Then send the application on the official site, or send the email shown above. This assistant cannot certify a federal or state application for the county. The authorized official has to do that.");
@@ -654,7 +923,7 @@ function shell(main) {
       </div>
     </header>
     <nav class="side">
-      <img src="logo.png?v=2" alt="">
+      <div class="side-logo"><img src="logo.png?v=2" alt="Bedford County EMS"></div>
       <strong>BCEMS Grants</strong>
       <span>Bedford County EMS</span>
       ${tabs.map(([href, label]) => tab(href, label, "")).join("")}
@@ -731,7 +1000,7 @@ function renderNotices(emptyLine) {
       ${notice.amountLabel ? `<p class="small"><strong>Amount.</strong> ${esc(notice.amountLabel)}</p>` : ""}
       <p class="small">${esc(notice.note || "")}</p>
       <div class="actions">
-        <a class="btn-gold" href="${esc(notice.url)}" target="_blank" rel="noopener">Read the notice</a>
+        <a class="btn-gold" href="${esc(notice.url)}" target="_blank" rel="noreferrer noopener">Read the notice</a>
         <button class="btn-ghost" type="button" data-hide-notice="${esc(notice.id)}">Hide</button>
       </div>
     </article>
@@ -747,11 +1016,15 @@ function renderNotices(emptyLine) {
 }
 
 function renderHome() {
-  const grants = state.catalog.grants.filter((grant) => state.filter === "all" || grant.level === state.filter);
+  const grants = state.catalog.grants.filter((grant) => {
+    const levelMatch = state.filter === "all" || grant.level === state.filter;
+    const statusMatch = state.statusFilter === "all" || grant.status === state.statusFilter;
+    return levelMatch && statusMatch;
+  });
   const counts = { open: 0, prepare: 0, watch: 0 };
   state.catalog.grants.forEach((grant) => { counts[grant.status] = (counts[grant.status] || 0) + 1; });
   const cards = grants.map((grant) => `
-    <article class="card">
+    <article class="card card-${esc(grant.status)}">
       <p class="kicker">${esc(LEVEL_LABEL[grant.level])} · ${esc(grant.funder)}</p>
       <h2>${esc(grant.name)}</h2>
       <div class="meta">
@@ -770,30 +1043,40 @@ function renderHome() {
     </article>
   `).join("");
   const skipped = state.catalog.notAFit.map((item) => `<li><strong>${esc(item.name)}.</strong> ${esc(item.reason)}</li>`).join("");
+  const statTile = (key, label) => `
+    <button type="button" class="stat ${state.statusFilter === key ? "active" : ""}" data-status-filter="${key}" aria-pressed="${state.statusFilter === key}">
+      <b>${counts[key] || 0}</b>
+      <span>${label}</span>
+    </button>
+  `;
+  const activeStatusNote = state.statusFilter !== "all"
+    ? `<div class="actions"><button class="btn-ghost" type="button" data-status-filter="all">Showing ${esc(STATUS_LABEL[state.statusFilter])} · Show all (${state.catalog.grants.length})</button></div>`
+    : "";
   return `
     <section class="home-grid">
       <div class="list">
-        <section class="panel">
-          <p class="kicker">Bedford County Emergency Medical Services</p>
-          <h2>Grant list</h2>
+        <section class="panel panel-hero">
+          <div class="section-bar">Bedford County Emergency Medical Services</div>
+          <h2>Grant list (${state.catalog.grants.length} programs)</h2>
           <p>The assistant writes the application from the funder's rules and the facts you confirm. You review it. You send it on the official site. The county's authorized official still has to certify a federal or state application.</p>
           <div class="actions"><button class="btn" data-share="list">Email or share</button></div>
           <div class="stats">
-            <div class="stat"><b>${counts.open || 0}</b><span>Open now</span></div>
-            <div class="stat"><b>${counts.prepare || 0}</b><span>Get ready</span></div>
-            <div class="stat"><b>${counts.watch || 0}</b><span>Watch</span></div>
+            ${statTile("open", "Open now")}
+            ${statTile("prepare", "Get ready")}
+            ${statTile("watch", "Watch")}
           </div>
-          <p class="small muted">${esc(checkedLabel())} The check runs every morning. This computer does not have to be on. The countdown uses a date only when the funder page posted one.</p>
+          ${activeStatusNote}
+          <p class="small muted">${esc(checkedLabel())} The check runs every morning. This computer does not have to be on. Tap a status box above to filter.</p>
           <div class="filters">
             ${["all", "federal", "state", "local", "private"].map((level) => `<button class="chip ${state.filter === level ? "active" : ""}" data-filter="${level}">${level === "all" ? "All" : LEVEL_LABEL[level]}</button>`).join("")}
           </div>
         </section>
         ${renderNotices("The last check did not find a new EMS posting on Grants.gov. Programs already on this list stay in the cards below.")}
-        ${cards || `<section class="panel"><p>No grants in this group.</p></section>`}
+        ${cards || `<section class="panel"><p>No grants match this filter.</p><button class="btn-ghost" type="button" data-reset-filters>Show all grants</button></section>`}
       </div>
       <aside class="list">
         <section class="panel">
-          <p class="kicker">Checked and set aside</p>
+          <div class="section-bar">Checked and set aside</div>
           <h2>Not a fit</h2>
           <ul class="clean">${skipped}</ul>
         </section>
@@ -811,7 +1094,7 @@ function renderGrant(id) {
   const grant = grantById(id);
   if (!grant) return `<section class="panel"><p>That grant is not on the list.</p></section>`;
   return `
-    <section class="card">
+    <section class="card card-${esc(grant.status)}">
       <p class="kicker">${esc(LEVEL_LABEL[grant.level])} · ${esc(grant.funder)}</p>
       <h2>${esc(grant.name)}</h2>
       <div class="meta"><span class="badge ${esc(grant.status)}">${esc(STATUS_LABEL[grant.status])}</span></div>
@@ -848,6 +1131,10 @@ function prefill(grant) {
 
 function startApplication(grantId) {
   const grant = grantById(grantId);
+  if (!grant) {
+    location.hash = "#/";
+    return;
+  }
   const existing = state.apps.find((item) => item.grantId === grantId && item.status !== "sent");
   if (existing) {
     location.hash = `#/apply/${grantId}/${existing.id}`;
@@ -873,9 +1160,12 @@ function startApplication(grantId) {
 
 function renderApplyPicker() {
   const buttons = state.catalog.grants.map((grant) => `
-    <button class="btn full" data-start="${esc(grant.id)}">${esc(grant.name)}</button>
+    <button class="btn full picker-btn" data-start="${esc(grant.id)}">
+      <span>${esc(grant.name)}</span>
+      <span class="badge ${esc(grant.status)}">${esc(STATUS_LABEL[grant.status])}</span>
+    </button>
   `).join("");
-  return `<section class="panel"><p class="kicker">Assistant</p><h2>Which application should I write?</h2><div class="choice">${buttons}</div></section>`;
+  return `<section class="panel"><div class="section-bar">Assistant</div><h2>Which application should I write?</h2><div class="choice">${buttons}</div></section>`;
 }
 
 function renderWizard(grantId, appId) {
@@ -889,16 +1179,31 @@ function renderWizard(grantId, appId) {
   const ids = questionIds(grant, item.answers);
   const index = Math.min(item.step || 0, ids.length);
   if (item.stop) {
-    return `<section class="panel"><p class="kicker">${esc(grant.name)}</p><h2>Stop here</h2><div class="stop">${esc(item.stop)}</div><button class="btn" data-go="#/">Back to grants</button></section>`;
+    return `
+      <section class="panel">
+        <p class="kicker">${esc(grant.name)}</p>
+        <h2>Stop here</h2>
+        <div class="stop">${esc(item.stop)}</div>
+        <div class="actions">
+          <button class="btn-gold" data-clear-stop="${esc(item.id)}">Change my answer</button>
+          <button class="btn" data-go="#/">Back to grants</button>
+          <button class="btn-ghost" data-delete-app="${esc(item.id)}">Delete this draft</button>
+        </div>
+      </section>
+    `;
   }
   if (index >= ids.length) return renderReview(grant, item);
   const question = QUESTIONS[ids[index]];
   const width = Math.round((index / ids.length) * 100);
+  const requiredAttr = question.optional ? "" : " required";
   const field = question.type === "choice"
     ? `<div class="choice">${question.options.map(([value, label]) => `<button class="btn" data-answer="${esc(value)}" data-app="${esc(item.id)}" data-qid="${esc(ids[index])}">${esc(label)}</button>`).join("")}</div>`
     : `<form data-text-form="${esc(item.id)}" data-qid="${esc(ids[index])}">
-        <input name="value" type="${question.type === "number" ? "number" : "text"}" inputmode="${question.type === "number" ? "decimal" : "text"}" placeholder="${esc(question.placeholder || "")}" value="${esc(item.answers[ids[index]] || "")}" required>
-        <div class="actions"><button class="btn-gold" type="submit">Use this answer</button></div>
+        <input name="value" type="${question.type === "number" ? "number" : "text"}" inputmode="${question.type === "number" ? "decimal" : "text"}" placeholder="${esc(question.placeholder || "")}" value="${esc(item.answers[ids[index]] || "")}"${requiredAttr}>
+        <div class="actions">
+          <button class="btn-gold" type="submit">${question.optional ? "Continue" : "Use this answer"}</button>
+          ${question.optional ? `<button class="btn-ghost" type="button" data-answer="" data-app="${esc(item.id)}" data-qid="${esc(ids[index])}">Leave blank for now</button>` : ""}
+        </div>
       </form>`;
   return `
     <section class="question">
@@ -918,7 +1223,7 @@ function renderWizard(grantId, appId) {
 
 function renderReview(grant, item) {
   const ids = questionIds(grant, item.answers);
-  const rows = ids.map((id) => `<li><strong>${esc(QUESTIONS[id].label)}.</strong> ${esc(item.answers[id] || "Missing")}</li>`).join("");
+  const rows = ids.map((id) => `<li><strong>${esc(QUESTIONS[id].label)}.</strong> ${esc(item.answers[id] || (QUESTIONS[id].optional ? "Left blank for now" : "Missing"))}</li>`).join("");
   return `
     <section class="panel">
       <p class="kicker">${esc(grant.name)}</p>
@@ -950,11 +1255,11 @@ function renderPacket(appId) {
   const ready = (item.blockers || []).length === 0;
   return `
     <article class="packet" id="packet">
-      <p class="kicker">${esc(grant.funder)}</p>
+      <div class="section-bar">${esc(grant.funder)}</div>
       <h2>${esc(grant.name)}</h2>
       <p class="small">Prepared for ${esc(state.profile.department)}. ${esc(grant.deadlineLabel)}</p>
       ${stale ? `<div class="callout">The funder's page changed after this draft was written. Read the rules again before you send it.</div>` : ""}
-      ${ready ? `<div class="note">The draft has the facts you entered. Read it once more, then send it on the official site.</div>` : `<div class="callout">This packet is not ready to send.</div>`}
+      ${ready ? `<div class="note">The draft has the facts you entered. Read it once more, then send it on the official site.</div>` : `<div class="callout">This packet is not ready to send. Fix the items below first.</div>`}
       ${blocks}
       ${sections}
       <div class="actions noprint">
@@ -962,7 +1267,8 @@ function renderPacket(appId) {
         <button class="btn" data-copy-all="${esc(item.id)}">Copy the whole packet</button>
         <a class="btn" href="${esc(grant.portalUrl)}" target="_blank" rel="noreferrer noopener">Open the official site</a>
         <button class="btn" data-print>Print or save PDF</button>
-        ${ready ? `<button class="btn" data-sent="${esc(item.id)}">I sent this on the official site</button>` : `<button class="btn" data-go="#/apply/${esc(grant.id)}/${esc(item.id)}">Fix the answers</button>`}
+        ${ready ? `<button class="btn" data-sent="${esc(item.id)}">I sent this on the official site</button>` : ""}
+        <button class="btn-ghost" data-edit="${esc(item.id)}">${ready ? "Edit answers" : "Fix the answers"}</button>
       </div>
     </article>
   `;
@@ -970,17 +1276,20 @@ function renderPacket(appId) {
 
 function renderPackets() {
   if (!state.apps.length) {
-    return `<section class="panel"><h2>No packets yet</h2><p>Choose a grant and the assistant will write the first one.</p><button class="btn-gold" data-go="#/apply">Start</button></section>`;
+    return `<section class="panel"><div class="section-bar">Packets</div><h2>No packets yet</h2><p>Choose a grant and the assistant will write the first one.</p><button class="btn-gold" data-go="#/apply">Start</button></section>`;
   }
   const cards = state.apps.map((item) => {
     const grant = grantById(item.grantId);
-    const label = item.status === "sent" ? "Sent" : (item.blockers?.length ? "Needs facts" : "Ready to review");
+    const label = item.status === "sent" ? "Sent" : (item.stop ? "Stopped" : (item.blockers?.length ? "Needs facts" : "Ready to review"));
     return `
       <article class="card">
         <p class="kicker">${esc(label)}</p>
         <h2>${esc(grant ? grant.name : "Grant")}</h2>
         <p class="small muted">${item.sentAt ? `Sent ${esc(item.sentAt.slice(0, 10))}` : "Saved on this browser only."}</p>
-        <button class="btn-gold" data-go="${item.sections?.length ? `#/packet/${esc(item.id)}` : `#/apply/${esc(item.grantId)}/${esc(item.id)}`}">Open</button>
+        <div class="actions">
+          <button class="btn-gold" data-go="${item.sections?.length ? `#/packet/${esc(item.id)}` : `#/apply/${esc(item.grantId)}/${esc(item.id)}`}">Open</button>
+          <button class="btn-ghost" data-delete-app="${esc(item.id)}">Delete</button>
+        </div>
       </article>
     `;
   }).join("");
@@ -993,34 +1302,47 @@ function field(name, label, value, type = "text") {
 
 function renderAgency() {
   const profile = state.profile;
+  const facts = SERVICE_FACTS.map(([label, value]) => `<li><strong>${esc(label)}.</strong> ${esc(value)}</li>`).join("");
   return `
-    <section class="panel">
-      <p class="kicker">Agency facts</p>
-      <h2>What the assistant is allowed to say</h2>
-      <p>These facts are saved on this device. The assistant uses them in every application. Leave a box blank if you do not know the number. It will ask you later instead of guessing.</p>
-      <form id="profile-form">
-        ${field("director", "Director", profile.director)}
-        ${field("title", "Title", profile.title)}
-        ${field("email", "Email", profile.email, "email")}
-        ${field("phone", "Phone", profile.phone)}
-        ${field("uei", "Unique Entity ID", profile.uei)}
-        ${field("ein", "Employer identification number", profile.ein)}
-        ${field("calls", "Calls in the last full year", profile.calls, "number")}
-        ${field("fullTime", "Full-time employees", profile.fullTime, "number")}
-        ${field("partTime", "Part-time employees", profile.partTime, "number")}
-        <label class="field" for="sam">SAM.gov</label>
-        <select id="sam" name="sam">
-          <option value="" ${profile.sam === "" ? "selected" : ""}>Not confirmed</option>
-          <option value="yes" ${profile.sam === "yes" ? "selected" : ""}>Active</option>
-          <option value="no" ${profile.sam === "no" ? "selected" : ""}>Not active</option>
-        </select>
-        <div class="actions"><button class="btn-gold" type="submit">Save agency facts</button></div>
-      </form>
-      <div class="note">Population stays at ${esc(numberText(profile.population))} from the Census Bureau estimate for July 1, 2025. Licensed ambulances stay at ${esc(profile.ambulances)} from the October 27, 2026 finance committee statement. Change those in the file you export only if a newer official figure replaces them.</div>
-      <div class="actions">
-        <button class="btn" data-export>Save my file</button>
-        <label class="btn">Open my file<input id="import-file" type="file" accept="application/json" hidden></label>
-      </div>
+    <section class="list">
+      <section class="panel">
+        <div class="section-bar">Checked November 26, 2026</div>
+        <h2>Service facts</h2>
+        <p>These verified facts stay the same for everyone who opens this page.</p>
+        <ul class="clean facts-list">${facts}</ul>
+      </section>
+      <section class="panel">
+        <div class="section-bar">Local agency file</div>
+        <h2>Facts saved on this device</h2>
+        <p>These details stay in this browser. The assistant uses them in every application. Leave a box blank if you do not have the number yet. It will ask later instead of guessing.</p>
+        <form id="profile-form">
+          ${field("director", "Director", profile.director)}
+          ${field("title", "Title", profile.title)}
+          ${field("email", "Email", profile.email, "email")}
+          ${field("phone", "Phone", profile.phone)}
+          ${field("uei", "Unique Entity ID", profile.uei)}
+          ${field("ein", "Employer identification number", profile.ein)}
+          ${field("calls", "Calls in the last full year", profile.calls, "number")}
+          ${field("fullTime", "Full-time employees", profile.fullTime, "number")}
+          ${field("partTime", "Part-time employees", profile.partTime, "number")}
+          <label class="field" for="sam">SAM.gov</label>
+          <select id="sam" name="sam">
+            <option value="" ${profile.sam === "" ? "selected" : ""}>Not confirmed</option>
+            <option value="yes" ${profile.sam === "yes" ? "selected" : ""}>Active</option>
+            <option value="no" ${profile.sam === "no" ? "selected" : ""}>Not active</option>
+          </select>
+          <div class="actions"><button class="btn-gold" type="submit">Save agency facts</button></div>
+        </form>
+      </section>
+      <section class="panel">
+        <p class="kicker">Move drafts between devices</p>
+        <h2>Backup file</h2>
+        <p>Save your profile and packets to a file, or load a backup file on another phone or computer.</p>
+        <div class="actions">
+          <button class="btn" data-export>Save my file</button>
+          <label class="btn">Open my file<input id="import-file" type="file" accept="application/json" hidden></label>
+        </div>
+      </section>
     </section>
   `;
 }
@@ -1054,7 +1376,7 @@ function render() {
 }
 
 function saveAnswer(item, qid, value) {
-  item.answers[qid] = String(value).trim();
+  item.answers[qid] = String(value ?? "").trim();
   item.updatedAt = new Date().toISOString();
   item.stop = hardStop(qid, item.answers[qid]);
   if (qid === "uei") state.profile.uei = item.answers.uei;
@@ -1166,6 +1488,19 @@ function onClick(event) {
     showHiddenNotices();
     return;
   }
+  if (event.target.closest("[data-reset-filters]")) {
+    state.filter = "all";
+    state.statusFilter = "all";
+    render();
+    return;
+  }
+  const statusFilter = event.target.closest("[data-status-filter]");
+  if (statusFilter) {
+    const next = statusFilter.getAttribute("data-status-filter");
+    state.statusFilter = state.statusFilter === next ? "all" : next;
+    render();
+    return;
+  }
   const go = event.target.closest("[data-go]");
   if (go) {
     location.hash = go.getAttribute("data-go");
@@ -1187,11 +1522,45 @@ function onClick(event) {
     saveAnswer(appById(answer.getAttribute("data-app")), answer.getAttribute("data-qid"), answer.getAttribute("data-answer"));
     return;
   }
+  const clearStop = event.target.closest("[data-clear-stop]");
+  if (clearStop) {
+    const item = appById(clearStop.getAttribute("data-clear-stop"));
+    if (item) {
+      item.stop = "";
+      saveApps();
+      render();
+    }
+    return;
+  }
+  const edit = event.target.closest("[data-edit]");
+  if (edit) {
+    const item = appById(edit.getAttribute("data-edit"));
+    if (item) {
+      item.step = 0;
+      item.sections = [];
+      item.stop = "";
+      item.updatedAt = new Date().toISOString();
+      saveApps();
+      location.hash = `#/apply/${item.grantId}/${item.id}`;
+    }
+    return;
+  }
+  const del = event.target.closest("[data-delete-app]");
+  if (del) {
+    const id = del.getAttribute("data-delete-app");
+    if (!window.confirm("Delete this draft from this browser?")) return;
+    state.apps = state.apps.filter((item) => item.id !== id);
+    saveApps();
+    if (location.hash.includes(id)) location.hash = "#/packets";
+    else render();
+    return;
+  }
   const back = event.target.closest("[data-back]");
   if (back) {
     const item = appById(back.getAttribute("data-back"));
     item.step = Math.max(0, (item.step === "packet" ? questionIds(grantById(item.grantId), item.answers).length : item.step) - 1);
     item.sections = [];
+    item.stop = "";
     saveApps();
     render();
     return;
@@ -1263,6 +1632,11 @@ function onSubmit(event) {
 }
 
 function onChange(event) {
+  if (event.target.closest("#profile-form")) {
+    const submitBtn = event.target.closest("#profile-form").querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.textContent = "Save agency facts";
+    return;
+  }
   if (event.target.id !== "import-file") return;
   const file = event.target.files[0];
   if (!file) return;

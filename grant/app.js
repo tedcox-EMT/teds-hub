@@ -682,6 +682,11 @@ function hideNotice(id) {
   render();
 }
 
+function showHiddenNotices() {
+  localStorage.removeItem(HIDE_KEY);
+  render();
+}
+
 function applyLive(overlay) {
   if (!overlay || !overlay.checkedAt || !state.catalog) return;
   state.catalog.checkedAt = overlay.checkedAt;
@@ -696,15 +701,25 @@ function applyLive(overlay) {
     if ("clock" in patch) grant.clock = patch.clock;
     if ("watcherNote" in patch) grant.watcherNote = patch.watcherNote;
   }
+  const active = document.activeElement;
+  if (active && /^(INPUT|TEXTAREA|SELECT)$/.test(active.tagName)) return;
   render();
 }
 
 function renderNotices(emptyLine) {
   if (!Array.isArray(state.catalog.notices)) return "";
   const hidden = hiddenNoticeIds();
-  const notices = state.catalog.notices.filter((notice) => notice && notice.id && !hidden.has(notice.id));
+  const valid = state.catalog.notices.filter((notice) => notice && notice.id);
+  const notices = valid.filter((notice) => !hidden.has(notice.id));
+  const hiddenCount = valid.length - notices.length;
+  const restoreBtn = hiddenCount
+    ? `<div class="actions"><button class="btn-ghost" type="button" data-show-hidden-notices>Show hidden (${hiddenCount})</button></div>`
+    : "";
   if (!notices.length) {
-    return `<section class="panel"><p class="kicker">New on official pages</p><h2>No new notice</h2><p>${esc(emptyLine)}</p></section>`;
+    const line = hiddenCount
+      ? `You hid ${hiddenCount} ${hiddenCount === 1 ? "notice" : "notices"} from the last check.`
+      : emptyLine;
+    return `<section class="panel"><p class="kicker">New on official pages</p><h2>No new notice</h2><p>${esc(line)}</p>${restoreBtn}</section>`;
   }
   const cards = notices.map((notice) => `
     <article class="card notice">
@@ -726,6 +741,7 @@ function renderNotices(emptyLine) {
       <p class="kicker">New on official pages</p>
       <h2>Look at these before they are added</h2>
       <p>These are postings from Grants.gov. The check does not turn them into an application. Read the notice. Hide it if it is not for Bedford County.</p>
+      ${restoreBtn}
     </section>
     ${cards}`;
 }
@@ -1020,7 +1036,7 @@ function render() {
     return;
   }
   const hash = location.hash || "#/";
-  const parts = hash.slice(2).split("/");
+  const parts = hash.replace(/^#\/?/, "").split("/").filter(Boolean);
   let body = "";
   if (!parts[0]) body = renderHome();
   else if (parts[0] === "grant") body = renderGrant(parts[1]);
@@ -1146,6 +1162,10 @@ function onClick(event) {
     hideNotice(hide.getAttribute("data-hide-notice"));
     return;
   }
+  if (event.target.closest("[data-show-hidden-notices]")) {
+    showHiddenNotices();
+    return;
+  }
   const go = event.target.closest("[data-go]");
   if (go) {
     location.hash = go.getAttribute("data-go");
@@ -1248,12 +1268,17 @@ function onChange(event) {
   if (!file) return;
   const reader = new FileReader();
   reader.onload = () => {
-    const data = JSON.parse(String(reader.result));
-    if (data.profile) state.profile = { ...DEFAULT_PROFILE, ...data.profile };
-    if (Array.isArray(data.apps)) state.apps = data.apps;
-    saveProfile();
-    saveApps();
-    render();
+    try {
+      const data = JSON.parse(String(reader.result));
+      if (!data || typeof data !== "object") throw new Error("Invalid backup");
+      if (data.profile) state.profile = { ...DEFAULT_PROFILE, ...data.profile };
+      if (Array.isArray(data.apps)) state.apps = data.apps;
+      saveProfile();
+      saveApps();
+      render();
+    } catch (error) {
+      window.alert("That file is not a valid grant backup.");
+    }
   };
   reader.readAsText(file);
 }

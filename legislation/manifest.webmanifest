@@ -1,0 +1,14 @@
+{
+  "name": "Bedford County Legislation",
+  "short_name": "Legislation",
+  "description": "Local, state, and federal legislation affecting Bedford County, Tennessee.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1f3864",
+  "theme_color": "#1f3864",
+  "icons": [
+    { "src": "logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

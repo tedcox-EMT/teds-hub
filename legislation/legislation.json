@@ -1,0 +1,1144 @@
+{
+  "checkedAt": "2026-11-26",
+  "county": {
+    "name": "Bedford County, Tennessee",
+    "population": 55273,
+    "seat": "Shelbyville, TN",
+    "commissionMeeting": "Second Tuesday of each month at 7:00 PM, Bedford County Historic Courthouse",
+    "note": "Track local resolutions, Tennessee General Assembly acts, pre-filed 2027 state bills, and federal bills affecting Bedford County departments, residents, and budgets."
+  },
+  "sections": [
+    {
+      "id": "budget",
+      "label": "Budget, Taxes & Finance",
+      "short": "Budget & Taxes",
+      "description": "Property tax rates, senior tax freeze, sales tax proposals, county budgets, and state constitutional tax rules."
+    },
+    {
+      "id": "zoning",
+      "label": "Zoning, Land & Utilities",
+      "short": "Zoning & Land",
+      "description": "County zoning updates, data centers, extraterritorial zoning, development clocks, and water or sewer rules."
+    },
+    {
+      "id": "roads",
+      "label": "Roads, Bridges & Rural Infrastructure",
+      "short": "Roads & Rural",
+      "description": "Federal highway funding, bridge grants, Farm Bill rural facilities, broadband, and Highway 231 utilities."
+    },
+    {
+      "id": "ems",
+      "label": "EMS, Fire, Law Enforcement & EMA",
+      "short": "Public Safety & EMS",
+      "description": "Bedford County EMS, Sheriff, County Jail, emergency warning sirens, FEMA disaster rules, and first responder laws."
+    },
+    {
+      "id": "schools",
+      "label": "Schools, Health & Human Services",
+      "short": "Schools & Health",
+      "description": "Bedford County Schools reporting, rural childcare, TennCare proposals, and the federal Rural Health Transformation Fund."
+    },
+    {
+      "id": "governance",
+      "label": "County Governance, Purchasing & Elections",
+      "short": "Governance",
+      "description": "Commission rules, public comment, E-Verify, procurement bans, dual office limits, and local boards."
+    }
+  ],
+  "representatives": [
+    {
+      "level": "local",
+      "office": "Bedford County Mayor",
+      "name": "Curt Cobb",
+      "jurisdiction": "Bedford County Government",
+      "termNote": "County executive office in Shelbyville",
+      "contact": "931-684-7944",
+      "url": "https://www.bedfordcountytn.gov/"
+    },
+    {
+      "level": "local",
+      "office": "Bedford County Board of Commissioners",
+      "name": "18 Commissioners across 9 Districts",
+      "jurisdiction": "Bedford County Legislative Body",
+      "termNote": "Meets the second Tuesday of each month at 7:00 PM at the Historic Courthouse",
+      "contact": "Next regular vote: Tuesday, December 8, 2026",
+      "url": "https://www.bedfordcountytn.gov/"
+    },
+    {
+      "level": "state",
+      "office": "Tennessee State Representative, District 62",
+      "name": "Pat Marsh (R)",
+      "jurisdiction": "Bedford, Moore, and part of Lincoln County",
+      "termNote": "Re-elected November 3, 2026 (72.1 percent, unofficial)",
+      "contact": "rep.pat.marsh@capitol.tn.gov",
+      "url": "https://wapp.capitol.tn.gov/apps/LegislatorInfo/Member?district=h62"
+    },
+    {
+      "level": "state",
+      "office": "Tennessee State Senator, District 14",
+      "name": "Shane Reeves (R)",
+      "jurisdiction": "Bedford, Rutherford, Cannon, and Moore Counties",
+      "termNote": "Mid-term seat, next regular election in November 2028",
+      "contact": "sen.shane.reeves@capitol.tn.gov",
+      "url": "https://wapp.capitol.tn.gov/apps/LegislatorInfo/Member?district=s14"
+    },
+    {
+      "level": "state",
+      "office": "Governor of Tennessee (Transition)",
+      "name": "Bill Lee (current) / Marsha Blackburn (Governor-elect)",
+      "jurisdiction": "State of Tennessee",
+      "termNote": "Marsha Blackburn won November 3, 2026 (unofficial) and takes office in January 2027",
+      "contact": "115th General Assembly convenes January 12, 2027",
+      "url": "https://www.tn.gov/governor.html"
+    },
+    {
+      "level": "federal",
+      "office": "U.S. House of Representatives, District 9",
+      "name": "Brent Taylor (R, Rep.-elect)",
+      "jurisdiction": "Tennessee 9th Congressional District (includes Bedford County under 2026 map)",
+      "termNote": "Won November 3, 2026 (49.6 percent, unofficial). Takes office January 3, 2027. Steve Cohen serves through the 119th Congress.",
+      "contact": "120th Congress convenes January 3, 2027",
+      "url": "https://www.congress.gov/"
+    },
+    {
+      "level": "federal",
+      "office": "U.S. Senate (Tennessee)",
+      "name": "Bill Hagerty (R) and Marsha Blackburn (R)",
+      "jurisdiction": "State of Tennessee",
+      "termNote": "Bill Hagerty won re-election November 3, 2026. Blackburn vacates her Senate seat upon taking office as Governor in January 2027.",
+      "contact": "U.S. Capitol Switchboard: 202-224-3121",
+      "url": "https://www.senate.gov/"
+    }
+  ],
+  "officialTrackers": [
+    {
+      "label": "Bedford County Official Website & Commission Notices",
+      "url": "https://www.bedfordcountytn.gov/"
+    },
+    {
+      "label": "CTAS 2026 Index of Acts Related to County Government (PDF)",
+      "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf"
+    },
+    {
+      "label": "Tennessee General Assembly Bill Search (114th & 115th Sessions)",
+      "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx"
+    },
+    {
+      "label": "LegiScan Tennessee 2027 Pre-Filed Bills (115th GA)",
+      "url": "https://legiscan.com/TN/legislation/2027"
+    },
+    {
+      "label": "Congress.gov Federal Legislation Search (119th Congress)",
+      "url": "https://www.congress.gov/"
+    },
+    {
+      "label": "Federal Register Live Agency Rules & Notices",
+      "url": "https://www.federalregister.gov/"
+    }
+  ],
+  "items": [
+    {
+      "id": "bc-senior-tax-freeze",
+      "citation": "Bedford County Commission Agenda (Dec 8, 2026)",
+      "title": "Bedford County Senior Property Tax Freeze",
+      "level": "local",
+      "status": "action",
+      "stageLabel": "Scheduled for Vote",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Bedford County Board of Commissioners",
+      "keyDate": "2026-12-08",
+      "keyDateLabel": "Commission vote",
+      "effectiveDate": "2027-01-01",
+      "affectedOffices": ["County Commission", "Trustee Office", "Property Assessor", "Finance Department"],
+      "summary": "Freezes the county property tax dollar amount for qualifying homeowners age 65 and older whose household income is at or under $43,780.",
+      "bedfordImpact": "The Commission votes Tuesday, December 8, 2026, at 7:00 PM at the Historic Courthouse. If approved, the county must file its resolution with the Tennessee Comptroller by December 31, 2026. The freeze holds a qualifying owner's tax bill flat against future reappraisals or rate hikes. Owners must reapply each year at the Trustee's office by early April.",
+      "actionSteps": [
+        "Track the December 8, 2026 commission vote at the Historic Courthouse.",
+        "If passed, submit county certification paperwork to the Tennessee Comptroller before December 31, 2026.",
+        "Prepare Trustee appointment intake (931-684-4303) for the spring application window."
+      ],
+      "statute": "T.C.A. 67-5-705 (Property Tax Freeze Act)",
+      "sources": [
+        { "label": "Bedford County News: Senior Tax Freeze Goes to Commission Dec 8", "url": "https://www.bedfordcountynews.com/editions/2026-11-23/Bedford-County-News.pdf" },
+        { "label": "Bedford County News Coverage", "url": "http://bedfordcountynews.com/" }
+      ]
+    },
+    {
+      "id": "bc-budget-amendments-nov2026",
+      "citation": "Finance Committee Action (Nov 24, 2026)",
+      "title": "County & School Budget Amendments and Solid Waste Authority Review",
+      "level": "local",
+      "status": "pending",
+      "stageLabel": "Sent to Full Commission",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Bedford County Financial Management Committee",
+      "keyDate": "2026-12-08",
+      "keyDateLabel": "Commission vote",
+      "effectiveDate": null,
+      "affectedOffices": ["Finance Department", "Bedford County Schools", "Solid Waste", "County Commission"],
+      "summary": "Sends mid-year county and school budget amendments to the full Commission and flags discussions with Shelbyville on leaving the interlocal solid waste authority.",
+      "bedfordImpact": "On November 24, 2026, the Financial Management Committee advanced both a school budget amendment and a county budget amendment to the December 8 commission agenda. Officials also reported that Shelbyville and Bedford County are evaluating an exit from the interlocal solid waste authority, which would reshape county solid waste operations and costs.",
+      "actionSteps": [
+        "Review final amendment amounts ahead of the December 8, 2026 commission meeting.",
+        "Track any interlocal solid waste exit study or resolution at the December 15 Financial Management Committee meeting."
+      ],
+      "statute": "County Financial Management System of 1981",
+      "sources": [
+        { "label": "Bedford County News (Nov 25, 2026)", "url": "http://bedfordcountynews.com/" }
+      ]
+    },
+    {
+      "id": "tn-hb0010-grocery-tax-2027",
+      "citation": "HB 0010 (115th General Assembly, Pre-Filed Nov 17, 2026)",
+      "title": "Ending the Grocery Tax by Closing Corporate Loopholes Act",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Submitted / Pre-Filed (Not Signed)",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Tennessee 115th General Assembly (Rep. Aftyn Behn)",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["Finance Department", "County Commission", "Bedford County Schools"],
+      "summary": "Pre-filed bill for the 2027 session that proposes eliminating Tennessee's grocery tax and offsetting the revenue through corporate tax changes.",
+      "bedfordImpact": "Not signed into law yet. Any state legislation altering food sales taxes matters directly to Bedford County because local option sales tax is a major funding stream for Bedford County Schools and the county general fund. Finance staff should watch whether amendments touch only the state 4 percent food rate or also affect local option collections.",
+      "actionSteps": [
+        "Watch for the Fiscal Review fiscal note once the 115th General Assembly opens January 12, 2027.",
+        "Verify whether local option sales tax collections for Bedford County and Bedford County Schools stay untouched."
+      ],
+      "statute": "Proposed amendment to T.C.A. Title 57 and Title 67",
+      "sources": [
+        { "label": "Tennessee General Assembly: HB 0010 (115th GA)", "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default?BillNumber=HB0010&ga=115" },
+        { "label": "LegiScan TN 2027 Pre-Filed Bills", "url": "https://legiscan.com/TN/legislation/2027" }
+      ]
+    },
+    {
+      "id": "tn-hb0013-fresh-food-tax-2027",
+      "citation": "HB 0013 (115th General Assembly, Pre-Filed Nov 19, 2026)",
+      "title": "State Sales Tax Repeal on Fresh Produce, Meat, Dairy, Eggs & Bread",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Submitted / Pre-Filed (Not Signed)",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Tennessee 115th General Assembly (Rep. Todd Warner)",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["Finance Department", "County Commission", "Bedford County Schools"],
+      "summary": "Pre-filed bill eliminating the state sales tax on fresh or frozen produce, poultry, fish, lean raw meat, eggs, dairy, whole grains, legumes, and bread.",
+      "bedfordImpact": "Submitted by neighboring District 92 Rep. Todd Warner ahead of the 2027 session. As drafted, it targets the state sales tax rate rather than local sales tax, but county finance leaders should track committee amendments and any indirect changes to state shared sales-tax distributions to counties.",
+      "actionSteps": [
+        "Monitor House Finance subcommittee assignment after January 12, 2027.",
+        "Check Fiscal Review estimates for any impact on county state-shared revenue."
+      ],
+      "statute": "Proposed amendment to T.C.A. Title 67, Chapter 6",
+      "sources": [
+        { "label": "Tennessee General Assembly: HB 0013 (115th GA)", "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default?BillNumber=HB0013&GA=115" }
+      ]
+    },
+    {
+      "id": "tn-hb0007-sales-tax-holiday-2027",
+      "citation": "HB 0007 (115th General Assembly, Pre-Filed Nov 10, 2026)",
+      "title": "Sales Tax Holiday Computer Exemption Increase ($1,500 to $2,500)",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Submitted / Pre-Filed (Not Signed)",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Tennessee 115th General Assembly",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["Finance Department", "Bedford County Schools", "County Commission"],
+      "summary": "Pre-filed bill raising the tax-free price cap on computers during Tennessee's annual back-to-school sales tax holiday from $1,500 to $2,500.",
+      "bedfordImpact": "Not yet enacted. Expanding the sales tax holiday exemption helps Bedford County families buying laptops, while slightly trimming local option sales tax receipts during holiday weekend unless the state reimburses local governments.",
+      "actionSteps": [
+        "Watch whether the 2027 state budget includes local government hold-harmless reimbursement if HB 0007 advances."
+      ],
+      "statute": "Proposed amendment to T.C.A. Title 67, Chapter 6",
+      "sources": [
+        { "label": "LegiScan TN 2027 Pre-Filed Bills (HB 0007)", "url": "https://legiscan.com/TN/legislation/2027" }
+      ]
+    },
+    {
+      "id": "tn-hb0005-hb0012-property-reports-2027",
+      "citation": "HB 0005 & HB 0012 (115th General Assembly, Pre-Filed Nov 2026)",
+      "title": "Property Assessment & Tax Relief Electronic Reporting Bills (Caption Vehicles)",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Submitted / Pre-Filed (Not Signed)",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Tennessee 115th General Assembly (Rep. Jason Zachary & House Sponsors)",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["Property Assessor", "Trustee Office", "Finance Department"],
+      "summary": "Early pre-filed property-tax bills updating electronic Comptroller reporting for the property tax relief program and Division of Property Assessments.",
+      "bedfordImpact": "In Tennessee, narrow early-filed bills amending T.C.A. Title 67, Chapter 5 often serve as caption bills that get amended in spring with broader property tax relief or reappraisal rules. Bedford County's Property Assessor and Trustee should watch both bills for late amendments affecting senior tax relief thresholds or county reappraisal rules.",
+      "actionSteps": [
+        "Keep HB 0005 and HB 0012 on the county watchlist for committee amendments once the 115th General Assembly begins."
+      ],
+      "statute": "Proposed amendments to T.C.A. Title 67, Chapter 5",
+      "sources": [
+        { "label": "Tennessee General Assembly: HB 0012 (115th GA)", "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default?BillNumber=HB0012" },
+        { "label": "LegiScan TN 2027 Pre-Filed Bills (HB 0005)", "url": "https://legiscan.com/TN/legislation/2027" }
+      ]
+    },
+    {
+      "id": "bc-res-27-01-02-budget",
+      "citation": "Bedford County Resolutions No. 27-01 & 27-02",
+      "title": "FY 2026-27 County Budget ($198.2M) & Certified Property Tax Rate ($1.5083)",
+      "level": "local",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Bedford County Board of Commissioners",
+      "keyDate": "2027-06-30",
+      "keyDateLabel": "Fiscal year ends",
+      "effectiveDate": "2026-07-01",
+      "affectedOffices": ["All County Departments", "Finance Department", "Bedford County Schools", "Highway Department"],
+      "summary": "Sets Bedford County's $198,205,381 budget for FY 2026-27 and adopts the state-certified revenue-neutral property tax rate of $1.5083 per $100 assessed value after the 2026 reappraisal.",
+      "bedfordImpact": "Approved June 30, 2026. Major funds include General Purpose Schools ($106.88M), County General Fund ($43.64M), Debt Service ($22.22M), Child Nutrition ($8.43M), Education Capital Projects ($6.59M), Highway/Public Works ($5.06M), and County Capital Projects ($4.72M). Tax rate breakdown: $0.9276 General, $0.4022 Schools, $0.0973 Debt Service, $0.0584 Highway, and $0.0228 Capital Projects.",
+      "actionSteps": [
+        "Monitor quarterly department spending against FY 2026-27 line items before the June 30, 2027 fiscal year close."
+      ],
+      "statute": "Resolutions No. 27-01 & 27-02 (FY 2026-27)",
+      "sources": [
+        { "label": "Bedford County Official Notice: Commission Approves FY 2026-27 Budget & Tax Rate", "url": "https://www.bedfordcountytn.gov/news_detail_T10_R61.php" }
+      ]
+    },
+    {
+      "id": "tn-const-amendments-2026",
+      "citation": "Tennessee Constitutional Amendments 1, 2 & 3 (Nov 3, 2026)",
+      "title": "Voters Approve State Property Tax Ban, Expanded Bail Denial & Victims' Rights",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Approved by Voters (Pending Certification)",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Tennessee Voters (General Election)",
+      "keyDate": null,
+      "keyDateLabel": "Approved Nov 3, 2026 (pending final certification)",
+      "effectiveDate": null,
+      "affectedOffices": ["County Commission", "Courts & Clerk", "Sheriff's Office", "Trustee Office"],
+      "summary": "Tennessee voters passed all three statewide constitutional amendments on November 3, 2026, each clearing both a majority of votes on the measure and a majority of votes cast for Governor.",
+      "bedfordImpact": "Amendment 2 (66.7 percent Yes) permanently bans the state legislature from levying a state property tax, preserving property tax solely for counties and cities like Bedford County. Amendment 1 (67.1 percent Yes) expands offenses eligible for pretrial denial of bail, which can raise county jail populations and court hearings. Amendment 3 (76.1 percent Yes) adds constitutional notice and safety rights for crime victims.",
+      "actionSteps": [
+        "Watch county jail pretrial housing counts as courts apply Amendment 1 bail rules.",
+        "Confirm court clerk and victim-notice procedures align with Amendment 3."
+      ],
+      "statute": "Tennessee Constitution Art. I Sec. 15, Art. I Sec. 35, Art. II Sec. 28",
+      "sources": [
+        { "label": "Tennessee Secretary of State: 2026 Proposed Amendments", "url": "https://sos.tn.gov/elections/announcements/2026-proposed-constitutional-amendments" },
+        { "label": "Tennessee Firefly: Nov 2026 General Election Results", "url": "https://tnfirefly.com/results/november-2026-general" }
+      ]
+    },
+    {
+      "id": "bc-zoning-overhaul-2026",
+      "citation": "Bedford County Zoning Resolution Update (Dec 8, 2026)",
+      "title": "County Zoning Resolution Overhaul & Combined Codes Inspector Role",
+      "level": "local",
+      "status": "action",
+      "stageLabel": "Scheduled for Vote",
+      "topic": "zoning",
+      "topicLabel": "Zoning & Land",
+      "body": "Bedford County Board of Commissioners",
+      "keyDate": "2026-12-08",
+      "keyDateLabel": "Commission vote",
+      "effectiveDate": null,
+      "affectedOffices": ["Codes & Planning", "County Mayor", "Rules & Legislative Committee"],
+      "summary": "Updates Bedford County's zoning resolution to place a zoning officer inside the Codes Department and clean up outdated language.",
+      "bedfordImpact": "Sent to the December 8, 2026 commission agenda by the Rules and Legislative Committee. County Mayor Curt Cobb said the change lets inspectors cover both building and zoning work from one office, speeding up permitting ahead of state review deadlines taking effect January 1, 2027.",
+      "actionSteps": [
+        "Follow the December 8, 2026 commission vote on the revised zoning text.",
+        "Align updated Codes and Zoning workflows with Tennessee Public Chapter 1044 review timelines starting January 1, 2027."
+      ],
+      "statute": "Bedford County Zoning Resolution",
+      "sources": [
+        { "label": "Bedford County News (Nov 23, 2026 Edition)", "url": "https://www.bedfordcountynews.com/editions/2026-11-23/Bedford-County-News.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-1044-dev-timelines",
+      "citation": "Public Chapter 1044 (SB 2237 / HB 2552)",
+      "title": "Mandatory Development Review Timelines & Surety Release Rules",
+      "level": "state",
+      "status": "action",
+      "stageLabel": "Enacted (Takes Effect Jan 1)",
+      "topic": "zoning",
+      "topicLabel": "Zoning & Land",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": "2027-01-01",
+      "keyDateLabel": "Takes effect",
+      "effectiveDate": "2027-01-01",
+      "affectedOffices": ["Codes & Planning", "Planning Commission", "Highway Department", "County Attorney"],
+      "summary": "Sets state deadlines for county review of development applications, site plans, inspections, written deficiency notices, and engineer-certified surety releases.",
+      "bedfordImpact": "Takes effect January 1, 2027. Bedford County planning and codes staff must track statutory review clocks and limits on written deficiency letters. The law also creates a formal path for developers to use a licensed engineer to certify contract completion and seek release of subdivision performance bonds.",
+      "actionSteps": [
+        "Set up application date-stamp tracking in Codes and Planning before January 1, 2027.",
+        "Review subdivision bond release language with the County Attorney and Highway Department."
+      ],
+      "statute": "T.C.A. Title 7, Chapter 51, Part 22",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 1044)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-hb0002-water-safety-2027",
+      "citation": "HB 0002 (115th General Assembly, Pre-Filed Nov 4, 2026)",
+      "title": "Endocrine-Disrupting Pharmaceuticals Water Safety Act",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Submitted / Pre-Filed (Not Signed)",
+      "topic": "zoning",
+      "topicLabel": "Zoning & Land",
+      "body": "Tennessee 115th General Assembly",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["Bedford County Utility District", "Shelbyville Water & Sewerage", "County Commission"],
+      "summary": "Pre-filed 2027 bill directing TDEC to list endocrine-disrupting pharmaceuticals of concern and imposing new water and wastewater monitoring or treatment requirements.",
+      "bedfordImpact": "Not signed into law yet. If enacted, new state water-quality monitoring and treatment mandates would directly affect public water and wastewater plants drawing from and discharging into the Duck River, including Bedford County Utility District and Shelbyville Power, Water, and Sewerage System.",
+      "actionSteps": [
+        "Alert local utility directors to review the full text of HB 0002 before committee hearings begin in January 2027.",
+        "Watch Fiscal Review estimates for local water and sewer compliance costs."
+      ],
+      "statute": "Proposed amendment to T.C.A. Title 4 and Title 68",
+      "sources": [
+        { "label": "LegiScan TN 2027 Pre-Filed Bills (HB 0002)", "url": "https://legiscan.com/TN/legislation/2027" }
+      ]
+    },
+    {
+      "id": "bc-res-26-19-datacenter",
+      "citation": "Bedford County Resolution No. 26-19",
+      "title": "One-Year Moratorium on Large and Hyperscale Data Centers",
+      "level": "local",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "zoning",
+      "topicLabel": "Zoning & Land",
+      "body": "Bedford County Board of Commissioners",
+      "keyDate": "2027-08-11",
+      "keyDateLabel": "Moratorium expires",
+      "effectiveDate": "2026-08-11",
+      "affectedOffices": ["County Commission", "Codes & Planning", "Utility District", "Economic Development"],
+      "summary": "Pauses all permits and zoning approvals for large-scale (40 MW+) and hyperscale (101 MW+) data centers in unincorporated Bedford County for one year.",
+      "bedfordImpact": "Passed unanimously August 11, 2026. The resolution cites heavy water demand (1 to 5 million gallons daily), Duck River Watershed protection, noise, and power grid limits. The county now has until August 11, 2027 to draft permanent zoning, noise, water-reuse, and lighting standards.",
+      "actionSteps": [
+        "Complete technical zoning, water, and noise standards before the moratorium expires August 11, 2027.",
+        "Pair local standards with Tennessee Public Chapter 961, which bars utilities from absorbing data center electric infrastructure costs."
+      ],
+      "statute": "Resolution No. 26-19 (Adopted Aug 11, 2026)",
+      "sources": [
+        { "label": "Bedford County Commission Minutes (Aug 11, 2026 PDF)", "url": "https://cms5.revize.com/revize/bedfordtn/Regular%20Monthly%20Meeting%202026-08-11.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-1090-extraterritorial-zoning",
+      "citation": "Public Chapter 1090 (SB 1771 / HB 1720)",
+      "title": "County Authority to End Municipal Extraterritorial Zoning",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "zoning",
+      "topicLabel": "Zoning & Land",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": null,
+      "keyDateLabel": "In effect (May 22, 2026)",
+      "effectiveDate": "2026-05-22",
+      "affectedOffices": ["County Commission", "Codes & Planning", "Register of Deeds"],
+      "summary": "Authorizes counties under 341,500 population to vote by majority to stop municipalities from exercising zoning authority outside city limits.",
+      "bedfordImpact": "Bedford County (population 55,273) qualifies. If the County Commission opts in, anyone filing a plat, site plan, or building permit inside an urban growth boundary outside city limits must record an annexation declaration with the Register of Deeds. City zoning standards apply only if the owner seeks annexation.",
+      "actionSteps": [
+        "Review whether Bedford County wants to opt in by majority Commission resolution.",
+        "Coordinate with the Register of Deeds on recording annexation declarations if adopted."
+      ],
+      "statute": "T.C.A. Title 13, Chapter 7, Part 3",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 1090)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "fed-cr-iija-hr8870",
+      "citation": "H.R. 8870 (BUILD America 250 Act) & P.L. 119-113 CR",
+      "title": "Federal Highway & Bridge Reauthorization ($580B Bill / Dec 11 Deadline)",
+      "level": "federal",
+      "status": "action",
+      "stageLabel": "Passed Committee (Not Signed)",
+      "topic": "roads",
+      "topicLabel": "Roads & Rural",
+      "body": "119th U.S. Congress (Rep. Sam Graves)",
+      "keyDate": "2026-12-11",
+      "keyDateLabel": "CR & highway authority expires",
+      "effectiveDate": null,
+      "affectedOffices": ["Highway Department", "County Mayor", "Finance Department", "Emergency Management"],
+      "summary": "Five-year, $580 billion highway, bridge, and rural transit bill awaiting a House floor vote while temporary federal highway authority expires December 11, 2026.",
+      "bedfordImpact": "The 2021 infrastructure law (IIJA) expired September 30, 2026, and Division J advance funds for the Bridge Formula Program and Safe Streets for All already lapsed. H.R. 8870 passed House committee 62-2 and creates a new Surface Transportation Accelerator Grant program for rural and local roads, adds an annual federal EV fee ($130 EV / $35 plug-in hybrid), and funds highway safety and bridge grants through FY 2031.",
+      "actionSteps": [
+        "Monitor Congress before December 11, 2026 for a multi-year highway bill or another extension.",
+        "Track restoration of Bridge Formula and rural road safety grants for Bedford County Highway Department.",
+        "Watch the CR's OMB Uniform Guidance delay if managing active federal grants."
+      ],
+      "statute": "H.R. 8870, P.L. 119-103, P.L. 119-113",
+      "sources": [
+        { "label": "Congress.gov: H.R. 8870 BUILD America 250 Act", "url": "https://www.congress.gov/bill/119th-congress/house-bill/8870" },
+        { "label": "NACo Advocacy Hub: Surface Transportation", "url": "https://www.naco.org/page/advocacy-hub" }
+      ]
+    },
+    {
+      "id": "fed-farm-bill-hr7567",
+      "citation": "H.R. 7567 / Senate Agricultural Act of 2026",
+      "title": "2026 Federal Farm Bill Reauthorization (Rural Facilities, Water & Broadband)",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Passed House / Senate Pending (Not Signed)",
+      "topic": "roads",
+      "topicLabel": "Roads & Rural",
+      "body": "119th U.S. Congress (Rep. Glenn Thompson)",
+      "keyDate": "2026-12-31",
+      "keyDateLabel": "Current Farm Bill extension expires",
+      "effectiveDate": null,
+      "affectedOffices": ["County Mayor", "Agriculture & Extension", "Emergency Services", "Utilities"],
+      "summary": "Five-year reauthorization of USDA rural development, Community Facilities grants, rural water and broadband funding, conservation, and SNAP through FY 2031.",
+      "bedfordImpact": "Passed the House 224-200 on April 30, 2026 and cleared Senate Agriculture Committee on September 16, 2026, awaiting a Senate floor vote. USDA Community Facilities grants help rural counties like Bedford fund public buildings, vehicles, and water systems. NACo backs reauthorization while warning against provisions preempting county authority over livestock and pesticides.",
+      "actionSteps": [
+        "Watch Senate floor action during the December 2026 lame-duck session.",
+        "Track final USDA Community Facilities and rural broadband funding rules for FY 2027."
+      ],
+      "statute": "H.R. 7567 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: H.R. 7567 Farm, Food, and National Security Act", "url": "https://www.congress.gov/bill/119th-congress/house-bill/7567" },
+        { "label": "NACo Farm Bill Advocacy Hub", "url": "https://www.naco.org/page/farm-bill-reauthorization-advocacy-hub" }
+      ]
+    },
+    {
+      "id": "fed-rural-partnership-hr6041",
+      "citation": "H.R. 6041 (119th Congress, Introduced Nov 12, 2025)",
+      "title": "Rural Partnership and Prosperity Act",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / In Committee (Not Signed)",
+      "topic": "roads",
+      "topicLabel": "Roads & Rural",
+      "body": "119th U.S. Congress (House Agriculture Committee)",
+      "keyDate": "2027-01-03",
+      "keyDateLabel": "119th Congress adjourns",
+      "effectiveDate": null,
+      "affectedOffices": ["County Mayor", "Economic Development", "Finance Department", "Regional Partners"],
+      "summary": "Creates multi-year (2 to 5 year) flexible USDA Rural Partnership grants and technical assistance grants for counties, cities, nonprofits, and regional partners.",
+      "bedfordImpact": "Not signed into law yet, and supported by NACo for inclusion in the Farm Bill. Unlike narrow capital-only grants, these awards could fund county predevelopment planning, grant-writing and project staffing, public-private partnerships, and disaster economic recovery in rural counties like Bedford.",
+      "actionSteps": [
+        "Watch whether H.R. 6041 language is folded into the final Farm Bill or re-filed in the 120th Congress."
+      ],
+      "statute": "H.R. 6041 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: H.R. 6041 Rural Partnership and Prosperity Act", "url": "https://www.congress.gov/bill/119th-congress/house-bill/6041" }
+      ]
+    },
+    {
+      "id": "bc-res-26-18-hwy231-sewer",
+      "citation": "Bedford County Resolution No. 26-18",
+      "title": "$10 Million Highway 231 Sewer Expansion Grant Transfer",
+      "level": "local",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "roads",
+      "topicLabel": "Roads & Rural",
+      "body": "Bedford County Board of Commissioners",
+      "keyDate": null,
+      "keyDateLabel": "In effect (Aug 11, 2026)",
+      "effectiveDate": "2026-08-11",
+      "affectedOffices": ["County Mayor", "Finance Department", "Economic Development", "Shelbyville Power, Water & Sewerage"],
+      "summary": "Transfers $10,000,000 in state infrastructure grant funds from Bedford County to Shelbyville Power, Water, and Sewerage System for Highway 231 sewer expansion.",
+      "bedfordImpact": "Adopted August 11, 2026. Shelbyville Power, Water, and Sewerage System handles procurement, construction, ownership, and upkeep of the new wastewater lines along the Highway 231 growth corridor, and uses the $10 million state grant as local match for a U.S. EDA Public Works federal grant.",
+      "actionSteps": [
+        "Track interlocal transfer milestones and EDA Public Works grant award updates."
+      ],
+      "statute": "Resolution No. 26-18 (Adopted Aug 11, 2026)",
+      "sources": [
+        { "label": "Bedford County Commission Minutes (Aug 11, 2026 PDF)", "url": "https://cms5.revize.com/revize/bedfordtn/Regular%20Monthly%20Meeting%202026-08-11.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-965-paramedic-death",
+      "citation": "Public Chapter 965 (SB 343 / HB 398)",
+      "title": "Paramedic Determination and Pronouncement of Death",
+      "level": "state",
+      "status": "action",
+      "stageLabel": "Enacted (Takes Effect Jan 1)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": "2027-01-01",
+      "keyDateLabel": "Takes effect",
+      "effectiveDate": "2027-01-01",
+      "affectedOffices": ["Bedford County EMS", "Medical Examiner", "Sheriff's Office"],
+      "summary": "Authorizes licensed Tennessee paramedics to determine and pronounce death outside a hospital after resuscitation attempts if they complete EMS Board training.",
+      "bedfordImpact": "Takes effect January 1, 2027. Bedford County EMS paramedics who intend to pronounce death in the field must finish the state-approved course first and keep proof of completion ready for EMS Board inspection. Does not apply inside a hospital. Non-compliance can trigger EMS Board discipline.",
+      "actionSteps": [
+        "Verify state EMS Board training course completion for every participating BCEMS paramedic before January 1, 2027.",
+        "File certificates in personnel training records so proof is available on request.",
+        "Update county EMS field termination and Medical Examiner notification protocols."
+      ],
+      "statute": "T.C.A. Title 68, Chapter 3, Part 5 and Chapter 140, Part 3",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 965)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "fed-pl-119-75-medicare-ems",
+      "citation": "P.L. 119-75 Sec. 6203 & CMS CY 2027 PFS Final Rule",
+      "title": "Medicare Rural Ambulance Add-Ons & New CY 2027 Rural ZIP Rules",
+      "level": "federal",
+      "status": "action",
+      "stageLabel": "Enacted (Rule Takes Effect Jan 1)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "119th U.S. Congress & CMS",
+      "keyDate": "2027-01-01",
+      "keyDateLabel": "New CMS RUCA ZIP map takes effect",
+      "effectiveDate": "2027-01-01",
+      "affectedOffices": ["Bedford County EMS", "EMS Billing", "Finance Department"],
+      "summary": "Extends the 3 percent rural and 22.6 percent super-rural Medicare ambulance add-ons through December 31, 2027, while updating rural ZIP boundaries on January 1, 2027.",
+      "bedfordImpact": "Good revenue news and an immediate billing check. Congress locked in Medicare rural ambulance add-ons through 2027 under the Consolidated Appropriations Act (P.L. 119-75). Starting January 1, 2027, CMS switches to OMB Bulletin 23-01 and RUCA 4.0+ codes to define rural pickup ZIP codes. Billing software must load the CY 2027 CMS ZIP file so Bedford County calls bill at the right rural rate.",
+      "actionSteps": [
+        "Check every Bedford County pickup ZIP code in the CMS CY 2027 PFS ZIP table for urban, rural, or super-rural changes.",
+        "Confirm EMS billing software updates the Ambulance Fee Schedule effective January 1, 2027.",
+        "Plan ahead for the next federal Medicare add-on expiration on December 31, 2027."
+      ],
+      "statute": "P.L. 119-75 Sec. 6203, 42 CFR 414.610",
+      "sources": [
+        { "label": "CMS Ambulance News & CY 2027 Final Rule", "url": "https://www.cms.gov/ambulance-news-announcements" },
+        { "label": "EMS1: Congress Extends Medicare Ambulance Add-Ons Through 2027", "url": "https://www.ems1.com/legislation-funding/congress-extends-medicare-ambulance-add-on-payments-for-23-months" }
+      ]
+    },
+    {
+      "id": "fed-fema-act-hr4669",
+      "citation": "H.R. 4669 (FEMA Act of 2025)",
+      "title": "Fixing Emergency Management for Americans (FEMA) Act",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Passed Committee 57-3 (Not Signed)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "119th U.S. Congress (Rep. Sam Graves)",
+      "keyDate": "2027-01-03",
+      "keyDateLabel": "119th Congress adjourns",
+      "effectiveDate": null,
+      "affectedOffices": ["Emergency Management (EMA)", "County Mayor", "Finance Department", "Fire & EMS"],
+      "summary": "Bipartisan bill passed 57-3 by the House Transportation and Infrastructure Committee to make FEMA an independent cabinet agency and overhaul disaster grants.",
+      "bedfordImpact": "Not signed into law yet. Directly affects how Bedford County gets reimbursed after tornadoes, floods, and severe storms. Adds expedited facility repair grants, optional block grants for smaller disasters, and noncompetitive formula mitigation grants as federal review proposals weigh shifting disaster costs toward counties.",
+      "actionSteps": [
+        "Monitor House floor action and any federal Public Assistance cost-share changes.",
+        "Keep county disaster procurement and damage documentation audit-ready."
+      ],
+      "statute": "H.R. 4669 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: H.R. 4669 FEMA Act of 2025", "url": "https://www.congress.gov/bill/119th-congress/house-bill/4669" },
+        { "label": "NACo Advocacy Hub: FEMA Act", "url": "https://www.naco.org/page/advocacy-hub" }
+      ]
+    },
+    {
+      "id": "fed-s1720-jail-medicaid",
+      "citation": "S. 1720 / H.R. 1510 (119th Congress, Introduced May 12, 2025)",
+      "title": "Due Process Continuity of Care Act (Medicaid for Pretrial County Jail Detainees)",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / In Committee (Not Signed)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "119th U.S. Congress (Sen. Bill Cassidy, Senate Finance)",
+      "keyDate": "2027-01-03",
+      "keyDateLabel": "119th Congress adjourns",
+      "effectiveDate": null,
+      "affectedOffices": ["County Jail", "Sheriff's Office", "Finance Department", "Bedford County EMS"],
+      "summary": "Allows states to keep Medicaid benefits active for eligible pretrial detainees held in county jails while awaiting trial before any conviction.",
+      "bedfordImpact": "Not signed into law yet, and a top NACo county priority. Under current federal Medicaid rules, Bedford County taxpayers absorb nearly all medical, mental health, and hospital bills for inmates who have not been convicted. Passing this bill would cut county jail healthcare costs and keep mental health medications uninterrupted.",
+      "actionSteps": [
+        "Track Senate Finance action or reintroduction in the 120th Congress.",
+        "Coordinate with the Sheriff's Office on annual pretrial jail medical cost figures if briefing federal lawmakers."
+      ],
+      "statute": "S. 1720 / H.R. 1510 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: S. 1720 Due Process Continuity of Care Act", "url": "https://www.congress.gov/bill/119th-congress/senate-bill/1720" }
+      ]
+    },
+    {
+      "id": "fed-s3858-siren-warning",
+      "citation": "S. 3858 (SIREN Act of 2026, Introduced Feb 12, 2026)",
+      "title": "BEAD Funds for County Tornado Sirens & Disaster Warning Sensors",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / In Committee (Not Signed)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "119th U.S. Congress (Sen. John Cornyn, Senate Commerce)",
+      "keyDate": "2027-01-03",
+      "keyDateLabel": "119th Congress adjourns",
+      "effectiveDate": null,
+      "affectedOffices": ["Emergency Management (EMA)", "911 Communications", "County Mayor"],
+      "summary": "Lets states use leftover federal BEAD broadband funds for competitive subgrants to counties for warning sirens, flood and wind sensors, and alert systems.",
+      "bedfordImpact": "Not signed into law yet. If passed, Tennessee could subgrant leftover BEAD broadband funds to Bedford County for outdoor tornado warning sirens, Duck River flood sensors, and alert equipment (prioritizing local projects with a 25 percent local match).",
+      "actionSteps": [
+        "Monitor Senate Commerce Committee progress or 120th Congress reintroduction.",
+        "Keep a list of priority tornado siren and flood-sensor gap areas ready in EMA."
+      ],
+      "statute": "S. 3858 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: S. 3858 SIREN Act of 2026", "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3858/text/is?format=txt" }
+      ]
+    },
+    {
+      "id": "tn-hb0014-school-officers-2027",
+      "citation": "HB 0014 (115th General Assembly, Pre-Filed Nov 19, 2026)",
+      "title": "Off-Duty Law Enforcement Carrying Firearms on School Grounds",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Submitted / Pre-Filed (Not Signed)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "Tennessee 115th General Assembly (Rep. Fred Atchley)",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["Sheriff's Office", "Bedford County Schools", "Local Police"],
+      "summary": "Pre-filed 2027 bill removing the requirement that an off-duty law enforcement officer carrying a firearm onto school grounds immediately notify the school principal.",
+      "bedfordImpact": "Not signed into law yet. If passed in 2027, Bedford County Schools and the Sheriff's Office will need to update visitor sign-in and school safety procedures for off-duty officers entering school buildings during regular school hours.",
+      "actionSteps": [
+        "Watch committee assignment in January 2027 and coordinate school security protocol updates if advanced."
+      ],
+      "statute": "Proposed amendment to T.C.A. Title 39, Ch. 17, Part 13 and Title 49",
+      "sources": [
+        { "label": "Tennessee General Assembly: HB 0014 (115th GA)", "url": "https://wapp.capitol.tn.gov/apps/Billinfo/Default?BillNumber=HB0014&ga=115" }
+      ]
+    },
+    {
+      "id": "fed-care-act-s3145",
+      "citation": "S. 3145 / H.R. 2538 (CARE Act of 2025)",
+      "title": "Medicare 5-Year Treatment-in-Place Ground Ambulance Test",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / In Committee (Not Signed)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "119th U.S. Congress (Sen. Susan Collins / Rep. Mike Carey)",
+      "keyDate": "2027-01-03",
+      "keyDateLabel": "119th Congress adjourns",
+      "effectiveDate": null,
+      "affectedOffices": ["Bedford County EMS", "EMS Billing", "Finance Department"],
+      "summary": "Directs Medicare's Innovation Center (CMMI) to test a 5-year payment model paying ground ambulances when they treat a Medicare patient on scene without an ER transport.",
+      "bedfordImpact": "Not signed into law yet. Right now Medicare pays zero when Bedford County EMS treats a patient on scene who safely avoids the ER. Under S. 3145 / H.R. 2538, payment rates would align with standard transport rates. Any bill that stalls this winter must be re-filed in the 120th Congress.",
+      "actionSteps": [
+        "Track whether CARE Act language attaches to a December 2026 health package or gets re-filed in January 2027.",
+        "Brief incoming District 9 Rep.-elect Brent Taylor on rural EMS non-transport call volume."
+      ],
+      "statute": "S. 3145 / H.R. 2538 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: S. 3145 CARE Act of 2025", "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3145" },
+        { "label": "Congress.gov: H.R. 2538 CARE Act of 2025", "url": "https://www.congress.gov/bill/119th-congress/house-bill/2538/committees" }
+      ]
+    },
+    {
+      "id": "fed-ems-rocs-s3730",
+      "citation": "S. 3730 (EMS ROCs Act, Introduced Jan 29, 2026)",
+      "title": "Permanent Medicare Coverage for On-Scene EMS Care Without Transport",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / In Committee (Not Signed)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "119th U.S. Congress (Sen. Peter Welch, Senate Finance)",
+      "keyDate": "2027-01-03",
+      "keyDateLabel": "119th Congress adjourns",
+      "effectiveDate": null,
+      "affectedOffices": ["Bedford County EMS", "Finance Department"],
+      "summary": "Amends Title XVIII of the Social Security Act to establish permanent Medicare coverage for ambulance care even when the patient is not transported.",
+      "bedfordImpact": "Not signed into law yet. Goes further than the CARE Act pilot by making on-scene Medicare EMS reimbursement permanent nationwide. Currently sitting in the Senate Finance Committee with bipartisan rural interest.",
+      "actionSteps": [
+        "Monitor Senate Finance activity and 120th Congress reintroduction alongside the CARE Act."
+      ],
+      "statute": "S. 3730 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: S. 3730 EMS ROCs Act", "url": "https://www.congress.gov/bill/119th-congress/senate-bill/3730" }
+      ]
+    },
+    {
+      "id": "fed-comm-paramed-hr4011",
+      "citation": "H.R. 4011 (Community Paramedicine Act of 2025)",
+      "title": "Federal Grants for Rural Community Paramedicine & Mobile Integrated Health",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / In Committee (Not Signed)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "119th U.S. Congress (House Energy & Commerce)",
+      "keyDate": "2027-01-03",
+      "keyDateLabel": "119th Congress adjourns",
+      "effectiveDate": null,
+      "affectedOffices": ["Bedford County EMS", "County Health Partners"],
+      "summary": "Creates a new HHS grant program funding rural and underserved EMS agencies to launch Mobile Integrated Healthcare and community paramedicine programs.",
+      "bedfordImpact": "Not signed into law yet. If enacted in the lame-duck session or 120th Congress, this program would give rural county services like Bedford County EMS dedicated federal startup funding to reduce repeat 911 calls.",
+      "actionSteps": [
+        "Watch House Energy and Commerce action and 120th Congress re-filing."
+      ],
+      "statute": "H.R. 4011 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: H.R. 4011 Community Paramedicine Act", "url": "https://www.congress.gov/bill/119th-congress/house-bill/4011/actions" }
+      ]
+    },
+    {
+      "id": "tn-2027-ems-tacir-tcrs",
+      "citation": "TACIR PC 413 Recommendations & 2027 TCRS EMS Re-Filing Watch",
+      "title": "2027 State Watch: Recurring Ambulance Equipment Grants & Retired EMS TCRS Return-to-Work",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Expected 2027 Filing (Watch)",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "Tennessee 115th General Assembly & TACIR",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["Bedford County EMS", "County Commission", "Finance Department"],
+      "summary": "Tracks two expected 2027 state bills: TACIR's recommendation to make Tennessee ambulance equipment grants recurring every year, and potential re-filing of TCRS retired-EMS return-to-work after SB 513 / HB 628 died.",
+      "bedfordImpact": "TACIR's 2026 report under Public Chapter 413 urged the General Assembly to make state ambulance equipment grants recurring like county road and emergency management grants, while rejecting mandatory city-to-county ambulance billing. Meanwhile, SB 513 / HB 628 (extending TCRS return-to-work for retired EMS staff) died April 24, 2026 and may be re-filed in January.",
+      "actionSteps": [
+        "Coordinate with Rep. Pat Marsh and Sen. Shane Reeves before January 12, 2027 on recurring ambulance equipment grant funding.",
+        "Watch January 2027 filings for a new TCRS EMS return-to-work bill."
+      ],
+      "statute": "Public Chapter 413 (2025 TACIR Report), 114th GA SB 0513 / HB 0628",
+      "sources": [
+        { "label": "TACIR 2026 Report: Improving Tennessee's Ambulance Services (PDF)", "url": "https://www.tn.gov/content/dam/tn/tacir/2026publications/2026_AmbulanceServices.pdf" },
+        { "label": "TN General Assembly SB 0513 / HB 0628 History", "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default?BillNumber=SB0513&ga=114" }
+      ]
+    },
+    {
+      "id": "tn-pc-1123-ambulance-assessment",
+      "citation": "Public Chapter 1123 (SB 2221 / HB 2097)",
+      "title": "Tennessee Ground Ambulance Service Annual Assessment Extension",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": "2027-06-30",
+      "keyDateLabel": "Assessment sunsets unless renewed",
+      "effectiveDate": "2026-05-22",
+      "affectedOffices": ["Bedford County EMS", "Finance Department"],
+      "summary": "Extends the state ground ambulance provider assessment through June 30, 2027 and changes late payment penalties from $50 per day to 5 percent per month.",
+      "bedfordImpact": "Keeps Tennessee's ground ambulance supplemental TennCare reimbursement assessment active through FY 2026-27. Bedford County EMS and Finance must pay quarterly assessment notices on time to avoid the new 5 percent monthly penalty, and watch the 2027 General Assembly for renewal before June 30, 2027.",
+      "actionSteps": [
+        "Calendar all quarterly TennCare ground ambulance assessment payment dates.",
+        "Track the 2027 renewal bill before the June 30, 2027 sunset."
+      ],
+      "statute": "T.C.A. 71-5-1506 and 71-5-1509",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 1123)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-1104-first-responder-assault",
+      "citation": "Public Chapter 1104 (SB 1900 / HB 2428)",
+      "title": "Class E Felony & Mandatory Sentence for Assaulting a First Responder",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": null,
+      "keyDateLabel": "In effect (July 1, 2026)",
+      "effectiveDate": "2026-07-01",
+      "affectedOffices": ["Bedford County EMS", "Sheriff's Office", "Fire Departments", "District Attorney"],
+      "summary": "Makes assault against a first responder or law enforcement officer a Class E felony carrying a mandatory $10,000 fine and a mandatory minimum 60-day jail sentence.",
+      "bedfordImpact": "In effect since July 1, 2026. Protects Bedford County EMS crews, firefighters, and deputies on scene. Defendants are not eligible for release until they serve the full 60-day minimum. Assault against a nurse is a Class A misdemeanor with a mandatory $5,000 fine and 30-day minimum jail term.",
+      "actionSteps": [
+        "Brief EMS crews and supervisors on documenting scene assaults and requesting law enforcement charges under T.C.A. 39-13-116(c)(1)."
+      ],
+      "statute": "T.C.A. 39-13-116(c)(1)",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 1104)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-849-public-safety-records",
+      "citation": "Public Chapter 849 (SB 1981 / HB 2179)",
+      "title": "Public Safety Access to Employment Records & Mental Health Screenings",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": null,
+      "keyDateLabel": "In effect (April 27, 2026)",
+      "effectiveDate": "2026-04-27",
+      "affectedOffices": ["Bedford County EMS", "Sheriff's Office", "Fire Departments", "Human Resources"],
+      "summary": "Requires public safety employers to grant employees and job applicants full access to their employment file, including mental health screenings.",
+      "bedfordImpact": "In effect since April 27, 2026. If Bedford County declines to hire a public safety applicant because of a mental health screening, the county must give the applicant the records and allow them to submit an alternative equivalent screening at their own cost. Failure to provide records exposes the county to a lawsuit and mandatory plaintiff attorney fees.",
+      "actionSteps": [
+        "Update HR, EMS, Fire, and Sheriff hiring packets to comply with full-file access requests.",
+        "Create a written review step when an applicant submits an independent mental health evaluation."
+      ],
+      "statute": "T.C.A. Title 50, Chapter 1, Part 3",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 849)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-751-jail-medical-clearance",
+      "citation": "Public Chapter 751 (SB 1724 / HB 1815)",
+      "title": "Arrestee Medical Clearance Before County Jail Intake",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "ems",
+      "topicLabel": "Public Safety & EMS",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": null,
+      "keyDateLabel": "In effect (2026)",
+      "effectiveDate": "2026-07-01",
+      "affectedOffices": ["Sheriff's Office", "County Jail", "Bedford County EMS", "Local Police"],
+      "summary": "Lets a sheriff or jailer refuse or delay booking an arrestee who has obvious serious injuries or an emergency condition until the arresting agency obtains medical clearance.",
+      "bedfordImpact": "Protects the Bedford County Jail from taking custody of unscreened medical emergencies and clarifies that the arresting agency must get treatment and provide hospital discharge paperwork before jail intake. May shift pre-booking medical transport volume for Bedford County EMS and local police.",
+      "actionSteps": [
+        "Ensure Jail intake staff document the factual basis whenever an intake is delayed.",
+        "Coordinate EMS, Sheriff, and Shelbyville Police handoff protocols for medical clearances."
+      ],
+      "statute": "T.C.A. 41-4-145",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 751)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-hb0018-temp-tenncare-2027",
+      "citation": "HB 0018 (115th General Assembly, Pre-Filed Nov 23, 2026)",
+      "title": "Temporary TennCare Benefits Bridge Program",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Submitted / Pre-Filed (Not Signed)",
+      "topic": "schools",
+      "topicLabel": "Schools & Health",
+      "body": "Tennessee 115th General Assembly",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["County Health Partners", "Bedford County EMS", "Finance Department"],
+      "summary": "Pre-filed 2027 bill directing the Bureau of TennCare to create a temporary medical assistance program for individuals who do not qualify for standard TennCare or CoverKids.",
+      "bedfordImpact": "Not signed into law yet. Any expansion of temporary state health coverage affects local uninsured rates, hospital emergency room volume, and county EMS self-pay collection rates in Bedford County.",
+      "actionSteps": [
+        "Track committee referral and Fiscal Review cost projections after January 12, 2027."
+      ],
+      "statute": "115th General Assembly Pre-Filed HB 0018",
+      "sources": [
+        { "label": "LegiScan TN 2027 Pre-Filed Bills (HB 0018)", "url": "https://legiscan.com/TN/legislation/2027" }
+      ]
+    },
+    {
+      "id": "fed-rural-childcare-hr5363",
+      "citation": "H.R. 5363 (119th Congress, Introduced Sept 15, 2025)",
+      "title": "Expanding Childcare in Rural America Act",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / In Committee (Not Signed)",
+      "topic": "schools",
+      "topicLabel": "Schools & Health",
+      "body": "119th U.S. Congress (House Agriculture Committee)",
+      "keyDate": "2027-01-03",
+      "keyDateLabel": "119th Congress adjourns",
+      "effectiveDate": null,
+      "affectedOffices": ["County Mayor", "Bedford County Schools", "Economic Development"],
+      "summary": "Directs USDA to prioritize rural development loans and grants that expand affordable childcare and early education in rural and farming-dependent counties.",
+      "bedfordImpact": "Not signed into law yet, and backed by NACo for the 2026 Farm Bill. Affordable childcare is one of the biggest barriers to county workforce recruitment across schools, healthcare, and local industry in Bedford County.",
+      "actionSteps": [
+        "Monitor whether H.R. 5363 is included in the final Farm Bill package or re-filed in January 2027."
+      ],
+      "statute": "H.R. 5363 (119th Congress)",
+      "sources": [
+        { "label": "Congress.gov: H.R. 5363 Expanding Childcare in Rural America Act", "url": "https://www.congress.gov/bill/119th-congress/house-bill/5363/all-info" }
+      ]
+    },
+    {
+      "id": "fed-pl-119-21-rural-health",
+      "citation": "Public Law 119-21 (Rural Health Transformation Program)",
+      "title": "$50 Billion Federal Rural Health Transformation Program",
+      "level": "federal",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "schools",
+      "topicLabel": "Schools & Health",
+      "body": "119th U.S. Congress & HHS/CMS",
+      "keyDate": null,
+      "keyDateLabel": "Active FY 2026 to FY 2030",
+      "effectiveDate": "2025-07-04",
+      "affectedOffices": ["Bedford County EMS", "County Mayor", "County Health Partners"],
+      "summary": "Created a $50 billion five-year federal fund for rural healthcare transformation, with all 50 states receiving FY 2026 awards and EMS services eligible.",
+      "bedfordImpact": "Tennessee's share of the Rural Health Transformation Program is already reaching rural EMS and healthcare operations across the state, including Bedford County's 2026 rural ambulance award. Future FY 2027 through FY 2030 state tranches will shape rural hospital, telehealth, and EMS sustainability.",
+      "actionSteps": [
+        "Track Tennessee's FY 2027 Rural Health Transformation Program sub-grant announcements.",
+        "Avoid duplicating equipment already funded under the 2026 Rural Health Transformation ambulance award."
+      ],
+      "statute": "P.L. 119-21 (Enacted July 2025)",
+      "sources": [
+        { "label": "The Paramedic Foundation: Federal EMS & Rural Health Summary", "url": "https://paramedicfoundation.org/policy/" }
+      ]
+    },
+    {
+      "id": "tn-pc-961-957-1007-county-ops",
+      "citation": "Public Chapters 961, 957, 1007, 1063 & 1101",
+      "title": "School Finance Reports, Annual EMA Training, Data Center Power Costs & Essential Housing",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "schools",
+      "topicLabel": "Schools & Health",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": "2027-08-01",
+      "keyDateLabel": "Annual school OREA/TDOE report due",
+      "effectiveDate": "2026-07-11",
+      "affectedOffices": ["Bedford County Schools", "Emergency Management (EMA)", "Trustee Office", "County Mayor"],
+      "summary": "Bundle of 2026 county operations laws setting August 1 school spending reports, mandatory TEMA training, utility cost rules, simplified 80+ tax relief, and essential worker housing.",
+      "bedfordImpact": "Public Chapter 1007 requires Bedford County Schools to submit annual budget and spending reports by August 1. Public Chapter 957 requires all local EMA employees to complete annual TEMA mutual-aid training and document it in personnel files. Public Chapter 961 bars utilities from absorbing data center power costs. Public Chapter 1063 drops annual income-proof rechecks for homeowners age 80+ with five consecutive years of tax relief. Public Chapter 1101 lets counties build or lease housing for essential workers.",
+      "actionSteps": [
+        "Schedule Bedford County Schools annual budget and expenditure filings before August 1 (PC 1007).",
+        "Log annual TEMA mutual-aid training certificates for all EMA personnel (PC 957).",
+        "Apply simplified 80+ tax-relief renewal rules at the Trustee Office (PC 1063)."
+      ],
+      "statute": "T.C.A. Titles 7, 9, 49, 58, and 67",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 957, 961, 1007, 1063, 1101)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-599-local-rules",
+      "citation": "Public Chapter 599 (SB 1617 / HB 1488)",
+      "title": "County Commission Local Rules of Procedure Deadline",
+      "level": "state",
+      "status": "action",
+      "stageLabel": "Enacted (Deadline Dec 1)",
+      "topic": "governance",
+      "topicLabel": "Governance",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": "2026-12-01",
+      "keyDateLabel": "Compliance deadline",
+      "effectiveDate": "2026-03-18",
+      "affectedOffices": ["County Commission", "County Mayor", "Rules & Legislative Committee"],
+      "summary": "Requires every newly elected Tennessee county commission to adopt written local rules of internal procedure by majority vote within 90 days of convening.",
+      "bedfordImpact": "CTAS issued a statewide reminder that county legislative bodies must adopt local rules by December 1, 2026. Once adopted, any change during the term needs a two-thirds vote. Any question not covered by the county rules falls back to the latest edition of Robert's Rules of Order.",
+      "actionSteps": [
+        "Confirm Bedford County Board of Commissioners has formal adopted rules on file by December 1, 2026.",
+        "Note the two-thirds vote requirement before proposing any mid-term rule changes.",
+        "Keep a copy of the latest Robert's Rules of Order on hand for procedural gaps."
+      ],
+      "statute": "T.C.A. Title 5, Chapter 1, Part 1",
+      "sources": [
+        { "label": "CTAS Final Reminder: December 1 Local Rules Deadline", "url": "https://www.ctas.tennessee.edu/news/final-reminder-december-1-deadline-adopt-local-rules-procedure" },
+        { "label": "CTAS 2026 Index of Acts (PC 599)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-sb0007-vessels-2027",
+      "citation": "SB 0007 (115th General Assembly, Pre-Filed Nov 16, 2026)",
+      "title": "Tennessee Certificate of Title for Vessels & Local Abandoned Vessel Program",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Submitted / Pre-Filed (Not Signed)",
+      "topic": "governance",
+      "topicLabel": "Governance",
+      "body": "Tennessee 115th General Assembly",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": ["County Clerk", "Sheriff's Office", "Emergency Management (EMA)"],
+      "summary": "Pre-filed 2027 bill requiring vessel owners to obtain a TWRA certificate of title starting July 1, 2028 and creating a Local Abandoned Vessel Program.",
+      "bedfordImpact": "Not signed into law yet. Relevant to Bedford County boat owners using Normandy Lake and the Duck River, and could give local county offices a new state framework for handling abandoned watercraft.",
+      "actionSteps": [
+        "Track Senate committee referral in January 2027 for County Clerk and local waterway duties."
+      ],
+      "statute": "115th General Assembly Pre-Filed SB 0007",
+      "sources": [
+        { "label": "LegiScan TN 2027 Pre-Filed Bills (SB 0007)", "url": "https://legiscan.com/TN/legislation/2027" }
+      ]
+    },
+    {
+      "id": "tn-pc-596-dual-office",
+      "citation": "Public Chapter 596 (SB 624 / HB 618)",
+      "title": "Prohibition on Dual Local Elected Office Holding",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted (Takes Effect Jan 1)",
+      "topic": "governance",
+      "topicLabel": "Governance",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": "2027-01-01",
+      "keyDateLabel": "Takes effect",
+      "effectiveDate": "2027-01-01",
+      "affectedOffices": ["County Commission", "Election Commission", "City Councils", "School Board"],
+      "summary": "Prohibits a person who holds a local elected office from holding another elected public office in Tennessee at the same time.",
+      "bedfordImpact": "Takes effect January 1, 2027. Officials who already hold two elected offices on January 1, 2027 may keep both and run for re-election to them, but once they leave either seat they cannot hold two elected offices again. Political party state executive committee seats are exempt.",
+      "actionSteps": [
+        "Share eligibility guidance with the Bedford County Election Commission ahead of future candidate filing periods."
+      ],
+      "statute": "T.C.A. Title 8, Chapter 50, Part 1",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 596)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-620-public-comment",
+      "citation": "Public Chapter 620 (SB 178 / HB 22)",
+      "title": "Expanded Public Comment Rights at County & School Board Meetings",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "governance",
+      "topicLabel": "Governance",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": null,
+      "keyDateLabel": "In effect (March 26, 2026)",
+      "effectiveDate": "2026-03-26",
+      "affectedOffices": ["County Commission", "School Board", "Regional Boards", "County Clerk"],
+      "summary": "Requires counties, cities, school boards, and local authorities to allow public comment on both agenda items and any other matter within the body's jurisdiction.",
+      "bedfordImpact": "In effect since March 26, 2026. County Commission, committees, and the Bedford County School Board cannot limit public speakers solely to items listed on that night's agenda. Reasonable time and sign-up rules still apply.",
+      "actionSteps": [
+        "Confirm County Commission and committee meeting rules reflect broader public-comment scope."
+      ],
+      "statute": "T.C.A. 8-44-112(a)(2)",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 620)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    },
+    {
+      "id": "tn-pc-772-768-everify-procurement",
+      "citation": "Public Chapters 772 (E-Verify) & 768 (Procurement Protection)",
+      "title": "Mandatory County E-Verify & Foreign-Adversary IT Bid Certifications",
+      "level": "state",
+      "status": "enacted",
+      "stageLabel": "Enacted Law",
+      "topic": "governance",
+      "topicLabel": "Governance",
+      "body": "Tennessee 114th General Assembly",
+      "keyDate": null,
+      "keyDateLabel": "In effect (July 1, 2026)",
+      "effectiveDate": "2026-07-01",
+      "affectedOffices": ["Human Resources", "Finance & Purchasing", "Bedford County Schools", "IT"],
+      "summary": "Requires counties and school districts to verify all hires in E-Verify and collect vendor certifications barring foreign-adversary IT and communications products.",
+      "bedfordImpact": "Both laws carry steep compliance risk. Under Public Chapter 772, the state may withhold all state funding if the Attorney General finds a county or school system failed to use E-Verify and retain records. Under Public Chapter 768, every IT or communications bid must include a vendor certification barring products from designated foreign adversary companies.",
+      "actionSteps": [
+        "Audit county and school HR E-Verify logs to verify records are kept for the length of employment.",
+        "Add the Public Chapter 768 foreign-adversary certification clause to all county IT, radio, camera, and software RFPs."
+      ],
+      "statute": "T.C.A. Title 50, Ch. 1, Part 1 & Title 4, Ch. 56",
+      "sources": [
+        { "label": "CTAS 2026 Index of Acts (PC 768 & PC 772)", "url": "https://www.ctas.tennessee.edu/sites/default/files/2026%20IOA%20-%20Final.pdf" }
+      ]
+    }
+  ]
+}

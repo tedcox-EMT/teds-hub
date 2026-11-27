@@ -1,6 +1,6 @@
 (() => {
   const DATA_URL = "legislation.json";
-  const LIVE_WORKER_URL = "https://bedford-grants.tedcox-travel.workers.dev/legislation";
+  const LIVE_UPDATES_URL = "live-updates.json";
   const FR_API_URL =
     "https://www.federalregister.gov/api/v1/documents.json?per_page=8&order=newest" +
     "&conditions%5Bpublication_date%5D%5Bgte%5D=2026-01-01" +
@@ -10,7 +10,7 @@
     "&conditions%5Bterm%5D=ambulance+OR+disaster+OR+rural+OR+county+OR+bridge";
 
   const STORE_KEY = "bc_legislation_state_v1";
-  const LIVE_CACHE_KEY = "bc_legislation_live_v1";
+  const LIVE_CACHE_KEY = "bc_legislation_live_v2";
   const LIVE_CACHE_MS = 6 * 60 * 60 * 1000;
 
   const STATUS_META = {
@@ -52,6 +52,76 @@
     { id: "governance", label: "County Governance, Purchasing & Elections", short: "Governance", description: "Commission rules, public comment, E-Verify, and procurement." }
   ];
 
+  const QUICK_SEARCHES = [
+    "EMS bills",
+    "Pending bills",
+    "Property & sales taxes",
+    "Data centers & zoning",
+    "Roads & bridges",
+    "Jail & sheriff",
+    "Schools & health"
+  ];
+
+  const STOP_WORDS = new Set([
+    "a", "an", "and", "are", "all", "about", "affect", "affects", "affecting", "any",
+    "at", "be", "bedford", "bill", "bills", "by", "can", "county", "do", "does",
+    "find", "for", "from", "get", "have", "here", "how", "i", "impact", "impacts",
+    "in", "is", "it", "law", "laws", "legislation", "list", "me", "measure", "measures",
+    "my", "of", "on", "or", "our", "pull", "related", "see", "show", "statute",
+    "statutes", "tennessee", "that", "the", "this", "tn", "to", "up", "us", "we",
+    "what", "which", "with"
+  ]);
+
+  const SYNONYMS = {
+    ems: ["ems", "ambulance", "paramedic", "emt", "emergency medical", "bcems", "first responder", "community paramedicine", "treatment-in-place", "treatment in place", "medicare rural ambulance", "tenncare ground ambulance"],
+    ambulance: ["ambulance", "ems", "paramedic", "emergency medical", "bcems", "treatment-in-place", "ruca"],
+    paramedic: ["paramedic", "ems", "ambulance", "pronouncement", "community paramedicine"],
+    fire: ["fire", "firefighter", "first responder", "fema", "siren", "emergency management"],
+    responder: ["first responder", "ems", "paramedic", "firefighter", "law enforcement", "sheriff", "deputy"],
+    police: ["police", "law enforcement", "sheriff", "deputy", "officer", "jail", "first responder"],
+    sheriff: ["sheriff", "jail", "law enforcement", "deputy", "officer", "arrestee", "bail", "pretrial"],
+    jail: ["jail", "detainee", "arrestee", "inmate", "pretrial", "bail", "sheriff", "medicaid"],
+    inmate: ["inmate", "detainee", "arrestee", "jail", "pretrial", "medicaid"],
+    tax: ["tax", "taxes", "property tax", "sales tax", "grocery", "freeze", "reappraisal", "assessment", "trustee", "revenue"],
+    taxes: ["tax", "taxes", "property tax", "sales tax", "grocery", "freeze", "reappraisal", "assessment", "trustee", "revenue"],
+    property: ["property", "reappraisal", "tax freeze", "assessment", "assessor", "zoning", "school grounds"],
+    grocery: ["grocery", "food", "produce", "sales tax"],
+    budget: ["budget", "finance", "tax rate", "amendment", "spending", "appropriation"],
+    road: ["road", "roads", "highway", "bridge", "transportation", "iija", "build america", "hwy 231"],
+    roads: ["road", "roads", "highway", "bridge", "transportation", "iija", "build america", "hwy 231"],
+    highway: ["highway", "road", "bridge", "transportation", "build america", "hwy 231"],
+    bridge: ["bridge", "bridges", "highway", "road", "transportation", "build america"],
+    bridges: ["bridge", "bridges", "highway", "road", "transportation", "build america"],
+    zoning: ["zoning", "codes", "planning", "development", "data center", "moratorium", "extraterritorial", "subdivision", "permit"],
+    data: ["data center", "data centers", "hyperscale", "moratorium", "utility"],
+    center: ["data center", "data centers", "hyperscale", "moratorium"],
+    centers: ["data center", "data centers", "hyperscale", "moratorium"],
+    water: ["water", "wastewater", "sewer", "duck river", "utility district", "pharmaceutical", "hwy 231"],
+    sewer: ["sewer", "wastewater", "water", "hwy 231", "utility"],
+    school: ["school", "schools", "education", "student", "childcare", "board", "off-duty"],
+    schools: ["school", "schools", "education", "student", "childcare", "board", "off-duty"],
+    health: ["health", "rural health", "medicare", "medicaid", "tenncare", "mental health", "ambulance", "ems", "wastewater"],
+    medicare: ["medicare", "ambulance", "ruca", "treatment-in-place", "care act", "rocs"],
+    medicaid: ["medicaid", "tenncare", "pretrial", "jail", "ambulance"],
+    tenncare: ["tenncare", "medicaid", "ambulance", "temporary"],
+    fema: ["fema", "disaster", "tema", "ema", "emergency management", "siren", "tornado"],
+    disaster: ["disaster", "fema", "tema", "ema", "tornado", "siren", "flood", "warning"],
+    tornado: ["tornado", "siren", "warning", "disaster", "ema", "fema"],
+    siren: ["siren", "warning", "tornado", "bead", "ema"],
+    sirens: ["siren", "warning", "tornado", "bead", "ema"],
+    farm: ["farm", "usda", "rural", "agriculture", "community facilities", "broadband"],
+    rural: ["rural", "usda", "farm", "ambulance", "broadband", "childcare", "partnership", "health"],
+    broadband: ["broadband", "bead", "siren", "farm bill", "rural"],
+    everify: ["e-verify", "everify", "verify", "procurement", "human resources"],
+    commission: ["commission", "commissioners", "local rules", "public comment", "dual office", "zoning", "budget"]
+  };
+
+  const STAGE_KEYWORDS = {
+    pending: ["pending", "submitted", "prefiled", "pre-filed", "upcoming", "coming", "unsigned", "proposed", "introduced"],
+    enacted: ["enacted", "signed", "passed", "effective"],
+    action: ["urgent", "deadline", "deadlines", "vote", "action"]
+  };
+
   const POSITIONS = [
     { id: "", label: "No position set" },
     { id: "action", label: "Action Needed" },
@@ -61,6 +131,7 @@
   ];
 
   let catalog = null;
+  let updates = null;
   let userState = loadUserState();
   let ui = {
     level: "all",
@@ -98,18 +169,16 @@
   function loadLiveCache() {
     try {
       const raw = localStorage.getItem(LIVE_CACHE_KEY);
-      if (!raw) return { checkedAt: 0, notices: [], workerItems: [], workerCheckedAt: null, loading: false, error: "" };
+      if (!raw) return { checkedAt: 0, notices: [], loading: false, error: "" };
       const parsed = JSON.parse(raw);
       return {
         checkedAt: parsed.checkedAt || 0,
         notices: Array.isArray(parsed.notices) ? parsed.notices : [],
-        workerItems: Array.isArray(parsed.workerItems) ? parsed.workerItems : [],
-        workerCheckedAt: parsed.workerCheckedAt || null,
         loading: false,
         error: ""
       };
     } catch {
-      return { checkedAt: 0, notices: [], workerItems: [], workerCheckedAt: null, loading: false, error: "" };
+      return { checkedAt: 0, notices: [], loading: false, error: "" };
     }
   }
 
@@ -117,9 +186,7 @@
     try {
       localStorage.setItem(LIVE_CACHE_KEY, JSON.stringify({
         checkedAt: live.checkedAt,
-        notices: live.notices,
-        workerItems: live.workerItems,
-        workerCheckedAt: live.workerCheckedAt
+        notices: live.notices
       }));
     } catch {}
   }
@@ -154,6 +221,13 @@
     const d = parseIsoDate(iso);
     if (!d) return iso || "";
     return d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  function formatStamp(iso) {
+    if (!iso) return "";
+    const d = new Date(iso);
+    if (Number.isNaN(d.getTime())) return iso;
+    return d.toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
   }
 
   function daysUntil(iso) {
@@ -235,17 +309,18 @@
 
   function getAllItems() {
     const base = catalog && Array.isArray(catalog.items) ? catalog.items : [];
-    const merged = base.map((item) => ({ ...item }));
-    if (live.workerItems && live.workerItems.length) {
-      const byId = new Map(merged.map((x) => [x.id, x]));
-      for (const patch of live.workerItems) {
-        if (!patch || !patch.id) continue;
-        if (byId.has(patch.id)) {
-          Object.assign(byId.get(patch.id), patch);
-        } else {
-          merged.push(patch);
-        }
-      }
+    const patches = (updates && updates.statusPatches) || {};
+    const merged = base.map((item) => {
+      const p = patches[item.id];
+      return p ? { ...item, ...p } : { ...item };
+    });
+
+    const seen = new Set(merged.map((x) => x.id));
+    const discovered = (updates && Array.isArray(updates.discoveredItems)) ? updates.discoveredItems : [];
+    for (const d of discovered) {
+      if (!d || !d.id || seen.has(d.id)) continue;
+      seen.add(d.id);
+      merged.push({ ...d });
     }
     return merged;
   }
@@ -265,26 +340,149 @@
     });
   }
 
+  function parsePlainQuery(rawQuery) {
+    const normalized = String(rawQuery || "").toLowerCase().replace(/&/g, " ").replace(/[^\w.\-\s]/g, " ").replace(/\s+/g, " ").trim();
+    if (!normalized) return { active: false, terms: [], stageHints: [], levelHints: [], exactBill: null };
+
+    const exactBillMatch = /\b(hb|sb|hr|h\.r\.|s\.|pc|p\.l\.)\s*0*(\d+)\b/i.exec(normalized);
+    const exactBill = exactBillMatch ? { prefix: exactBillMatch[1].replace(/\./g, ""), num: exactBillMatch[2] } : null;
+
+    const stageHints = [];
+    if (/\bnot\s+signed\b|\bnot\s+yet\s+signed\b/.test(normalized)) {
+      stageHints.push("pending");
+    }
+    const levelHints = [];
+    if (/\bfederal\s+only\b|\bcongress\s+only\b/.test(normalized)) levelHints.push("federal");
+    if (/\bstate\s+only\b/.test(normalized)) levelHints.push("state");
+    if (/\blocal\s+only\b/.test(normalized)) levelHints.push("local");
+
+    const rawTokens = normalized
+      .replace(/\bnot\s+(?:yet\s+)?signed\b/g, " ")
+      .replace(/\b(?:federal|state|local|congress)\s+only\b/g, " ")
+      .split(/\s+/)
+      .filter(Boolean);
+
+    const terms = [];
+    for (const tok of rawTokens) {
+      if (STOP_WORDS.has(tok)) continue;
+      let matchedStage = false;
+      for (const [stKey, words] of Object.entries(STAGE_KEYWORDS)) {
+        if (words.includes(tok)) {
+          if (!stageHints.includes(stKey)) stageHints.push(stKey);
+          matchedStage = true;
+        }
+      }
+      if (matchedStage) continue;
+      if (tok === "federal" || tok === "congress") {
+        if (!levelHints.includes("federal")) levelHints.push("federal");
+        continue;
+      }
+      if (tok === "local" || tok === "shelbyville") {
+        if (!levelHints.includes("local")) levelHints.push("local");
+        continue;
+      }
+      if (tok === "state") {
+        if (!levelHints.includes("state")) levelHints.push("state");
+        continue;
+      }
+      terms.push(tok);
+    }
+
+    return { active: true, normalized, terms, stageHints, levelHints, exactBill };
+  }
+
+  function scoreItemForQuery(item, parsed) {
+    if (!parsed.active) return 1;
+
+    if (parsed.stageHints.length && !parsed.stageHints.includes(item.status)) {
+      return 0;
+    }
+    if (parsed.levelHints.length && !parsed.levelHints.includes(item.level)) {
+      return 0;
+    }
+
+    const titleLow = String(item.title || "").toLowerCase();
+    const citeLow = String(item.citation || "").toLowerCase();
+    const officesLow = (item.affectedOffices || []).join(" ").toLowerCase();
+    const fullHay = [
+      titleLow,
+      citeLow,
+      String(item.statute || "").toLowerCase(),
+      String(item.stageLabel || "").toLowerCase(),
+      String(item.summary || "").toLowerCase(),
+      String(item.bedfordImpact || "").toLowerCase(),
+      String(item.body || "").toLowerCase(),
+      String(item.topicLabel || "").toLowerCase(),
+      officesLow
+    ].join(" ");
+
+    if (parsed.exactBill) {
+      const compactCite = `${citeLow} ${String(item.statute || "").toLowerCase()}`.replace(/[\s.]/g, "");
+      const needle1 = `${parsed.exactBill.prefix}${parsed.exactBill.num}`;
+      const needle2 = `${parsed.exactBill.prefix}${String(parsed.exactBill.num).padStart(4, "0")}`;
+      if (compactCite.includes(needle1) || compactCite.includes(needle2)) {
+        return 100;
+      }
+    }
+
+    if (!parsed.terms.length) {
+      return parsed.stageHints.length || parsed.levelHints.length ? 10 : 1;
+    }
+
+    let totalScore = 0;
+    let matchedTerms = 0;
+
+    for (const term of parsed.terms) {
+      const variants = SYNONYMS[term] || [term];
+      let bestTermScore = 0;
+
+      for (let i = 0; i < variants.length; i++) {
+        const v = variants[i];
+        const isPrimary = i === 0;
+        if (titleLow.includes(v)) {
+          bestTermScore = Math.max(bestTermScore, isPrimary ? 24 : 14);
+        } else if (officesLow.includes(v) || citeLow.includes(v)) {
+          bestTermScore = Math.max(bestTermScore, isPrimary ? 18 : 11);
+        } else if (fullHay.includes(v)) {
+          bestTermScore = Math.max(bestTermScore, isPrimary ? 12 : 7);
+        }
+      }
+
+      if (bestTermScore > 0) {
+        matchedTerms += 1;
+        totalScore += bestTermScore;
+      }
+    }
+
+    // For 1-2 term queries require every meaningful term to match (or 1+ if multi-topic like "property & sales taxes" / "jail & sheriff")
+    if (parsed.terms.length === 1) return matchedTerms === 1 ? totalScore : 0;
+    if (parsed.terms.length === 2) {
+      if (matchedTerms === 2) return totalScore + 15;
+      // If user typed two related nouns like "data centers" or "jail sheriff", allow 1 match only if query contains & or "or" or both are in SYNONYMS
+      if (matchedTerms >= 1 && (/[&/]|\bor\b/i.test(ui.query) || (SYNONYMS[parsed.terms[0]] && SYNONYMS[parsed.terms[1]]))) {
+        return totalScore;
+      }
+      return 0;
+    }
+    const minRequired = Math.ceil(parsed.terms.length * 0.6);
+    return matchedTerms >= minRequired ? totalScore + matchedTerms * 5 : 0;
+  }
+
   function filterItems(items) {
-    const q = ui.query.trim().toLowerCase();
-    return items.filter((item) => {
-      if (ui.level !== "all" && item.level !== ui.level) return false;
-      if (ui.topic !== "all" && item.topic !== ui.topic) return false;
-      if (ui.status !== "all" && item.status !== ui.status) return false;
-      if (!q) return true;
-      const hay = [
-        item.title,
-        item.citation,
-        item.statute,
-        item.stageLabel,
-        item.summary,
-        item.bedfordImpact,
-        item.body,
-        item.topicLabel,
-        (item.affectedOffices || []).join(" ")
-      ].join(" ").toLowerCase();
-      return hay.includes(q);
-    });
+    const parsed = parsePlainQuery(ui.query);
+    const out = [];
+    for (const item of items) {
+      if (ui.level !== "all" && item.level !== ui.level) continue;
+      if (ui.topic !== "all" && item.topic !== ui.topic) continue;
+      if (ui.status !== "all" && item.status !== ui.status) continue;
+      const score = scoreItemForQuery(item, parsed);
+      if (score <= 0) continue;
+      out.push({ item, score });
+    }
+    if (parsed.active) {
+      out.sort((a, b) => b.score - a.score);
+    }
+    return out.map((x) => x.item);
   }
 
   async function refreshLiveFeeds(force) {
@@ -308,25 +506,23 @@
         }));
       });
 
-    const workerPromise = fetch(LIVE_WORKER_URL, { headers: { Accept: "application/json" } })
+    const updatesPromise = fetch(`${LIVE_UPDATES_URL}?t=${Date.now()}`, { cache: "no-cache" })
       .then((r) => (r.ok ? r.json() : null))
       .catch(() => null);
 
     try {
-      const [noticesRes, workerRes] = await Promise.allSettled([frPromise, workerPromise]);
+      const [noticesRes, updRes] = await Promise.allSettled([frPromise, updatesPromise]);
+      if (updRes.status === "fulfilled" && updRes.value && typeof updRes.value === "object") {
+        updates = updRes.value;
+      }
       if (noticesRes.status === "fulfilled") {
         live.notices = noticesRes.value;
         live.checkedAt = Date.now();
+      } else if (updates && Array.isArray(updates.federalNotices) && updates.federalNotices.length) {
+        live.notices = updates.federalNotices;
+        live.checkedAt = Date.now();
       } else {
         live.error = "Could not reach Federal Register right now. Curated bills are still loaded.";
-      }
-      if (workerRes.status === "fulfilled" && workerRes.value && typeof workerRes.value === "object") {
-        if (Array.isArray(workerRes.value.items)) {
-          live.workerItems = workerRes.value.items;
-        }
-        if (workerRes.value.checkedAt) {
-          live.workerCheckedAt = workerRes.value.checkedAt;
-        }
       }
       saveLiveCache();
     } finally {
@@ -441,23 +637,42 @@
   }
 
   function renderLivePanel() {
+    const autoUpdated = updates && updates.updatedAt ? formatStamp(updates.updatedAt) : null;
     const checkedLabel = live.checkedAt
-      ? `Checked ${new Date(live.checkedAt).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`
+      ? `Live feed checked ${new Date(live.checkedAt).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`
       : "Checking live federal register";
+    const notices = live.notices.length ? live.notices : ((updates && updates.federalNotices) || []);
+    const countyAlerts = (updates && Array.isArray(updates.countyAlerts)) ? updates.countyAlerts : [];
+
     return `
       <section class="panel">
-        <p class="section-bar">Live Federal Feed</p>
-        <h2>Newest CMS, FEMA &amp; DOT Rules</h2>
-        <p class="small muted">Pulled live from the official Federal Register API for ambulance, disaster, bridge, and rural county notices.</p>
-        <p class="small muted"><strong>Status:</strong> ${live.loading ? "Checking official feed now..." : esc(checkedLabel)}</p>
+        <p class="section-bar">Auto-Updated Feeds</p>
+        <h2>Daily State, County &amp; Federal Checks</h2>
+        <p class="small muted">Runs automatically every morning to check Tennessee 115th GA bills, Congressional bills, CTAS alerts, Bedford County notices, and Federal Register rules.</p>
+        ${autoUpdated ? `<p class="small muted"><strong>Last daily bill scan:</strong> ${esc(autoUpdated)}</p>` : ""}
+        <p class="small muted"><strong>Browser feed:</strong> ${live.loading ? "Checking now..." : esc(checkedLabel)}</p>
         <div class="actions">
           <button type="button" class="btn full" data-action="refresh-live" ${live.loading ? "disabled" : ""}>
-            ${live.loading ? "Checking live feed..." : "Check live feed now"}
+            ${live.loading ? "Checking live feed..." : "Check live feeds now"}
           </button>
         </div>
         ${live.error ? `<div class="note small">${esc(live.error)}</div>` : ""}
-        <div class="list" style="margin-top: 12px;">
-          ${live.notices.length ? live.notices.slice(0, 6).map((n) => `
+
+        ${countyAlerts.length ? `
+          <h3 style="margin-top: 16px;">Latest CTAS &amp; Bedford County Notices</h3>
+          <div class="list" style="margin-top: 8px;">
+            ${countyAlerts.slice(0, 5).map((a) => `
+              <article class="live-item">
+                <p class="kicker">${esc(a.source)}</p>
+                <p style="margin: 2px 0 0;"><a href="${esc(safeUrl(a.url))}" target="_blank" rel="noopener noreferrer">${esc(a.title)}</a></p>
+              </article>
+            `).join("")}
+          </div>
+        ` : ""}
+
+        <h3 style="margin-top: 16px;">Newest CMS, FEMA &amp; DOT Rules</h3>
+        <div class="list" style="margin-top: 8px;">
+          ${notices.length ? notices.slice(0, 5).map((n) => `
             <article class="live-item">
               <p class="kicker">${esc(formatDate(n.date))} &middot; ${esc(n.type)}</p>
               <p style="margin: 2px 0 4px;"><a href="${esc(safeUrl(n.url))}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a></p>
@@ -481,11 +696,13 @@
           <span class="badge ${lv.badgeClass}">${esc(lv.label)}</span>
           <span class="badge ${st.badgeClass}">${esc(item.stageLabel || st.label)}</span>
           <span class="badge">${esc(item.topicLabel)}</span>
+          ${item.autoDiscovered ? `<span class="badge saved">Auto-Found</span>` : ""}
           ${saved ? `<span class="badge saved">${pos && pos.id ? esc(pos.label) : "Saved"}</span>` : ""}
         </div>
         <p class="kicker">${esc(item.citation)}</p>
         <h2>${esc(item.title)}</h2>
         <p>${esc(item.summary)}</p>
+        ${item.lastVerifiedAction ? `<p class="small muted"><strong>Latest official action:</strong> ${esc(item.lastVerifiedAction)}</p>` : ""}
         ${renderCountdown(item, true)}
         <p class="small muted"><strong>Offices:</strong> ${esc((item.affectedOffices || []).join(", "))}</p>
         <div class="actions">
@@ -498,7 +715,28 @@
 
   function renderGroupedList(visible) {
     if (!visible.length) {
-      return `<section class="panel"><h2>No matching bills</h2><p class="muted">Try clearing one of your filters or search terms.</p></section>`;
+      return `
+        <section class="panel">
+          <h2>No matching bills</h2>
+          <p class="muted">Try a simpler phrase like "EMS bills", "property tax", "data center", or "jail", or clear your filters.</p>
+          <div class="actions">
+            <button type="button" class="btn-gold" data-action="clear-filters">Show all bills</button>
+          </div>
+        </section>
+      `;
+    }
+
+    if (ui.query.trim()) {
+      return `
+        <div class="list">
+          <div class="group-head">
+            <h2>Search Results for "${esc(ui.query.trim())}"</h2>
+            <span class="group-count">${visible.length} match${visible.length === 1 ? "" : "es"}</span>
+            <p>Ranked by relevance across local, Tennessee state, and federal legislation affecting Bedford County.</p>
+          </div>
+          ${visible.map(renderBillCard).join("")}
+        </div>
+      `;
     }
 
     if (ui.groupBy === "stage") {
@@ -545,6 +783,7 @@
     const enactedCount = all.filter((x) => x.status === "enacted").length;
     const visible = filterItems(all);
     const sections = getSections();
+    const autoUpdated = updates && updates.updatedAt ? formatStamp(updates.updatedAt) : formatDate(catalog.checkedAt);
 
     const statusStat = (key, count, label) => {
       const isAct = ui.status === key;
@@ -565,7 +804,7 @@
       <section class="panel panel-hero">
         <p class="section-bar">Bedford County Legislative Tracker</p>
         <h2>Local, State &amp; Federal Legislation Affecting Bedford County</h2>
-        <p class="small muted">Verified ${esc(formatDate(catalog.checkedAt))}. Includes county votes, submitted 2027 Tennessee bills and pending federal bills not signed yet, and enacted laws. Notes stay on your device.</p>
+        <p class="small muted">Auto-updated daily (${esc(autoUpdated)}). Search in plain English, like "EMS bills", "property tax", or "pending bills". Notes stay on your device.</p>
 
         <div class="stats" role="group" aria-label="Filter by bill stage">
           ${statusStat("action", actionCount, "Action Needed")}
@@ -574,7 +813,13 @@
         </div>
 
         <div class="search-wrap">
-          <input type="search" id="bill-search" placeholder="Search bill number, topic, taxes, zoning, jail, schools, EMS, roads..." value="${esc(ui.query)}" aria-label="Search legislation">
+          <input type="search" id="bill-search" placeholder="Search in plain English (example: EMS bills, property tax, data centers, jail)..." value="${esc(ui.query)}" aria-label="Search legislation in plain English">
+        </div>
+
+        <div class="filters" role="group" aria-label="Quick plain-language searches">
+          ${QUICK_SEARCHES.map((q) => `
+            <button type="button" class="chip quick-chip ${ui.query.trim().toLowerCase() === q.toLowerCase() ? "active" : ""}" data-quick-search="${esc(q)}">${esc(q)}</button>
+          `).join("")}
         </div>
 
         <div class="filters" role="group" aria-label="Filter by government level">
@@ -665,10 +910,12 @@
           <span class="badge ${lv.badgeClass}">${esc(lv.label)}</span>
           <span class="badge ${st.badgeClass}">${esc(item.stageLabel || st.label)}</span>
           <span class="badge">${esc(item.topicLabel)}</span>
+          ${item.autoDiscovered ? `<span class="badge saved">Auto-Found</span>` : ""}
         </div>
         <p class="kicker">${esc(item.citation)} &middot; ${esc(item.body)}</p>
         <h2>${esc(item.title)}</h2>
         <p>${esc(item.summary)}</p>
+        ${item.lastVerifiedAction ? `<p class="small muted"><strong>Latest official action:</strong> ${esc(item.lastVerifiedAction)}</p>` : ""}
 
         ${renderCountdown(item, false)}
 
@@ -925,6 +1172,17 @@
         return;
       }
 
+      const quickBtn = e.target.closest("[data-quick-search]");
+      if (quickBtn) {
+        const q = quickBtn.getAttribute("data-quick-search");
+        ui.query = ui.query.trim().toLowerCase() === q.toLowerCase() ? "" : q;
+        ui.level = "all";
+        ui.topic = "all";
+        ui.status = "all";
+        render();
+        return;
+      }
+
       const lvlBtn = e.target.closest("[data-level-filter]");
       if (lvlBtn) {
         ui.level = lvlBtn.getAttribute("data-level-filter");
@@ -1038,9 +1296,15 @@
     bindEvents();
     render();
     try {
-      const res = await fetch(DATA_URL, { cache: "no-cache" });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      catalog = await res.json();
+      const [catRes, updRes] = await Promise.all([
+        fetch(DATA_URL, { cache: "no-cache" }),
+        fetch(LIVE_UPDATES_URL, { cache: "no-cache" }).catch(() => null)
+      ]);
+      if (!catRes.ok) throw new Error(`HTTP ${catRes.status}`);
+      catalog = await catRes.json();
+      if (updRes && updRes.ok) {
+        try { updates = await updRes.json(); } catch {}
+      }
       render();
       refreshLiveFeeds(false);
     } catch (err) {

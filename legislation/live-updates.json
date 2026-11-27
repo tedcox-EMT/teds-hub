@@ -1,0 +1,220 @@
+{
+  "updatedAt": "2026-11-27T05:48:10.139Z",
+  "statusPatches": {
+    "tn-hb0010-grocery-tax-2027": {
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "lastVerifiedAction": "Filed for introduction (2026-11-17)"
+    },
+    "tn-hb0013-fresh-food-tax-2027": {
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "lastVerifiedAction": "Filed for introduction (2026-11-19)"
+    },
+    "tn-hb0007-sales-tax-holiday-2027": {
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "lastVerifiedAction": "Filed for introduction (2026-11-10)"
+    },
+    "tn-hb0005-hb0012-property-reports-2027": {
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "lastVerifiedAction": "Filed for introduction (2026-11-05)"
+    },
+    "tn-hb0002-water-safety-2027": {
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "lastVerifiedAction": "Filed for introduction (2026-11-04)"
+    },
+    "tn-hb0014-school-officers-2027": {
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "lastVerifiedAction": "Filed for introduction (2026-11-19)"
+    },
+    "tn-hb0018-temp-tenncare-2027": {
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "lastVerifiedAction": "Filed for introduction (2026-11-23)"
+    },
+    "tn-sb0007-vessels-2027": {
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "lastVerifiedAction": "Filed for introduction (2026-11-16)"
+    }
+  },
+  "discoveredItems": [
+    {
+      "id": "auto-tn115-sb0005",
+      "citation": "SB 0005 (115th General Assembly, 2026-11-10)",
+      "title": "Taxes - As introduced, changes the annual date by which the department of revenue is required to report its findings and r...",
+      "level": "state",
+      "status": "pending",
+      "stageLabel": "Filed for introduction (Not Signed)",
+      "topic": "budget",
+      "topicLabel": "Budget & Taxes",
+      "body": "Tennessee 115th General Assembly (Walley)",
+      "keyDate": "2027-01-12",
+      "keyDateLabel": "115th Session convenes",
+      "effectiveDate": null,
+      "affectedOffices": [
+        "Finance Department",
+        "Property Assessor",
+        "Trustee Office",
+        "County Commission"
+      ],
+      "summary": "Taxes - As introduced, changes the annual date by which the department of revenue is required to report its findings and recommendations to the general assembly regarding sales tax collections for electronic nicotine delivery devices from February 1 to January 15 of each year. - Amends TCA Title 67, Chapter 6.",
+      "bedfordImpact": "Auto-detected from the official Tennessee General Assembly 115th Session feed. Latest official action: Filed for introduction on 2026-11-10. Review the bill text on capitol.tn.gov to evaluate direct impact on Bedford County.",
+      "actionSteps": [
+        "Read the full bill text and fiscal note for SB 0005 on capitol.tn.gov.",
+        "Track committee assignment after the 115th General Assembly opens January 12, 2027."
+      ],
+      "statute": "AN ACT to amend Tennessee Code Annotated, Title 67, Chapter 6, relative to taxation.",
+      "autoDiscovered": true,
+      "sources": [
+        {
+          "label": "Tennessee General Assembly: SB 0005 (115th GA)",
+          "url": "https://wapp.capitol.tn.gov/apps/BillInfo/Default.aspx?BillNumber=SB0005&GA=115"
+        }
+      ]
+    },
+    {
+      "id": "auto-fed-hr11096",
+      "citation": "H.R. 11096 (U.S. Congress, 2026-11-24)",
+      "title": "Public health Response and Emergency Detection through Integrated wastewater Community Testing Act",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / Introduced in House (Not Signed)",
+      "topic": "zoning",
+      "topicLabel": "Zoning & Land",
+      "body": "U.S. Congress (GovInfo Live Feed)",
+      "keyDate": null,
+      "keyDateLabel": "Updated 2026-11-24 in Congress",
+      "effectiveDate": null,
+      "affectedOffices": [
+        "Codes & Planning",
+        "Utility District",
+        "County Commission"
+      ],
+      "summary": "Newly posted Congressional bill matching Bedford County interests (Zoning & Land): Public health Response and Emergency Detection through Integrated wastewater Community Testing Act.",
+      "bedfordImpact": "Auto-discovered from the official U.S. GovInfo Congressional Bills feed. Stage: Submitted / Introduced in House (Not Signed). Open the official GovInfo bill link to inspect full text and sponsors.",
+      "actionSteps": [
+        "Review bill text and committee status for H.R. 11096 on GovInfo."
+      ],
+      "statute": "H.R. 11096 (Pending Federal Bill)",
+      "autoDiscovered": true,
+      "sources": [
+        {
+          "label": "GovInfo Official Bill: H.R. 11096",
+          "url": "https://www.govinfo.gov/app/details/BILLS-119hr11096ih"
+        }
+      ]
+    },
+    {
+      "id": "auto-fed-hr11064",
+      "citation": "H.R. 11064 (U.S. Congress, 2026-11-24)",
+      "title": "Data Center Community Empowerment Act of 2026",
+      "level": "federal",
+      "status": "pending",
+      "stageLabel": "Submitted / Introduced in House (Not Signed)",
+      "topic": "zoning",
+      "topicLabel": "Zoning & Land",
+      "body": "U.S. Congress (GovInfo Live Feed)",
+      "keyDate": null,
+      "keyDateLabel": "Updated 2026-11-24 in Congress",
+      "effectiveDate": null,
+      "affectedOffices": [
+        "Codes & Planning",
+        "Utility District",
+        "County Commission"
+      ],
+      "summary": "Newly posted Congressional bill matching Bedford County interests (Zoning & Land): Data Center Community Empowerment Act of 2026.",
+      "bedfordImpact": "Auto-discovered from the official U.S. GovInfo Congressional Bills feed. Stage: Submitted / Introduced in House (Not Signed). Open the official GovInfo bill link to inspect full text and sponsors.",
+      "actionSteps": [
+        "Review bill text and committee status for H.R. 11064 on GovInfo."
+      ],
+      "statute": "H.R. 11064 (Pending Federal Bill)",
+      "autoDiscovered": true,
+      "sources": [
+        {
+          "label": "GovInfo Official Bill: H.R. 11064",
+          "url": "https://www.govinfo.gov/app/details/BILLS-119hr11064ih"
+        }
+      ]
+    }
+  ],
+  "federalNotices": [
+    {
+      "id": "2026-22750",
+      "date": "2026-11-09",
+      "type": "Rule",
+      "agency": "Health and Human Services Department",
+      "title": "Calendar Year 2027 Home Health Prospective Payment System (HH PPS) Rate Update, Requirements for the HH Quality Reporting Program and the Expanded HH Value-Based Purchasing Model, Medicare Provider Enrollment, Durable Medical Equipment (DME), and DME, Prosthetics, Orthotics, and Supplies (DMEPOS) Policies",
+      "url": "https://www.federalregister.gov/documents/2026/11/09/2026-22750/calendar-year-2027-home-health-prospective-payment-system-hh-pps-rate-update-requirements-for-the-hh"
+    },
+    {
+      "id": "2026-22743",
+      "date": "2026-11-09",
+      "type": "Rule",
+      "agency": "Health and Human Services Department",
+      "title": "Medicare and Medicaid Programs, CY 2027 Payment Policies Under the Physician Fee Schedule and Other Changes to Part B Payment and Coverage Policies, Medicare Shared Savings Program Requirements, and Medicare Prescription Drug Inflation Rebate Program",
+      "url": "https://www.federalregister.gov/documents/2026/11/09/2026-22743/medicare-and-medicaid-programs-cy-2027-payment-policies-under-the-physician-fee-schedule-and-other"
+    },
+    {
+      "id": "2026-15833",
+      "date": "2026-08-04",
+      "type": "Rule",
+      "agency": "Health and Human Services Department",
+      "title": "Medicare Program, Hospital Inpatient Prospective Payment Systems for Acute Care Hospitals (IPPS) and the Long-Term Care Hospital Prospective Payment System and Policy Changes and Fiscal Year (FY) 2027 Rates, Requirements for Quality Programs, Other Policy Changes, and Adoption of Updated Versions of Certain Health Information Technology Standards",
+      "url": "https://www.federalregister.gov/documents/2026/08/04/2026-15833/medicare-program-hospital-inpatient-prospective-payment-systems-for-acute-care-hospitals-ipps-and"
+    },
+    {
+      "id": "2026-07203",
+      "date": "2026-04-14",
+      "type": "Proposed Rule",
+      "agency": "Health and Human Services Department",
+      "title": "Medicare Program, Hospital Inpatient Prospective Payment Systems for Acute Care Hospitals (IPPS) and the Long-Term Care Hospital Prospective Payment System and Policy Changes and Fiscal Year (FY) 2027 Rates, Requirements for Quality Programs, and Other Policy Changes",
+      "url": "https://www.federalregister.gov/documents/2026/04/14/2026-07203/medicare-program-hospital-inpatient-prospective-payment-systems-for-acute-care-hospitals-ipps-and"
+    }
+  ],
+  "countyAlerts": [
+    {
+      "source": "UT CTAS County Alert",
+      "title": "Final Reminder: December 1 Deadline to Adopt Local Rules of Procedure",
+      "url": "https://www.ctas.tennessee.edu/news/final-reminder-december-1-deadline-adopt-local-rules-procedure"
+    },
+    {
+      "source": "UT CTAS County Alert",
+      "title": "Robert's Rules Minute: Point of Order! Now What?",
+      "url": "https://www.ctas.tennessee.edu/news/roberts-rules-minute-point-order-now-what"
+    },
+    {
+      "source": "UT CTAS County Alert",
+      "title": "Reminder: E-Verify Requirements Change for Local Governments Beginning Jan. 1, 2027",
+      "url": "https://www.ctas.tennessee.edu/news/reminder-e-verify-requirements-change-local-governments-beginning-jan-1-2027"
+    },
+    {
+      "source": "UT CTAS County Alert",
+      "title": "CTAS Staff Discuss Data Centers on In Touch with Tennessee Podcast",
+      "url": "https://www.ctas.tennessee.edu/news/ctas-staff-discuss-data-centers-touch-tennessee-podcast"
+    },
+    {
+      "source": "UT CTAS County Alert",
+      "title": "Reminder: Orientation Deadline Approaching for Newly Elected County Commissioners",
+      "url": "https://www.ctas.tennessee.edu/news/reminder-orientation-deadline-approaching-newly-elected-county-commissioners"
+    },
+    {
+      "source": "Bedford County Official Notice",
+      "title": "Commission approves budget, tax rate",
+      "url": "https://www.bedfordcountytn.gov/news_detail_T10_R61.php"
+    },
+    {
+      "source": "Bedford County Official Notice",
+      "title": "White to serve on state's Duck River planning body",
+      "url": "https://www.bedfordcountytn.gov/news_detail_T10_R57.php"
+    }
+  ],
+  "scanState": {
+    "tn115MaxHB": 20,
+    "tn115MaxSB": 8
+  }
+}

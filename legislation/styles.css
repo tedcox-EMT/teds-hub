@@ -222,6 +222,16 @@ img { max-width: 100%; }
 }
 .chip:hover, .btn:hover, .btn-ghost:hover { background: var(--navy-tint); }
 .chip.active, .tab.active { background: var(--navy); color: white; border-color: var(--navy); }
+.chip.quick-chip {
+  background: var(--gold-tint);
+  border-color: #e6cfa0;
+  color: var(--gold-deep);
+}
+.chip.quick-chip.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--black);
+}
 .btn-gold, .primary {
   background: var(--navy);
   color: white;

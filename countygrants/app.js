@@ -4,6 +4,17 @@ const APPS_KEY = "county-grants-apps";
 const STATUS_LABEL = { open: "Open now", prepare: "Get ready", watch: "Watch", awarded: "Awarded" };
 const LEVEL_LABEL = { federal: "Federal", state: "State", local: "Local", private: "Private" };
 
+const COUNTY_FACTS = [
+  ["Applicant", "Bedford County Government"],
+  ["County seat", "Shelbyville, Tennessee 37160"],
+  ["County population", "55,273. Census estimate for July 1, 2025."],
+  ["Shelbyville population", "26,146. A USDA project for the city or the whole county does not qualify."],
+  ["CDBG", "Bedford County is not a HUD entitlement county."],
+  ["Appalachian Regional Commission", "Bedford County is not an ARC county."],
+  ["Region", "South Central Tennessee Development District."],
+  ["Crashes", "Rank 23 of 95 counties for 2021 through 2025. Rankings revised February 12, 2026."]
+];
+
 const DEFAULT_PROFILE = {
   legalName: "Bedford County Government",
   department: "",
@@ -682,11 +693,18 @@ function field(name, label, value, type = "text") {
 
 function renderAgency() {
   const profile = state.profile;
+  const facts = COUNTY_FACTS.map(([label, value]) => `<li><strong>${esc(label)}.</strong> ${esc(value)}</li>`).join("");
   return `
     <section class="panel">
+      <p class="kicker">Checked November 26, 2026</p>
+      <h2>County facts</h2>
+      <p>These are the same for everyone who opens this page.</p>
+      <ul class="clean">${facts}</ul>
+    </section>
+    <section class="panel">
       <p class="kicker">County file</p>
-      <h2>Facts used on every draft</h2>
-      <p>These stay in this browser. They are not sent anywhere until you copy or share a draft.</p>
+      <h2>Facts you add</h2>
+      <p>Office, contact, UEI, EIN, and SAM.gov stay blank until you enter them. They stay in this browser until you copy or share a draft.</p>
       <form id="profile-form">
         ${field("department", "Office or department", profile.department)}
         ${field("contact", "Contact name", profile.contact)}

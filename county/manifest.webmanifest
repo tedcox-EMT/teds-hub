@@ -1,0 +1,14 @@
+{
+  "name": "County Grants",
+  "short_name": "Grants",
+  "description": "Grant applications for Bedford County government.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1f3864",
+  "theme_color": "#1f3864",
+  "icons": [
+    { "src": "logo.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "logo.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

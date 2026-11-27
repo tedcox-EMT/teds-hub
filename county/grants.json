@@ -1,0 +1,393 @@
+{
+  "checkedAt": "2026-11-26T20:30:00Z",
+  "rulesNote": "Facts below were checked against the funder pages on November 26, 2026. The daily update rechecks those pages and changes only the status line when the page itself changes. This is not every grant in the country. A program is listed when a funder page says a Tennessee county may apply, or when the page was checked and the county does not qualify.",
+  "grants": [
+    {
+      "id": "srf",
+      "name": "State Revolving Fund and water infrastructure grants",
+      "funder": "Tennessee Department of Environment and Conservation",
+      "level": "state",
+      "status": "open",
+      "deadlineLabel": "Applications are open from November 17, 2026 through January 8, 2027.",
+      "actionDate": "2027-01-08",
+      "amountLabel": "Grants and loans for wastewater, stormwater, and drinking water. The solicitation sets the amounts. Do not guess a cap.",
+      "matchLabel": "Read the current solicitation for the match or loan terms. Do not assume there is no match.",
+      "summary": "TDEC is taking applications for wastewater, stormwater, and drinking water work. This is the round that is open now.",
+      "why": "The November 16, 2026 TDEC notice says the State Revolving Fund Loan Program and the State Water Infrastructure Grants Program are accepting those applications. A county files for its own utility project.",
+      "rules": [
+        "The posted window is November 17, 2026 through January 8, 2027.",
+        "Use the project type named in the solicitation: wastewater, stormwater, or drinking water.",
+        "Read the solicitation for who may apply, the match, and the loan terms before you send it.",
+        "File in the TDEC grant system named in the notice."
+      ],
+      "portalUrl": "https://www.tn.gov/environment/program-areas/wr-water-resources/srfp/srf-home/srf-news.html",
+      "infoUrl": "https://www.tn.gov/environment/program-areas/wr-water-resources/srfp/srf-home/srf-news.html",
+      "sources": [
+        "TDEC SRF news, November 16, 2026. Applications accepted November 17, 2026 through January 8, 2027."
+      ],
+      "watch": { "kind": "srf", "url": "https://www.tn.gov/environment/program-areas/wr-water-resources/srfp/srf-home/srf-news.html" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["srf-type", "project", "cost", "match-known", "contact-name", "contact-email"]
+    },
+    {
+      "id": "cdbg",
+      "name": "Tennessee CDBG, community development",
+      "funder": "Tennessee Department of Economic and Community Development",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "The 2026 applications were due April 10, 2026. The 2027 round was briefed on October 22, 2026. A 2027 due date is not posted yet.",
+      "actionDate": null,
+      "amountLabel": "Up to $1,000,000 when construction is most of the project. Up to $420,000 for an equipment project.",
+      "matchLabel": "County match is the ability-to-pay rate, from 5 percent to 25 percent. Get Bedford County's rate from TNECD. Do not guess it.",
+      "summary": "The once-a-year CDBG round funds water, sewer, community infrastructure, community revitalization, and public health and safety. The county may file one regular-round application.",
+      "why": "Eligible applicants are Tennessee cities and counties that do not get CDBG directly from HUD. Bedford County is not on that entitlement list. A county may apply for a project inside the county.",
+      "rules": [
+        "Only one regular-round application is allowed. A government with an open regular-round grant cannot apply.",
+        "At least 51 percent of the people who benefit must have low or moderate income, unless TNECD has accepted another method.",
+        "The county commission has to pass a resolution before you submit. An application without the resolution is ineligible.",
+        "Eligible categories in the 2026 notices are sewer system improvements, water system improvements, community infrastructure, community revitalization, public health and safety, water line extensions, and sewer line extensions.",
+        "If construction is most of the project, the cap is $1,000,000. Otherwise the equipment cap is $420,000.",
+        "File in the TNECD portal when the 2027 date is posted."
+      ],
+      "portalUrl": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html",
+      "infoUrl": "https://ecd.grants.tn.gov/files/1514989/195800/2026_Application_Notices.pdf",
+      "sources": [
+        "Tennessee State CDBG Program 2026 Application Notices. Due April 10, 2026.",
+        "TNECD CDBG page. The 2027 public meeting was October 22, 2026. A 2027 due date is not posted.",
+        "TNECD About CDBG. Bedford County is not an entitlement community."
+      ],
+      "watch": { "kind": "cdbg", "url": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["cdbg-project", "cost", "lmi", "atp", "cdbg-open", "resolution", "contact-name", "contact-email"]
+    },
+    {
+      "id": "cdbg-ed",
+      "name": "Tennessee CDBG, economic development",
+      "funder": "Tennessee Department of Economic and Community Development",
+      "level": "state",
+      "status": "watch",
+      "deadlineLabel": "TNECD says this program operates continuously. It is separate from the once-a-year community development round. No current due date is posted on the about page.",
+      "actionDate": null,
+      "amountLabel": "Get the current cap from TNECD. Do not reuse the community development caps.",
+      "matchLabel": "Get the current match rule from TNECD.",
+      "summary": "Use this file to ask TNECD whether a job-creating public infrastructure project can be filed outside the annual round.",
+      "why": "The TNECD about page says the economic development program operates continuously, and that CDBG funds go to city and county governments that are not entitlement communities.",
+      "rules": [
+        "Do not file this as the annual community development application. It is a different program.",
+        "Ask TNECD for the current eligible activities, cap, and match before you draft a budget.",
+        "One regular-round community development grant still blocks a second regular-round filing. Confirm with TNECD whether an open grant also blocks this program."
+      ],
+      "portalUrl": "https://www.tn.gov/ecd/community-development-block-grant/cdbg/cdbg-about.html",
+      "infoUrl": "https://www.tn.gov/ecd/community-development-block-grant/cdbg/cdbg-about.html",
+      "sources": [
+        "TNECD About CDBG, checked November 26, 2026. The economic development program operates continuously."
+      ],
+      "watch": { "kind": "cdbg", "url": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["project", "cost", "contact-name", "contact-email"]
+    },
+    {
+      "id": "bric",
+      "name": "BRIC hazard mitigation",
+      "funder": "FEMA, through TEMA",
+      "level": "federal",
+      "status": "prepare",
+      "deadlineLabel": "The fiscal year 2024 and 2025 window closed at 3:00 p.m. ET on July 23, 2026. The next window is not posted yet.",
+      "actionDate": null,
+      "amountLabel": "FEMA made $1 billion available for that closed cycle. The next cycle will set its own amount.",
+      "matchLabel": "Each notice sets the match. Do not reuse a rate from an old year.",
+      "summary": "BRIC pays for projects that reduce future disaster damage. The county applies as a subapplicant through TEMA.",
+      "why": "FEMA lists local governments as subapplicants. TEMA tells Tennessee communities to start with a statement of interest and then use the state portal when a cycle is open.",
+      "rules": [
+        "The July 23, 2026 deadline has passed. Do not send an application until FEMA or TEMA posts a new open cycle.",
+        "The county needs a FEMA-approved hazard mitigation plan and good standing in the National Flood Insurance Program. Confirm both before you file.",
+        "BRIC does not pay for routine maintenance or ordinary repairs.",
+        "Start with the TEMA statement of interest. TEMA reviews the project before it goes to FEMA.",
+        "The authorized official has to certify the federal application."
+      ],
+      "portalUrl": "https://www.tn.gov/tema/ready-communities/grants/mitigation-grants/building-resilient-infrastructure-and-communities.html",
+      "infoUrl": "https://www.fema.gov/grants/mitigation/learn/building-resilient-infrastructure-communities",
+      "sources": [
+        "FEMA BRIC page, checked November 26, 2026. The fiscal year 2024 and 2025 application period is closed. Deadline was 3:00 p.m. ET on July 23, 2026.",
+        "TEMA BRIC page. Subapplicants include local governments. A statement of interest comes first."
+      ],
+      "watch": { "kind": "bric", "url": "https://www.fema.gov/grants/mitigation/learn/building-resilient-infrastructure-communities" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["project", "cost", "bric-plan", "bric-nfip", "sam", "uei", "contact-name", "contact-email"]
+    },
+    {
+      "id": "hmgp",
+      "name": "Hazard Mitigation Grant after a disaster",
+      "funder": "FEMA, through TEMA",
+      "level": "federal",
+      "status": "watch",
+      "deadlineLabel": "Money is available only after a presidential major disaster declaration, and only when TEMA posts an open round.",
+      "actionDate": null,
+      "amountLabel": "Set by the disaster allocation. Do not guess it.",
+      "matchLabel": "Follow the notice for that disaster.",
+      "summary": "This is the post-disaster mitigation grant. It can fund drainage, culverts, elevations, warning tools, and plan updates. It does not pay for ordinary repairs.",
+      "why": "TEMA says funding is available to communities that meet the subapplicant rules, and that the county should start with a statement of interest when a round is open.",
+      "rules": [
+        "Do not file unless TEMA says an HMGP round is open.",
+        "The project has to reduce future damage. Repairs and deferred maintenance do not qualify.",
+        "Confirm the hazard mitigation plan and National Flood Insurance Program standing.",
+        "Submit through TEMA. TEMA sends selected applications to FEMA."
+      ],
+      "portalUrl": "https://www.tn.gov/tema/ready-communities/grants/mitigation-grants/hazard-mitigation-grant-program.html",
+      "infoUrl": "https://www.tn.gov/tema/ready-communities/grants/mitigation-grants/hazard-mitigation-grant-program.html",
+      "sources": [
+        "TEMA Hazard Mitigation Grant Program page, checked November 26, 2026."
+      ],
+      "watch": { "kind": "tema", "url": "https://www.tn.gov/tema/ready-communities/grants/mitigation-grants/hazard-mitigation-grant-program.html" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["hmgp-open", "project", "cost", "contact-name", "contact-email"]
+    },
+    {
+      "id": "usda-cf",
+      "name": "USDA Community Facilities, rural areas only",
+      "funder": "USDA Rural Development",
+      "level": "federal",
+      "status": "prepare",
+      "deadlineLabel": "USDA accepts Community Facilities applications year round, from October 1 through September 30. The place served still has to be rural.",
+      "actionDate": null,
+      "amountLabel": "Grant share depends on the population and income of the area served. USDA sets the percent. Do not pick one.",
+      "matchLabel": "The rest of the project is a loan or other funds. USDA publishes a grant cap of 15 to 75 percent of eligible costs based on population and income.",
+      "summary": "This can build an essential public facility in a rural place of 20,000 people or fewer. It cannot fund a project for Shelbyville or for the whole county.",
+      "why": "County governments are public bodies and may apply. The facility must serve a rural area of no more than 20,000 people. Census estimates for July 1, 2025 put Shelbyville at 26,146 and Bedford County at 55,273.",
+      "rules": [
+        "Stop if the facility serves Shelbyville or the whole county. Both are over 20,000 people.",
+        "A project in a town or unincorporated area of 20,000 or fewer can fit. Name that place and confirm the Census count with USDA.",
+        "USDA grant limits run from 15 percent to 75 percent of eligible cost. The higher percents are for smaller, lower-income places. Get the percent from USDA.",
+        "The applicant must be unable to borrow the whole project commercially at reasonable rates.",
+        "Contact the Tennessee USDA Rural Development office before you prepare the file."
+      ],
+      "portalUrl": "https://www.rd.usda.gov/programs-services/community-facilities/community-facilities-direct-loan-grant-program",
+      "infoUrl": "https://www.rd.usda.gov/programs-services/community-facilities/community-facilities-direct-loan-grant-program",
+      "sources": [
+        "USDA Community Facilities Direct Loan and Grant page, checked November 26, 2026.",
+        "U.S. Census Bureau QuickFacts, July 1, 2025. Bedford County 55,273. Shelbyville 26,146."
+      ],
+      "watch": { "kind": "usda", "url": "https://www.rd.usda.gov/programs-services/community-facilities/community-facilities-direct-loan-grant-program" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["usda-place", "usda-pop", "project", "cost", "contact-name", "contact-email"]
+    },
+    {
+      "id": "cops",
+      "name": "COPS Hiring Program",
+      "funder": "U.S. Department of Justice, COPS Office",
+      "level": "federal",
+      "status": "prepare",
+      "deadlineLabel": "The fiscal year 2026 deadlines have passed. Grants.gov closed July 23, 2026. JustGrants closed July 29, 2026. The next notice is not posted.",
+      "actionDate": null,
+      "amountLabel": "The closed notice listed awards up to $6,250,000 over 60 months. The next notice sets the amount.",
+      "matchLabel": "The fiscal year 2026 notice required a cost share. Read the next notice for the rate. Do not reuse the old rate.",
+      "summary": "This grant hires or rehires full-time sworn officers. The sheriff's office would be the applicant if it has primary law enforcement authority in the county.",
+      "why": "The fiscal year 2026 notice lists county governments, and it limits applicants to an established law enforcement agency with primary authority for the jurisdiction.",
+      "rules": [
+        "Do not file until the COPS Office posts a new open notice.",
+        "The sheriff's office must be established, funded, and the first responder for criminal calls in the area the grant would serve.",
+        "The fiscal year 2026 notice required a match. Wait for the next notice before you budget the local share.",
+        "Apply in Grants.gov and then JustGrants. The authorized official has to certify it."
+      ],
+      "portalUrl": "https://cops.usdoj.gov/grants",
+      "infoUrl": "https://cops.usdoj.gov/pdf/2026ProgramDocs/chp/nofo.pdf",
+      "sources": [
+        "COPS Office grants table, checked November 26, 2026. Fiscal year 2026 Hiring Program is closed.",
+        "FY 2026 COPS Hiring Program notice, opportunity O-COPS-2026-172611. Grants.gov deadline July 23, 2026. JustGrants deadline July 29, 2026."
+      ],
+      "watch": { "kind": "cops", "url": "https://cops.usdoj.gov/grants" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["cops-primary", "cops-count", "cost", "sam", "uei", "contact-name", "contact-email"]
+    },
+    {
+      "id": "eda",
+      "name": "EDA public infrastructure",
+      "funder": "U.S. Economic Development Administration",
+      "level": "federal",
+      "status": "watch",
+      "deadlineLabel": "No Bedford County deadline is posted. Ask the South Central Tennessee Development District and EDA whether a project is open.",
+      "actionDate": null,
+      "amountLabel": "SCTDD says there is no set funding limit. The award depends on the project. Do not invent a request.",
+      "matchLabel": "EDA sets the match by distress and project type. Get the rate before you budget.",
+      "summary": "EDA can fund public water, sewer, road, and broadband infrastructure that supports business growth. It cannot fund private development.",
+      "why": "The South Central Tennessee Development District listed EDA public infrastructure as open funding in August 2026 for communities in its region. Bedford County is in that region. The county still has to meet EDA's distress test for the project area.",
+      "rules": [
+        "Do not file until EDA or the development district confirms the project area meets the current distress test.",
+        "The work has to be public infrastructure. Private buildings and private site work are not eligible.",
+        "There is no published dollar cap in the August 2026 district note. Ask EDA for the current match.",
+        "The authorized official has to certify a federal application."
+      ],
+      "portalUrl": "https://www.sctdd.org/sctdd/august-2026-grant-opportunities/",
+      "infoUrl": "https://www.eda.gov/funding/funding-opportunities",
+      "sources": [
+        "South Central Tennessee Development District, August 2026 grant opportunities. EDA public infrastructure, no set funding limit."
+      ],
+      "watch": { "kind": "eda", "url": "https://www.eda.gov/funding/funding-opportunities" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["eda-distress", "project", "cost", "sam", "uei", "contact-name", "contact-email"]
+    },
+    {
+      "id": "outdoor",
+      "name": "Local parks, trails, and outdoor recreation",
+      "funder": "Tennessee Department of Environment and Conservation",
+      "level": "state",
+      "status": "watch",
+      "deadlineLabel": "TDEC says it anticipates the next outdoor recreation application cycle in 2028. Dates are not posted.",
+      "actionDate": null,
+      "amountLabel": "Each program sets its own cap in the application manual. Do not guess a cap.",
+      "matchLabel": "LPRF and LWCF require a 50 percent match. RTP is an 80 percent grant with a 20 percent match.",
+      "summary": "These grants buy and build public parks, trails, and outdoor recreation on land the government owns. The next cycle is not open.",
+      "why": "TDEC awards LPRF, LWCF, and RTP to local governments. Land tied to an award has to stay in public recreation.",
+      "rules": [
+        "Do not file until TDEC posts the 2028 dates, or an earlier date if the page changes.",
+        "LPRF and the Land and Water Conservation Fund each require a 50 percent match.",
+        "The Recreational Trails Program is an 80 percent grant with a 20 percent match. The trail must be on publicly owned land.",
+        "TRIP is only for a city or county that has no parks and recreation department. Do not file TRIP if the county already has one.",
+        "Budget the match before you apply."
+      ],
+      "portalUrl": "https://www.tn.gov/environment/outdoorrec/grants.html",
+      "infoUrl": "https://www.tn.gov/environment/about-tdec/grants/recreation.html",
+      "sources": [
+        "TDEC Office of Outdoor Recreation grants page, checked November 26, 2026. Next cycle anticipated in 2028.",
+        "TDEC outdoor recreation page. LWCF match is 50 percent. RTP is 80 percent with a 20 percent match.",
+        "Local Parks and Recreation Fund descriptions published by Tennessee counties. LPRF requires a 50 percent match."
+      ],
+      "watch": { "kind": "outdoor", "url": "https://www.tn.gov/environment/outdoorrec/grants.html" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["outdoor-type", "trip-dept", "project", "cost", "match-known", "contact-name", "contact-email"]
+    },
+    {
+      "id": "thso",
+      "name": "Tennessee Highway Safety Office",
+      "funder": "Tennessee Highway Safety Office",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "The published local window opens March 1 and closes March 31. The 2026 window has passed. Plan on March 1, 2027, and confirm the program area on the THSO page.",
+      "actionDate": "2027-03-01",
+      "amountLabel": "THSO sets the amount by program area. Do not copy an EMS equipment award onto a different project.",
+      "matchLabel": "Check the current notice. Do not assume a match.",
+      "summary": "THSO funds local traffic safety work. The county can prepare a project for enforcement, education, or equipment the current notice allows.",
+      "why": "THSO accepts applications from local public agencies during the posted window. Bedford County ranked 23rd of 95 counties for overall crash rate in the 2021 through 2025 rankings.",
+      "rules": [
+        "Confirm the March 1 to March 31 window for your program area. A different THSO program can use a different date.",
+        "Use crash numbers from the THSO dashboard. Do not estimate them.",
+        "Ask only for items the current notice allows.",
+        "File at THSOGrants.org during the open window."
+      ],
+      "portalUrl": "https://tntrafficsafety.org/applying-for-grants",
+      "infoUrl": "https://www.tn.gov/content/dam/tn/safety/documents/crash_stats/CountyCrashRankings.pdf",
+      "sources": [
+        "Tennessee Traffic Safety Resource Service, grant application process, checked for the local March window.",
+        "Tennessee Department of Safety county rankings, 2021 through 2025, revised February 12, 2026. Bedford overall crash rate rank 23."
+      ],
+      "watch": { "kind": "thso", "url": "https://tntrafficsafety.org/applying-for-grants" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["project", "cost", "thso-stats", "contact-name", "contact-email"]
+    },
+    {
+      "id": "abc",
+      "name": "Arts Build Communities",
+      "funder": "Tennessee Arts Commission, through South Central Tennessee Development District",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "The 2026 deadline was July 1, 2026. The next opening is not posted.",
+      "actionDate": null,
+      "amountLabel": "Maximum request is $5,000.",
+      "matchLabel": "No match.",
+      "summary": "A county government can request up to $5,000 for a community arts project. The 2026 round is closed.",
+      "why": "The district notice says an entity of government may apply if it meets the guidelines. Bedford County is in the South Central Tennessee Development District.",
+      "rules": [
+        "The July 1, 2026 deadline has passed. Wait for the next posted opening.",
+        "The maximum request is $5,000. There is no match.",
+        "Only one application per applicant per year.",
+        "The 2026 project period was August 16, 2026 through June 15, 2027. A later round will set its own dates.",
+        "Major cultural institutions and school-credit programs are not the target of this grant."
+      ],
+      "portalUrl": "https://www.sctdd.org/arts-build-communities/",
+      "infoUrl": "https://www.sctdd.org/arts-build-communities/",
+      "sources": [
+        "South Central Tennessee Development District, Arts Build Communities, checked November 26, 2026. Applications opened April 1, 2026 and closed July 1, 2026."
+      ],
+      "watch": { "kind": "abc", "url": "https://www.sctdd.org/arts-build-communities/" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["project", "cost", "contact-name", "contact-email"]
+    },
+    {
+      "id": "tema",
+      "name": "Homeland Security Grant through county EMA",
+      "funder": "Tennessee Emergency Management Agency",
+      "level": "local",
+      "status": "watch",
+      "deadlineLabel": "TEMA posts the deadline in the EM Grants Portal when a cycle opens. Departments do not apply alone.",
+      "actionDate": null,
+      "amountLabel": "Set by the state allocation and the local EMA.",
+      "matchLabel": "Follow the current TEMA notice.",
+      "summary": "Radios, equipment, training, and exercises can be funded when they prepare the county for terrorism and other hazards. The request goes through Bedford County EMA.",
+      "why": "TEMA tells local agencies to work through the county emergency management agency. The county EMA is the local applicant.",
+      "rules": [
+        "Send the project to Bedford County EMA. Do not send it straight to TEMA.",
+        "The project has to support prevention, protection, response, or recovery. Routine replacement of daily equipment does not fit.",
+        "Radios bought with this money have to meet interoperability rules.",
+        "Equipment has to be inventoried and tagged."
+      ],
+      "portalUrl": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html",
+      "infoUrl": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html",
+      "sources": [
+        "TEMA Homeland Security Grant Program page, checked November 26, 2026."
+      ],
+      "watch": { "kind": "tema", "url": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["project", "cost", "tema-hazard", "ema-name", "ema-email"]
+    },
+    {
+      "id": "firehouse",
+      "name": "Firehouse Subs Public Safety Foundation",
+      "funder": "Firehouse Subs Public Safety Foundation",
+      "level": "private",
+      "status": "prepare",
+      "deadlineLabel": "Portal opens January 14, 2027 at 2:00 p.m. ET. It stops after 600 applications.",
+      "actionDate": "2027-01-14",
+      "amountLabel": "$15,000 to $25,000 is the usual range. Requests over $40,000 are rejected. They do not fund part of a quote.",
+      "matchLabel": "No match.",
+      "summary": "This private foundation buys lifesaving equipment for law enforcement, fire, and EMS. Have one complete quote ready on opening day.",
+      "why": "The foundation accepts law enforcement, fire, and EMS. A county sheriff's office or county emergency service can apply. The award stays with that agency.",
+      "rules": [
+        "One request per organization. If the agency has received an award, wait 4 years from the funding date.",
+        "They do not reimburse equipment you already bought.",
+        "They do not fund power-load stretchers, naloxone, drones, body cameras, or exercise equipment.",
+        "You need one official vendor quote and a current budget, balance sheet, or audit that shows the county or the department.",
+        "The portal opens at 2:00 p.m. ET on January 14, 2027, April 15, 2027, and July 15, 2027. Dates can change."
+      ],
+      "portalUrl": "https://firehousesubs-foundation.wizehive.app/program/firehouse-subs-foundation-grant-us/applicant/application/info",
+      "infoUrl": "https://grants.firehousesubs.com/FAQ",
+      "sources": [
+        "Firehouse Subs Public Safety Foundation application page, checked November 26, 2026. The portal was closed and listed a reopen time of January 14, 2027 at 2:00 p.m. ET."
+      ],
+      "watch": { "kind": "firehouse", "url": "https://firehousesubs-foundation.wizehive.app/program/firehouse-subs-foundation-grant-us/applicant/application/info" },
+      "rulesVersion": "2026-11-26",
+      "questions": ["fh-item", "cost", "fh-quote", "fh-financials", "fh-prior", "contact-name", "contact-email"]
+    }
+  ],
+  "notAFit": [
+    {
+      "name": "Appalachian Regional Commission",
+      "reason": "Bedford County is not one of the 52 Tennessee counties ARC serves. The district's August 2026 note listed ARC funds for other counties in the region, not Bedford."
+    },
+    {
+      "name": "USDA Community Facilities for Shelbyville or the whole county",
+      "reason": "The program is limited to a rural area of 20,000 people or fewer. Shelbyville is 26,146. The county is 55,273. A project in a smaller town can still be checked on the USDA card."
+    },
+    {
+      "name": "Downtown Improvement Grant",
+      "reason": "The August 28, 2026 round was only for Tennessee Main Street communities and Tennessee Downtowns alumni, with a maximum request of $300,000 and a 25 percent match. That deadline has passed, and the district note did not list Bedford County."
+    },
+    {
+      "name": "FEMA SAFER staffing grant",
+      "reason": "SAFER hires firefighters for fire departments. It is not a general grant for county government."
+    },
+    {
+      "name": "Opioid settlement request for proposals",
+      "reason": "Those payments are already allocated to the county. The 2026 request invited community organizations to apply to the county. It is not a grant the county files. The 2026 proposals were due April 15, 2026."
+    }
+  ]
+}

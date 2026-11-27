@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bedford County EMS</title>
+  <title>Bedford County</title>
   <meta name="robots" content="noindex">
-  <link rel="icon" href="seal.png">
   <style>
     :root {
-      --navy: #1F3864;
-      --gold: #C5A253;
-      --gold-tint: #FBF3E3;
-      --paper: #f7f4ee;
-      --ink: #1b2430;
+      --ink: #1c2430;
+      --muted: #5c6b7c;
+      --line: #d7deE6;
+      --paper: #f4f6f8;
+      --navy: #16324f;
+      --gold: #b8893a;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; min-height: 100%; }
@@ -20,87 +20,54 @@
       font-family: Calibri, "Segoe UI", sans-serif;
       color: var(--ink);
       background:
-        radial-gradient(900px 420px at 50% -80px, #31568f 0%, transparent 70%),
-        linear-gradient(180deg, #14284a 0%, var(--navy) 42%, #152743 100%);
+        radial-gradient(700px 280px at 50% -40px, #ffffff 0%, transparent 70%),
+        var(--paper);
       min-height: 100vh;
       display: grid;
       place-items: center;
-      padding: 28px 16px 40px;
+      padding: 28px 16px;
     }
-    .card {
-      width: min(680px, 100%);
+    main {
+      width: min(560px, 100%);
       background: #fff;
-      border-radius: 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.32);
+      box-shadow: 0 16px 40px rgba(22, 50, 79, 0.08);
     }
-    .banner {
-      background:
-        linear-gradient(180deg, rgba(197, 162, 83, 0.16), transparent 42%),
-        #12233f;
+    .mark {
+      background: var(--navy);
+      padding: 36px 24px 28px;
       text-align: center;
-      padding: 28px 20px 0;
     }
-    .seal {
-      width: min(300px, 78vw);
-      height: auto;
+    .crest {
+      width: 84px;
+      height: 84px;
+      margin: 0 auto 16px;
       display: block;
-      margin: 0 auto;
     }
-    .rule {
-      height: 5px;
-      margin-top: 22px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-    }
-    .body { padding: 34px 32px 32px; }
-    .kicker {
-      margin: 0 0 8px;
-      color: var(--gold);
+    .mark p {
+      margin: 0;
+      color: #f3e6c8;
       font-family: Cambria, Georgia, serif;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
       font-size: 0.78rem;
     }
+    .body { padding: 32px 28px 28px; }
     h1 {
-      margin: 0 0 12px;
-      color: var(--navy);
+      margin: 0 0 10px;
       font-family: Cambria, Georgia, serif;
-      font-size: clamp(2rem, 5vw, 2.6rem);
-      line-height: 1.12;
+      font-size: clamp(1.8rem, 4vw, 2.3rem);
+      color: var(--navy);
+      line-height: 1.15;
     }
-    .lead {
-      margin: 0 0 26px;
-      font-size: 1.15rem;
-      line-height: 1.45;
-      color: #3c4b60;
-      max-width: 36rem;
-    }
-    .who {
-      display: flex;
-      gap: 16px;
-      align-items: center;
+    p.lead {
       margin: 0 0 22px;
-      padding: 14px 16px;
-      background: var(--gold-tint);
-      border-left: 6px solid var(--gold);
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.45;
     }
-    .mark {
-      width: 54px;
-      height: 54px;
-      flex: none;
-      border-radius: 50%;
-      background: var(--navy);
-      display: grid;
-      place-items: center;
-    }
-    .who strong {
-      display: block;
-      color: var(--navy);
-      font-family: Cambria, Georgia, serif;
-      font-size: 1.25rem;
-    }
-    .who span { color: #5c6b7e; }
     a.mail {
       display: inline-flex;
       align-items: center;
@@ -109,59 +76,32 @@
       color: #fff;
       text-decoration: none;
       font-weight: 700;
-      font-size: 1.05rem;
-      padding: 14px 20px;
+      padding: 14px 18px;
       border-radius: 999px;
       border: 2px solid var(--gold);
     }
-    a.mail:hover { background: #152846; }
+    a.mail:hover { background: #10263c; }
     a.mail:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
-    address {
-      margin: 26px 0 0;
-      font-style: normal;
-      color: #3c4b60;
-      line-height: 1.5;
-    }
-    address b {
-      display: block;
-      color: var(--navy);
-      font-family: Cambria, Georgia, serif;
-      margin-bottom: 2px;
-    }
-    @media (max-width: 560px) {
-      .body { padding: 26px 18px 24px; }
+    @media (max-width: 520px) {
+      .body { padding: 26px 18px 22px; }
       a.mail { width: 100%; justify-content: center; }
     }
   </style>
 </head>
 <body>
-  <main class="card">
-    <div class="banner">
-      <img class="seal" src="seal.png" alt="Bedford County EMS seal">
-      <div class="rule"></div>
+  <main>
+    <div class="mark">
+      <svg class="crest" viewBox="0 0 84 84" aria-hidden="true">
+        <circle cx="42" cy="42" r="40" fill="none" stroke="#b8893a" stroke-width="2"/>
+        <circle cx="42" cy="42" r="30" fill="none" stroke="#f3e6c8" stroke-width="1"/>
+        <path d="M42 18l6.2 14.2L63 34.4l-11.2 9.4L54.6 58 42 50.8 29.4 58l2.8-14.2L21 34.4l14.8-2.2z" fill="#f3e6c8"/>
+      </svg>
+      <p>Bedford County</p>
     </div>
     <div class="body">
-      <p class="kicker">Bedford County EMS</p>
-      <h1>Contact the director</h1>
-      <p class="lead">For information about Bedford County Emergency Medical Services, write Ted Cox.</p>
-      <div class="who">
-        <div class="mark" aria-hidden="true">
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <path d="M6 8.5h16v11H6z" stroke="#C5A253" stroke-width="1.7"/>
-            <path d="M6 9l8 6 8-6" stroke="#C5A253" stroke-width="1.7"/>
-          </svg>
-        </div>
-        <div>
-          <strong>Ted Cox</strong>
-          <span>Director</span>
-        </div>
-      </div>
-      <a class="mail" href="mailto:ted.cox@bedfordems.com">ted.cox@bedfordems.com</a>
-      <address>
-        <b>EMS Operations Center</b>
-        119 Frank Martin Road<br>
-        Shelbyville, Tennessee 37160
-      </address>
+      <h1>For information, write here</h1>
+      <p class="lead">Send a note and it will come to this address.</p>
+      <a class="mail" href="mailto:info@bedfordtn.com">info@bedfordtn.com</a>
     </div>
   </main>
 </body>

@@ -604,7 +604,7 @@
     const header = `
       <header class="app-header">
         <div class="brand">
-          <img src="logo.png?v=1" alt="Bedford County">
+          <img src="logo.png?v=2" alt="Bedford County">
           <div>
             <p class="eyebrow">Bedford County, Tennessee</p>
             <h1>Bedford County Legislation</h1>
@@ -616,7 +616,7 @@
 
     const side = `
       <aside class="side noprint" aria-label="Primary navigation">
-        <img src="logo.png?v=1" alt="Bedford County">
+        <img src="logo.png?v=2" alt="Bedford County">
         <strong>Bedford County Legislation</strong>
         <span>Local, state, and federal tracking</span>
         ${navItems.map((n) => `

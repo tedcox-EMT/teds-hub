@@ -756,10 +756,13 @@ const FAMILIES = [
   ["paramedic", "paramedics", "medic", "medics", "clinician", "clinicians"],
   ["emt", "aemt"],
   ["driver", "drivers", "operator", "operators"],
-  ["ce", "renewal", "hours", "credits"],
+  ["ce", "hours", "credits"],
+  ["renewal", "renew", "renewing", "july"],
+  ["fee", "fees"],
   ["posting", "posted", "stage", "staging", "county"],
-  ["form", "forms", "ph3939", "ph-3939", "ph2405", "ph-2405"],
+  ["form", "forms", "ph3939", "ph-3939", "ph2405", "ph-2405", "ph4318", "ph-4318"],
   ["consultant", "consultants", "region", "regional", "office", "division"],
+  ["category", "categories"],
 ];
 
 const LOOKUP = {};
@@ -793,6 +796,80 @@ function searchRules(q) {
   return RULES.filter((r) =>
     matchesHay([r.citation, r.title, r.summary, r.chapterTitle, ...r.digest, ...r.watchFor].join(" "), q),
   );
+}
+
+function regionHay(r) {
+  return [r.name, r.consultant, r.phone, r.email, r.address, "consultant", "region", "regional", (r.counties || []).join(" ")].join(" ");
+}
+
+function searchRegions(q) {
+  if (!q.trim()) return [];
+  return REGIONS.filter((r) => matchesHay(regionHay(r), q));
+}
+
+function officePeople() {
+  var people = [
+    {
+      name: DIRECTOR.name,
+      role: DIRECTOR.title,
+      detail: DIRECTOR.phone,
+      href: "office.html",
+      hay: [DIRECTOR.name, DIRECTOR.title, "director", "ward", "nashville"].join(" "),
+    },
+    {
+      name: OFFICE.medicalDirector,
+      role: "State EMS medical director",
+      detail: OFFICE.name,
+      href: "office.html",
+      hay: [OFFICE.medicalDirector, "medical director", "holley"].join(" "),
+    },
+    {
+      name: OFFICE.dataManager.name,
+      role: "Data manager",
+      detail: OFFICE.dataManager.office + " · " + OFFICE.dataManager.email,
+      href: "office.html",
+      hay: [OFFICE.dataManager.name, OFFICE.dataManager.email, "data manager", "tnemsis", "nemsis", "epcr"].join(" "),
+    },
+    {
+      name: OFFICE.radio.name,
+      role: "Radio systems analyst",
+      detail: OFFICE.radio.phone + " · " + OFFICE.radio.email,
+      href: "office.html",
+      hay: [OFFICE.radio.name, OFFICE.radio.email, "radio", "fcc", "communications"].join(" "),
+    },
+    {
+      name: OFFICE.tnpap.name,
+      role: "Peer assistance",
+      detail: OFFICE.tnpap.phone,
+      href: OFFICE.tnpap.site,
+      hay: [OFFICE.tnpap.name, "tnpap", "peer assistance", "impairment", "assistance"].join(" "),
+    },
+  ];
+  BOARD_MEMBERS.forEach(function (m) {
+    people.push({
+      name: m.name,
+      role: m.role + " · " + m.seat,
+      detail: m.term,
+      href: "office.html",
+      hay: [m.name, m.role, m.seat, "board", "member", "roster"].join(" "),
+    });
+  });
+  return people;
+}
+
+function searchPeople(q) {
+  if (!q.trim()) return [];
+  return officePeople().filter((p) => matchesHay(p.hay, q));
+}
+
+function formsForIds(ids) {
+  var want = {};
+  (ids || []).forEach(function (id) {
+    want[id] = true;
+  });
+  return FORMS.filter(function (f) {
+    return want[f.id];
+  });
 }
 
 const DIRECTOR = {
@@ -868,7 +945,8 @@ const REGIONS = [
     consultant: "John Dabbs",
     phone: "423-737-1992",
     email: "john.dabbs@tn.gov",
-    address: "185 Treasure Lane, Johnson City, TN 37604",
+    address: "Johnson City, TN",
+    counties: ["Carter", "Greene", "Hancock", "Hawkins", "Johnson", "Sullivan", "Unicoi", "Washington"],
   },
   {
     id: "east",
@@ -876,7 +954,8 @@ const REGIONS = [
     consultant: "Jonathan Beaty",
     phone: "865-235-6360",
     email: "jonathan.beaty@tn.gov",
-    address: "P.O. Box 343, 1103 Knoxville Hwy., Wartburg, TN 37887",
+    address: "Knoxville, TN",
+    counties: ["Anderson", "Blount", "Campbell", "Claiborne", "Cocke", "Grainger", "Hamblen", "Jefferson", "Knox", "Loudon", "Monroe", "Morgan", "Roane", "Scott", "Sevier", "Union"],
   },
   {
     id: "se",
@@ -884,7 +963,8 @@ const REGIONS = [
     consultant: "Nita Jernigan",
     phone: "423-737-4112",
     email: "nita.jernigan@tn.gov",
-    address: "1301 Riverfront Parkway, Suite 209, Chattanooga, TN 37402",
+    address: "Chattanooga, TN",
+    counties: ["Bledsoe", "Bradley", "Franklin", "Grundy", "Hamilton", "McMinn", "Marion", "Meigs", "Polk", "Rhea", "Sequatchie"],
   },
   {
     id: "uc",
@@ -892,23 +972,26 @@ const REGIONS = [
     consultant: "Brian Tompkins",
     phone: "931-216-3999",
     email: "brian.tompkins@tn.gov",
-    address: "1100 England Drive, Cookeville, TN 38501",
+    address: "Cookeville, TN",
+    counties: ["Cannon", "Clay", "Cumberland", "DeKalb", "Fentress", "Jackson", "Macon", "Overton", "Pickett", "Putnam", "Smith", "Van Buren", "Warren", "White"],
   },
   {
     id: "mid",
     name: "Mid-Cumberland",
-    consultant: "Dwight Davis",
+    consultant: "Hansel Cook",
     phone: "615-828-5206",
-    email: "dwight.n.davis@tn.gov",
-    address: "665 Mainstream Drive, Nashville, TN 37247",
+    email: "hansel.cook@tn.gov",
+    address: "Nashville, TN",
+    counties: ["Cheatham", "Davidson", "Dickson", "Houston", "Humphreys", "Montgomery", "Robertson", "Rutherford", "Stewart", "Sumner", "Trousdale", "Williamson", "Wilson"],
   },
   {
     id: "sc",
     name: "South Central",
-    consultant: "Vacant on Nov 2023 list",
-    phone: "615-741-2584",
-    email: "health.ems@tn.gov",
-    address: "1216 Trotwood Avenue, Columbia, TN 38401",
+    consultant: "Chad Brown",
+    phone: "931-542-8461",
+    email: "chad.brown@tn.gov",
+    address: "Columbia, TN",
+    counties: ["Bedford", "Coffee", "Giles", "Hickman", "Lawrence", "Lewis", "Lincoln", "Marshall", "Maury", "Moore", "Perry", "Wayne"],
   },
   {
     id: "west",
@@ -916,7 +999,8 @@ const REGIONS = [
     consultant: "Kevin Cagle",
     phone: "731-267-1111",
     email: "kevin.cagle@tn.gov",
-    address: "295 Summar Dr., 2nd Floor, Jackson, TN 38301",
+    address: "Jackson, TN",
+    counties: ["Benton", "Carroll", "Chester", "Crockett", "Decatur", "Dyer", "Gibson", "Hardeman", "Hardin", "Haywood", "Henderson", "Henry", "Lake", "McNairy", "Madison", "Obion", "Weakley"],
   },
   {
     id: "delta",
@@ -924,7 +1008,8 @@ const REGIONS = [
     consultant: "Mike Duck",
     phone: "901-212-4444",
     email: "james.duck@tn.gov",
-    address: "295 Summar Dr., 2nd Floor, Jackson, TN 38301",
+    address: "Memphis, TN",
+    counties: ["Fayette", "Lauderdale", "Shelby", "Tipton"],
   },
   {
     id: "al",
@@ -933,6 +1018,7 @@ const REGIONS = [
     phone: "615-864-3389",
     email: "russell.d.gupton@tn.gov",
     address: "665 Mainstream Drive, Nashville, TN 37243",
+    counties: [],
   },
 ];
 
@@ -1015,6 +1101,7 @@ const SCENARIOS = [
       "1200-12 does not create an unpermitted 911 reserve. If someone tells you a shop loaner is automatically illegal, point to .02(5). If someone tells you a parked unpermitted truck can take calls all year, that sentence is not in the rule.",
     ],
     citations: ["1200-12-01-.02", "1200-12-01-.03", "1200-12-01-.06", "1200-12-01-.09", "1200-12-01-.14"],
+    formIds: ["ph3939", "ph2405"],
     phrases: "spare truck reserve ambulance loaner shop replacement unpermitted backup rig PH-3939 fleet change",
   },
   {
@@ -1115,7 +1202,47 @@ const SCENARIOS = [
       "1200-12-01-.19",
       "1200-12-02-.04",
     ],
+    formIds: ["incident", "ph3939"],
     phrases: "what am i required to report accident crash wreck incident annual run report ePCR hospital copy five days",
+  },
+  {
+    id: "county-base",
+    title: "Second county license / posting",
+    question: "Do we need a second service license to post a truck in another county?",
+    status: "conditional",
+    short:
+      "A State-issued service license is required for each county where the service has a base of operations. Permits ride on that license. Posting into another county's protected area needs that government's authorization.",
+    steps: [
+      "No ambulance or cot-equipped transport business operates in Tennessee without a service license. Cite 1200-12-01-.14.",
+      "A license is issued only to the named applicant and only for the listed base and substations. It is not transferable and expires June 30.",
+      "Each base of operations needs a State-issued service license for the county where it sits. The official EMS site says the same: a separate service license is required for each county in which the service has a base of operations, and ambulances are permitted to the license they are assigned.",
+      "A posted spare that is not a base of operations is not automatically a second county license. Ask whether the site is a listed base or substation on the license. If it is, that county needs its own license. Cite 1200-12-01-.14.",
+      "The service may not post into another county's protected service area against local ordinance without that government's authorization. Cite 1200-12-01-.14.",
+      "Patients are not transported until the license is issued. Using a second party to dodge a denied license or an inspection is expressly forbidden in .14.",
+      "Initial service applications use PH-3987. Confirm the current packet on the state EMS site before you file.",
+    ],
+    citations: ["1200-12-01-.14"],
+    formIds: ["ph3987"],
+    phrases: "second county license base of operations posting into another county substation protected service area",
+  },
+  {
+    id: "renewal",
+    title: "License and permit renewal",
+    question: "When do we renew the service license and vehicle permits, and what do we pay?",
+    status: "allowed",
+    short:
+      "The service license expires June 30. Licenses and vehicle permits renew by July 1. Renewal packets are mailed in the spring. Dollar amounts live in 1200-12-01-.06 and change when the Board amends that table.",
+    steps: [
+      "1200-12-01-.14 says the service license is not transferable and expires June 30.",
+      "The official EMS site says all ambulance service licenses and vehicle permits must be renewed by July 1 each year. Renewal notices are mailed each spring and must be returned by the deadline with the fees.",
+      "Ground ambulance renewal is PH-4318. Air and invalid services have their own renewal forms on the Forms page.",
+      "Each permitted ground vehicle pays an annual vehicle permit fee in 1200-12-01-.06. The compilation often shows $250 for standard services and $100 volunteer non-profit. Confirm the current table before you write a check. Failed inspections can trigger a published repeat-inspection fee. Replacement licenses or permits have a published replacement fee.",
+      "A verbal convenience fee or regional surcharge that is not in .06 is not the Board schedule.",
+      "Personnel license fees and miscellaneous fees are on PH-2397 and PH-3940. Those are not the service-vehicle table in .06.",
+    ],
+    citations: ["1200-12-01-.14", "1200-12-01-.06"],
+    formIds: ["ph4318", "ph2397", "ph3940"],
+    phrases: "renewal july 1 june 30 license expire permit fee fees packet PH-4318 how much do we pay",
   },
 ];
 
@@ -1133,4 +1260,7 @@ window.PROTOCOLS = PROTOCOLS;
 window.LINKS = LINKS;
 window.getRule = getRule;
 window.searchRules = searchRules;
+window.searchRegions = searchRegions;
+window.searchPeople = searchPeople;
+window.formsForIds = formsForIds;
 window.matchesHay = matchesHay;

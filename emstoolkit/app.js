@@ -23,6 +23,9 @@
   var getRule = window.getRule || function () { return null; };
   var searchRules = window.searchRules || function () { return RULES; };
   var matchesHay = window.matchesHay || function () { return false; };
+  var searchRegions = window.searchRegions || function () { return []; };
+  var searchPeople = window.searchPeople || function () { return []; };
+  var formsForIds = window.formsForIds || function () { return []; };
 
   var file = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   if (file === "emstoolkit" || file === "") file = "index.html";
@@ -89,6 +92,20 @@
     return h;
   }
 
+  function formRow(f) {
+    return '<a class="row" href="' + esc(openHref(f.href)) + '" target="_blank" rel="noreferrer"><span>' + esc(f.name) + "</span><small>" + esc(f.number) + "</small></a>";
+  }
+
+  function formList(forms) {
+    if (!forms || !forms.length) return "";
+    return "<h2>Forms</h2><div class=\"list\">" + forms.map(formRow).join("") + "</div>";
+  }
+
+  function regionTile(r) {
+    var counties = (r.counties || []).join(", ");
+    return '<div class="tile"><strong>' + esc(r.name) + "</strong><div>" + esc(r.consultant) + '</div><div class="muted">' + esc(r.phone) + ' · <a href="mailto:' + esc(r.email) + '">' + esc(r.email) + "</a></div><div class=\"muted\">" + esc(r.address) + "</div>" + (counties ? '<div class="muted">' + esc(counties) + "</div>" : "") + "</div>";
+  }
+
   function ruleCard(r) {
     return '<a class="tile" href="' + esc(r.id) + '.html"><div class="cite">' + esc(r.citation) + "</div><strong>" + esc(r.title) + '</strong><div class="muted">' + esc(r.summary) + "</div></a>";
   }
@@ -105,19 +122,33 @@
       }).join("") + "</div><h2>Rules</h2><div class=\"list\">" + RULES.slice(0, 8).map(ruleCard).join("") + "</div>";
     } else {
       var rules = searchRules(q);
-      var forms = FORMS.filter(function (f) { return matchesHay(f.name + " " + f.number + " " + f.group, q); });
       var lookups = SCENARIOS.filter(function (s) { return matchesHay([s.title, s.question, s.short, s.phrases].concat(s.steps).join(" "), q); });
+      var related = {};
+      lookups.forEach(function (s) {
+        (s.formIds || []).forEach(function (id) { related[id] = true; });
+      });
+      var forms = FORMS.filter(function (f) {
+        return related[f.id] || matchesHay(f.name + " " + f.number + " " + f.group, q);
+      });
+      var regions = searchRegions(q);
+      var people = searchPeople(q);
       var html = "";
       if (lookups.length) {
         html += "<h2>Lookups</h2><div class=\"list\">" + lookups.map(function (s) {
           return '<a class="tile" href="' + esc(s.id) + '.html"><strong>' + esc(s.title) + '</strong><div class="muted">' + esc(s.short) + "</div></a>";
         }).join("") + "</div>";
       }
-      if (forms.length) {
-        html += "<h2>Forms</h2><div class=\"list\">" + forms.map(function (f) {
-          return '<a class="row" href="' + esc(openHref(f.href)) + '" target="_blank" rel="noreferrer"><span>' + esc(f.name) + "</span><small>" + esc(f.number) + "</small></a>";
-        }).join("") + "</div>";
+      if (regions.length || people.length) {
+        html += "<h2>Office</h2><div class=\"list\">";
+        html += regions.map(regionTile).join("");
+        html += people.map(function (p) {
+          var inner = "<strong>" + esc(p.name) + '</strong><div class="muted">' + esc(p.role) + " · " + esc(p.detail) + "</div>";
+          if (p.href && p.href.indexOf("http") === 0) return '<a class="tile" href="' + esc(p.href) + '" target="_blank" rel="noreferrer">' + inner + "</a>";
+          return '<a class="tile" href="' + esc(p.href || "office.html") + '">' + inner + "</a>";
+        }).join("");
+        html += "</div>";
       }
+      if (forms.length) html += formList(forms);
       html += "<h2>Matching sections · " + rules.length + "</h2><div class=\"list\">";
       html += rules.length ? rules.map(ruleBlock).join("") : '<p class="muted">No matching sections.</p>';
       html += "</div>";
@@ -158,7 +189,7 @@
       html += "<h2>" + esc(g) + '</h2><div class="list">';
       list.forEach(function (f) {
         if (f.group !== g) return;
-        html += '<a class="row" href="' + esc(openHref(f.href)) + '" target="_blank" rel="noreferrer"><span>' + esc(f.name) + "</span><small>" + esc(f.number) + "</small></a>";
+        html += formRow(f);
       });
       html += "</div>";
     });
@@ -171,9 +202,15 @@
     html += '<div><a href="mailto:' + esc(OFFICE.email) + '">' + esc(OFFICE.email) + "</a></div>";
     html += "<div>Director: " + esc(DIRECTOR.name) + " · " + esc(DIRECTOR.phone) + "</div>";
     html += "<div>Medical director: " + esc(OFFICE.medicalDirector) + "</div></div>";
-    html += '<h2>Consultants</h2><div class="list">';
+    if (OFFICE.dataManager) {
+      html += '<h2>Data and radio</h2><div class="list">';
+      html += '<div class="tile"><strong>' + esc(OFFICE.dataManager.name) + '</strong><div>Data manager</div><div class="muted">' + esc(OFFICE.dataManager.office) + " · cell " + esc(OFFICE.dataManager.cell) + '</div><div class="muted"><a href="mailto:' + esc(OFFICE.dataManager.email) + '">' + esc(OFFICE.dataManager.email) + "</a></div></div>";
+      html += '<div class="tile"><strong>' + esc(OFFICE.radio.name) + '</strong><div>Radio systems analyst</div><div class="muted">' + esc(OFFICE.radio.phone) + ' · <a href="mailto:' + esc(OFFICE.radio.email) + '">' + esc(OFFICE.radio.email) + "</a></div></div>";
+      html += "</div>";
+    }
+    html += '<h2>Consultants</h2><p class="muted">Names from the state EMS site. Confirm before you send a letter.</p><div class="list">';
     REGIONS.forEach(function (r) {
-      html += '<div class="tile"><strong>' + esc(r.name) + "</strong><div>" + esc(r.consultant) + '</div><div class="muted">' + esc(r.phone) + ' · <a href="mailto:' + esc(r.email) + '">' + esc(r.email) + '</a></div><div class="muted">' + esc(r.address) + "</div></div>";
+      html += regionTile(r);
     });
     html += '</div><h2>Board</h2><div class="list">';
     BOARD_MEMBERS.forEach(function (m) {
@@ -184,6 +221,8 @@
     PROTOCOLS.forEach(function (p) {
       html += '<a class="row" href="' + esc(p.href) + '" target="_blank" rel="noreferrer">' + esc(p.label) + "</a>";
     });
+    html += '</div><h2>Peer assistance</h2><div class="list">';
+    html += '<a class="tile" href="' + esc(OFFICE.tnpap.site) + '" target="_blank" rel="noreferrer"><strong>' + esc(OFFICE.tnpap.name) + '</strong><div class="muted">' + esc(OFFICE.tnpap.phone) + " · toll-free " + esc(OFFICE.tnpap.tollFree) + "</div><div class=\"muted\">" + esc(OFFICE.tnpap.address) + "</div></a>";
     html += '</div><h2>Links</h2><div class="list">';
     LINKS.forEach(function (p) {
       html += '<a class="row" href="' + esc(p.href) + '" target="_blank" rel="noreferrer">' + esc(p.label) + "</a>";
@@ -205,7 +244,9 @@
       s.steps.forEach(function (d) { html += "<li>" + linkCites(d) + "</li>"; });
       html += '</ol><p class="cite-row">';
       html += s.citations.map(function (c) { return citeAnchor(c); }).join(" · ");
-      html += "</p><p>";
+      html += "</p>";
+      html += formList(formsForIds(s.formIds));
+      html += "<p>";
       var seen = {};
       s.citations.forEach(function (c) {
         var r = ruleForCite(c);

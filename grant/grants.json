@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-11-26T19:00:00Z",
-  "rulesNote": "Facts below were checked against the funder pages on November 26, 2026. The daily update rechecks those pages and changes only the status line when the page itself changes.",
+  "rulesNote": "Facts below were checked against the funder pages on November 26, 2026. The weekly check rechecks those pages and changes only the status line when the page itself changes.",
   "grants": [
     {
       "id": "afg-vehicle",
@@ -30,9 +30,25 @@
         "FEMA Assistance to Firefighters Grants page, checked November 26, 2026. The FY 2025 application period is closed.",
         "U.S. Census Bureau QuickFacts, Bedford County, Tennessee, July 1, 2025 population estimate 55,273"
       ],
-      "watch": { "kind": "fema-afg", "url": "https://www.fema.gov/grants/preparedness/firefighters" },
+      "watch": {
+        "kind": "fema-afg",
+        "url": "https://www.fema.gov/grants/preparedness/firefighters"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["eligibility-ems", "sam", "uei", "unit-year", "unit-label", "mileage", "unit-condition", "outages", "project-cost", "match-cash", "calls", "full-time"]
+      "questions": [
+        "eligibility-ems",
+        "sam",
+        "uei",
+        "unit-year",
+        "unit-label",
+        "mileage",
+        "unit-condition",
+        "outages",
+        "project-cost",
+        "match-cash",
+        "calls",
+        "full-time"
+      ]
     },
     {
       "id": "afg-ops",
@@ -60,9 +76,23 @@
         "FEMA FY 2025 AFG Notice of Funding Opportunity",
         "FEMA Assistance to Firefighters Grants page, checked November 26, 2026"
       ],
-      "watch": { "kind": "fema-afg", "url": "https://www.fema.gov/grants/preparedness/firefighters" },
+      "watch": {
+        "kind": "fema-afg",
+        "url": "https://www.fema.gov/grants/preparedness/firefighters"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["eligibility-ems", "sam", "uei", "ops-item", "item-age", "quantity", "project-cost", "match-cash", "calls", "full-time"]
+      "questions": [
+        "eligibility-ems",
+        "sam",
+        "uei",
+        "ops-item",
+        "item-age",
+        "quantity",
+        "project-cost",
+        "match-cash",
+        "calls",
+        "full-time"
+      ]
     },
     {
       "id": "firehouse",
@@ -81,7 +111,7 @@
         "They do not reimburse equipment you already bought.",
         "They do not fund power-load stretchers, naloxone, drones, body cameras, or exercise equipment.",
         "You need one official vendor quote with the foundation's required quote details, plus a current budget, balance sheet, or audit that shows the county or department name.",
-        "The portal opens at 2:00 p.m. ET on January 14, 2027, April 15, 2027, and July 15, 2027. Dates can change. The daily check reads the foundation page."
+        "The portal opens at 2:00 p.m. ET on January 14, 2027, April 15, 2027, and July 15, 2027. Dates can change. The weekly check reads the foundation page."
       ],
       "portalUrl": "https://firehousesubs-foundation.wizehive.app/program/firehouse-subs-foundation-grant-us/applicant/application/info",
       "infoUrl": "https://grants.firehousesubs.com/FAQ",
@@ -93,7 +123,18 @@
         "url": "https://firehousesubs-foundation.wizehive.app/program/firehouse-subs-foundation-grant-us/applicant/application/info"
       },
       "rulesVersion": "2026-11-26",
-      "questions": ["fh-item", "fh-amount", "fh-quote", "fh-financials", "fh-prior", "fh-need"]
+      "questions": [
+        "fh-item",
+        "fh-amount",
+        "fh-quote",
+        "fh-financials",
+        "fh-prior",
+        "fh-need"
+      ],
+      "clock": {
+        "kind": "opens",
+        "at": "2027-01-14T14:00:00-05:00"
+      }
     },
     {
       "id": "thso",
@@ -121,9 +162,22 @@
         "Tennessee Department of Safety county rankings, 2021 through 2025, revised February 12, 2026. Bedford overall crash rate rank 23.",
         "FFY 2026 THSO grant awards list"
       ],
-      "watch": { "kind": "thso", "url": "https://tntrafficsafety.org/applying-for-grants" },
+      "watch": {
+        "kind": "thso",
+        "url": "https://tntrafficsafety.org/applying-for-grants"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["thso-project", "thso-amount", "thso-stats", "thso-rural"]
+      "questions": [
+        "thso-project",
+        "thso-amount",
+        "thso-stats",
+        "thso-rural"
+      ],
+      "clock": {
+        "kind": "closes",
+        "on": "2027-03-31",
+        "planned": true
+      }
     },
     {
       "id": "cdbg",
@@ -151,9 +205,22 @@
         "Tennessee State CDBG Program 2026 Application Notices",
         "TNECD CDBG page, 2027 public meeting held October 22, 2026"
       ],
-      "watch": { "kind": "cdbg", "url": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html" },
+      "watch": {
+        "kind": "cdbg",
+        "url": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["cdbg-project", "cdbg-cost", "lmi", "lmi-alt", "atp", "cdbg-open", "resolution", "unit-year", "mileage"]
+      "questions": [
+        "cdbg-project",
+        "cdbg-cost",
+        "lmi",
+        "lmi-alt",
+        "atp",
+        "cdbg-open",
+        "resolution",
+        "unit-year",
+        "mileage"
+      ]
     },
     {
       "id": "tema",
@@ -172,16 +239,25 @@
         "The project has to support prevention, protection, response, or recovery. A replacement ambulance for daily 911 work does not fit.",
         "Radios bought with this money have to meet interoperability rules.",
         "Equipment has to be inventoried and tagged.",
-        "The daily check reads the TEMA page for a posted deadline."
+        "The weekly check reads the TEMA page for a posted deadline."
       ],
       "portalUrl": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html",
       "infoUrl": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html",
       "sources": [
         "TEMA Homeland Security Grant Program page, checked November 26, 2026"
       ],
-      "watch": { "kind": "tema", "url": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html" },
+      "watch": {
+        "kind": "tema",
+        "url": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["tema-project", "tema-cost", "tema-hazard", "ema-name", "ema-email"]
+      "questions": [
+        "tema-project",
+        "tema-cost",
+        "tema-hazard",
+        "ema-name",
+        "ema-email"
+      ]
     },
     {
       "id": "rhtp",
@@ -200,7 +276,7 @@
         "A later project can cover workforce, training, or technology if a notice says EMS or county government may apply.",
         "Organizations have to be registered with the State of Tennessee.",
         "Send questions to RuralHealth@tn.gov and watch tn.gov/health/rural.",
-        "The daily check looks for a new notice that names EMS, ambulances, or the workforce."
+        "The weekly check looks for a new notice that names EMS, ambulances, or the workforce."
       ],
       "portalUrl": "https://www.tn.gov/health/rural.html",
       "infoUrl": "https://www.tn.gov/health/news/2026/5/15/tennessee-to-release-1st-grant-funding-opportunity-of-rural-health-transformation-program.html",
@@ -209,9 +285,16 @@
         "CTAS notice, May 15, 2026, one ambulance for every eligible rural county",
         "Bedford County Financial Management Committee reports, June 23, 2026 and September 23, 2026"
       ],
-      "watch": { "kind": "rhtp", "url": "https://www.tn.gov/health/rural.html" },
+      "watch": {
+        "kind": "rhtp",
+        "url": "https://www.tn.gov/health/rural.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["rhtp-idea", "rhtp-cost", "email"]
+      "questions": [
+        "rhtp-idea",
+        "rhtp-cost",
+        "email"
+      ]
     }
   ],
   "notAFit": [

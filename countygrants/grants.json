@@ -1,6 +1,6 @@
 {
   "checkedAt": "2026-11-26T20:30:00Z",
-  "rulesNote": "Facts below were checked against the funder pages on November 26, 2026. The daily update rechecks those pages and changes only the status line when the page itself changes. This is not every grant in the country. A program is listed when a funder page says a Tennessee county may apply, or when the page was checked and the county does not qualify.",
+  "rulesNote": "Facts below were checked against the funder pages on November 26, 2026. The weekly check rechecks those pages and changes only the status line when the page itself changes. This is not every grant in the country. A program is listed when a funder page says a Tennessee county may apply, or when the page was checked and the county does not qualify.",
   "grants": [
     {
       "id": "srf",
@@ -25,9 +25,23 @@
       "sources": [
         "TDEC SRF news, November 16, 2026. Applications accepted November 17, 2026 through January 8, 2027."
       ],
-      "watch": { "kind": "srf", "url": "https://www.tn.gov/environment/program-areas/wr-water-resources/srfp/srf-home/srf-news.html" },
+      "watch": {
+        "kind": "srf",
+        "url": "https://www.tn.gov/environment/program-areas/wr-water-resources/srfp/srf-home/srf-news.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["srf-type", "project", "cost", "match-known", "contact-name", "contact-email"]
+      "questions": [
+        "srf-type",
+        "project",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ],
+      "clock": {
+        "kind": "due",
+        "on": "2027-01-08"
+      }
     },
     {
       "id": "cdbg",
@@ -56,9 +70,21 @@
         "TNECD CDBG page. The 2027 public meeting was October 22, 2026. A 2027 due date is not posted.",
         "TNECD About CDBG. Bedford County is not an entitlement community."
       ],
-      "watch": { "kind": "cdbg", "url": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html" },
+      "watch": {
+        "kind": "cdbg",
+        "url": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["cdbg-project", "cost", "lmi", "atp", "cdbg-open", "resolution", "contact-name", "contact-email"]
+      "questions": [
+        "cdbg-project",
+        "cost",
+        "lmi",
+        "atp",
+        "cdbg-open",
+        "resolution",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "cdbg-ed",
@@ -82,9 +108,17 @@
       "sources": [
         "TNECD About CDBG, checked November 26, 2026. The economic development program operates continuously."
       ],
-      "watch": { "kind": "cdbg", "url": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html" },
+      "watch": {
+        "kind": "cdbg",
+        "url": "https://www.tn.gov/ecd/community-development-block-grant/cdbg.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["project", "cost", "contact-name", "contact-email"]
+      "questions": [
+        "project",
+        "cost",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "bric",
@@ -111,9 +145,21 @@
         "FEMA BRIC page, checked November 26, 2026. The fiscal year 2024 and 2025 application period is closed. Deadline was 3:00 p.m. ET on July 23, 2026.",
         "TEMA BRIC page. Subapplicants include local governments. A statement of interest comes first."
       ],
-      "watch": { "kind": "bric", "url": "https://www.fema.gov/grants/mitigation/learn/building-resilient-infrastructure-communities" },
+      "watch": {
+        "kind": "bric",
+        "url": "https://www.fema.gov/grants/mitigation/learn/building-resilient-infrastructure-communities"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["project", "cost", "bric-plan", "bric-nfip", "sam", "uei", "contact-name", "contact-email"]
+      "questions": [
+        "project",
+        "cost",
+        "bric-plan",
+        "bric-nfip",
+        "sam",
+        "uei",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "hmgp",
@@ -138,9 +184,18 @@
       "sources": [
         "TEMA Hazard Mitigation Grant Program page, checked November 26, 2026."
       ],
-      "watch": { "kind": "tema", "url": "https://www.tn.gov/tema/ready-communities/grants/mitigation-grants/hazard-mitigation-grant-program.html" },
+      "watch": {
+        "kind": "tema",
+        "url": "https://www.tn.gov/tema/ready-communities/grants/mitigation-grants/hazard-mitigation-grant-program.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["hmgp-open", "project", "cost", "contact-name", "contact-email"]
+      "questions": [
+        "hmgp-open",
+        "project",
+        "cost",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "usda-cf",
@@ -167,9 +222,19 @@
         "USDA Community Facilities Direct Loan and Grant page, checked November 26, 2026.",
         "U.S. Census Bureau QuickFacts, July 1, 2025. Bedford County 55,273. Shelbyville 26,146."
       ],
-      "watch": { "kind": "usda", "url": "https://www.rd.usda.gov/programs-services/community-facilities/community-facilities-direct-loan-grant-program" },
+      "watch": {
+        "kind": "usda",
+        "url": "https://www.rd.usda.gov/programs-services/community-facilities/community-facilities-direct-loan-grant-program"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["usda-place", "usda-pop", "project", "cost", "contact-name", "contact-email"]
+      "questions": [
+        "usda-place",
+        "usda-pop",
+        "project",
+        "cost",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "cops",
@@ -195,9 +260,20 @@
         "COPS Office grants table, checked November 26, 2026. Fiscal year 2026 Hiring Program is closed.",
         "FY 2026 COPS Hiring Program notice, opportunity O-COPS-2026-172611. Grants.gov deadline July 23, 2026. JustGrants deadline July 29, 2026."
       ],
-      "watch": { "kind": "cops", "url": "https://cops.usdoj.gov/grants" },
+      "watch": {
+        "kind": "cops",
+        "url": "https://cops.usdoj.gov/grants"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["cops-primary", "cops-count", "cost", "sam", "uei", "contact-name", "contact-email"]
+      "questions": [
+        "cops-primary",
+        "cops-count",
+        "cost",
+        "sam",
+        "uei",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "eda",
@@ -222,9 +298,20 @@
       "sources": [
         "South Central Tennessee Development District, August 2026 grant opportunities. EDA public infrastructure, no set funding limit."
       ],
-      "watch": { "kind": "eda", "url": "https://www.eda.gov/funding/funding-opportunities" },
+      "watch": {
+        "kind": "eda",
+        "url": "https://www.eda.gov/funding/funding-opportunities"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["eda-distress", "project", "cost", "sam", "uei", "contact-name", "contact-email"]
+      "questions": [
+        "eda-distress",
+        "project",
+        "cost",
+        "sam",
+        "uei",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "outdoor",
@@ -252,9 +339,20 @@
         "TDEC outdoor recreation page. LWCF match is 50 percent. RTP is 80 percent with a 20 percent match.",
         "Local Parks and Recreation Fund descriptions published by Tennessee counties. LPRF requires a 50 percent match."
       ],
-      "watch": { "kind": "outdoor", "url": "https://www.tn.gov/environment/outdoorrec/grants.html" },
+      "watch": {
+        "kind": "outdoor",
+        "url": "https://www.tn.gov/environment/outdoorrec/grants.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["outdoor-type", "trip-dept", "project", "cost", "match-known", "contact-name", "contact-email"]
+      "questions": [
+        "outdoor-type",
+        "trip-dept",
+        "project",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "thso",
@@ -280,9 +378,23 @@
         "Tennessee Traffic Safety Resource Service, grant application process, checked for the local March window.",
         "Tennessee Department of Safety county rankings, 2021 through 2025, revised February 12, 2026. Bedford overall crash rate rank 23."
       ],
-      "watch": { "kind": "thso", "url": "https://tntrafficsafety.org/applying-for-grants" },
+      "watch": {
+        "kind": "thso",
+        "url": "https://tntrafficsafety.org/applying-for-grants"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["project", "cost", "thso-stats", "contact-name", "contact-email"]
+      "questions": [
+        "project",
+        "cost",
+        "thso-stats",
+        "contact-name",
+        "contact-email"
+      ],
+      "clock": {
+        "kind": "closes",
+        "on": "2027-03-31",
+        "planned": true
+      }
     },
     {
       "id": "abc",
@@ -308,9 +420,17 @@
       "sources": [
         "South Central Tennessee Development District, Arts Build Communities, checked November 26, 2026. Applications opened April 1, 2026 and closed July 1, 2026."
       ],
-      "watch": { "kind": "abc", "url": "https://www.sctdd.org/arts-build-communities/" },
+      "watch": {
+        "kind": "abc",
+        "url": "https://www.sctdd.org/arts-build-communities/"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["project", "cost", "contact-name", "contact-email"]
+      "questions": [
+        "project",
+        "cost",
+        "contact-name",
+        "contact-email"
+      ]
     },
     {
       "id": "tema",
@@ -335,9 +455,18 @@
       "sources": [
         "TEMA Homeland Security Grant Program page, checked November 26, 2026."
       ],
-      "watch": { "kind": "tema", "url": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html" },
+      "watch": {
+        "kind": "tema",
+        "url": "https://www.tn.gov/tema/ready-communities/grants/homeland-security-grant-program.html"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["project", "cost", "tema-hazard", "ema-name", "ema-email"]
+      "questions": [
+        "project",
+        "cost",
+        "tema-hazard",
+        "ema-name",
+        "ema-email"
+      ]
     },
     {
       "id": "firehouse",
@@ -363,9 +492,24 @@
       "sources": [
         "Firehouse Subs Public Safety Foundation application page, checked November 26, 2026. The portal was closed and listed a reopen time of January 14, 2027 at 2:00 p.m. ET."
       ],
-      "watch": { "kind": "firehouse", "url": "https://firehousesubs-foundation.wizehive.app/program/firehouse-subs-foundation-grant-us/applicant/application/info" },
+      "watch": {
+        "kind": "firehouse",
+        "url": "https://firehousesubs-foundation.wizehive.app/program/firehouse-subs-foundation-grant-us/applicant/application/info"
+      },
       "rulesVersion": "2026-11-26",
-      "questions": ["fh-item", "cost", "fh-quote", "fh-financials", "fh-prior", "contact-name", "contact-email"]
+      "questions": [
+        "fh-item",
+        "cost",
+        "fh-quote",
+        "fh-financials",
+        "fh-prior",
+        "contact-name",
+        "contact-email"
+      ],
+      "clock": {
+        "kind": "opens",
+        "at": "2027-01-14T14:00:00-05:00"
+      }
     }
   ],
   "notAFit": [

@@ -233,7 +233,112 @@ function checkedLabel() {
   if (!raw) return "The list has not been checked.";
   const date = new Date(raw);
   if (Number.isNaN(date.getTime())) return "The list has not been checked.";
-  return `Checked ${date.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })}.`;
+  return `Official pages last read ${date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "America/Chicago" })}.`;
+}
+
+function clockMarkup(grant) {
+  const clock = grant.clock;
+  if (!clock || !clock.kind) {
+    return `<div class="timer timer-none"><p class="timer-note">No due date posted.</p></div>`;
+  }
+  const on = clock.on ? ` data-on="${esc(clock.on)}"` : "";
+  const at = clock.at ? ` data-at="${esc(clock.at)}"` : "";
+  const planned = clock.planned ? ` data-planned="yes"` : "";
+  return `<div class="timer" data-kind="${esc(clock.kind)}"${on}${at}${planned}><p class="timer-kicker"></p><p class="timer-count"></p><p class="timer-note"></p></div>`;
+}
+
+function chicagoDay(now) {
+  const parts = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Chicago",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit"
+  }).formatToParts(now);
+  const pick = (type) => parts.find((part) => part.type === type).value;
+  return `${pick("year")}-${pick("month")}-${pick("day")}`;
+}
+
+function spokenDay(iso) {
+  const [year, month, day] = iso.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day)).toLocaleDateString("en-US", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC"
+  });
+}
+
+function dayGap(on, now) {
+  const today = chicagoDay(now);
+  const start = Date.parse(`${today}T00:00:00Z`);
+  const end = Date.parse(`${on}T00:00:00Z`);
+  return Math.round((end - start) / 86400000);
+}
+
+function paintClock(node, now) {
+  const kind = node.dataset.kind;
+  const kicker = node.querySelector(".timer-kicker");
+  const count = node.querySelector(".timer-count");
+  const note = node.querySelector(".timer-note");
+  const planned = node.dataset.planned === "yes";
+  const words = { due: "Due in", opens: "Opens in", closes: "Closes in" };
+  if (node.dataset.at) {
+    const left = Date.parse(node.dataset.at) - now.getTime();
+    if (!Number.isFinite(left) || left <= 0) {
+      node.classList.add("timer-past");
+      kicker.textContent = "";
+      count.textContent = "Opened";
+      note.textContent = "The posted opening time has passed. It stops after 600 applications.";
+      return;
+    }
+    const total = Math.floor(left / 1000);
+    const days = Math.floor(total / 86400);
+    const hours = Math.floor((total % 86400) / 3600);
+    const minutes = Math.floor((total % 3600) / 60);
+    const seconds = total % 60;
+    kicker.textContent = words[kind] || "Opens in";
+    if (days >= 2) count.textContent = `${days} days`;
+    else {
+      const dayText = days === 1 ? "1 day " : "";
+      count.textContent = `${dayText}${hours}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+    }
+    const when = new Date(node.dataset.at).toLocaleString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: "America/New_York",
+      timeZoneName: "short"
+    });
+    note.textContent = `${when}. No closing time is posted. It stops after 600 applications.`;
+    node.classList.toggle("timer-soon", days < 14);
+    return;
+  }
+  const gap = dayGap(node.dataset.on, now);
+  if (!Number.isFinite(gap)) {
+    note.textContent = "No due date posted.";
+    return;
+  }
+  if (gap < 0) {
+    node.classList.add("timer-past");
+    kicker.textContent = "";
+    count.textContent = "Date passed";
+    note.textContent = `${spokenDay(node.dataset.on)} has passed.`;
+    return;
+  }
+  kicker.textContent = planned ? "Planned close in" : (words[kind] || "Due in");
+  if (gap === 0) count.textContent = "Today";
+  else if (gap === 1) count.textContent = "1 day";
+  else count.textContent = `${gap} days`;
+  const confirm = planned ? " Confirm this date on the funder page." : " No hour was posted.";
+  note.textContent = `${spokenDay(node.dataset.on)}.${confirm}`;
+  node.classList.toggle("timer-soon", gap < 14);
+}
+
+function paintClocks() {
+  const now = new Date();
+  document.querySelectorAll(".timer[data-kind]").forEach((node) => paintClock(node, now));
 }
 
 function shell(main) {
@@ -284,6 +389,7 @@ function renderHome() {
       <p>${esc(grant.summary)}</p>
       <p class="small"><strong>Why it fits.</strong> ${esc(grant.why)}</p>
       <p class="small"><strong>Timing.</strong> ${esc(grant.deadlineLabel)}</p>
+      ${clockMarkup(grant)}
       <p class="small"><strong>Amount.</strong> ${esc(grant.amountLabel)}</p>
       ${grant.watcherNote ? `<p class="small muted">${esc(grant.watcherNote)}</p>` : ""}
       <div class="actions">
@@ -306,7 +412,7 @@ function renderHome() {
             <div class="stat"><b>${counts.prepare || 0}</b><span>Get ready</span></div>
             <div class="stat"><b>${counts.watch || 0}</b><span>Watch</span></div>
           </div>
-          <p class="small muted">${esc(checkedLabel())} A daily check reads the TDEC, TNECD, FEMA, TEMA, USDA, COPS, THSO, arts district, and Firehouse Subs pages. It changes a date only when that page states a new one.</p>
+          <p class="small muted">${esc(checkedLabel())} A weekly check reads the TDEC, TNECD, FEMA, TEMA, USDA, COPS, THSO, arts district, and Firehouse Subs pages. It changes a date only when that page states a new one.</p>
           <div class="filters">
             ${["all", "federal", "state", "local", "private"].map((level) => `<button class="chip ${state.filter === level ? "active" : ""}" data-filter="${level}">${level === "all" ? "All" : LEVEL_LABEL[level]}</button>`).join("")}
           </div>
@@ -340,6 +446,7 @@ function renderGrant(id) {
       <p>${esc(grant.summary)}</p>
       <div class="note"><strong>Why the county can apply.</strong> ${esc(grant.why)}</div>
       <p><strong>Timing.</strong> ${esc(grant.deadlineLabel)}</p>
+      ${clockMarkup(grant)}
       <p><strong>Amount.</strong> ${esc(grant.amountLabel)}</p>
       <p><strong>Match.</strong> ${esc(grant.matchLabel)}</p>
       <h3>Rules that change the application</h3>
@@ -666,6 +773,7 @@ function render() {
   else if (parts[0] === "agency") main = renderAgency();
   else main = renderHome();
   root.innerHTML = shell(main);
+  paintClocks();
 }
 
 function onClick(event) {
@@ -795,6 +903,7 @@ document.getElementById("app").addEventListener("change", (event) => {
 });
 
 window.addEventListener("hashchange", render);
+setInterval(paintClocks, 1000);
 
 fetch("grants.json", { cache: "no-store" })
   .then((response) => {

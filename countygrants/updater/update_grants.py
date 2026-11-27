@@ -13,6 +13,7 @@ import sys
 import urllib.request
 from datetime import date, datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "grants.json"
@@ -285,6 +286,65 @@ CHECKS = {
 }
 
 
+def thso_clock() -> dict:
+    year = TODAY.year if (TODAY.month, TODAY.day) <= (3, 31) else TODAY.year + 1
+    close = date(year, 3, 31).isoformat()
+    if TODAY.month == 3 and TODAY.day <= 31:
+        return {"kind": "due", "on": close}
+    return {"kind": "closes", "on": close, "planned": True}
+
+
+def firehouse_clock(grant: dict) -> dict | None:
+    if grant.get("status") == "open":
+        return None
+    action = grant.get("actionDate")
+    if not action:
+        return None
+    label = grant.get("deadlineLabel") or ""
+    match = re.search(r"(\d{1,2})(?::(\d{2}))?\s*(a\.?m\.|p\.?m\.)\s*ET", label, re.I)
+    if not match:
+        return {"kind": "opens", "on": action}
+    hour = int(match.group(1))
+    minute = int(match.group(2) or 0)
+    meridiem = match.group(3).lower()
+    if meridiem.startswith("p") and hour < 12:
+        hour += 12
+    if meridiem.startswith("a") and hour == 12:
+        hour = 0
+    year, month, day = (int(part) for part in action.split("-"))
+    moment = datetime(year, month, day, hour, minute, tzinfo=ZoneInfo("America/New_York"))
+    return {"kind": "opens", "at": moment.isoformat()}
+
+
+def due_clock(grant: dict) -> dict | None:
+    action = grant.get("actionDate")
+    label = grant.get("deadlineLabel") or ""
+    if not action or not re.search(r"due|deadline|through|application date", label, re.I):
+        return None
+    return {"kind": "due", "on": action}
+
+
+def clock_for(grant: dict) -> dict | None:
+    gid = grant.get("id")
+    if gid == "thso":
+        return thso_clock()
+    if gid == "firehouse":
+        return firehouse_clock(grant)
+    if gid in {"srf", "cdbg", "cdbg-ed", "abc", "outdoor", "bric", "afg-vehicle", "afg-ops"}:
+        return due_clock(grant)
+    return None
+
+
+def sync_clocks(data: dict) -> bool:
+    changed = False
+    for grant in data["grants"]:
+        clock = clock_for(grant)
+        if grant.get("clock") != clock:
+            grant["clock"] = clock
+            changed = True
+    return changed
+
+
 def main() -> int:
     data = json.loads(DATA_PATH.read_text())
     changed = False
@@ -298,11 +358,13 @@ def main() -> int:
         try:
             text = fetch(url)
         except Exception as error:
-            grant["watcherNote"] = f"The daily check could not read the funder page. {error.__class__.__name__}."
+            grant["watcherNote"] = f"The weekly check could not read the funder page. {error.__class__.__name__}."
             changed = True
             continue
         if checker(grant, text):
             changed = True
+    if sync_clocks(data):
+        changed = True
     data["checkedAt"] = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     DATA_PATH.write_text(json.dumps(data, indent=2) + "\n")
     print("updated" if changed else "checked")

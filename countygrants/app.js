@@ -251,7 +251,7 @@ function shell(main) {
   return `
     <header class="app-header">
       <div class="brand">
-        <img src="logo.png?v=1" alt="Bedford County seal with Grants across it">
+        <img src="logo.png?v=2" alt="Bedford County seal">
         <div>
           <p class="eyebrow">Bedford County</p>
           <h1>County Grants</h1>
@@ -260,7 +260,7 @@ function shell(main) {
       </div>
     </header>
     <nav class="side">
-      <img src="logo.png?v=1" alt="">
+      <img src="logo.png?v=2" alt="">
       <strong>County Grants</strong>
       <span>Bedford County</span>
       ${tabs.map(([href, label]) => tab(href, label)).join("")}
@@ -322,7 +322,7 @@ function renderHome() {
         <section class="panel install">
           <p class="kicker">Use it like an app</p>
           <h2>Add it to this phone or computer</h2>
-          <p>On an iPhone, tap Share, then Add to Home Screen. The icon says Grants across the county seal. On Android, use the browser menu and choose Install app or Add to Home screen. On a Mac, open this page in Safari and choose File, then Add to Dock. It then opens full screen, with no browser bar.</p>
+          <p>On an iPhone, tap Share, then Add to Home Screen. The icon is the county seal with Grants at the bottom. On Android, use the browser menu and choose Install app or Add to Home screen. On a Mac, open this page in Safari and choose File, then Add to Dock. It then opens full screen, with no browser bar.</p>
         </section>
       </aside>
     </section>

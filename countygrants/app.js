@@ -412,7 +412,7 @@ function renderHome() {
             <div class="stat"><b>${counts.prepare || 0}</b><span>Get ready</span></div>
             <div class="stat"><b>${counts.watch || 0}</b><span>Watch</span></div>
           </div>
-          <p class="small muted">${esc(checkedLabel())} A weekly check reads the TDEC, TNECD, FEMA, TEMA, USDA, COPS, THSO, arts district, and Firehouse Subs pages. It changes a date only when that page states a new one.</p>
+          <p class="small muted">${esc(checkedLabel())} The countdown uses a date only when the funder page posted one.</p>
           <div class="filters">
             ${["all", "federal", "state", "local", "private"].map((level) => `<button class="chip ${state.filter === level ? "active" : ""}" data-filter="${level}">${level === "all" ? "All" : LEVEL_LABEL[level]}</button>`).join("")}
           </div>

@@ -165,6 +165,46 @@ const QUESTIONS = {
     type: "choice",
     options: [["no", "No."], ["yes", "Yes. We have to wait."]],
     stop: ["yes"]
+  },
+  "litter-ready": {
+    label: "Litter plans",
+    prompt: "Are the work plan, the education plan, and a budget that matches the contract amount ready?",
+    type: "choice",
+    options: [["yes", "Yes."], ["no", "Not yet."]]
+  },
+  "walk-filed": {
+    label: "2026 filing",
+    prompt: "Did the county submit a sidewalk or bikeway project in the 2026 Statewide Partnership Program intake?",
+    type: "choice",
+    options: [["yes", "Yes."], ["no", "No. The next intake is in 2027."]]
+  },
+  "recycle-private": {
+    label: "Private competition",
+    prompt: "Would this equipment make the county compete with a private recycling business in this area?",
+    type: "choice",
+    options: [["no", "No."], ["yes", "Yes. That equipment is not eligible."]],
+    stop: ["yes"]
+  },
+  "site-loi": {
+    label: "Letter of intent",
+    prompt: "Did TNECD approve a Site Development Grant letter of intent for this site?",
+    type: "choice",
+    options: [["yes", "Yes."], ["no", "No. The October 15, 2026 letter deadline has passed."]],
+    stop: ["no"]
+  },
+  "site-public": {
+    label: "Public site",
+    prompt: "Is the site publicly owned, or is this request to buy it or to pay for due diligence?",
+    type: "choice",
+    options: [["yes", "Yes."], ["no", "No."]],
+    stop: ["no"]
+  },
+  "hist-register": {
+    label: "National Register",
+    prompt: "If this project restores a building, is that building listed in the National Register of Historic Places?",
+    type: "choice",
+    options: [["yes", "Yes, or this is not a restoration."], ["no", "No. A restoration has to be listed."]],
+    stop: ["no"]
   }
 };
 
@@ -572,6 +612,7 @@ function blockersFor(grant, answers) {
   }
   if (answers.resolution === "no") blockers.push("The commission still has to adopt the resolution.");
   if (answers["match-known"] === "no") blockers.push("The match or loan terms are not confirmed.");
+  if (answers["litter-ready"] === "no") blockers.push("The litter work plan, education plan, and budget are not ready.");
   if (answers["bric-plan"] === "no") blockers.push("Confirm the FEMA-approved hazard mitigation plan before you file.");
   if (answers["bric-nfip"] === "no") blockers.push("Confirm National Flood Insurance Program standing before you file.");
   if (answers.sam === "no") blockers.push("SAM.gov is not confirmed as active.");

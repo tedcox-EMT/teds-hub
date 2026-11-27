@@ -1,6 +1,6 @@
 {
-  "checkedAt": "2026-11-26T20:30:00Z",
-  "rulesNote": "Facts below were checked against the funder pages on November 26, 2026. The weekly check rechecks those pages and changes only the status line when the page itself changes. This is not every grant in the country. A program is listed when a funder page says a Tennessee county may apply, or when the page was checked and the county does not qualify.",
+  "checkedAt": "2026-11-27T03:30:00Z",
+  "rulesNote": "Facts below were checked against the funder pages on November 26, 2026. A second check the same night added road, solid waste, site, housing, preservation, tourism, and library programs only when the funder page says a Tennessee county may apply. The weekly check rechecks saved pages and changes only the status line when the page itself changes. This is not every grant in the country.",
   "grants": [
     {
       "id": "srf",
@@ -510,6 +510,352 @@
         "kind": "opens",
         "at": "2027-01-14T14:00:00-05:00"
       }
+    },
+    {
+      "id": "tdot-litter",
+      "name": "TDOT litter grant",
+      "funder": "Tennessee Department of Transportation",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "The fiscal year 2027 packet was due June 8, 2026. The next packet date is not posted.",
+      "actionDate": null,
+      "amountLabel": "TDOT distributes about $5 million a year to all 95 counties by a formula of population and road miles. Do not guess Bedford County's share.",
+      "matchLabel": "The packet does not post a local match. The budget has to match the contract amount.",
+      "summary": "Every Tennessee county can get this annual grant for roadside litter pickup and litter prevention education.",
+      "why": "The Highway Beautification Office says litter grants go to all 95 county governments. Bedford County is one of those counties.",
+      "rules": [
+        "Send a work plan, an education plan, and a litter grant budget.",
+        "No more than 10 percent of the grant may be used to advertise a litter program.",
+        "The fiscal year 2027 instructions set the packet deadline at June 8, 2026. That date has passed.",
+        "Do not enter a dollar request until TDOT names the county's formula amount."
+      ],
+      "portalUrl": "https://www.tn.gov/tdot/local-programs-community-investments/community-investments-office/highway-beautification-office.html",
+      "infoUrl": "https://www.tn.gov/tdot/government/g/gr/tdot-grant-information.html",
+      "sources": [
+        "TDOT Highway Beautification Office. Litter grants go to all 95 counties.",
+        "TDOT grant information page. About $5 million a year is distributed by road miles and population.",
+        "Fiscal year 2027 litter grant instruction packet. Required documents were due June 8, 2026."
+      ],
+      "watch": {
+        "kind": "litter",
+        "url": "https://www.tn.gov/tdot/local-programs-community-investments/community-investments-office/highway-beautification-office.html"
+      },
+      "questions": [
+        "project",
+        "litter-ready",
+        "cost",
+        "contact-name",
+        "contact-email"
+      ],
+      "rulesVersion": "2026-11-26",
+      "clock": null
+    },
+    {
+      "id": "tdot-walk",
+      "name": "TDOT sidewalk and bikeway projects",
+      "funder": "Tennessee Department of Transportation",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "The 2026 Statewide Partnership Program intake closed September 15, 2026. The next intake is in 2027. A signed resolution was due December 31, 2026 only for a project that was submitted.",
+      "actionDate": null,
+      "amountLabel": "The Multimodal Access Grant page says projects are state funded at 95 percent, up to a total project value of $1,250,000.",
+      "matchLabel": "The posted Multimodal Access Grant share is 95 percent state and 5 percent local, inside that project cap.",
+      "summary": "Cities and counties can ask TDOT to fund sidewalks, bikeways, and related safety work. The 2026 path was the Statewide Partnership Program.",
+      "why": "The Statewide Partnership Program page says the intake is for cities and counties, and that 2026 sidewalk and bikeway requests use the same intake as the Multimodal Access Grant and the Transportation Alternatives Program.",
+      "rules": [
+        "Eligible work includes sidewalks, bicycle facilities, shared-use paths that serve transportation, crossings, transit stop pads, pedestrian lighting, ADA upgrades, and school-zone walking and biking improvements.",
+        "A shared-use path has to serve a transportation purpose. A path that is only for recreation does not fit this intake.",
+        "The 2026 intake closed September 15, 2026. TDOT said a project that missed it waits until 2027.",
+        "If a 2026 project was submitted, the county commission resolution had to reach TDOT by December 31, 2026."
+      ],
+      "portalUrl": "https://www.tn.gov/tdot/long-range-planning-home/longrange-oct/statewide-partnership-program.html",
+      "infoUrl": "https://www.tn.gov/tdot/local-programs-community-investments/community-investments-office/bicycle-and-pedestrian-program/multimodal-access-grant.html",
+      "sources": [
+        "TDOT Statewide Partnership Program page, checked November 26, 2026. Cities and counties. Intake extended to September 15, 2026. Next window in 2027.",
+        "TDOT Multimodal Access Grant page. State share 95 percent, up to a project value of $1,250,000."
+      ],
+      "watch": {
+        "kind": "walk",
+        "url": "https://www.tn.gov/tdot/long-range-planning-home/longrange-oct/statewide-partnership-program.html"
+      },
+      "questions": [
+        "project",
+        "walk-filed",
+        "resolution",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ],
+      "rulesVersion": "2026-11-26",
+      "clock": null
+    },
+    {
+      "id": "recycle",
+      "name": "TDEC recycling equipment grant",
+      "funder": "Tennessee Department of Environment and Conservation",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "The 2026 round closed October 15, 2026. The grants page now lists this program as closed. The next opening is not posted.",
+      "actionDate": null,
+      "amountLabel": "Bedford County's population is 55,273, so it competes in the pool for places over 50,000. That pool is $1,000,000. The maximum award is $250,000.",
+      "matchLabel": "A cash match of 10 to 50 percent is required. The percent comes from an economic index. Do not pick a percent. In-kind match does not count.",
+      "summary": "The county can ask for recycling carts, balers, compactors, and other equipment used to collect or process recyclables.",
+      "why": "Tennessee counties may apply. The five counties limited to a recycling rebate are Davidson, Hamilton, Knox, Rutherford, and Shelby. Bedford is not one of them.",
+      "rules": [
+        "Do not request equipment that would make the county compete with a private recycling business in this area.",
+        "A collection truck has to have a gross vehicle weight rating of at least 10,000 pounds.",
+        "A county that still has an open recycling equipment contract from the last two years should not apply.",
+        "The University of Tennessee County Technical Assistance Service calendar listed the 2026 round as September 7 through October 15, 2026. That round is closed."
+      ],
+      "portalUrl": "https://www.tn.gov/environment/about-tdec/grants/materials-management/recycling-equipment.html",
+      "infoUrl": "https://www.tn.gov/environment/program-areas/solid-waste/materials-management/grants-administration.html",
+      "sources": [
+        "TDEC Recycling Equipment Grant page, checked November 26, 2026. Counties may apply. Maximum $250,000 for a place over 50,000 people.",
+        "TDEC grants administration page. The recycling equipment grant is currently closed.",
+        "UT County Technical Assistance Service, May 15, 2026. The 2026 recycling equipment deadline was October 15, 2026."
+      ],
+      "watch": {
+        "kind": "recycle",
+        "url": "https://www.tn.gov/environment/program-areas/solid-waste/materials-management/grants-administration.html"
+      },
+      "questions": [
+        "project",
+        "cost",
+        "match-known",
+        "recycle-private",
+        "contact-name",
+        "contact-email"
+      ],
+      "rulesVersion": "2026-11-26",
+      "clock": null
+    },
+    {
+      "id": "materials",
+      "name": "TDEC convenience center, used oil, and household hazardous waste",
+      "funder": "Tennessee Department of Environment and Conservation",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "The 2026 rounds are closed. Convenience center and used oil applications were due July 30, 2026. Household hazardous waste applications were due October 15, 2026. The next dates are not posted.",
+      "actionDate": null,
+      "amountLabel": "Each manual sets its own cap. Do not reuse the recycling equipment cap for these programs.",
+      "matchLabel": "Read the manual for that program before you assume a match.",
+      "summary": "Counties can apply for convenience center improvements, used automotive fluid collection, and household hazardous waste work when TDEC opens those rounds.",
+      "why": "The TDEC grants administration page says these awards go to municipalities, counties, and nonprofits.",
+      "rules": [
+        "File in the TDEC Grants Management System.",
+        "Use the manual for the program you are filing. Do not mix the rules.",
+        "The grants administration page lists all three as closed."
+      ],
+      "portalUrl": "https://www.tn.gov/environment/program-areas/solid-waste/materials-management/grants-administration.html",
+      "infoUrl": "https://www.ctas.tennessee.edu/news/tennessee-opens-5m-solid-waste-and-recycling-grants-2026",
+      "sources": [
+        "TDEC grants administration page, checked November 26, 2026. Convenience center, used oil, and household hazardous waste grants are closed.",
+        "UT County Technical Assistance Service, May 15, 2026. Convenience center and used oil were due July 30, 2026. Household hazardous waste was due October 15, 2026."
+      ],
+      "watch": {
+        "kind": "materials",
+        "url": "https://www.tn.gov/environment/program-areas/solid-waste/materials-management/grants-administration.html"
+      },
+      "questions": [
+        "project",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ],
+      "rulesVersion": "2026-11-26",
+      "clock": null
+    },
+    {
+      "id": "site",
+      "name": "TNECD site development grant",
+      "funder": "Tennessee Department of Economic and Community Development",
+      "level": "state",
+      "status": "prepare",
+      "deadlineLabel": "The letter of intent was due October 15, 2026. A full application is due November 30, 2026 only if TNECD approved that letter. If no letter was filed, wait for the next round.",
+      "actionDate": null,
+      "amountLabel": "The maximum site development grant is $5,000,000. The maximum due diligence grant is $100,000.",
+      "matchLabel": "The match follows the county tier table. Bedford County is not on the July 1, 2026 distressed or at-risk list. Do not guess the percent.",
+      "summary": "A county can ask for help to buy, study, or build out a publicly owned industrial site.",
+      "why": "Eligible applicants include a city, a county, and an industrial development board. Bedford County is a county government.",
+      "rules": [
+        "One application per governmental entity and one application per site.",
+        "The site has to be publicly owned, unless the request is to buy it or to pay for due diligence.",
+        "A site in a county that is not tier 3 or tier 4 has to be at least 20 acres and needs the required site visit. Tier 3 and tier 4 counties may submit a site of at least 10 acres.",
+        "A site with an open site development grant cannot be filed again.",
+        "Do not file the November 30, 2026 application unless TNECD approved the letter of intent."
+      ],
+      "portalUrl": "https://www.tn.gov/ecd/rural-development/tnecd-site-development/select-tennessee-site-development-grant.html",
+      "infoUrl": "https://www.tn.gov/ecd/rural-development/tnecd-site-development/select-tennessee-site-development-grant/site-development-grant-application-process.html",
+      "sources": [
+        "TNECD Site Development Grant page, 2027 round 1. Letter of intent October 15, 2026. Applications November 30, 2026. Maximum $5,000,000.",
+        "TNECD distressed and at-risk county map, updated July 1, 2026. Bedford County is not listed."
+      ],
+      "watch": {
+        "kind": "site",
+        "url": "https://www.tn.gov/ecd/rural-development/tnecd-site-development/select-tennessee-site-development-grant.html"
+      },
+      "questions": [
+        "project",
+        "site-loi",
+        "site-public",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ],
+      "rulesVersion": "2026-11-26",
+      "clock": null
+    },
+    {
+      "id": "home",
+      "name": "THDA HOME housing grant",
+      "funder": "Tennessee Housing Development Agency",
+      "level": "federal",
+      "status": "prepare",
+      "deadlineLabel": "The 2026 program descriptions are posted. The HOME page does not post the application due date. Read the notice for the round you will file.",
+      "actionDate": null,
+      "amountLabel": "Read the program description for the minimum and maximum. Do not copy an award from another county.",
+      "matchLabel": "Read the program description for the match. Do not assume there is no match.",
+      "summary": "A county outside a local HOME participating jurisdiction can compete for funds to build or repair affordable housing.",
+      "why": "THDA says cities and counties may apply, and homeowner rehabilitation applicants have to be outside a local participating jurisdiction. The listed jurisdictions are Chattanooga, Clarksville, Jackson, Knoxville, Memphis, Murfreesboro, Nashville-Davidson, Knox County, Shelby County, and the Northeast Tennessee consortium. Bedford County is not on that list.",
+      "rules": [
+        "Pick one posted round, such as rental development, homeownership development, or homeowner rehabilitation.",
+        "Use the program description for that round. The rules are not the same.",
+        "Do not file until the notice for that round gives a due date."
+      ],
+      "portalUrl": "https://thda.org/govt-non-profit/home-program/",
+      "infoUrl": "https://thda.org/govt-non-profit/home-program/",
+      "sources": [
+        "THDA HOME program page, checked November 26, 2026. Cities and counties may apply. Rehabilitation applicants must be outside a local participating jurisdiction.",
+        "2026 HOME Homeowner Rehabilitation program description, as summarized from the posted description. Bedford County is not one of the named local participating jurisdictions."
+      ],
+      "watch": {
+        "kind": "home",
+        "url": "https://thda.org/govt-non-profit/home-program/"
+      },
+      "questions": [
+        "project",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ],
+      "rulesVersion": "2026-11-26",
+      "clock": null
+    },
+    {
+      "id": "historic",
+      "name": "Federal historic preservation grant",
+      "funder": "Tennessee Historical Commission",
+      "level": "federal",
+      "status": "prepare",
+      "deadlineLabel": "The next cycle opens in January 2027. A due date inside that month is not posted.",
+      "actionDate": null,
+      "amountLabel": "The August 11, 2026 award announcement reported 28 grants totaling over $1.1 million. It did not set a cap for the next cycle. Do not guess a request.",
+      "matchLabel": "The grant reimburses 60 percent. The applicant pays the other 40 percent.",
+      "summary": "A local government can ask for help to study or restore a historic place. A restoration has to be on the National Register.",
+      "why": "The August 11, 2026 announcement awarded this grant to local governments, including Maury County and Obion County. Certified local governments are encouraged. They are not the only applicants.",
+      "rules": [
+        "A restoration project has to be listed in the National Register of Historic Places.",
+        "The grant pays 60 percent and the applicant pays 40 percent.",
+        "The next cycle opens in January 2027. Do not send an application before the notice opens."
+      ],
+      "portalUrl": "https://www.tn.gov/historicalcommission/news/2026/8/11/hpf.html",
+      "infoUrl": "https://www.tn.gov/historicalcommission/news/2026/8/11/hpf.html",
+      "sources": [
+        "Tennessee Historical Commission, August 11, 2026. Federal Historic Preservation Fund grants. 60 percent reimbursement. Next cycle opens January 2027. Local governments received awards."
+      ],
+      "watch": {
+        "kind": "historic",
+        "url": "https://www.tn.gov/historicalcommission/news/2026/8/11/hpf.html"
+      },
+      "questions": [
+        "project",
+        "hist-register",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ],
+      "clock": null,
+      "rulesVersion": "2026-11-26"
+    },
+    {
+      "id": "tourism",
+      "name": "Tourism enhancement grant",
+      "funder": "Tennessee Department of Tourist Development",
+      "level": "state",
+      "status": "watch",
+      "deadlineLabel": "No open application is posted. The last award list was announced November 12, 2025.",
+      "actionDate": null,
+      "amountLabel": "Do not reuse an old maximum. Read the notice for the next round.",
+      "matchLabel": "Earlier rounds used a match based on economic status. Read the next notice. Do not guess Bedford County's share.",
+      "summary": "Cities and counties use this grant to improve a local tourism asset, such as a stage, signs, access, or a historic feature.",
+      "why": "The department's award announcements say the grants help cities and counties. County governments are on the recipient lists. Bedford County was not on the November 12, 2025 list.",
+      "rules": [
+        "Wait for a posted application. Do not send one against the 2025 award announcement.",
+        "The project should be a tourism asset the county owns or controls.",
+        "Use the match in the next notice."
+      ],
+      "portalUrl": "https://www.tn.gov/tourism/news/2025/11/13/tn-tourism-awards-2-million-in-tourism-enhancement-grants-to-30-tn-communities.html",
+      "infoUrl": "https://www.tn.gov/content/dam/tn/rural/documents/Printable%20Grants%20List%20Feb%202026.pdf",
+      "sources": [
+        "Tennessee Department of Tourist Development, November 12, 2025. Tourism enhancement grants were awarded to cities and counties.",
+        "State grants list, February 2026. Tourism Enhancement Grant. Applicant type is local government."
+      ],
+      "watch": {
+        "kind": "tourism",
+        "url": "https://www.tn.gov/tourism/news/2025/11/13/tn-tourism-awards-2-million-in-tourism-enhancement-grants-to-30-tn-communities.html"
+      },
+      "questions": [
+        "project",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ],
+      "rulesVersion": "2026-11-26",
+      "clock": null
+    },
+    {
+      "id": "library",
+      "name": "Public library construction grant",
+      "funder": "Tennessee State Library and Archives",
+      "level": "state",
+      "status": "watch",
+      "deadlineLabel": "The submission page says there are no open calls.",
+      "actionDate": null,
+      "amountLabel": "Read the current guideline for the cap. A 2020 instruction limited state funds to half the project or $100,000, whichever was less. A later award was larger, so do not use the old cap until the current guideline confirms it.",
+      "matchLabel": "The 2020 instruction required the city or county to appropriate at least 10 percent of the amount requested, and local funds equal to the grant had to be spent on the project. Confirm that rule in the current guideline.",
+      "summary": "A county, a city, or a library board with authority to accept state funds can ask for help to build, expand, or remodel a public library when a call is open.",
+      "why": "The construction grant instructions say funds are typically granted to a city, a county, or a library board. The library has to meet the rules for the regional library system.",
+      "rules": [
+        "The applicant has to have legal authority to accept the state funds.",
+        "The library has to meet the regional system guidelines, including a commission resolution and public operating funds.",
+        "Do not file while the submission page says there is no open call.",
+        "Confirm the current cap and match before you enter a dollar request."
+      ],
+      "portalUrl": "https://tsla.submittable.com/submit",
+      "infoUrl": "https://sos.tn.gov/tsla",
+      "sources": [
+        "Tennessee State Library and Archives submission page, checked November 26, 2026. No open calls.",
+        "Library construction grant instructions, revised April 14, 2020. Applicants are a city, a county, or a library board."
+      ],
+      "watch": {
+        "kind": "library",
+        "url": "https://tsla.submittable.com/submit"
+      },
+      "questions": [
+        "project",
+        "cost",
+        "match-known",
+        "contact-name",
+        "contact-email"
+      ],
+      "rulesVersion": "2026-11-26",
+      "clock": null
     }
   ],
   "notAFit": [
@@ -532,6 +878,30 @@
     {
       "name": "Opioid settlement request for proposals",
       "reason": "Those payments are already allocated to the county. The 2026 request invited community organizations to apply to the county. It is not a grant the county files. The 2026 proposals were due April 15, 2026."
+    },
+    {
+      "name": "Broadband Equity, Access, and Deployment",
+      "reason": "TNECD awards these funds to internet providers. The final proposal was approved February 2, 2026. A county does not file this application."
+    },
+    {
+      "name": "TNECD Last Mile broadband grant",
+      "reason": "The posted eligible counties are Carroll, Henderson, Unicoi, Johnson, Meigs, Roane, Marshall, and Moore. Bedford County is not on that list."
+    },
+    {
+      "name": "Safe Streets and Roads for All",
+      "reason": "Fiscal year 2026 was the last round. Applications were due May 26, 2026. That deadline has passed, and the program is not scheduled for another year."
+    },
+    {
+      "name": "Historic Development Grant",
+      "reason": "TNECD says the courthouse funding was allocated and the program will not have more rounds."
+    },
+    {
+      "name": "Direct federal Byrne Justice Assistance Grant",
+      "reason": "Only a local government named on the federal allocation chart can file. This check did not confirm Bedford County on that chart. Do not file the direct federal application unless the chart names the county. A later state solicitation is a different application."
+    },
+    {
+      "name": "Assistance to Firefighters Grant for a fire department",
+      "reason": "The fiscal year 2025 window closed June 22, 2026. A fire department files its own application. This list does not treat Bedford County as a fire department. Add it only if a county fire department is part of county government."
     }
   ]
 }
